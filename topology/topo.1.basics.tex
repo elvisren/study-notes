@@ -226,13 +226,13 @@ Let $\displaystyle f : A \rightarrow \prod_{\alpha} X_{\alpha}$ be given by $f(a
 \end{theorem}
 
 \begin{example}[counterexample in box topology where $f$ is not continuous]
-    Define $f: \real \rightarrow \real^{\omega}$ by $f(t) = (t,t,t, ...)$. Define a open set in box topology $B = (-1, 1) \times (- \frac{1}{2}, \frac{1}{2}) \times  (- \frac{1}{3}, \frac{1}{3}) \times \cdots$. $f^{-1}(B)$ is not open in $R$.
+    Define $f: \realnumber \rightarrow \realnumber^{\omega}$ by $f(t) = (t,t,t, ...)$. Define a open set in box topology $B = (-1, 1) \times (- \frac{1}{2}, \frac{1}{2}) \times  (- \frac{1}{3}, \frac{1}{3}) \times \cdots$. $f^{-1}(B)$ is not open in $R$.
 \end{example}
 
 \subsection{Metric Topology}
 
 \begin{definition}
-    A \cindex{metric} on a set $X$ is a function $d: X \times X \rightarrow \real$ with the following property:
+    A \cindex{metric} on a set $X$ is a function $d: X \times X \rightarrow \realnumber$ with the following property:
     \begin{enumerate}
         \item $d(x,y) \geq 0$.
         \item $d(x,y) = 0 \Leftrightarrow x = y$.
@@ -259,7 +259,7 @@ Let $\displaystyle f : A \rightarrow \prod_{\alpha} X_{\alpha}$ be given by $f(a
 \end{definition}
 
 \begin{definition}
-    For $x \in \real^n$, the \cindex{norm} of $x$ is $\norm{x} = \sqrt{x_1^2 + ... + x_n^2}$. The \cindex{euclidean metric} $d$ on $\real^n$ is defined as $d(x,y) = \norm{x - y}$. The \cindex{square metric} $\rho$ is defined as $\rho (x,y) = \text{max}\set{\absolutevalue{x_1 - y_1}, ... , \absolutevalue{x_n - y_n} }$.
+    For $x \in \realnumber^n$, the \cindex{norm} of $x$ is $\norm{x} = \sqrt{x_1^2 + ... + x_n^2}$. The \cindex{euclidean metric} $d$ on $\realnumber^n$ is defined as $d(x,y) = \norm{x - y}$. The \cindex{square metric} $\rho$ is defined as $\rho (x,y) = \text{max}\set{\absolutevalue{x_1 - y_1}, ... , \absolutevalue{x_n - y_n} }$.
 \end{definition}
 
 \begin{definition}
@@ -267,17 +267,17 @@ Let $\displaystyle f : A \rightarrow \prod_{\alpha} X_{\alpha}$ be given by $f(a
 \end{definition}
 
 \begin{theorem}
-The uniform topology on $\real_{\mathcal{J}}$ is finer than the product topology and coarser than the box topology. They are all different if $\mathcal{J}$ is infinite.
+The uniform topology on $\realnumber_{\mathcal{J}}$ is finer than the product topology and coarser than the box topology. They are all different if $\mathcal{J}$ is infinite.
 \end{theorem}
 \begin{proof}
     For a basis in product topology, there are finite $B_i$ that is not $R$. Find the minimum $\epsilon$ and make $\closure{\rho} < \epsilon$. For the box topology, find basis that is half of the size of $\closure{\rho}$.
 \end{proof}
 
-\begin{theorem}[$\real^{\omega}$ is metrizable]
-    Define $\displaystyle D(x,y) = \supremum{\frac{\closure{d}(x_i, y_i )}{i}} $. Then $D$ is a metric that induces the product topology on $\real^\omega$.
+\begin{theorem}[$\realnumber^{\omega}$ is metrizable]
+    Define $\displaystyle D(x,y) = \supremum{\frac{\closure{d}(x_i, y_i )}{i}} $. Then $D$ is a metric that induces the product topology on $\realnumber^\omega$.
 \end{theorem}
 \begin{proof}
-    (the metric is changed from $\closure{\rho}(x,y) = \supremum{ \closure{d}(x_{\alpha}, y_{\alpha})} $ to $\supremum{\frac{\closure{d}(x_i, y_i )}{i}} $) First need to prove $D$ is a metric by proving the triangle inequality. The trick is to choose a $N$ that $\frac{1}{N} < \epsilon$ so all $\real$ is included in the $\epsilon$-ball.
+    (the metric is changed from $\closure{\rho}(x,y) = \supremum{ \closure{d}(x_{\alpha}, y_{\alpha})} $ to $\supremum{\frac{\closure{d}(x_i, y_i )}{i}} $) First need to prove $D$ is a metric by proving the triangle inequality. The trick is to choose a $N$ that $\frac{1}{N} < \epsilon$ so all $\realnumber$ is included in the $\epsilon$-ball.
 \end{proof}
 
 \begin{theorem}
@@ -289,11 +289,11 @@ Let $f: X \rightarrow Y$. Let $X$ and $Y$ be metrizable with $d_X$ and $d_Y$. $f
 \end{theorem}
 Note: the sequence lemma is quite useful in proving a topology space is not metrizable.
 
-\begin{example}[$\real^\omega$ is not metrizable in box topology]
+\begin{example}[$\realnumber^\omega$ is not metrizable in box topology]
     Let $A = \set{(x_1, x_2, ... ) | x_i > 0}$. We have $(0,0,0,...) \in \closure{A}$. For a sequence $a_n = (x_{n_1}, x_{n_2}, ...)$, the open set $\set{(- x_{1_1}, x_{1_1}) \times (- x_{2_2}, x_{2_2}), ...}$ contains no $a_i$.
 \end{example}
 
-\begin{example}[$\real^{\mathcal{J}}$ is not metrizable in product topology]
+\begin{example}[$\realnumber^{\mathcal{J}}$ is not metrizable in product topology]
     Assume $\mathcal{J}$ is uncountable. Let $A$ contains all $x$ that $\pi_{\beta}(x) = 1$ for all but finite many $\beta$. Then $(0,0,...)$ is in $\closure{A}$.
     
     Assume there is a sequence $a_n$ that converge to $(0,0,...)$. Let $J_n = \set{\beta | \pi_\beta (a_n) \neq 1 }$. Then $\Sigma_n \absolutevalue{J_n}$ is countable of finite value, which is countable. Because $\mathcal{J}$ is uncountable, there exists a $\gamma$ that $\forall i, \pi_\gamma (a_i) = 1$. Take a basis $\pi_{\gamma}^{-1}(-1,1)$, which contains $(0,0,...)$ but intersect with no $a_i$.

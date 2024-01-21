@@ -222,51 +222,47 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 
 
 \begin{center} 
-   \begin{tabular}{|c|c|c|c|c|}
+   \begin{tabular}{ccccc}
   \hline
   name & density & $\phi(t)$ & mean & var \\
-  \hline
+
   \cindex{binomial} & $\displaystyle \binom{n}{x} p^x (1-p)^{n-x}$  &$(p e^t + q)^n$ & np & npq \\
-  \hline
+
   \cindex{poisson} & $\displaystyle e^{-\lambda} \frac{\lambda^x}{x!}$  & $\displaystyle e^{\lambda (e^t -1)}$& $\lambda$ & $\lambda$ \\
-  \hline
+
   \cindex{geometric} & $p (1-p)^{x-1}$& $\displaystyle \frac{pe^t}{1-(1-p)e^t}$ & $\displaystyle \frac{1}{p}$ & $\displaystyle \frac{1-p}{p^2}$ \\
-  \hline
+
   \cindex{uniform} &$\displaystyle \frac{1}{b-a}$ & $\displaystyle \frac{e^{tb} - e^{ta}}{t(b-a)}$ & $\displaystyle \frac{a + b}{2}$ & $\displaystyle \frac{(b-a)^2}{12}$ \\
-  \hline
+
+  \cindex{normal} & $\displaystyle \frac{1}{\sqrt{2 \pi} \sigma} \exponential{- \frac{(x - \mu)^2}{2 \sigma^2}}$ & $\exponential{\displaystyle \mu t + \frac{\sigma^2 t^2}{2}}$&$\mu$& $\sigma^2$ \\
+  
   \cindex{exponential} & $\lambda e^{-\lambda x}$ & $\displaystyle \frac{\lambda}{\lambda - t}$ & $\displaystyle \frac{1}{\lambda}$ & $\displaystyle \frac{1}{\lambda^2}$ \\
-  \hline
-  \cindex{gamma} & $\displaystyle \frac{\lambda e^{-\lambda x} (\lambda x)^{n - 1}}{(n-1)!}$ & $\displaystyle \left(\frac{\lambda }{\lambda - t} \right)^n$ & $\displaystyle \frac{n}{\lambda}$ & $\displaystyle \frac{n}{\lambda^2}$ \\
-  \hline
-  \cindex{normal} & $\displaystyle \frac{1}{\sqrt{2 \pi} \sigma} e^{\displaystyle - \frac{(x - \mu)^2}{2 \sigma^2}}$ & $e^{\displaystyle \mu t + \frac{\sigma^2 t^2}{2}}$&$\mu$& $\sigma^2$ \\
+
+  \cindex{gamma} & $\displaystyle \frac{\beta e^{-\beta x} (\beta x)^{n - 1}}{\Gamma(\alpha)}$ & $\displaystyle \left(\frac{\beta }{\beta - t} \right)^\alpha$ & $\displaystyle \frac{\alpha}{\beta}$ & $\displaystyle \frac{\alpha}{\beta^2}$ \\
+  
+  
+  \cindex{beta} & $\displaystyle \frac{ \Gamma(\alpha) \Gamma(\beta) }{\Gamma(\alpha + \beta)} x^{\alpha -1} (1-x)^{\beta - 1}$ & & $\displaystyle \frac{\alpha}{\alpha + \beta}$ & $\displaystyle \frac{\alpha\beta}{(\alpha+\beta)^2 (\alpha+\beta+1)}$ \\
+  
+  \cindex{chi-square} & $\displaystyle \frac{x^{\frac{k}{2} - 1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}} \Gamma(\frac{k}{2})}$ & $\displaystyle (1-2s)^{- \frac{k}{2}}$ & k & 2k \\
+
   \hline
 \end{tabular} 
 \end{center}
 
 
 \begin{theorem}
-    If $X$ is normally distributed with $\mu$ and $\sigma^2$, then $Y = aX + b$ is a normal distribution with $a\mu + b$ and $(a\sigma)^2$. So $Y =\displaystyle \frac{X - \mu}{\sigma}$ is normally distributed with $0$ and $1$, which is called \cindex{standard normal distribution}.
+    If $X$ is normally distributed $\normaldistribution{\mu}{\sigma^2}$, then $Y = aX + b$ is a normal distribution with $a\mu + b$ and $(a\sigma)^2$. So $Y =\displaystyle \frac{X - \mu}{\sigma}$ is normally distributed $\normaldistribution{0}{1}$, which is called \cindex{standard normal distribution}.
 \end{theorem}
 
-\begin{definition}
-    A random variable $X$ has \cindex{gamma distribution} with parameter $\alpha$ and $\beta$ if the pdf is:
-    \begin{equation*}
-        f(x|\alpha, \beta) = \frac{\beta e^{-\beta x} (\beta x)^{\alpha - 1}}{\Gamma(\alpha)}
-    \end{equation*}
-    while $\Gamma(\alpha)$  is defined as:
+
+
+\begin{definition}[gamma function]
+    \cindex{gamma function} is an extension of $n!$ to $\realnumber$ which is defined as
     \begin{equation}
         \Gamma(\alpha) = \int_0^\infty e^{-x} x^{\alpha - 1} \dif{x}
     \end{equation}
-    exponential distribution is gamma distribution with $\alpha = 1$.
-\end{definition}
 
-\begin{theorem}
-    If $X_i$ are independent gamma distribution with $\alpha_i$ and $\beta$, then the sum $\displaystyle \sum_{i=1}^n X_i$ has gamma distribution with $\displaystyle \sum \alpha_i$ and $\beta$.
-\end{theorem}
-
-
-\begin{theorem}
-    Gamma function is an extension of $n!$ to $\realnumber$.
+    Gamma function has the following property:
     \begin{equation}
         \Gamma \left(\frac{1}{2} \right) = \sqrt{\pi}
     \end{equation}
@@ -277,11 +273,26 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
     \begin{equation}
         \Gamma (n) = (n-1)!
     \end{equation}
+\end{definition}
+
+
+\begin{definition}[gamma distribution]
+    A random variable $X$ is a \cindex{gamma distribution} $\gammadistribution{\alpha}{\beta}$ if the pdf is:
+    \begin{equation}
+        f(x|\alpha, \beta) = \frac{\beta e^{-\beta x} (\beta x)^{\alpha - 1}}{\Gamma(\alpha)}
+    \end{equation}
+    
+    exponential distribution is gamma distribution with $\alpha = 1$.
+\end{definition}
+
+\begin{theorem}
+    If $X_i$ are independent gamma distribution $\gammadistribution{\alpha_i}{\beta}$, then the sum $\displaystyle \sum_{i=1}^n X_i$ is a gamma distribution $\gammadistribution{\sum \alpha_i}{\beta}$.
 \end{theorem}
 
 
-\begin{definition}
-    $X$ is a \cindex{beta distribution} if the pdf is:
+
+\begin{definition}[beta distribution]
+    $X$ is a \cindex{beta distribution} $\betadistribution{\alpha}{\beta}$ if the pdf is:
     \begin{equation}
         f(x|\alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} x^{\alpha - 1} (1-x)^{\beta - 1}
     \end{equation}
@@ -427,27 +438,6 @@ So the process of calculating $f_{Y_i}$ are:
     This theorem is often used to calculate the variance.
 \end{theorem}
 
-\begin{definition}[sample mean]
-    If $X_i$ are independent and identically distributed, then the random variable $\bar{X} =\displaystyle \frac{\sum_{i=1}^n X_i}{n}$ is called the \cindex{sample mean}.
-\end{definition}
-
-\begin{theorem}
-\begin{equation}
-    \expect{\bar{X}} = \mu
-\end{equation}    
-\end{theorem}
-
-\begin{theorem}
-\begin{equation}
-    \variance{\bar{X}} = \frac{\sigma^2}{n}
-\end{equation}    
-\end{theorem}
-\begin{theorem}
-\begin{equation}
-    \covariance{\bar{X}}{X_i - \bar{X}} = 0
-\end{equation}    
-\end{theorem}
-
 \begin{definition}
     Function $F_{X+Y}$ is called the \cindex{convolution} of the distribution of $F_X$ and $F_Y$, which is
     \begin{equation}
@@ -472,6 +462,8 @@ So the process of calculating $f_{Y_i}$ are:
 
 
 % moment generating function
+
+\section{Moment Generating Function}
 
 \begin{definition}
     The \cindex{moment generating function} $\phi(t)$ of the random variable $X$ is defined by
@@ -506,8 +498,9 @@ The moment generating function uniquely determine the distribution.
 
 \section{Sample Mean and Sample Variance}
 
+
 \begin{definition}[sample mean]
-    The \cindex{sample mean} is defined as $\displaystyle \bar{X} = \frac{\sum X_i}{n}$.
+    If $X_i$ are independent and identically distributed, then the random variable $\bar{X} =\displaystyle \frac{\sum_{i=1}^n X_i}{n}$ is called the \cindex{sample mean}.
 \end{definition}
 
 \begin{definition}[sample variance]
@@ -517,11 +510,34 @@ The moment generating function uniquely determine the distribution.
 \end{equation} 
 \end{definition}
 
+
+
+\begin{theorem}
+\begin{equation}
+    \expect{\bar{X}} = \mu
+\end{equation}    
+\end{theorem}
+
+\begin{theorem}
+\begin{equation}
+    \variance{\bar{X}} = \frac{\sigma^2}{n}
+\end{equation}    
+\end{theorem}
+
+
 \begin{theorem}
 \begin{equation}
     \expect{S^2} = \sigma^2
 \end{equation}    
 \end{theorem}
+
+
+\begin{theorem}
+\begin{equation}
+    \covariance{\bar{X}}{X_i - \bar{X}} = 0
+\end{equation}    
+\end{theorem}
+
 
 
 \begin{definition}[chi-squared]
@@ -585,64 +601,18 @@ If $X$ is a random variable that is non-negative. Then for any $a > 0$ we have
 \end{proof}
 
 \begin{theorem}[\cindex{Strong Law of Large Numbers}]
-    Let $X_i$ be a sequence of independent random variables having a common distribution. With probability 1
+    Let $X_i$ be a sequence of independent random variables having a common distribution. With probability 1:
     \begin{equation}
         \frac{X_1 + X_2 + \dots + X_n}{n} \rightarrow \mu \text{ as } n \rightarrow \infty
     \end{equation}
 \end{theorem}
 
 \begin{theorem}[\cindex{Central Limit Theorem}]
-    Let $X_i$ be a sequence of independent identical random variables with mean $\mu$ and variance $\sigma^2$, the distribution $\displaystyle \frac{X_1 + X_2 + \dots + X_n - n \mu}{\sigma \sqrt{n}}$ tends to be standard normal distribution as $n \rightarrow \infty$.
+    Let $X_i$ be a sequence of independent identical random variables with mean $\mu$ and variance $\sigma^2$, the distribution $\displaystyle \frac{X_1 + X_2 + \dots + X_n - n \mu}{\sigma \sqrt{n}}$ tends to be $\normaldistribution{0}{1}$ as $n \rightarrow \infty$.
 \end{theorem}
 
 
 
 
-
-
-% examples
-\section{Examples}
-
-\begin{example}
-    Suppose $m$ coupons are selected from $n$ different types of coupons. Each coupon is equally likely to be selected. What is the expected number of different types?
-\end{example}
-
-\begin{proof}
-    Let $X$ denote the number of types in $m$ selection. We have $X = X_1 + ... + X_n$ where
-    \begin{equation*}
-        X_i = \begin{cases}
-            1 & \text{ , if } i \text{ occurs in selection} \\
-            0 & \text{ , otherwise}
-        \end{cases}
-    \end{equation*}
-    We have 
-    \begin{equation*}
-        \expect{X_i} = 1 - \left(\frac{n - 1}{n} \right)^m
-    \end{equation*}
-    So $\expect{X} = \expect{X_1} + \dots + \expect{X_n} = \displaystyle n \left(1 - \left(\frac{n - 1}{n} \right)^m \right)$
-\end{proof}
-
-\begin{example}
-    Let $X_i$ be independent and identically distributed continuous random variable. Let $X_{(i)}$ denote the $i$th smallest of these random variables. Then $X_{(i)}$ is called \cindex{order statistics}. Note that $X_{(i)} \leq x$ if and only if at least $i$ of $X_j$ are not larger than $x$, so
-    \begin{equation*}
-        \probability{X_{(i)} \leq x} = \sum_{k=i}^n \binom{n}{k} \left(F(x) \right)^k \left(1 - F(x) \right)^{n-k}
-    \end{equation*}
-    
-    So
-    \begin{equation*}
-        \begin{aligned}
-            f_{X_{(i)}} (x) &= \dod{\probability{X_{(i)} \leq x}}{x} \\
-            &= \frac{n!}{(n-i)!(i-1)!} f(x) \left( F(x) \right)^{i-1} \left(1-F(x) \right)^{n-i}
-        \end{aligned}
-    \end{equation*}
-    The result could be read as there are $\left( F(x) \right)^{i-1}$ which are less than $x$, $\left(1-F(x) \right)^{n-i}$ which are larger than $x$, and $f(x)$ which equals $x$.
-\end{example}
-
-\begin{example}
-A particle moves along a circle of $m+1$ nodes. Each time it has equality of moving clockwise or counterclockwise. What is the probability that node $i$ is the last visited node?    
-\end{example}
-\begin{proof}
-    Suppose $i$ is the last visited nodes and consider 2 nodes $i-1$ and $i+1$ around it. If $i-1$ is visited before $i+1$, the probability is the same as gambling without losing money when it reaches $i+1$, so the probability is the same for every nodes. So the result is $\displaystyle \frac{1}{m}$.
-\end{proof}
 
 
