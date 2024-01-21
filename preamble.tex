@@ -134,7 +134,7 @@
 \newcommand\theoref[1]{Theorem~\ref{#1}\footnote{Page~\pageref{#1}}}
 \newcommand\defiref[1]{Definition~\ref{#1}\footnote{Page~\pageref{#1}}}
 
-
+% DTMnow can show the current ISO time
 \usepackage{datetime2}
 
 % align the content top and bottom with "[" and "]"
@@ -169,6 +169,7 @@
     \arabic{buildnumber}
 }
 
+\newcommand\boldmathtext[1]{\mathop{\bf #1\/}}
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% set theory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -215,13 +216,11 @@
 
 \newcommand\transfinitesequence[1]{\left< #1 \right>}
 
+% sup {x}
 \newcommand\supremum[1]{\mathbf{sup} \set{#1}}
 
+% inf {x}
 \newcommand\infimum[1]{\mathbf{inf} \set{#1}}
-
-\newcommand\maximum[1]{\mathbf{max} \set{#1}}
-
-\newcommand\minimum[1]{\mathbf{min} \set{#1}}
 
 
 
@@ -229,7 +228,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% group theory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\newcommand\kernel[1]{\displaystyle \mathrm{Ker}~( #1 )}
+\newcommand\kernel[1]{\displaystyle \boldmathtext{Ker}~( #1 )}
 
 
 %
@@ -256,21 +255,21 @@
 \newcommand\absolutevalue[1]{\abs{#1}}
 
 % absolute value text, the "abs"
-\newcommand\absolutevaluetext[1]{\mathrm{abs}~#1}
+\newcommand\absolutevaluetext[1]{\boldmathtext{abs}~#1}
 
 
 % determinate, the same as |x|
 \newcommand\determinate[1]{\absolutevalue{#1}}
 
 % determinate text, the "det"
-\newcommand\determinatetext[1]{\displaystyle \mathrm{det}~\displaystyle #1}
+\newcommand\determinatetext[1]{\displaystyle \boldmathtext{det}~\displaystyle #1}
 
 % the coordinate, the [x]
 %\newcommand\coordinate[1]{\sbr{#1}}
 \newcommand\coordinate[1]{\alignedbrackets{\displaystyle #1}}
 
 % the projection of v on S: proj_S (v)
-\newcommand\projection[2]{\mathrm{proj}_{#2} #1}
+\newcommand\projection[2]{\boldmathtext{proj}_{#2} #1}
 
 
 \newcommand\rowvector[1]{\left[ \displaystyle #1 \right]}
@@ -281,22 +280,22 @@
 \newcommand\inverse[1]{ {#1}^{-1} }
 
 % dimension text, the "dim x"
-\newcommand\dimension[1]{\displaystyle \mathrm{dim}~\left( #1 \right)}
+\newcommand\dimension[1]{\displaystyle \boldmathtext{dim}~\left( #1 \right)}
 
 % rank text, the "rank x"
-\newcommand\rank[1]{\displaystyle \mathrm{rank}~\left( #1 \right)}
+\newcommand\rank[1]{\displaystyle \boldmathtext{rank}~\left( #1 \right)}
 
 % adjugate matrix, the "adj x"
-\newcommand\adjugate[1]{\displaystyle \mathrm{adj}~\left( #1 \right)}
+\newcommand\adjugate[1]{\displaystyle \boldmathtext{adj}~\left( #1 \right)}
 
 % inner product, the <x,y>
 \newcommand\innerproduct[2]{\left\langle \displaystyle #1, #2 \right\rangle}
 
 % trace, the "tr x"
-\newcommand\trace[1]{\displaystyle \mathrm{tr}~( #1 )}
+\newcommand\trace[1]{\displaystyle \boldmathtext{tr}~( #1 )}
 
 % span, the "span x"
-\newcommand\spanset[1]{\displaystyle \mathrm{span}~\left( #1 \right)}
+\newcommand\spanset[1]{\displaystyle \boldmathtext{span}~\left( #1 \right)}
 
 % pseudoinverse, the dagger
 \newcommand\pseudoinverse[1]{ {#1}^\dagger }
@@ -309,7 +308,7 @@
 \newcommand\transpose[1]{ {#1}^\top }
 
 %\newcommand\adjugate[1]{\displaystyle \mathrm{adj}~\displaystyle #1 }
-\newcommand\cofactor[1]{\displaystyle \mathrm{cof}~\displaystyle #1 }
+\newcommand\cofactor[1]{\displaystyle \boldmathtext{cof}~\displaystyle #1 }
 
 % column vector
 \newcommand\columnvector[1]{\boldsymbol{#1}}
@@ -327,28 +326,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% probability %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\newcommand\probability[1]{\mathop{\bf P\/}\alignedbrackets{\displaystyle #1}}
+\newcommand\probability[1]{\boldmathtext{P}\alignedbrackets{\displaystyle #1}}
 
 % E[x]
-\newcommand\expect[1]{\mathop{\bf E\/}\alignedbrackets{\displaystyle #1}}
+\newcommand\expect[1]{\boldmathtext{E}\alignedbrackets{\displaystyle #1}}
 
 % Var[x]
-\newcommand\variance[1]{\mathop{\bf Var\/}\alignedbrackets{\displaystyle #1}}
+\newcommand\variance[1]{\boldmathtext{Var}\alignedbrackets{\displaystyle #1}}
 
-
-\newcommand\covariance[2]{\mathop{\bf Cov\/}\displaystyle \left(#1,#2 \right)}
+% Cov(a,b)
+\newcommand\covariance[2]{\boldmathtext{Cov}\displaystyle \left(#1,#2 \right)}
 
 % exp { xxx }
-\newcommand\exponential[1]{\text{exp}\set{#1}}
+\newcommand\exponential[1]{\boldmathtext{exp}~\set{#1}}
 
 % N(\mu, \sig^2)
 \newcommand\normaldistribution[2]{\mathcal{N}(#1,#2)}
 
 % Gamma(\alpha, \beta)
-\newcommand\gammadistribution[2]{\text{Gamma }(#1,#2)}
+\newcommand\gammadistribution[2]{\boldmathtext{Gamma}~(#1,#2)}
 
 % Beta(\alpha, \beta)
-\newcommand\betadistribution[2]{\text{Beta }(#1,#2)}
+\newcommand\betadistribution[2]{\boldmathtext{Beta}~(#1,#2)}
+
+% Chi-square (k)
+\newcommand\chisquaredistribution[1]{\chi^2_{#1}}
 
 
 %

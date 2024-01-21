@@ -6,7 +6,7 @@
     \begin{equation}
         \probability{E} = \begin{cases}
             \displaystyle \sum_y \probability{E|Y = y} p(Y=y) \\
-            \displaystyle \int_{-\infty}^\infty f_Y(y) \dif{y}
+            \displaystyle \int_{-\infty}^\infty \probability{E|Y=y} f_Y(y) \dif{y}
         \end{cases}
     \end{equation}    
 \end{theorem}

@@ -198,16 +198,13 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 \begin{definition}[variance]
     The \cindex{variance} of $X$ is defined as
     \begin{equation}
-        \variance{X} = \expect{(X - \expect{X})^2}
+        \begin{aligned}
+            \variance{X} &= \expect{(X - \expect{X})^2} \\
+            &= \expect{X^2} - \expect{X}^2
+        \end{aligned}
     \end{equation}
 \end{definition}
 
-
-\begin{theorem}
-    \begin{equation}
-        \variance{X} = \expect{X^2} - \expect{X}^2
-    \end{equation}
-\end{theorem}
 
 \begin{theorem}
     Let $X_i$ be identically independent random variable. We need to notice that 
@@ -241,7 +238,7 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
   \cindex{gamma} & $\displaystyle \frac{\beta e^{-\beta x} (\beta x)^{n - 1}}{\Gamma(\alpha)}$ & $\displaystyle \left(\frac{\beta }{\beta - t} \right)^\alpha$ & $\displaystyle \frac{\alpha}{\beta}$ & $\displaystyle \frac{\alpha}{\beta^2}$ \\
   
   
-  \cindex{beta} & $\displaystyle \frac{ \Gamma(\alpha) \Gamma(\beta) }{\Gamma(\alpha + \beta)} x^{\alpha -1} (1-x)^{\beta - 1}$ & & $\displaystyle \frac{\alpha}{\alpha + \beta}$ & $\displaystyle \frac{\alpha\beta}{(\alpha+\beta)^2 (\alpha+\beta+1)}$ \\
+  \cindex{beta} & $\displaystyle \frac{\Gamma(\alpha + \beta)}{ \Gamma(\alpha) \Gamma(\beta) } x^{\alpha -1} (1-x)^{\beta - 1}$ & & $\displaystyle \frac{\alpha}{\alpha + \beta}$ & $\displaystyle \frac{\alpha\beta}{(\alpha+\beta)^2 (\alpha+\beta+1)}$ \\
   
   \cindex{chi-square} & $\displaystyle \frac{x^{\frac{k}{2} - 1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}} \Gamma(\frac{k}{2})}$ & $\displaystyle (1-2s)^{- \frac{k}{2}}$ & k & 2k \\
 
@@ -282,6 +279,11 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
         f(x|\alpha, \beta) = \frac{\beta e^{-\beta x} (\beta x)^{\alpha - 1}}{\Gamma(\alpha)}
     \end{equation}
     
+    Let $x_i$ be $n$ independent random variables with exponential distribution $\lambda$, then
+    \begin{equation}
+        \sum_{i=1}^n x_i \sim \gammadistribution{n}{\lambda}
+    \end{equation}
+    
     exponential distribution is gamma distribution with $\alpha = 1$.
 \end{definition}
 
@@ -292,13 +294,23 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 
 
 \begin{definition}[beta distribution]
-    $X$ is a \cindex{beta distribution} $\betadistribution{\alpha}{\beta}$ if the pdf is:
+    For $0 \leq X \leq 1$, $X$ is a \cindex{beta distribution} $\betadistribution{\alpha}{\beta}$ if the pdf is:
     \begin{equation}
         f(x|\alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} x^{\alpha - 1} (1-x)^{\beta - 1}
     \end{equation}
+    
+    If $X \sim \gammadistribution{\alpha}{\theta}$, $Y \sim \gammadistribution{\beta}{\theta}$, and they are independent, then
+    \begin{equation}
+        \frac{X}{X+Y} \sim \betadistribution{\alpha}{\beta}
+    \end{equation}
 \end{definition}
 
-
+\begin{definition}[Chi-Square distribution]
+    If $\set{x_i}$ are independent $\normaldistribution{0}{1}$. The sum of their square $\sum_{i=1}^k x_i^2$ is the \cindex{chi-square distribution} with $k$ degrees of freedom. So
+    \begin{equation}
+        \sum_{i=1}^k x_i^2 \sim \chisquaredistribution{k}
+    \end{equation}
+\end{definition}
 
 % joint distribution
 \section{Joint Distribution}
@@ -466,10 +478,10 @@ So the process of calculating $f_{Y_i}$ are:
 \section{Moment Generating Function}
 
 \begin{definition}
-    The \cindex{moment generating function} $\phi(t)$ of the random variable $X$ is defined by
+    The \cindex{moment generating function} $\phi_X (t)$ of the random variable $X$ is defined by
     \begin{equation}
         \begin{aligned}
-            \phi(x) &= \expect{e^{tX}} \\
+            \phi_X (t) &= \expect{e^{tX}} \\
             &= \begin{cases}
                  \displaystyle \sum_x e^{tx} p(x)\\
                  \displaystyle \int_{-\infty}^\infty e^{tx} f(x) \dif{x}
@@ -483,6 +495,7 @@ So the process of calculating $f_{Y_i}$ are:
 Because $\phi^n (t) = \expect{X^n e^{tX}}$, we have $\phi^n(0) = \expect{X^n}$.
 
 \begin{theorem}
+    For random variable $X + Y$, the moment generation function is
     \begin{equation}
         \phi_{X+Y}(t) = \phi_X(t) \phi_Y(t)
     \end{equation}    
@@ -513,25 +526,16 @@ The moment generating function uniquely determine the distribution.
 
 
 \begin{theorem}
-\begin{equation}
-    \expect{\bar{X}} = \mu
-\end{equation}    
+    Some commonly used identity for sample mean and sample variance:
+    \begin{equation}
+        \begin{aligned}
+            \expect{\bar{X}} &= \mu \\
+            \variance{\bar{X}} &= \frac{\sigma^2}{n} \\
+            \expect{S^2} &= \sigma^2
+        \end{aligned}
+    \end{equation}
 \end{theorem}
-
-\begin{theorem}
-\begin{equation}
-    \variance{\bar{X}} = \frac{\sigma^2}{n}
-\end{equation}    
-\end{theorem}
-
-
-\begin{theorem}
-\begin{equation}
-    \expect{S^2} = \sigma^2
-\end{equation}    
-\end{theorem}
-
-
+    
 \begin{theorem}
 \begin{equation}
     \covariance{\bar{X}}{X_i - \bar{X}} = 0
@@ -540,16 +544,12 @@ The moment generating function uniquely determine the distribution.
 
 
 
-\begin{definition}[chi-squared]
-    If $Z_i$ are $n$ independent standard normal random variables, the random variable $\displaystyle \sum_{i=1}^n Z_i^2$ is called \cindex{chi-squared} random variable with $n$ degrees of freedom.
-\end{definition}
-
 \begin{theorem}
-If $X_i$ are independent and identically distributed normal random variable with mean $\mu$ and variance $\sigma^2$, then:
+If $X_i$ are independent and identically distributed normal random variable $\normaldistribution{\mu}{\sigma^2}$, then
     \begin{enumerate}
         \item the sample mean $\bar{X}$ and sample variance $S^2$ are independent.
-        \item $\bar{X}$ is a normal random variable with mean $\mu$ and variance $\displaystyle \frac{\sigma^2}{n}$.
-        \item $\displaystyle \frac{(n-1)S^2}{\sigma^2}$ is a chi-squared random variable with $n-1$ degrees of freedom.
+        \item $\bar{X} \sim \normaldistribution{\mu}{\frac{\sigma^2}{n}}$
+        \item $\displaystyle \frac{(n-1)S^2}{\sigma^2} \sim \chisquaredistribution{n-1}$
     \end{enumerate}   
 \end{theorem}
 
@@ -560,7 +560,7 @@ If $X_i$ are independent and identically distributed normal random variable with
     \begin{equation*}
         \frac{(n-1)S^2}{\sigma^2} + \left(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}\right)^2 = \sum_{i=1}^n \frac{(X_i - \mu)^2}{\sigma^2}
     \end{equation*}
-    generate the moment generating function of $\displaystyle \frac{(n-1)S^2}{\sigma^2}$ from above formula and we have $\expect{e^{t \frac{(n-1)S^2}{\sigma^2}}} = \left(1-2t \right)^{- \frac{n-1}{2}}$ which is an chi-squared distribution with freedom $n-1$.
+    generate the moment generating function of $\displaystyle \frac{(n-1)S^2}{\sigma^2}$ from above formula and we have $\expect{\exponential{t \frac{(n-1)S^2}{\sigma^2}}} = \left(1-2t \right)^{- \frac{n-1}{2}}$ which is an chi-squared distribution with freedom $n-1$.
 \end{proof}
 
 

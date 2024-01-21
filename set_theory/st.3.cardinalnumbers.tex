@@ -20,11 +20,11 @@
 
 \begin{theorem}
     \begin{equation}
-        \omega \not\approx \real
+        \omega \not\approx \realnumber
     \end{equation}
 \end{theorem}
 \begin{proof}
-    $\forall f:\omega \rightarrow \real$, use binary expansion to prove that $f$ is not onto.
+    $\forall f:\omega \rightarrow \realnumber$, use binary expansion to prove that $f$ is not onto.
 \end{proof}
 
 
@@ -47,7 +47,7 @@ Some conclusion:
 \begin{enumerate}
     \item All $n \in \omega$ are cardinals.
     \item $\absolutevalue{\omega} = \omega = \aleph_0$
-    \item $\absolutevalue{\real} = 2^{\aleph_0}$
+    \item $\absolutevalue{\realnumber} = 2^{\aleph_0}$
     \item The next aleph is $\aleph_1$, which may or may not be $2^{\aleph_0}$.
 \end{enumerate}
 
@@ -96,7 +96,7 @@ Now the cardinal hierarchy is:
     Let $\kappa \geq \aleph_0$, then $\kappa \cdot \kappa = \kappa$.
 \end{theorem}
 \begin{proof}
-    Clearly $\kappa = \kappa \cdot 1 \leq \kappa \cdot \kappa$. Assume $\exists \kappa, \kappa < \kappa \cdot \kappa$. Choose the minimum $\kappa$. Define a dictionary order $(\delta, \epsilon) \prec (\delta', \epsilon')$ which is a well order on $\kappa \times \kappa$. So there is an ordinal $\alpha$ that there is a bijection $f: (\kappa \times \kappa) \rightarrow (\alpha, <)$. so $\kappa < \kappa \cdot \kappa = \absolutevalue{\alpha} \leq \alpha$. So there is a $(\beta, \lambda) \in \kappa \times \kappa$ that $f((\beta, \lambda)) = \kappa$. Define $S = \set{(\delta, \epsilon)|(\delta, \epsilon) }\prec (\beta, \lambda)$ and $\gamma = \maximum{\beta, \gamma} + 1$. $\absolutevalue{S} = \kappa$. But $\absolutevalue{S} = \absolutevalue{\gamma \times \gamma} = \absolutevalue{\gamma} \times \absolutevalue{\gamma} = \absolutevalue{\gamma} < k$ because $\kappa$ is the minimal element. 
+    Clearly $\kappa = \kappa \cdot 1 \leq \kappa \cdot \kappa$. Assume $\exists \kappa, \kappa < \kappa \cdot \kappa$. Choose the minimum $\kappa$. Define a dictionary order $(\delta, \epsilon) \prec (\delta', \epsilon')$ which is a well order on $\kappa \times \kappa$. So there is an ordinal $\alpha$ that there is a bijection $f: (\kappa \times \kappa) \rightarrow (\alpha, <)$. so $\kappa < \kappa \cdot \kappa = \absolutevalue{\alpha} \leq \alpha$. So there is a $(\beta, \lambda) \in \kappa \times \kappa$ that $f((\beta, \lambda)) = \kappa$. Define $S = \set{(\delta, \epsilon)|(\delta, \epsilon) }\prec (\beta, \lambda)$ and $\gamma = \max\set{\beta, \gamma} + 1$. $\absolutevalue{S} = \kappa$. But $\absolutevalue{S} = \absolutevalue{\gamma \times \gamma} = \absolutevalue{\gamma} \times \absolutevalue{\gamma} = \absolutevalue{\gamma} < k$ because $\kappa$ is the minimal element. 
     
 
 \end{proof}
