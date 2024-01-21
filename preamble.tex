@@ -20,12 +20,20 @@
 %\newtheorem{theorem}{Theorem}
 
 \usepackage{thmtools}
-\declaretheorem{theorem}
-\declaretheorem{definition}
-\declaretheorem{example}
-\declaretheorem{axiom}
 
-
+% Redefine theorem environment to add \qed at the end
+\declaretheoremstyle[
+    spaceabove=\topsep, spacebelow=\topsep,
+    headfont=\normalfont\bfseries,
+    notefont=\normalfont\bfseries, notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=0.5em,
+    qed=\qedsymbol
+]{mystyle}
+\declaretheorem[style=mystyle]{theorem}
+\declaretheorem[style=mystyle]{definition}
+\declaretheorem[style=mystyle]{example}
+\declaretheorem[style=mystyle]{axiom}
 
 % for mathematical integratoin
 \usepackage{commath}

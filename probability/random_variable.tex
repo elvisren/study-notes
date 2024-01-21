@@ -17,26 +17,36 @@ It is conventional to designate $E \cup F$ as $EF$.
     If $EF = \emptyset $, $E$ and $F$ are said to be \cindex{mutually exclusive}.
 \end{definition}
 
-\begin{definition}
-    The probabilty $P$ is defined on event $E$ of sample space $S$ which follow the following condition:
+
+\begin{definition}[sigma algebra]
+    A collection of subsets of $S$ is called \cindex{sigma algebra} $\mathcal{B}$ if
     \begin{enumerate}
-        \item $0 \leq P(E) \leq 1$.
-        \item $P(S) = 1$.
-        \item for any sequence of mutually exclusive event $E_1, E_2, \dots$,
-            \begin{equation*}
-                P \left(\bigcup_{n=1}^\infty E_n \right) = \sum_{n=1}^\infty P(E_n)
-            \end{equation*}
-        
+        \item $\emptyset \in \mathcal{B}$
+        \item If $A \in \mathcal{B}$, then $A^c \in \mathcal{B}$
+        \item If $\set{A_i} \in \mathcal{B}$, then $\cup_{i=1}^\infty A_i \in \mathcal{B}$
     \end{enumerate}
-    \qed
 \end{definition}
+
+
+\begin{definition}[probability function]
+    For a sample space $S$ and the associated sigma algebra $\mathcal{B}$, a \cindex{probability function} $P$ with domain $\mathcal{B}$ satisfies:
+    \begin{enumerate}
+        \item $P(A) \geq 0$ for all $A \in \mathcal{B}$
+        \item $P(S) = 1$
+        \item If $\set{A_i}$ are pairwise disjoint, then        
+            \begin{equation}
+                P \left(\bigcup_{n=1}^\infty E_n \right) = \sum_{n=1}^\infty P(E_n)
+            \end{equation}
+    \end{enumerate}
+\end{definition}
+
 
 If the experiment is repeated over and over again, with probability $1$ the proportion of time that event $E$ will occur is $P(E)$.
 
 \begin{theorem}[inclusion-exclusion identity]
     \begin{equation}
         \begin{aligned}
-            P(\bigcup_{i=1}^n E_i) &= \sum_i P(E_i) - \sum_{i < j}P(E_i E_j) + \sum_{i < j < k} P(E_i E_j E_k) + \dots + (-1)^{n+1} P(E_1 E_2 \dots E_n)
+            P\left(\bigcup_{i=1}^n E_i \right) &= \sum_i P(E_i) - \sum_{i < j}P(E_i E_j) + \sum_{i < j < k} P(E_i E_j E_k) + \cdots + (-1)^{n+1} P(E_1 E_2 \dots E_n)
         \end{aligned}
     \end{equation}
 \end{theorem}
@@ -48,8 +58,6 @@ If the experiment is repeated over and over again, with probability $1$ the prop
     \end{equation}
     
     For conditional probability the sample space is changed.
-    
-    \qed
 \end{definition}
 
 \begin{definition}[independent]
@@ -57,7 +65,7 @@ If the experiment is repeated over and over again, with probability $1$ the prop
 \end{definition}
 
 \begin{theorem}
-    $E$ and $F$ are independent if $P(E/F) = P(E)$.    
+    $E$ and $F$ are independent if $P(E|F) = P(E)$.    
 \end{theorem}
 
 \begin{definition}
@@ -70,14 +78,39 @@ If the experiment is repeated over and over again, with probability $1$ the prop
 \begin{definition}
     For mutually exclusive event $F_i$ that $\displaystyle \bigcup_{i=1}^n F_i = S$ .The \cindex{Bayes' formula} is defined as:
     \begin{equation}
-    \displaystyle P(F_j | F) = \frac{\probability{EF_j}}{\sum\limits_{i=1}^n \probability{EF_i}} = \frac{\probability{E|F_j} \probability{F_j}}{\sum\limits_{i=1}^n \probability{E|F_i} \probability{F_i}}
+    \displaystyle P(F_j | E) = \frac{P(EF_j)}{\sum\limits_{i=1}^n P(EF_i)} = \frac{P(E|F_j) P(F_j)}{\sum\limits_{i=1}^n P(E|F_i) P(F_i)}
     \end{equation}
 \end{definition}
 
+\begin{example}
+    One classic example in traditional probability is to select $r$ balls from $n$ samples. We could do it with replacement or without replacement (\cindex{replacement} means put it back). In this experiment the sample space is finite and all outcomes are equally likely. The result is:
+
+\begin{table}[H]
+\centering
+% \renewcommand*{\arraystretch}{1.4}
+\begin{tabular}[t]{ccc}
+\hline
+ & Without replacement & With replacement \\
+Ordered & $\displaystyle \frac{n!}{(n-r)!}$ & $n^r$ \\ 
+Unordered & $\displaystyle {n \choose r}$ & $\displaystyle {{n + r -1} \choose r}$ \\
+\hline
+\end{tabular}
+\end{table}
+\end{example}
+\begin{proof}
+    For the unordered case with replacement, we want to solve the following formula:
+    \begin{equation}
+        x_1 + x_2 + \cdots + x_n = r \text{ (} x_i \geq 0 \text{)}
+    \end{equation}
+\end{proof}
 
 
 
-\section{Random Variable Definition}
+
+% random variable
+
+
+\section{Random Variable}
 
 \begin{definition}[random variable]
     A real value function defined on sample space is called \cindex{random variable}.
@@ -88,12 +121,12 @@ If the experiment is repeated over and over again, with probability $1$ the prop
 \end{definition}
 
 \begin{definition}[probability mass function]
-    The \cindex{probability mass function} $p(a)$ of discrete random variable $X$ is defined as $p(a) = \probability{X = a}$.
+    The \cindex{probability mass function} (pmf) $p(a)$ of discrete random variable $X$ is defined as $p(a) = \probability{X = a}$.
 \end{definition}
 
 
 \begin{definition}[cdf]
-    The \cindex{cumulative distribution function (cdf)} of random variable $X$ for any $- \infty < b < \infty$ is defined as $F(b) = \probability{ X \leq b }$
+    The \cindex{cumulative distribution function} (cdf) of random variable $X$ for any $- \infty < b < \infty$ is defined as $F(b) = \probability{ X \leq b }$
 \end{definition}
 
 \begin{theorem}
@@ -101,8 +134,8 @@ If the experiment is repeated over and over again, with probability $1$ the prop
     \begin{enumerate}
         \item $F(b)$ is nondecreasing function of $b$.
         \item $F(b)$ is continuous from the right.
-        \item $\displaystyle \lim_{b \rightarrow \infty} F(b) = F(\infty) = 1$.
-        \item $\displaystyle \lim_{b \rightarrow -\infty} F(b) = F(- \infty) = 0$.
+        \item $\lim_{b \rightarrow \infty} F(b) = F(\infty) = 1$.
+        \item $\lim_{b \rightarrow -\infty} F(b) = F(- \infty) = 0$.
     \end{enumerate}
 \end{theorem}
 
@@ -115,7 +148,7 @@ $\probability{X < b} \neq F(b)$ because $F(b)$ also include the probability that
 
 
 
-Poisson random variable is a approximate of binomial random variable when $n$ is large and $p$ is small. Let $\lambda = np$, then:
+Poisson random variable is an approximate of binomial random variable when $n$ is large and $p$ is small. Let $\lambda = np$, then:
 \begin{equation*}
     \begin{aligned}
         \binom{n}{i}p^i (1-p)^{n-i} &= \frac{n!}{(n-i)! i!} \left(\frac{\lambda}{n} \right)^i \left(1-\frac{\lambda}{n} \right)^{n-i} \\
@@ -125,7 +158,7 @@ Poisson random variable is a approximate of binomial random variable when $n$ is
 \end{equation*}
 
 \begin{definition}
-    $f(x)$ is called \cindex{probability density function} if $\probability{X \in B} = {\displaystyle \int_B f(x) \dif{x}} $. \qed
+    $f(x)$ is called \cindex{probability density function} (pdf) if $\probability{X \in B} = {\displaystyle \int_B f(x) \dif{x}} $.
 \end{definition}
 
 Because $\probability{ a - \frac{\varepsilon}{2} \leq X \leq a + \frac{\varepsilon}{2} } =\displaystyle \int_{a - \frac{\varepsilon}{2}}^{a + \frac{\varepsilon}{2}} f(x) \dif{x} \approx \varepsilon f(a)  $, $f(a)$ is a measure of how likely it is that the random variable will be near $a$ within interval $\varepsilon$.
@@ -156,20 +189,11 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
     \end{equation}
 \end{theorem}
 
-
-\begin{theorem}
-    \begin{equation}
-        \expect{aX + b} = a \expect{X} + b
-    \end{equation}    
-\end{theorem}
-
 \begin{theorem}
     \begin{equation}
         \expect{aX + bY} = a \expect{X} + b \expect{Y}
     \end{equation}    
 \end{theorem}
-
-
 
 \begin{definition}[variance]
     The \cindex{variance} of $X$ is defined as
@@ -221,7 +245,7 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 
 
 \begin{theorem}
-    If $X$ is normally distributed with $\mu$ and $\rho^2$, then $Y = aX + b$ is a normal distribution with $a\mu + b$ and $(a\rho)^2$. So $Y =\displaystyle \frac{X - \mu}{\rho}$ is normally distributed with $0$ and $1$, which is called \cindex{standard normal distribution}.
+    If $X$ is normally distributed with $\mu$ and $\sigma^2$, then $Y = aX + b$ is a normal distribution with $a\mu + b$ and $(a\sigma)^2$. So $Y =\displaystyle \frac{X - \mu}{\sigma}$ is normally distributed with $0$ and $1$, which is called \cindex{standard normal distribution}.
 \end{theorem}
 
 \begin{definition}
@@ -234,8 +258,6 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
         \Gamma(\alpha) = \int_0^\infty e^{-x} x^{\alpha - 1} \dif{x}
     \end{equation}
     exponential distribution is gamma distribution with $\alpha = 1$.
-    
-    \qed
 \end{definition}
 
 \begin{theorem}
@@ -244,8 +266,9 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 
 
 \begin{theorem}
+    Gamma function is an extension of $n!$ to $\realnumber$.
     \begin{equation}
-        \Gamma \left(\frac{1}{1} \right) = \sqrt{\pi}
+        \Gamma \left(\frac{1}{2} \right) = \sqrt{\pi}
     \end{equation}
     
     \begin{equation}
@@ -254,7 +277,6 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
     \begin{equation}
         \Gamma (n) = (n-1)!
     \end{equation}
-    \qed
 \end{theorem}
 
 
@@ -290,7 +312,6 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
     \begin{equation}
         p_X(x) = \displaystyle \sum_{y: p(x,y) > 0} p(x,y)
     \end{equation}
-    \qed
 \end{definition}
 
 
@@ -303,7 +324,7 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 $f(x,y)$ is called \cindex{joint probability density function} of $X$ and $Y$. The probability density function of $X$ can be obtained as
 \begin{equation}
     \begin{aligned}
-        \probability{X \in A} &= \int_A \int_{-\infty}^\infty f(x,y) \dif{x} \dif{y} \\
+        \probability{X \in A} &= \int_A \left( \int_{-\infty}^\infty f(x,y) \dif{y} \right) \dif{x}  \\
         &= \int_A f_X (x) \dif{x}
     \end{aligned}
 \end{equation}
@@ -316,7 +337,6 @@ We have
 \begin{equation}
     \dmd{F(a,b)}{2}{a}{1}{b}{1} = f(a,b)
 \end{equation}
-\qed
 \end{definition}
 
 For $n$ random variable $X_i$, we could construct $Y_i$ that
@@ -338,7 +358,7 @@ So the process of calculating $f_{Y_i}$ are:
 \begin{enumerate}
     \item solve $X_i = h(Y_i)$ from equation (\ref{jointdenityequation} ).
     \item calculate $J(X_i)$.
-    \item replace $x_i$ by $y_i$ in $f(x_i)$ and multiplicate by $\displaystyle \frac{1}{\absolutevalue{J}}$.
+    \item replace $x_i$ by $y_i$ in $f(x_i)$ and multiply by $\displaystyle \frac{1}{\absolutevalue{J}}$.
 \end{enumerate}
 
 
@@ -362,7 +382,6 @@ So the process of calculating $f_{Y_i}$ are:
     \begin{equation}
         f(x,y)=f_X(x) f_Y(y)
     \end{equation}
-    \qed
 \end{definition}
 
 \begin{theorem}
@@ -383,36 +402,17 @@ So the process of calculating $f_{Y_i}$ are:
     \end{aligned}
     \end{equation}
     In general covariance means $Y$ tends to move in the same direction of $X$.
-    \qed
 \end{definition}
 
 \begin{theorem}
     \begin{equation}
-        \covariance{X}{Y} = \variance{X}
-    \end{equation}    
-\end{theorem}
-
-\begin{theorem}
-    \begin{equation}
-        \covariance{X}{Y} = \covariance{Y}{X}
-    \end{equation}    
-\end{theorem}
-
-\begin{theorem}
-    \begin{equation}
-        \covariance{cX}{Y} = c \covariance{X}{Y}
-    \end{equation}    
-\end{theorem}
-
-\begin{theorem}
-    \begin{equation}
-        \covariance{X}{Y + Z} = \covariance{X}{Y} + \covariance{X}{Z}
-    \end{equation}    
-\end{theorem}
-
-\begin{theorem}
-    \begin{equation}
-        \mathhilight{Cov} \left(\sum_{i=1}^n X_i, \sum_{j=1}^m Y_j \right) = \sum_{i=1}^n \sum_{j=1}^m \mathhilight{Cov}(X_i, Y_j)
+        \begin{aligned}
+            \covariance{X}{X} &= \variance{X} \\
+            \covariance{X}{Y} &= \covariance{Y}{X} \\
+            \covariance{cX}{Y} &= c \covariance{X}{Y} \\
+            \covariance{X}{Y + Z} &= \covariance{X}{Y} + \covariance{X}{Z} \\
+            \mathhilight{Cov} \left(\sum_{i=1}^n X_i, \sum_{j=1}^m Y_j \right) &= \sum_{i=1}^n \sum_{j=1}^m \mathhilight{Cov}(X_i, Y_j) \\
+        \end{aligned}
     \end{equation}    
 \end{theorem}
 
@@ -424,7 +424,7 @@ So the process of calculating $f_{Y_i}$ are:
         &= \sum_{i=1}^n \variance{X_i} \text{ (if } X_i \text{,} X_j \text{ are independent)}
     \end{aligned}
     \end{equation}
-    This theorem is often used to calculate the variance. \qed
+    This theorem is often used to calculate the variance.
 \end{theorem}
 
 \begin{definition}[sample mean]
@@ -466,7 +466,7 @@ So the process of calculating $f_{Y_i}$ are:
             &= \dod{\displaystyle \int_{-\infty}^\infty F_X (a-y)g(y) \dif{y}}{a} \\
             &= \int_{-\infty}^{\infty} f(a-y) g(y) \dif{y}
         \end{aligned}
-    \end{equation} \qed
+    \end{equation}
 \end{definition}
 
 
@@ -486,7 +486,6 @@ So the process of calculating $f_{Y_i}$ are:
     \end{equation}
     
     For any $n$ random variable $X_i$, the \cindex{joint moment generating function} $\phi(t_i)$ is defined by $\phi(t_1, \dots, t_n) = \expect{ e^{ \sum_{i=1}^n t_i X_i}}$.
-    \qed
 \end{definition}
 
 Because $\phi^n (t) = \expect{X^n e^{tX}}$, we have $\phi^n(0) = \expect{X^n}$.
@@ -509,7 +508,6 @@ The moment generating function uniquely determine the distribution.
 
 \begin{definition}[sample mean]
     The \cindex{sample mean} is defined as $\displaystyle \bar{X} = \frac{\sum X_i}{n}$.
-    \qed
 \end{definition}
 
 \begin{definition}[sample variance]
@@ -517,7 +515,6 @@ The moment generating function uniquely determine the distribution.
 \begin{equation}
     S^2 = \sum_{i=1}^n \displaystyle \frac{(X_i - \bar{X})^2}{n - 1}
 \end{equation} 
-\qed
 \end{definition}
 
 \begin{theorem}
@@ -638,7 +635,7 @@ If $X$ is a random variable that is non-negative. Then for any $a > 0$ we have
             &= \frac{n!}{(n-i)!(i-1)!} f(x) \left( F(x) \right)^{i-1} \left(1-F(x) \right)^{n-i}
         \end{aligned}
     \end{equation*}
-    The result could be read as there are $\left( F(x) \right)^{i-1}$ which are less than $x$, $\left(1-F(x) \right)^{n-i}$ which are larger than $x$, and $f(x)$ which equals $x$. \qed
+    The result could be read as there are $\left( F(x) \right)^{i-1}$ which are less than $x$, $\left(1-F(x) \right)^{n-i}$ which are larger than $x$, and $f(x)$ which equals $x$.
 \end{example}
 
 \begin{example}
