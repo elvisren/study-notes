@@ -1,0 +1,97 @@
+\chapter{Linear Equations}
+
+\section{Elementary Operations}
+
+There are 3 elementary row operations on a $m \times n$ matrix $A$:
+\begin{enumerate}
+    \item interchange any two rows
+    \item multiply any row by a nonzero scalar
+    \item add any scalar multiple of a row to another row
+\end{enumerate}
+
+Each operation has an elementary operation $E$ associated with it.
+
+
+The rank of a matrix $A$ is the rank of $L_A$. So we are defining the rank of a matrix using the rank of a linear transformation. This is sometimes useful because we could use matrix to calculate the rank of a linear transformation.
+
+By applying a series of elementary row and column operations on $A$ ($m \times n$), we could find invertible matrix $B$ (multiplication of row operations, $m \times m$) and $C$ (multiplication of column operations, $n \times n$) that
+\begin{equation*}
+    D = B A C = \begin{pmatrix}
+        I_r & 0 \\
+        0 & 0
+    \end{pmatrix}
+\end{equation*}
+
+We could find the inverse of a matrix using elementary operations. Define an augmented matrix $(A|I_n)$. If we could apply a series of row operation on $A$ and convert it to $I$, then the same operations could convert from $I$ to $\inverse{A}$. So the logic is:
+\begin{equation}
+    E_p E_{p-1} \hdots E_2 E_1 (A|I_n) = (I_n | \inverse{A} )
+\end{equation}
+
+
+\section{Systems of Linear Equations}
+
+A system of linear equations could be written as 
+\begin{equation}
+    A x = b
+\end{equation}
+
+$A$ is called the coefficient matrix. The equation is consistent if the solution set is non-empty; otherwise it is called inconsistent. If $b=0$, the equation is called homogeneous; otherwise it is nonhomogeneous.
+
+For homogeneous equation $Ax=0$, the solution is $\nullspace{A}$. There are many properties of the solution:
+\begin{itemize}
+    \item If $m < n$, $A_{m \times n} x = 0$ always has nonzero solution
+    \item If $s$ is one solution to $Ax=b$, and $N$ is the solution space of $Ax=0$, then all the solutions are $\set{s} + N$
+    \item If $A$ is invertible, then there is only one solution $\inverse{A} b$
+\end{itemize}
+
+
+\begin{theorem}
+    $Ax=b$ is consistent if and only if $\rank{A} = \rank{A|b}$
+\end{theorem}
+
+If $C$ is invertible, then the solution of $Ax=b$ is the same as $CAx=Cb$. So we could apply a series of elementary row operations to $Ax=b$ until $A$ is in reduced row echelon form, which greatly reduce the calculation effort. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

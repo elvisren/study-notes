@@ -1,0 +1,160 @@
+\documentclass[reqno,16pt]{book}
+\usepackage{amssymb}
+\usepackage{latexsym}
+
+
+% algorithm
+\usepackage{algpseudocode}
+\usepackage[section]{algorithm}
+\usepackage{algorithmicx}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{float}
+
+% math theorem, lemma, proof
+\usepackage{amsthm}
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}
+%\newtheorem{theorem}{Theorem}
+
+\usepackage{thmtools}
+\declaretheorem{theorem}
+\declaretheorem{definition}
+\declaretheorem{example}
+\declaretheorem{axiom}
+
+
+
+% for mathematical integratoin
+\usepackage{commath}
+
+
+% for drawing beautiful math commutative diagram
+% note:
+%   it treat nodes as a matrix and use "&" to separate row and "\\" for line.
+%   "'" change the label from above arrow to below arrow.
+%   "l", "r" and "d" means move among matrix nodes.
+\usepackage{tikz-cd}
+
+
+% create index
+\usepackage{mathtools}
+\usepackage{makeidx}
+\makeindex
+
+
+\usepackage{listings}
+
+
+
+% set font
+
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[theoremfont,trueslanted,largesc,tighter,p,osf]{newpxtext}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[varqu,varl]{inconsolata}
+\usepackage{amsmath} % must be loaded before amsthm
+\usepackage{amsthm} % must be loaded before newpxmath
+%\usepackage[vvarbb]{newpxmath}
+
+
+% no space in itemize
+\usepackage{enumitem}
+\setenumerate{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setitemize{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+
+
+% set line space
+\usepackage{setspace}
+
+
+
+% set page size
+\usepackage{geometry}
+%\geometry{a4paper}
+\geometry{a4paper,top=2cm,bottom=2cm,left=2.5cm,right=2cm}
+
+
+% set programming code highlight
+% \usepackage[chapter]{minted}
+
+
+% setup bibtex
+\usepackage{cite}
+
+
+% include eps file
+\usepackage{epsfig}
+
+
+
+% set toc and section level
+\setcounter{secnumdepth}{7}
+\setcounter{tocdepth}{7}
+
+
+
+% customized commands
+%\newcommand\cindex[1]{\underline{#1}\index{#1}}
+%\newcommand\cindex[1]{\textcolor{blue}{\textbf{#1}}\index{#1}}
+\newcommand\cindex[1]{\textcolor{blue}{#1}\index{#1}}
+
+
+\newcommand\mathhilight[1]{\mathop{\bf #1\/}}
+
+
+% set theory
+\newcommand\powerset[1]{\mathcal{P}\left( #1 \right)}
+\newcommand\range[1]{\mathbf{ran}(#1)}
+\newcommand\domain[1]{\mathbf{dom}(#1)}
+\newcommand\allordinals[0]{\mathbf{Ord}}
+\newcommand\transfinitesequence[1]{\left< #1 \right>}
+\newcommand\supremum[1]{\mathbf{sup} \set{#1}}
+\newcommand\infimum[1]{\mathbf{inf} \set{#1}}
+\newcommand\maximum[1]{\mathbf{max} \set{#1}}
+\newcommand\minimum[1]{\mathbf{min} \set{#1}}
+
+
+% topology
+\newcommand\closure[1]{\overline{#1}}
+\newcommand\real[0]{\mathbb{R}}
+
+
+%linear algebra
+\newcommand\nullspace[1]{\mathcal{N}(#1)}
+\newcommand\rangespace[1]{\mathcal{R}(#1)}
+\newcommand\absolutevalue[1]{\abs{#1}}
+\newcommand\determinate[1]{\absolutevalue{#1}}
+\newcommand\determinatetext[1]{\displaystyle \mathbf{det} ~\displaystyle #1}
+\newcommand\coordinate[1]{\sbr{#1}}
+\newcommand\projection[2]{\mathbf{proj}_{#2} #1}
+\newcommand\rowvector[1]{\left[ \displaystyle #1 \right]}
+
+
+\newcommand\dimension[1]{\displaystyle \mathbf{dim}\left( #1 \right)}
+\newcommand\vectorspan[1]{\displaystyle \mathbf{span}\left( #1 \right)}
+\newcommand\rank[1]{\displaystyle \mathbf{rank}( #1 )}
+\newcommand\innerproduct[2]{\left\langle \displaystyle #1, #2 \right\rangle}
+\newcommand\trace[1]{\displaystyle \mathbf{tr}( #1 )}
+
+
+\newcommand\adjugate[1]{\displaystyle \mathbf{adj} ~\displaystyle #1 }
+\newcommand\cofactor[1]{\displaystyle \mathbf{cof} ~\displaystyle #1 }
+
+\newcommand\columnvector[1]{\boldsymbol{#1}}
+
+
+%probability
+\newcommand\probability[1]{\mathop{\bf P\/}\displaystyle \left\{#1\right\}}
+\newcommand\expect[1]{\mathop{\bf E\/}\displaystyle  \left[ #1 \right]}
+\newcommand\variance[1]{\mathop{\bf Var\/}\displaystyle \left[ #1 \right]}
+\newcommand\covariance[2]{\mathop{\bf Cov\/}\displaystyle \left(#1,#2 \right)}
+
+
+% machine learning
+\newcommand\subscription[2]{\boldsymbol{#1}^{(#2)}}
+

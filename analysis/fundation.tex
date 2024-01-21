@@ -1,0 +1,690 @@
+\chapter{Fundation}
+
+
+\begin{enumerate}
+    \item Theorem: an important proposition
+    \item Lemma: a proposition before a theorem, and is needed for its proof
+    \item Corollary: a proposition follows directly from a theorem
+\end{enumerate}
+
+\section{Combinatorics}
+
+
+\begin{theorem}[multinomial formula]
+    for $\alpha=(\alpha_1, ... \alpha_m) \in \naturalnumber^m$ and $x=(x_1, ..., x_m) \in \realnumber^m$, define these operations:
+    \begin{equation}
+        \begin{aligned}
+            \absolutevalue{\alpha} &= \sum_{j=1}^m a_j \\
+            \alpha ! &= \prod_{j=1}^m \alpha_j ! \\
+            x^\alpha &= \prod_{j=1}^m {x_j}^{\alpha_j}
+        \end{aligned}
+    \end{equation}
+    
+    We have
+    \begin{equation}
+        \left(\sum_{j=1}^m x_j \right)^k = \sum_{\absolutevalue{\alpha = k}} \frac{k!}{\alpha !} x^\alpha
+    \end{equation}
+\end{theorem}
+
+
+
+\section{Trigonometry}
+
+\begin{theorem} 
+    Here are the essential trigonometry functions:    
+    
+\begin{equation}
+    \begin{aligned}
+        \sin(\alpha + \beta) &=\sin\alpha\cos\beta + \cos\alpha\sin\beta \\
+        \sin(\alpha - \beta) &=\sin\alpha\cos\beta - \cos\alpha\sin\beta \\
+        \cos(\alpha + \beta) &=\cos\alpha\cos\beta - \sin\alpha\sin\beta \\
+        \cos(\alpha - \beta) &=\cos\alpha\cos\beta + \sin\alpha\sin\beta \\
+        \tan(\alpha+\beta) &= \frac{\tanh\alpha + \tan\beta}{1 - \tan\alpha \tan\beta} \\   
+    \end{aligned}
+\end{equation}
+
+
+\begin{equation}
+    \begin{aligned}
+        \sin\alpha\cos\beta &=\frac{1}{2}[\sin(\alpha+\beta) + \sin(\alpha - \beta)] \\
+        \cos\alpha\sin\beta &=\frac{1}{2}[\sin(\alpha+\beta) - \sin(\alpha - \beta)] \\
+        \cos\alpha\cos\beta &=\frac{1}{2}[\cos(\alpha + \beta) + \cos(\alpha - \beta)] \\
+        \sin\alpha\sin\beta &=-\frac{1}{2}[\cos(\alpha + \beta) - \cos(\alpha - \beta)] \\
+    \end{aligned}
+\end{equation}
+
+
+\begin{equation}
+    \begin{aligned}   
+        \sin\alpha + \sin\beta &= 2 \sin\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} \\
+        \sin\alpha - \sin\beta &= 2 \cos\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} \\
+        \cos\alpha + \cos\beta &= 2 \cos\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} \\
+        \cos\alpha - \cos\beta &= 2 \sin\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} \\ 
+    \end{aligned}
+\end{equation}
+
+
+\begin{equation}
+    \begin{aligned}    
+        \sin 2\alpha &= 2 \sin\alpha \cos\alpha \\
+        \cos 2\alpha &= \cos^2 \alpha - \sin^2 \alpha \\
+        &= 2 \cos^2 \alpha - 1 \\
+        &= 1 - 2 \sin^2 \alpha \\
+        \sin 3\alpha &= 3 \sin\alpha - 4 \sin^3 \alpha \\
+        \cos 3\alpha &= -3 \cos\alpha + 4 \cos^3 \alpha \\
+    \end{aligned}
+\end{equation}
+
+\begin{equation}
+    \begin{aligned}       
+        \sin \alpha &= \frac{2 \tan \frac{\alpha}{2}}{1 + \tan^2 \frac{\alpha}{2}} \\
+        \cos \alpha &= \frac{1 - \tan^2 \frac{\alpha}{2}}{1 + \tan^2 \frac{\alpha}{2}} \\
+        \tan \alpha &= \frac{2 \tan \frac{\alpha}{2}}{1 - \tan^2 \frac{\alpha}{2}} \\  
+    \end{aligned}
+\end{equation}
+
+
+\begin{equation}
+    a \sin\alpha + b \cos\alpha = \sqrt{a^2 + b^2}\sin\left(\alpha + \arcsin\frac{b}{\sqrt{a^2 + b^2}}\right)
+\end{equation}
+
+\end{theorem}
+
+
+\section{Logic and Set Theory}
+
+
+\begin{definition}    
+The implication $A \Rightarrow B$ is defined as:
+\begin{equation}
+    A \Rightarrow B := \neg A \vee B
+\end{equation}
+
+Here $A$ is the sufficient condition for $B$, and $B$ is the necessary condition for $A$.
+
+Another observation is:
+\begin{equation}
+    A \Rightarrow B \Leftrightarrow \neg B \Rightarrow \neg A
+\end{equation}
+
+$\neg B \Rightarrow \neg A$ is the contrapositive of the statement $A \Rightarrow B$
+\end{definition}
+
+\begin{definition}
+    A function $f : X \rightarrow Y$ is a rule that for each element of $X$, there is only one element of $Y$.
+\end{definition}
+
+\begin{definition}
+    The fiber of $f$ at $y$ is $f^{-1}$ that:
+    \begin{equation}
+        f^{-1}(y) := \set{x \in X; f(x) = y}
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    A relation on $X$ which is reflective, transitive and symmetric is called an equivalent relation on $X$, and is denoted as $\sim$.
+    
+    It defines a surjection $X \rightarrow X / \sim$ which is called quotient function.
+\end{definition}
+
+
+
+\begin{theorem}
+    The natural number $\naturalnumber$ are well ordered, that is, each nonempty subset of $\naturalnumber$ has a minimum.
+\end{theorem}
+
+
+\begin{definition}
+    A set $X$ is finite if it is empty, or if there are $n \in \naturalnumber^{\times}$ and a bijection from $\set{1, ..., n}$ to $X$.
+    
+    If a set is not finite, it is infinite.
+    
+    A set $X$ is countably infinite if there is a bijection from $X$ to $\naturalnumber$. A set is countable if it is countably infinite or finite. Or it is uncountable.
+\end{definition}
+
+\begin{theorem}
+    There is no surjection from $X$ to $\powerset{X}$. So $\powerset{\naturalnumber}$ is uncountable.
+\end{theorem}
+\begin{proof}
+    Define a function $\varphi: X \rightarrow \powerset{X}$, and consider the set $A = \set{x\in X, x \notin \varphi(x)}$.
+\end{proof}
+
+
+\begin{theorem}
+A countable union of countable sets is countable.    
+\end{theorem}
+
+\begin{theorem}
+The set $\set{0,1}^{\naturalnumber}$ is uncountable.
+\end{theorem}
+\begin{proof}
+    Define a bijection from $\powerset{\naturalnumber}$ to $\set{0,1}^{\naturalnumber}$.
+\end{proof}
+
+
+\section{Group Theory}
+
+%
+% group theory 
+%
+
+\begin{definition}[magma]
+    A magma $(M, \cdot)$ has the property that
+    \begin{equation}
+        a, b \in M \Rightarrow a \odot b \in M
+    \end{equation}
+\end{definition}
+
+\begin{definition}[semigroup]
+    A semigroup is a magma with associativity:
+    \begin{equation}
+        (a \odot b) \odot c = a \odot (b \odot c)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[monoid]
+    A monoid is a semigroup with identity:
+    \begin{equation}
+        e \odot a = a
+    \end{equation}
+\end{definition}
+
+\begin{definition}[group]
+    A group is monoid with inverse:
+    \begin{equation}
+        \forall a, \exists b \Rightarrow a \odot b = e
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Abelian group]
+    An Abelian group is a group with commutativity on $\cdot$:
+    \begin{equation}
+        a \odot b = b \odot a
+    \end{equation}
+\end{definition}
+
+\begin{definition}[ring]
+    A ring $(R, +, \odot)$ is defined as:
+    \begin{itemize}
+        \item $+$ is an Abelian group
+        \item $\odot$ is a monoid
+        \item Distributivity: $a \odot (b + c) = a \odot b + a \odot c$, and $(a+b) \odot c = a \odot c + b \odot c$
+    \end{itemize}
+    
+\end{definition}
+
+\begin{definition}[field]
+    A field is a ring that $\odot$ is a group too.
+\end{definition}
+
+\begin{definition}[ordered field]
+    An ordered field is a field with order $\leq$:
+    \begin{itemize}
+        \item $(R, \leq)$ is totally ordered
+        \item $x < y \Rightarrow x + z < y + z$
+        \item $x,y > 0 \Rightarrow xy > 0$
+    \end{itemize}
+    
+    $x \in R$ is positive if $x > 0$.
+\end{definition}
+
+
+\begin{definition}[coset]
+    Let $N$ be a subgroup of $G$ and $g \in G$. Then $g \odot N$ is the left coset and $N \odot g$ is the right coset.
+    
+    The left coset is an equivalent relation so it defines $G/N$ which is the set of left cosets of $G$ modulo $N$.
+\end{definition}
+
+\begin{definition}[normal]
+    A subgroup $N$ is normal if for all $g \in G$, we have 
+    \begin{equation}
+        g \odot N = N \odot g
+    \end{equation}    
+\end{definition}
+
+\begin{definition}[quotient group]
+    A normal subgroup $N$ induces a quotient group $(G/N) \times (G/N) \rightarrow G/N$ that 
+    \begin{equation}
+        (a \odot N, b \odot N) \rightarrow (a \odot b) \odot N
+    \end{equation} 
+\end{definition}
+
+\begin{definition}[homomorphism]
+    Let $G = (G, \odot)$ and $H = (H, \otimes)$ be groups. A function $\varphi: G \rightarrow H$ is a homomorphism if 
+    \begin{equation}
+        \varphi(g \odot h) = \varphi(g) \otimes \varphi(h)
+    \end{equation}
+    
+    The image of a homomorphism is a subgroup.
+\end{definition}
+
+\begin{theorem}
+    If $\varphi$ is a homomorphism, then $\varphi(e) = e'$ and $\varphi(g)^{-1} = \varphi(g^{-1})$.
+\end{theorem}
+
+\begin{definition}[kernel]
+    Let $\varphi$ be a homomorphism. The kernel of $\varphi$, $\kernel{\varphi}$ is defined as
+    \begin{equation}
+        \kernel{\varphi} = \varphi^{-1}(e')
+    \end{equation}
+    
+    The kernel is a subgroup.
+\end{definition}
+
+\begin{theorem}
+Let $\varphi$ be a homomorphism and $N = \kernel{\varphi}$, then
+\begin{equation}
+    g \odot N = \varphi^{-1}\left(\varphi(g)\right)
+\end{equation}
+\end{theorem}
+
+\begin{theorem}
+    Let $N$ be a normal subgroup of $G$. Then the quotient function $p: G \rightarrow G/N$ is a surjective homomorphism, the quotient homomorphism, with $\kernel{p} = N$.
+\end{theorem}
+
+
+\begin{definition}[isomorphism]
+    A homomorphism is isomorphism if it is bijective. If it is from $G$ to itself, it is automorphism. Examples are:
+    \begin{itemize}
+        \item $g: a \odot g \odot a^{-1}$
+        \item for surjective homomorphism $\varphi: G \rightarrow H$, $\varphi' : G/\kernel{\varphi} \rightarrow H$
+        \item Let $(G, \odot)$ be a group, but $H$ is not. And $\varphi: G \rightarrow H$ is a bijection. Then define a function $\otimes$ that $g' \otimes h' := \varphi^{-1}(g') \odot \varphi^{-1}(h')$. $\otimes$ is the operation on $H$ induced from $\odot$ by $\varphi$
+    \end{itemize}
+\end{definition}
+
+
+
+% numbers
+\section{Numbers}
+
+\subsection{Integer Number}
+Natural number $\naturalnumber$ did not support the inverse $-n$. Integer $\integer$ is the smallest ring that contains $(\naturalnumber, +)$. For convenience we have defined the following:
+\begin{itemize}
+    \item The additive identity is denoted by $0_R$
+    \item The multiplicity identity is denoted by $1_R$
+    \item The additive inverse of $a$ is $-a$
+    \item $0 \cdot a = a \cdot 0 = 0$
+\end{itemize}
+
+\subsection{Rational Number}
+Integer $\integer$ did not support the $m/n$. Rational number $\rational$ is the smallest field that contains $\integer$. $\rational$ has a limitation too. For example, there is no rational $x$ that $x^2 = 2$. So we need to extend $\rational$ too.
+
+\begin{definition}[order complete]
+    Let $X$ be a totally ordered set. It is order complete if every nonempty subset is bounded below. It is also called complete.
+\end{definition}
+
+
+\begin{theorem}
+    $\rational$ is not order complete.
+\end{theorem}
+\begin{proof}
+    Define $A:=\set{x \in \rational; x > 0 , x^2 < 2}$, and $B:=\set{x \in \rational; x > 0, x^2 > 2}$. Assume there is $c$ that $a \leq c \leq b$, define $\xi = \frac{2c+2}{c+2}$, we have
+    \begin{equation}
+        \begin{aligned}
+            \xi^2 - 2 &= \frac{2(c^2 -2)}{(c+2)^2} \\
+            \xi - c &= - \frac{c^2 -2}{c+2}    
+        \end{aligned}      
+    \end{equation}
+    
+    If $c^2 < 2$, we have $\xi^2 < 2$ and $\xi < c$, so $\xi \in A$ and $\xi > c$, contradiction.
+\end{proof}
+
+
+\subsection{Real Number}
+
+Real number $\realnumber$ is the order completion of rational number $\rational$. Here we use Dedekind cut to do the completion.
+
+\begin{definition}[Dedekind cut]
+    Let $F$ be a field. A Dedekind cut $(L,R)$ on $F$ is a partition of $F$ into two disjoint set $L$ and $R$ that
+    \begin{itemize}
+        \item $L \neq \emptyset, F$
+        \item $L$ is closed downwards: for any $x,y \in F$ that $x < y$. If $y \in L$, then $x \in L$
+        \item $L$ does not have maximum element: for any $x \in L$, there is $y\in L$ that $x < y$
+    \end{itemize}
+\end{definition}
+
+Let $F=\rational$, the set of all Dedekind cut $C$ on $\rational$ is real number.
+
+For $q \in \rational$, there is a Dedekind cut $L_q = \set{x\in \rational: x < q}$. This $L_q$ has a property that
+\begin{theorem}
+    A Dedekind cut $L$ has a supremum in $\rational$ if and only if $L = L_q = \set{x \in \rational: x < q}$ for some $q\in \rational$.
+\end{theorem}
+
+\begin{definition}
+    Define $C_\rational = \set{L_q: q \in \rational} \subseteq C$. The $+$ operation could be defined as
+\begin{equation}
+    L_p + L_q = \set{x + y \in \rational: x < p, y < q}
+\end{equation}
+\end{definition}
+
+
+We could define the $\times$ on $L_\rational$ as well. Now we extend the $+$ and $\times$ operation to all $C$ and becomes the operations on real number.
+
+\begin{theorem}
+    The Dedekind cut $C$ with $+$, $\times$ is order complete.    
+\end{theorem}
+\begin{proof}
+    For a subset $D$ of $C$ whose elements are all bounded above, define a subset $M \subset C$ that
+    \begin{equation}
+        M = \set{x: x \in d \text{ for some } d \in D} =\bigcup_{d \in D} d
+    \end{equation}
+    
+    $M$ is also a Dedekind cut. So $M$ is a upper bound for $D$. Then prove it is the minimum upper bound.
+\end{proof}
+
+
+\begin{theorem}
+Let $x \in \realnumber$. It could be expressed as the supremum of the set $x = \sup \set{q \in \rational: q \leq x}$.
+\end{theorem}
+
+
+
+\begin{theorem}
+    Here are the common properties of real numbers:
+    \begin{itemize}
+        \item For each $x \in \realnumber$, there is a $n$ that $n > x$.
+        \item If $\displaystyle 0 \leq a \leq \frac{1}{n}$ for all $n \in \naturalnumber^{\times}$, then $a = 0$
+        \item For any $a >0$, there is $n \in \naturalnumber^{\times}$ that $\displaystyle \frac{1}{n} < a$
+        \item For any $a,b\in \realnumber$ that $a < b$, there is $q \in \rational$ that $a < q < b$
+        \item For any $a,b\in \realnumber$ that $a < b$, there is $r \in \realnumber \textbackslash \rational $ that $a < r < b$
+    \end{itemize}    
+\end{theorem}
+
+
+\begin{example}[decimal expression of rational number]
+    For an rational number $r = \frac{p}{q}$, there is $a_0$ that $p = a_0 q + b_1$ where $b_1 < q-1$. This expression is equivalent to 
+    \begin{equation}
+        \frac{p}{q} = a_0 + \frac{1}{10} \left(\frac{10 b_1}{q} \right)
+    \end{equation}
+    
+    because $0 < \frac{10 b_1}{q} < 10$, so there is $b_2$ that $\frac{10 b_1}{q} = a_1 + \frac{b_2}{q}$, which means
+    \begin{equation}
+        \frac{p}{q} = a_0 + \frac{1}{10} \left( a_1 + \frac{b_2}{q} \right) = a_0 + \frac{a_1}{10} + \frac{1}{10^2} \left(\frac{10 b_2}{q} \right)
+    \end{equation}
+\end{example}
+
+\begin{theorem}
+    The decimal expression of a rational number $r$ terminates after finitely many terms or it is periodic.    
+\end{theorem}
+\begin{proof}
+    Let $r = \frac{p}{q}$. Assume the decimal expression never terminate. Because all $b_i \in \set{0, \cdots, q -1}$, some $b_i$ must be equal.
+\end{proof}
+
+
+
+
+
+The real number $\realnumber$ still has limitation. It cannot solve $x^2 = -1$. The smallest extension field $\complexnumber$ to $\realnumber$ is the complex number.
+
+\begin{theorem}
+    For all $a,b \in \realnumber$ such that $a < b$. There is $r \in \rational$ that $a < r < b$.
+\end{theorem}
+\begin{proof}
+    Since $b - a > 0$, there is $n$ that $n > \frac{2}{b-a} > 0$. So $nb > na + 2$ and there is $m$ that $na < m < na + 2 < nb$. So $a < \frac{m}{n} < b$.
+\end{proof}
+
+
+
+% complex number
+\subsection{Complex Number}
+
+
+\begin{theorem}[De Moivre's Identity]
+    For $z = a + b i \neq 0$ and $n \infty \integer$, we have 
+    \begin{equation}
+        z^n = (a+bi)^n = r^n(\cos \theta + i \sin \theta)^n = r^n (\cos n\theta + i \sin n\theta)
+    \end{equation}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

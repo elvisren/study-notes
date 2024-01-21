@@ -1,0 +1,292 @@
+\chapter{Geometric Aspect}
+
+The vectors here are all in $\realnumber^2$ or $\realnumber^3$.
+
+\section{Vectors}
+
+A vector could be expressed as 
+\begin{equation}
+    \vec{v} = \length{\vec{v}} \angle \theta
+\end{equation}
+
+Vector multiplication:
+\begin{equation}
+    \begin{aligned}
+        \vec{u} \cdot \vec{v} &= x_1 y_1 + x_2 y_2 = \length{\vec{u}} \length{\vec{v}} \cos \theta \\
+        \vec{u} \times \vec{v} &= \begin{vmatrix}
+            i & j & k \\
+            u_x & u_y & u_z \\
+            v_x & v_y & v_z
+        \end{vmatrix}
+    \end{aligned}    
+\end{equation}
+
+we have
+\begin{equation}
+    \length{\vec{u} \times \vec{v}} = \length{\vec{u}} \length{\vec{v}} \sin \theta
+\end{equation}
+
+For 3 vectors $u, v, w$ in $R^3$, its volume is
+\begin{equation}
+    \begin{vmatrix}
+            u_x & u_y & u_z \\
+            v_x & v_y & v_z \\
+            w_x & w_y & w_z
+    \end{vmatrix} = \vec{u} \cdot (\vec{v} \times \vec{w})
+\end{equation}
+
+The direction of $\vec{u} \times \vec{v}$ is perpendicular to both $\vec{u}$ and ${v}$, and it follows the right-hand rule.
+
+In $\realnumber^3$, we have the following cross product:
+
+\begin{table}[H]
+\centering
+\begin{tabular}[t]{ccc}
+    $i \times j = k$ & $j \times k = i$ & $k \times i = j$ \\
+    $j \times i = -k$ & $k \times j = -i$ & $i \times k = -j$
+\end{tabular}
+\end{table}
+
+The projection $\Pi$ of $\vec{v}$ along $\vec{d}$ is
+\begin{equation}
+    \Pi_{\vec{d}} (\vec{v}) = \left(\frac{\vec{v} \cdot \vec{d}}{\length{\vec{d}^2}}\right) \vec{d}
+\end{equation}
+
+\section{Complex Number}
+
+The polar expression of a complex number $z$ is
+\begin{equation}
+    z = \absolutevalue{z} \angle \theta
+\end{equation}
+
+For two complex number $p \angle \theta$ and $q \angle \phi$, their product formula is
+\begin{equation}
+    p \angle \theta \cdot q \angle \phi = pq \angle (\theta + \phi)
+\end{equation}
+
+\begin{theorem}[Euler's formula] The Euler's formula is
+\begin{equation}
+    e^{i \theta} = \cos \theta + i \sin \theta
+\end{equation}
+
+And we have
+\begin{equation}
+    (\cos \theta + i \sin \theta)^n = \cos n \theta + \sin n \theta
+\end{equation}
+\end{theorem}
+
+
+\section{Lines}
+
+\begin{definition}[parametric equation]
+    Given a direction vector $\vec{v}$ and some point $p$, the line is defined as 
+    \begin{equation}
+        l = p + t \vec{v}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[symmetric equation]
+    Another expression is to project $\vec{v}$ on each coordinate:
+\begin{equation}
+    \begin{aligned}
+        x &= p_x + t v_x \\
+        y &= p_y + t v_y \\
+        z &= p_z + t v_z
+    \end{aligned} 
+\end{equation}
+
+Or it could be expressed as
+\begin{equation}
+    \frac{x - p_x}{v_x} = \frac{y - p_y}{v_y}  = \frac{z - p_z}{v_z}
+\end{equation}
+\end{definition}
+
+\begin{definition}
+    A third way to express a line is to treat is as the intersection of two planes:
+    \begin{equation}
+        \begin{aligned}
+            A_1 x + B_1 y + C_1 z &= D_1 \\
+            A_2 x + B_2 y + C_2 z &= D_2 \\
+        \end{aligned}
+    \end{equation}
+\end{definition}
+
+
+%
+% planes
+%
+\section{Planes}
+      
+\begin{definition}
+    A plane could be expressed as
+    \begin{equation}
+        A x + B y + C z = D
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    A plane passes a point $p$ and is orthogonal to a vector $\vec{n}$. It could be expressed as 
+    \begin{equation}
+        \vec{n} \cdot (x - p) = 0
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    A plane passes a point $p$ and there are two linearly independent vector $\vec{u}$ and $\vec{v}$ that are parallel to the plane. It could be expressed as
+    \begin{equation}
+        x = p + s \vec{u} + t \vec{v}
+    \end{equation}
+\end{definition}
+
+
+%
+% distance
+%
+
+\section{Distance}
+
+\begin{theorem}
+    The distance between two point $p$ and $q$ is $\length{p - q}$.
+\end{theorem}
+
+\begin{theorem}
+    The distance between the origin and the line $p + t \vec{v}$ is 
+    \begin{equation}
+        \lengthsmall{p - \frac{p \cdot \vec{v}}{\length{\vec{v}}^2} \vec{v}}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}
+    The distance between the origin and the plane $\vec{n} \cdot (x - p) = 0$ is    
+    \begin{equation}
+        \frac{\absolutevalue{\vec{n} \cdot p}}{\length{\vec{n}}}
+    \end{equation}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

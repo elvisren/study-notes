@@ -1,0 +1,306 @@
+\chapter{Diagonalization}
+
+\section{Why it is useful}
+
+
+The reason we do research on diagonalization is to simplify calculation. If a square matrix is diagonalizable, the result is a diagonal matrix, which is each to multiply.
+
+Diagonalization process will find eigenvectors. These special vectors have a special property that after the result of linear transformation are still themselves with different length. Because these eigenvectors are the basis of vector space, we could try to understand the behavior of the linear transformation through these eigenvectors.
+
+\section{Definition}
+
+
+A linear operator $T$ is diagonalizable if there is a basis $\beta$ of $V$ that $\coordinate{T}_\beta$ is a diagonal matrix. A square matrix $A$ is diagonalizable if $L_A$ is diagonalizable.
+
+If a linear operator $T$ is diagonalizable, it means $T(v_i) = \lambda_i v_i$, for each $v_i \in \beta$. $v_i$ is called eigenvector and $\lambda$ is called eigenvalue.
+
+If a square matrix is diagonalizable, it is similar to a diagonal matrix. So $D = \inverse{Q} A Q$ where each column of $Q$ is a eigenvector ($Q = \coordinate{I_V}_v^e$). ($A$ is the coordinate of $L_A$ under the standard basis of $\realnumber^n$. Now the basis was changed to $Q$, so use \theoref{change_of_coordinate_formula} to find the diagonal matrix $D$).
+
+
+
+\section{Calculation}
+
+It is easier to calculate eigenvalue using matrix representation. If (and only if) $\lambda$ is an eigenvalue of $A$, then $\determinate{A - \lambda I_n} = 0$. The function $f(t) = \determinate{A - t I_n}$ is called the characteristic polynomial of $A$. So our job is to find all zeros of $f(t)$.
+
+
+\begin{theorem}
+    similar matrices have the same determinant and characteristic function. It also means that a linear operator $T$ under two different basis will generate the same characteristic functions.
+\end{theorem}
+\begin{proof}
+    Let $B = \inverse{P}AP$, we have 
+    \begin{equation}
+        \absolutevalue{B - \lambda I} = \absolutevalue{\inverse{P} A P - \lambda \inverse{P} I P} = \absolutevalue{\inverse{P} (A - \lambda I) P} = \absolutevalue{A - \lambda I}
+    \end{equation}
+\end{proof}
+
+
+\begin{theorem}\label{eigenvector_sets_are_linearly_independent}
+    Let $\lambda_k$ be distinct eigenvalues of $T$, and $S_i$ are linearly independent eigenvectors for $\lambda_i$. Then $\bigcup_{i=1}^k S_i$ are linearly independent.
+    
+    (linearly independent is a weak property. If $T$ is self-adjoint, eigenvectors are all orthogonal)
+\end{theorem}
+\begin{proof}
+    Assume they are not linearly independent and multiply the equation by $T - \lambda_k I$. Use deduction to prove.
+\end{proof}
+
+\theoref{eigenvector_sets_are_linearly_independent} shows that if $T$ has $n$ distinct eigenvalue, then $T$ must be diagonalizable.
+
+\begin{definition}
+    A polynomial $f(t)$ splits over $F$ if there are distinct scalars $\set{a_i}$ that
+    \begin{equation}
+        f(t) = c (t - a_1)^{k_1} (t - a_2)^{k_2} \hdots (t - a_j)^{k_j}
+    \end{equation}
+    
+    The $F$ could be $\realnumber$ or $\complexnumber$. A function over $\complexnumber$ could always split. So we have to be careful when talking about the split over $F$.
+    
+    $k_j$ is called the multiplicity of $a_j$.
+\end{definition}
+
+If $T$ is diagonalizable, it must split. But split does not mean diagonalizable. The edge cases happen when some $a_i$ are the same.
+
+
+\begin{theorem}
+    Let $\lambda$ be an eigenvalue of $T$ with multiplicity $m$. Then $1 \leq \dimension{E_\lambda} \leq m$.
+\end{theorem}
+\begin{proof}
+    Consider the basis $\set{v_p}$ for $E_\lambda$. Extend it to the ordered basis $\beta = \set{v_1, ..., v_p, v_{p+1}, ... v_n}$ of $V$, and let $A = \coordinate{T}_\beta$. $A$ now looks like:
+    \begin{equation*}
+        A = \begin{pmatrix}
+            \lambda I_p & B \\
+            0 & D
+        \end{pmatrix}
+    \end{equation*}
+    
+    So the characteristic polynomial of $A$ is:
+    \begin{equation*}
+        \begin{aligned}
+            f(t) = \determinate{A - t I_n}  = \determinate{\begin{pmatrix}
+                (\lambda - t) I_p & B \\
+                0 & D - t I_{n-p}
+            \end{pmatrix}} = \determinate{(\lambda - t) I_p} \times \determinate{D - t I_{n-p}}  = (\lambda - t)^p g(t)
+        \end{aligned}
+    \end{equation*}
+    
+    So $p= \dimension{E_\lambda} \leq m$ .
+\end{proof}
+
+The test for diagonalizability now requires $\dimension{E_\lambda} = m$ for each eigenvalue. So the procedure is:
+\begin{enumerate}
+    \item The characteristic polynomial of $T$ must split
+    \item For each eigenvalue $\lambda$ of $T$, the multiplicity must equals the $\dimension{E_\lambda} = n - \rank{T - \lambda I_n}$)
+    \item Select $\dimension{E_\lambda}$ vectors from the eigenspace of $\lambda$. They are the eigenvectors
+    \item All eigenvectors of all eigenvalues forms a basis of $V$
+    \item Create a matrix $Q$ whose columns are eigenvectors. Then $\inverse{Q} A Q$ is a diagonal matrix with diagonals as eigenvalues
+\end{enumerate}
+
+\begin{definition}
+    Let $\set{W_i}$ be subspace of $V$. If $W_i \cap \sum_{j \neq i} W_j = \emptyset$ for all $i$, we define direct sum $W = \bigoplus_{j} W_j$
+\end{definition}
+
+\begin{theorem}
+    $T$ is diagonalizable if and only if $V$ is the direct sum of eigenspace of $T$.    
+\end{theorem}
+
+
+
+\begin{theorem}\label{split_means_upper_trangular}
+    If the characteristic polynomial splits, $A$ is similar to an upper diagonal matrix.
+    
+    (This theorem is used many times in inner product)
+\end{theorem}
+\begin{proof}
+    If it splits, there must be an eigenvector $v_1$ for eigenvalue $\lambda_1$. Expand $v_1$ to a basis of $V$. Create a matrix $P$ whose columns are these basis ($v_1$ is the first column). Then:
+    \begin{equation*}
+        \inverse{P} A P = \begin{pmatrix}
+            \lambda_1 & B \\
+            0 & C
+        \end{pmatrix}
+    \end{equation*}
+    
+    $C$ is a $(n-1) \times (n-1)$ matrix and it splits (similar matrix has the same characteristic polynomial). So by induction there is $Q$ that $U= \inverse{Q} C Q$ is an upper diagonal matrix. Define $\realnumber$ as:
+    \begin{equation*}
+        R = \begin{pmatrix}
+            1 & 0 \\
+            0 & Q
+        \end{pmatrix}
+    \end{equation*}
+    
+    Now we calculate $\inverse{R} (\inverse{P} A P) R$:
+    \begin{equation*}
+        \begin{aligned}
+            \inverse{R} (\inverse{P} A P) R  &= \begin{pmatrix}
+                1 & 0 \\
+                0 & \inverse{Q}
+            \end{pmatrix} \begin{pmatrix}
+                \lambda_1 & B \\
+                0 & C
+            \end{pmatrix} \begin{pmatrix}
+                1 & 0 \\
+                0 & Q
+            \end{pmatrix} \\
+            & = \begin{pmatrix}
+                1 & 0 \\
+                0 & \inverse{Q}
+            \end{pmatrix} \begin{pmatrix}
+                \lambda_1 & B Q \\
+                0 & C Q
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                \lambda_1 & BQ \\
+                0 & \inverse{Q} C Q
+            \end{pmatrix}
+        \end{aligned}     
+    \end{equation*}
+    
+    Idea on how to choose the $Q$ : left multiplication will change the row, and right multiplication will change the column. So if we multiply left and right together, we will have $\inverse{Q} C Q$.
+\end{proof}
+
+\begin{theorem}
+    For any $x_i$ in eigenspace $W_i$ with eigenvalue $\lambda_i$, we have $T(x_i) = \lambda_i x_i$.
+\end{theorem}
+
+\begin{theorem}
+    The rank of $A$ is the number of nonzero $\lambda_i$ (includes multiplicity). So $A$ is invertible if and only if $0$ is not an eigenvalue.    
+\end{theorem}
+
+\begin{theorem}
+    The eigenvalues of $\inverse{T}$ are $\displaystyle \set{\frac{1}{\lambda_i}}$.
+\end{theorem}
+
+
+\begin{theorem}
+    Let $\lambda_i$ be the eigenvalue of $A$ (with duplication), we have:
+    \begin{equation}
+        \trace{A} = \sum_i \lambda_i
+    \end{equation}
+    \begin{equation}
+        \absolutevalue{A} = \prod_i \lambda_i
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    The characteristic function of $A$ is $\absolutevalue{A - \lambda I} = 0$. Calculate what's before $\lambda$. Also take $\lambda=0$ and we have the proof for the second one.
+\end{proof}
+
+
+
+% invariant subspace
+\section{Invariant Subspace}
+
+Invariant subspace is very useful because it could split the big matrix representation into smaller ones. And it always exists.
+
+\begin{definition}[$T$-invariant]
+    A subspace $W$ of $V$ is $T$-invariant if $T(W) \subseteq W$.
+\end{definition}
+
+\begin{definition}[$T$-cyclic]
+    $W = \set{x, T(x), T^2(x), ...}$ is the $T$-cyclic subspace of $V$ generated by $x$. It is the smallest $T$-invariant subspace that contains $x$.
+\end{definition}
+
+For $T$-cyclic subspace, there are at most $n$ elements in it. 
+
+\begin{theorem}\label{split_of_invariant_subspace}
+    Let $W$ be $T$-invariant subspace of $V$. Then the characteristic polynomial of $T_W$ divides that of $T$.    
+\end{theorem}
+\begin{proof}
+    Find a basis $\gamma$ of $T_W$ and expand it to basis $\beta$ of $V$. We have 
+    \begin{equation*}
+        \coordinate{T}_\beta = \begin{pmatrix}
+            \coordinate{T}_\gamma & B \\
+            0 & C        
+        \end{pmatrix}
+    \end{equation*}
+    Then the characteristic polynomial of $\coordinate{T}_\beta$ could be expressed as the multiply of $\coordinate{T}_\gamma$.
+\end{proof}
+
+\begin{theorem}
+    Let $V = \bigoplus W_i$ where each $W_i$ is a $T$-invariant subspace. Let $f_i$ be the characteristic polynomial of $T_{W_i}$, and $f$ is the characteristic polynomial of $T$. We have 
+    \begin{equation}
+        f(t) = \prod f_i (t)
+    \end{equation}
+\end{theorem}
+
+
+
+\begin{theorem}\label{char_poly_of_invariant_subspace}
+    Let $W$ be a $T$-cyclic subspace of $V$ generated by $v$, and let $k = \dimension{W}$. We have
+    \begin{enumerate}
+        \item $\set{v, T(v), T^2(v), ..., T^{k-1}(v)}$ is a basis of $W$\label{cyclic_first_conclusion}
+        \item If $a_0 v + a_1 T(v) + a_2 T^2(v) + ... + a_{k-1} T^{k-1} (v) + T^k (v) = 0$ (there must be one because they are not linearly independent), then the characteristic polynomial of $T_W$ is $f(t) = (-1)^k (a_0 + a_1 t + a_2 t^2 + a_{k-1} t^{k-1} + t^k)$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $\beta$ be the basis of $W$ in conclusion~\ref{cyclic_first_conclusion}. Column $j$ of $\coordinate{T}_\beta$ is 
+    \begin{equation*}
+        T(\beta_j) = T\left(T^{j-1}(v)\right) = T^{j}(v) = \begin{pmatrix}
+            0 \\
+            \vdots \\
+            1_{j+1} \\
+            \vdots \\
+            0
+        \end{pmatrix}
+    \end{equation*}
+    
+    So we have 
+    \begin{equation*}
+        \coordinate{T}_\beta = \begin{pmatrix}
+            0 & 0 & \hdots & 0 & -a_0 \\
+            1 & 0 & \hdots & 0 & -a_1 \\
+            0 & 1 & \hdots & 0 & -a_2 \\
+            \vdots & \vdots & \ddots & \vdots & \vdots \\
+            0 & 0 & \hdots & 1 & -a_{k-1}
+        \end{pmatrix}
+    \end{equation*}
+    
+    The characteristic polynomial of $\coordinate{T}_\beta$ happens to be $f(t) = (-1)^k (a_0 + a_1 t + a_2 t^2 + a_{k-1} t^{k-1} + t^k)$.
+\end{proof}
+
+\begin{theorem}[Cayley-Hamilton]
+    Let $f$ be the characteristic polynomial of $T$. Then $f(T) = 0$.
+\end{theorem}
+\begin{proof}
+    For any vector $v$, find its $T$-cyclic subspace $W$. Because of \theoref{char_poly_of_invariant_subspace}, there is a characteristic polynomial $f_W$ that $f_W(T) = 0$. Because of \theoref{split_of_invariant_subspace}, $f = f_W \times g$, so $f(T) = f_W(T) \times g(T) = 0$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

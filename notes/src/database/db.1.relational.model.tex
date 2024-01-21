@@ -1,0 +1,112 @@
+\section{Relational Model}
+
+Relational model is defined by Ted Codd in 1970 \cite{Codd1983a}.
+
+\subsection{Basics of the Relational Model}
+
+\begin{definition}
+    A \cindex{relation} is a two-dimensional table.
+\end{definition}
+
+\begin{definition}
+    The columns of a relation are named by \cindex{attributes}.
+\end{definition}
+
+\begin{definition}
+    The name of a relation and the set of attributes for a relation is called the \cindex{schema} of that relation.
+\end{definition}
+
+\begin{definition}
+    The rows of a relation are called \cindex{tuples}. A tuple has one component for each relation attribute.
+\end{definition}
+
+The relation is a set of tuples, not lists of tuples.
+
+\begin{definition}
+    The attribute value type is called \cindex{domain}.
+\end{definition}
+
+\begin{definition}
+    A set of tuples for a given relation is called \cindex{instance}, or \cindex{current instance}.
+\end{definition}
+
+\begin{definition}
+    A database that keeps all historical version of data is called \cindex{temporal database}.
+\end{definition}
+
+\begin{definition}
+    A set of attributes form a \cindex{key} for a relation if we do not allow two tuples with the same values in all the attributes of the key. We usually use underscore to indicate a key, for example $R(\underline{a},\underline{b},c,d)$
+\end{definition}
+
+
+
+% for sql
+
+\subsection{SQL}
+
+SQL(\cindex{the structured query language}) have two responsibilities:
+\begin{enumerate}
+    \item The data definition sublanguage for declaring database schema.
+    \item The data manipulation sublanguage for querying and modifying the database.
+\end{enumerate}
+
+
+There are three relations in SQL:
+
+\begin{enumerate}
+    \item table, which stores the relation.
+    \item \cindex{view}, which is a relation defined by a computation. It is not stored but constructed.
+    \item \cindex{temporary table}, which is constructed by the SQL language processor. It is not stored.
+\end{enumerate}
+
+There are two kinds of keys:
+\begin{enumerate}
+    \item Primary key, which cannot contain NULL value.
+    \item Unique key, which could contain NULL value.
+\end{enumerate}
+
+
+% relation algebra
+
+\subsection{Relational Algebra}
+
+The operations of the traditional relation algebra falls into 4 classes:
+\begin{enumerate}
+    \item Set operation. $R \cup S$, $R \cap S$, $R - S$.
+    \item Operations that remove rows or columns of a relation. 
+        \begin{enumerate}
+            \item \cindex{projection}: $\pi_{A_1, A_2, \dots, A_n} (R)$ which takes only columns $A_1, A_2, \dots, A_n$ of $R$.
+            \item \cindex{selection}: $\sigma_C (R)$, $C$ is a conditional expression. Only those tuples that satisfies $C$ will be kept.
+        \end{enumerate}
+    \item Operations that combine tuples of two relations.
+        \begin{enumerate}
+            \item \cindex{cartesian product}: $R \times S$.
+            \item \cindex{natural join}: $R \Join S$, a join operation followed by a selection that if two columns have the same name, their values should be the same.
+            \item \cindex{theta join}: $R \Join_C S$, a cartesian join followed by a selection $C$.
+        \end{enumerate}
+    \item Rename columns of a relation. $\rho_{S(A_1, A_2, \dots, A_n)} (R)$
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

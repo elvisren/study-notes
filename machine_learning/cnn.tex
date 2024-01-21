@@ -1,0 +1,195 @@
+\chapter{CNN}
+
+\section{Definition}
+
+\begin{definition}[Convolution]
+
+The general definition of convolution is:
+\begin{equation}
+    s(t) = \int x(a) w(t-a) \dif a
+\end{equation}
+
+which has a short form
+\begin{equation}
+    s(t) = (x \circledast w)(t)
+\end{equation}
+
+The name for these variables are:
+\begin{enumerate}
+    \item Input: $x$
+    \item Kernel: $w$. It is also called weighted matrix
+    \item Feature map: $s$, or the output
+\end{enumerate}
+    
+\end{definition}
+
+There are several requirement for the convolution:
+\begin{enumerate}
+    \item $w$ needs to be a probability density function
+    \item $w(x) = 0$ if $x \leq 0$
+\end{enumerate}
+
+Because convolution flipped the calculation (one is $0 \rightarrow m$, and the other is $i \rightarrow 0$), it is commutative, which means $I \circledast K = K \circledast I$.
+
+\begin{definition}[Cross-correlation]
+    Neural network libraries did not flip the order. The result is cross-correction but the library call it convolution. For a 2d kernel $W_{H \times W}$, the convolution is
+    \begin{equation}
+        z_{i,j} = (W_{H \times W} \circledast X) (i,j) = \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} w_{u,v} x_{i+u,j+v}
+    \end{equation}
+    
+    So it will iterate over all kernel items and multiply it with input.
+\end{definition}
+
+\begin{example}[Multiple channels]
+    Image is not always gray-scale. It may have multiple channels (RGB, or hyper-spetral bands for satellite images), we could define a kernel for each channel. The kernel is now a tensor. With $c$ convolution channels, the output is
+\begin{equation}
+    z_{i,j} = b + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c} x_{i+u,j+v,c}
+\end{equation}
+    where $b$ is the bias.
+\end{example}
+
+
+\begin{example}[Multiple features]
+    Each convolution calculation above calculate one feature. Sometimes we would like to detect multiple features from the same input. So we will change $W$ to a $4$d weighted matrix to detect $d$ features:
+    \begin{equation}
+        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c,d} x_{i+u,j+v,c}
+    \end{equation}
+\end{example}
+
+\begin{example}[$1 \times 1$ convolution]
+    Sometimes we just want to combine features at a location, not across location. Also we want to change the number of channels from $C$ to $D$. This could be done by using $1 \times 1$ kernel.
+    \begin{equation}
+        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{0,0,c,d} x_{i+u,j+v,c}
+    \end{equation}
+    
+    $1 \times 1$ convolution could change the number of channel or feature without change the channel shape.
+\end{example}
+
+
+
+
+
+% analysis
+\section{Analysis}
+
+Convolution could be viewed as special matrix multiplication. For an input $X_{3 \times 3}$ with kernel $W_{2 \times 2}$, we will flatten $X$ to a $9 \times 1$ vector. For the result, we could convert it back from $4 \times 1$ vector to $2 \times 2$ matrix. The calculation is:
+\begin{equation}
+    \begin{aligned}
+        Y = W_{2 \times 2} \circledast X_{3 \times 3} &= \begin{pmatrix}
+            w_1 & w_2 & 0 & w_3 & w_4 & 0 & 0 & 0 & 0 \\
+            0 & w_1 & w_2 & 0 & w_3 & w_4 & 0 & 0 & 0 \\
+            0 & 0 & 0 & w_1 & w_2 & 0 & w_3 & w_4 & 0 \\
+            0 & 0 & 0 & 0 & w_1 & w_2 & 0 & w_3 & w_4 \\
+        \end{pmatrix}_{4 \times 9} \begin{pmatrix}
+            x_1 \\
+            x_2 \\
+            x_3 \\
+            x_4 \\
+            x_5 \\
+            x_6 \\
+            x_7 \\
+            x_8 \\
+            x_9 \\
+        \end{pmatrix}_{9 \times 1} \\
+        &= \begin{pmatrix}
+            w_1 x_1 + w_2 x_2 + w_3 x_4 + w_4 x_5 \\
+            w_1 x_2 + w_2 x_3 + w_3 x_5 + w_4 x_6 \\
+            w_1 x_4 + w_2 x_5 + w_3 x_7 + w_4 x_8 \\
+            w_1 x_5 + w_2 x_6 + w_3 x_8 + w_4 x_9 \\            
+        \end{pmatrix}_{4 \times 1}
+    \end{aligned}
+\end{equation}
+
+The motivation for convolution are:
+\begin{enumerate}
+    \item Sparse interaction. The matrix multiplication of neural network means all inputs will act in output generation. But in image processing, the feature may only interact with few pixels, such as edge. So convolution could use the 
+    \item Parameter sharing. In neural network, each element of $W$ is used only once for each input feature. In convolution, it is used multiple times
+    \item Equivariance. $f$ and $g$ is equivariant if $f \circ g(x) = g \circ f(x)$. If we apply some change, such as shift and color change, to a image, the output will have the same change
+    \item Space and time saving in calculation
+\end{enumerate}
+
+\section{Padding}
+
+\begin{definition}[Zero-padding]
+    If we apply the convolution, the shape of the result may not be the same as input. For example, for a image with size $x_h \times x_w$ and kernel with size $f_h \times f_w$, the output size is
+    \begin{equation}
+        (x_h - f_h + 1) \times (x_w - f_w + 1)
+    \end{equation}
+    
+    So we need to add $0$s to the 4 borders of the input, which is called zero-padding.
+\end{definition}
+
+\begin{definition}[Stride]
+    In convolution, neighboring output will be very similar because most of their input overlaps. We could reduce the redundancy by skipping every $s$ input both horizontally and vertically.
+\end{definition}
+
+\begin{theorem}
+    For a image with size $x_h \times x_w$ and kernel with size $f_h \times f_w$, we use zero-padding with size $p_h$ and $p_w$ and stride of $s_h$ and $s_w$, the output size is:
+    \begin{equation}
+        \left\lfloor \frac{x_h - f_h + 2p_h}{s_h} + 1 \right\rfloor \times \left\lfloor \frac{x_w - f_w + 2p_w}{s_w} + 1 \right\rfloor
+    \end{equation}
+\end{theorem}
+
+
+
+\section{Pooling}
+
+A typical layer of convolutional network consists of 3 stages:
+\begin{itemize}
+    \item Convolution stage with convolution calculation
+    \item Detector stage with nonlinear activation
+    \item Pooling stage with pooling function
+\end{itemize}
+
+
+Pooling calculates invariants to a small translation of the input. For example the max pooling. It is also useful in changing the size of inputs. But we should not change the size when the images are from different kinds of observations.
+
+It calculates a summary of the input region. Famous pooling includes:
+\begin{enumerate}
+    \item Max pooling
+    \item Average pooling
+\end{enumerate}
+
+Pooling is a convolution without padding, so the output size is
+\begin{equation}
+    \left\lfloor \frac{x_h - f_h}{s_h} + 1 \right\rfloor \times \left\lfloor \frac{x_w - f_w}{s_w} + 1 \right\rfloor
+\end{equation}
+
+\begin{definition}[Global average pooling]
+    If the pooling is applied to the entire image, the result is a $1 \times 1 \times D$ tensor. It could be reshaped into a vector and passed to fully connected layers in the next step.
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

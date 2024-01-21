@@ -1,0 +1,756 @@
+\section{Consumer}
+
+\subsection{Budget}
+
+\begin{definition}[\cindex{budget constraint}]
+    How to define "afford"?
+    \begin{enumerate}
+        \item A consumer's \cindex{consumption bundle} is $(x_1, x_2)$.
+        \item The \cindex{affordable consumption bundle} is $p_1 x_1 + p_2 x_2 \leq m$
+        \item The affordable consumption bundle and the income $m$ are called the \cindex{budget set} of the consumer.
+        \item The \cindex{budget line} is the set of $(x_1, x_2)$ that $p_1 x_1 + p_2 x_2 = m$.
+        \item The slope of the budget line is the \cindex{opportunity cost} of consuming good 1.
+        \item If $p_2 = 1$, good 2 is the \cindex{composite good} that stands for everything else the consumer might want to consume other than good 1.    \end{enumerate}
+\end{definition}
+
+How the budget line changes?
+\begin{enumerate}
+    \item If $m$ increase, the budget line parallel shift outward (or inward).
+    \item If $p_1$ increase, the budget line become steeper (or flatter).
+\end{enumerate}
+
+We could change the budget line from $p_1 x_1 + p_2 x_2 = m$ to $\displaystyle \frac{p_1}{p_2} x_1 + x_2 = \frac{m}{p_2}$. Here the price of $x_2$ is $1$, which is the \cindex{numeraire} price. All prices and income will be measured against it.
+
+How to change the budget constraint?
+\begin{enumerate}
+    \item \cindex{quantity tax}: $p_1 \Rightarrow p_1 + t$
+    \item \cindex{value tax} (\cindex{ad valorem tax}): $p_1 \Rightarrow (1+\tau)p_1$
+    \item \cindex{lump-sum tax}: $m \Rightarrow m - t$
+    \item \cindex{subsidy}:
+        \begin{enumerate}
+            \item \cindex{quantity subsidy}: $p_1 \Rightarrow p_1 - t$
+            \item \cindex{value subsidy} (\cindex{ad valorem subsidy}): $p_1 \Rightarrow (1-\tau)p_1$
+            \item \cindex{lump-sum subsidy}: $m \Rightarrow m + t$
+        \end{enumerate}
+    \item \cindex{rationing}: $x_1 \leq \hat{x}_1$
+\end{enumerate}
+
+Sometimes tax, subsidy and rationing are combined.
+
+
+
+
+% preference
+\subsection{Consumer Preference}
+
+The preference relation between two consumption bundle $(x_1, x_2)$ and $(y_1, y_2)$:
+\begin{enumerate}
+    \item $(x_1,x_2) \succ (y_1,y_2)$ (\cindex{strictly preferred}): the consumer definitely wants x-bundle rather than y-bundle.
+    \item $(x_1,x_2) \sim (y_1,y_2)$ (\cindex{indifferent} ): the consumer is equality satisfied by the two bundle. 
+    \item $(x_1,x_2) \succeq (y_1,y_2)$ (\cindex{weakly preferred}): $\succ$ or $\sim$.
+\end{enumerate}
+
+
+Assumption about preference:
+\begin{itemize}
+    \item Complete: $(x_1,x_2) \succeq (y_1,y_2)$ or $(y_1,y_2) \succeq (x_1,x_2)$. Quite reasonable.
+    \item Reflexive: $(x_1,x_2) \succeq (x_1,x_2)$. May not work for child.
+    \item Transitive: If $(x_1,x_2) \succeq (y_1,y_2)$ and $(y_1,y_2) \succeq (z_1,z_2)$, we have $(x_1,x_2) \succeq (z_1,z_2)$. This one is contraversial. It is a hypothesis, not a statement of logic.
+\end{itemize}
+
+The \cindex{weakly preferred set} for $(x_1,x_2)$ are $\set{(y_1,y_2): (y_1,y_2) \succeq (x_1,x_2)}$. 
+
+The \cindex{indifference curve} is $\set{(y_1,y_2): (y_1,y_2) \sim (x_1,x_2)}$.
+
+\begin{theorem}
+    The indifference curves cannot cross.    
+\end{theorem}
+
+Classification of preferences:
+\begin{enumerate}
+    \item \cindex{perfect substitute}: the slope of indifference curve are all $-1$.
+    \item \cindex{perfect complement}: the slope is L-shape.
+    \item \cindex{bad}: the slope points to top right. The direction of increasing preference is down and to the right.
+    \item \cindex{neutral}: the consumer doesn't care about it. the slope is vertical line.
+    \item \cindex{satiation}: circles of preference. The better preference is in the center.
+\end{enumerate}
+
+The well-behaved preference:
+\begin{enumerate}
+    \item \cindex{monotonicity of preference}: 
+        \begin{itemize}
+            \item If $y_1 > x_1$ and $y_2 > x_2$, then $(y_1,y_2) \succ (x_1, x_2)$.
+            \item It implies the slope is negative. If we start at $(x_1, x_2)$ and move around. The up and right will increase preference ,the bottom and left will decrease preference. The indifference position must be top left and bottom right, so the slope is negative.
+        \end{itemize}
+    \item We prefer average to extreme:
+        \begin{itemize}
+            \item So the weakly preferred set is \cindex{convex set}:
+                \begin{equation}
+                    \forall t \in (0,1], \left(x_1,x_2) \sim (y_1,y_2) \Rightarrow (t x_1 + (1-t)y_1, t x_2 + (1-t)y_2 \right) \succeq (x_1,x_2)
+                \end{equation}
+            \item Why is the preference convex?
+                \begin{itemize}
+                    \item We often consumes goods togethwer, rather than only one of them.
+                    \item In longer time horizon such as months, we consume goods together.
+                \end{itemize}
+            \item One extension is \cindex{strict convexity}, which replace $\succeq$ by $\succ$.
+        \end{itemize}
+\end{enumerate}
+
+
+
+
+% marginal rate of substitution
+\subsection{Marginal Rate of Substitution}
+
+\begin{enumerate}
+    \item The \cindex{marginal rate of substitution} (\cindex{MRS}) is the slope of indifference $\dod{x_2}{x_1}$, which is called the marginal rate of substitution of good 2 for good 1. 
+    \item The MRS is typically negative.
+    \item THe MRS measure the exchange rate. The consumer will trade one for another if the exchange rate is not MRS.
+    \item If $x_2$ is composite good ($p_2 = 1$), the MRS is the price of $x_1$.
+    \item For strictly convex indifference curve, the MRS exhibits a \cindex{diminishing marginal rate of substitution}.
+\end{enumerate}
+
+
+
+
+% utility
+\subsection{Utility}
+
+The \cindex{utility function} measures the order of preference. It assigns a number to every indifference curve that respect preference order. Only the order matters, and the magnitude does not matter. So it is \cindex{ordinal utility}. 
+
+There is a \cindex{cardinal utility}, but cardinality did not add anything to the description of choices.
+
+
+\begin{theorem}
+    If $f(x)$ is a monotonic function ($f'(x) > 0$), then for a utility function $u(x_1,x_2)$, $f\left(u(x_1,x_2)\right)$ represents the same preference.
+\end{theorem}
+
+Given a utility function, we could calculate the indifference curve by calculating its \cindex{level set}.
+
+
+The utility functions for common preferences:
+\begin{enumerate}
+    \item perfect substitute: $u(x_1,x_2) = a x_1 + b x_2$.
+    \item perfect complement: $u(x_1,x_2) = \minimum{a x_1, b x_2} $.
+    \item \cindex{quasilinear preference}: $u(x_1,x_2) = k = v(x_1) + x_2$. $k$ is the height of the curve. It is not realistic, but easy to work with.
+    \item \cindex{Cobb-Douglas}: $u(x_1,x_2) = x_1^c x_2^d$. Other forms are $x_1^a x_2^{1-a}$ and $c \ln x_1 + d \ln x_2$.
+\end{enumerate}
+
+The implication of curvature of preference:
+\begin{itemize}
+    \item Perfect substitute: don't care about swap between two goods.
+    \item Perfect complements: never allow swap. Remain constant ratio.
+\end{itemize}
+
+So the utility curve is often convex, which means the consumer would like to trade some for another, but not all, which is a balance between never swap and don't care.
+
+
+The \cindex{marginal utility} of good 1 measures the rate of change by good 1. Marginal in economics means derivative. So 
+\begin{equation}
+    MU_1 = \dpd{u(x_1,x_2)}{x_1}
+\end{equation}
+
+The marginal utility depends on the magnitude of utility function. So it will change after applying monotonic transformation. 
+
+
+For $x_1$ and $x_2$ in indifference curve $u(x_1,x_2) = k$, take the differentials and we have
+\begin{equation}
+    \dif{u} = \dpd{u}{x_1} \dif{x_1} + \dpd{u}{x_2} \dif{x_2} = 0
+\end{equation}
+
+So 
+
+\begin{equation}
+    \text{MRS} = \od{x_2}{x_1} = - \frac{\dpd{u}{x_1}}{\dpd{u}{x_2}}
+\end{equation}
+
+
+If there is monotonic transformation $v(x_1,x_2) = f(u(x_1,x_2))$, we have 
+\begin{equation}
+    \text{MRS} = - \frac{\dpd{v}{x_1}}{\dpd{v}{x_2}} = - \frac{\dod{f}{u} \dpd{u}{x_1}}{\dod{f}{u} \dpd{u}{x_2}} 
+= - \frac{\dod{f}{u}}{\dod{f}{u}} \times \frac{\dpd{u}{x_1}}{\dpd{u}{x_2}} = - \frac{\dpd{u}{x_1}}{\dpd{u}{x_2}}    
+\end{equation}
+
+So the monotonic transformation did not change MRS. 
+
+
+% choice
+\subsection{Choice}
+
+The \cindex{optimal choice} is a affordable consumption bundle with highest utility. It has several exceptions:
+\begin{enumerate}
+    \item The choice is often the tangent point between budget line and the indifference curve.
+    \item Sometimes it is not the tangent point. So we have \cindex{boundary optimum} and \cindex{interior optimum}.
+    \item If the preference is convex, all the tangent points are optimal points.
+    \item If the preference is strictly convex, there is only one optimal choice.
+\end{enumerate}
+
+The optimal choice is called \cindex{demanded bundle}. 
+
+In optimal choice, the exchange rate is $\displaystyle \dod{x_2}{x_1} = - \frac{p_1}{p_2}$ of budget line, which equals MRS. So we need to calculate $(x_1,x_2)$ that 
+\begin{equation}
+    \text{MRS} = - \frac{p_1}{p_2} 
+\end{equation}
+
+So we need to solve the Lagrangian with auxiliary funtion and $\lambda$:
+\begin{equation}
+    L = u(x_1,x_2) - \lambda (p_1 x_1 + p_2 x_2 -m)
+\end{equation}
+
+with solution
+\begin{equation}
+    \begin{aligned}
+        \dpd{L}{x_1} &= \dpd{u(x_1^*,x_2^*)}{x_1} - \lambda p_1 &= 0 \\
+        \dpd{L}{x_2} &= \dpd{u(x_1^*,x_2^*)}{x_2} - \lambda p_2 &= 0 \\
+        \dpd{L}{\lambda} &= p_1 x_1^* + p_2 x_2^* -m &= 0
+    \end{aligned}
+\end{equation}
+
+\begin{example}
+The result for Cobb-Douglas preference is
+\begin{equation}
+    \begin{aligned}
+        x_1^* &= \frac{c}{c+d} \times \frac{m}{p_1} \\
+        x_2^* &= \frac{d}{c+d} \times \frac{m}{p_2}
+    \end{aligned}
+\end{equation}
+
+So
+\begin{equation}
+    \frac{p_1 x_1^*}{m} = \frac{c}{c+d}
+\end{equation}
+
+Thus in Cobb-Douglas consumer always spends a fixed fraction of his income on each good. This could be used to check whether the preference is Cobb-Douglas.
+\end{example}
+
+\begin{example}
+    The \cindex{quantity tax} is the tax on quantity, and the \cindex{income tax} is the tax on income. The original budget line is:
+    \begin{equation}
+        p_1 x_1 + p_2 x_2 = m
+    \end{equation}
+    The optimal choice after quantity tax is:
+    \begin{equation}
+        (p_1 + t) q_1^* + p_2 q_2^* = m
+    \end{equation}
+    Assuming the government always receive the same tax revenue in both tax form, the optimal choice after income tax is:
+    \begin{equation}\label{choice:incometax}
+        p_1 i_1^* + p_2 i_2^* = m - t q_1^*
+    \end{equation}
+    
+    Because $(q_1^*, q_2^*)$ also satisfy \eqref{choice:incometax} and $(i_1^*,i_2^*)$ is chosen, we have $(i_1^*,i_2^*) \succeq (q_1^*, q_2^*)$, which means income tax is not worse than quantity tax for consumer, and the government is indifferent.
+    
+    So the conclusion is that taxing the income is better than taxing the expense.
+    
+    The limitation of the conclusion is that this applies to one consumer and the consumer preference will not change after the tax is applied. 
+\end{example}
+
+
+% demand
+\subsection{Demand}
+
+The \cindex{demand function} gives the optimal amount of the good as a function of price and income: $x_i = x_i(p_1, p_2, m)$.
+
+\subsubsection{Income Offer Curve}
+
+\begin{itemize}
+    \item The \cindex{normal good} is the one that $\dod{x_1}{m} > 0$.
+    \item The \cindex{inferior good} is $\dod{x_1}{m} < 0$.
+    \item The \cindex{luxury good} is $\displaystyle \dod{x_1}{m} \times \frac{m}{x_1} > 1$.
+    \item The \cindex{necessary good} is $\displaystyle 0 < \dod{x_1}{m} \times \frac{m}{x_1} < 1$.
+    \item The implicit function between $x_1$ and $x_2$ when $m$ changes is called \cindex{income offer curve}, also known as \cindex{income expansion path}.
+    \item The curve of $x_1 \sim m$ is called \cindex{Engel curve}.
+\end{itemize}
+
+\begin{example}
+    The income offset curve for quisilinear utility is very special:
+    \begin{equation}
+        x_2 = \begin{cases}
+            0 & \text{when } m \leq p_2 \\
+            \displaystyle \frac{m}{p_2} - 1 & \text{when } m > p_2
+        \end{cases}
+    \end{equation}
+    So $x_2 = 0$ for a while, and then $x_1$ become constant.
+\end{example}
+
+
+
+
+\begin{theorem}
+    If the consumer preference is \cindex{homothetic preference}, that is 
+    \begin{equation}
+        \forall t > 0, u(x_1,x_2) > u(y_1,y_2) \Rightarrow u(t x_1,t x_2) > u(t y_1,t y_2)
+    \end{equation}    
+
+    the income offer curve are all straight line through the origin. Perfect substitute, perfect complement and Cobb-Douglas are all homothetic preference. homothetic preference is not realistic for large $t$.
+\end{theorem}
+
+
+\subsubsection{Price Offer Curve}   
+
+\begin{itemize}
+    \item The implicit function between $x_1$ and $x_2$ when $p_1$ changes is called \cindex{price offer curve}. It rotates against $(0,x_1)$.
+    \item The curve of $x_1 \sim p_1$ is called \cindex{demand curve}.
+    \item Normally we have $\dod{x_1}{p_1} < 0$, so the demand curve goes downward.
+    \item The \cindex{Giffen good} is $\dod{x_1}{p_1} > 0$.
+\end{itemize}
+
+\subsubsection{Discrete Good}
+
+\begin{definition}[\cindex{reservation price}]
+    The reservation price is the price at which the consumer is just indifferent to consuming or not consuming the good.
+\end{definition}
+
+Suppose at reservation price $r_n$ the consumer is indifferent between $n$ and $n-1$ $x_1$, we have
+\begin{equation}
+    u(n, m - r_n \times n) = u(n-1, m - r_n \times (n-1))
+\end{equation}
+
+If we assume the utility function is quisilinear, that is $u(x_1,x_2) = v(x_1) + x_2$, for $r_n$ we have
+\begin{equation}
+    v(n) + m - r_n \times n = v(n-1) + m - r_n \times (n-1)
+\end{equation}
+
+So
+\begin{equation}
+    r(n) = v(n) - v(n-1) = \Delta v(n)
+\end{equation}
+
+It means the reservation price is the increase in utility.
+
+\subsubsection{Substitutes and Complements}
+
+\begin{itemize}
+    \item The \cindex{substitute} (\cindex{gross substitute}) is $\dod{x_1}{x_2} > 0$.
+    \item The \cindex{complement} (\cindex{gross complement}) is $\dod{x_1}{x_2} < 0$.
+\end{itemize}
+
+If there are more than 2 goods, it is possible that $a$ is a substitute for $b$, and $b$ is a complement for $a$.
+
+
+
+% revealed preference
+\subsection{Revealed Preference}
+
+Assumption:
+\begin{itemize}
+    \item The preference is strictly convex.
+    \item observation does not change preference.
+\end{itemize}
+
+When $(x_1,x_2)$ is chosen when $(y_1,y_2)$ is affordable, that is $p_1 x_1 + p_2 x_2 \geq p_1 y_1 + p_2 y_2$, we say $(x_1,x_2)$ is \cindex{directly revealed preferred} to $(y_1,y_2)$. So it is a relation between actual demand and the could have been demand.
+
+\begin{theorem}
+    If $(x_1,x_2)$ is directly revealed preferred to $(y_1,y_2)$, then it is preferred.
+\end{theorem}
+
+It is natural to define \cindex{indirectly revealed preferred} relation. Because that two comparision may happen on different prices and budget liens. The directly and indirectly revealed prefeered relation is called \cindex{revealed preferred}.
+
+If we assume preference is:
+\begin{itemize}
+    \item convex.
+    \item monotonic.
+\end{itemize}
+Then the revealed preference area is the top right section.
+
+\begin{theorem}[\cindex{weak axiom of revealed preference}, \cindex{WARP}]
+    If $(x_1,x_2)$ is directly revealed preferred to $(y_1,y_2)$, and two bundles are not the same, then it cannot happen that $(y_1,y_2)$ is directly revealed preferred to $(x_1,x_2)$. So if we choose x-bundle when y-bundle is affordable, then when y-bundle is choosen, the x-bundle must be unaffordable.
+\end{theorem}
+
+To check whether the preference satisfies WRAP, we calculate a square matrix using prices from $i$ and bundle from $j$:
+\begin{equation}
+    \begin{bmatrix}
+			\ddots &   &   &  &   \\
+			 & m_{ii} & \cdots & m_{ij}^* &   \\
+			 & & \ddots & & \\
+			 & m_{ji}^* & \cdots & m_{jj} & \\
+			&&&& \ddots
+		\end{bmatrix}
+\end{equation}
+
+where $m_{ij} =\overrightarrow{p_i} \times \overrightarrow{x_j}$. We then compare $m_{ij}$ and $m_{ii}$ (same $i$, different $j$, not $m_{jj}$) and mark $m_{ij}$ as $m_{ij}^*$ if $m_{ij} < m_{ii}$. A violation of WARP is found if there exists $i \neq j$ that $m_{ij}^*$ and $m_{ji}^*$ both have a star.
+
+\begin{theorem}[\cindex{strong axiom of revealed preference}, \cindex{SARP}]
+    If $(x_1,x_2)$ is revealed preferred to $(y_1,y_2)$, and two bundles are not the same, then it cannot happen that $(y_1,y_2)$ is revealed preferred to $(x_1,x_2)$.
+\end{theorem}
+
+SARP is both a necessary and sufficient condition for observed choices to be compatible with the economic model of consumer choice.
+
+The algorithm of detecting SARP is almost the same as WARP. We need to add the chain of stars so if $m_{ij}^* < m_{ii}$ and $m_{jk}^* < m_{jj}$, we mark $m_{ik}$ with star too:
+\begin{equation}
+    \begin{bmatrix}
+			\ddots &   &   &  &  & & \\
+			 & m_{ii} & \cdots & m_{ij}^* & \cdots & m_{ik}^* &  \\
+			 &        & \ddots &          &        & \vdots & \\
+			 &        &        & m_{jj}   & \cdots & m_{jk}^* & \\
+			 &        &        &          & \ddots &        & \ddots
+		\end{bmatrix}
+\end{equation}
+
+
+The validation of SARP is the same as WARP.
+
+
+\begin{example}[index]
+    The index is an average of consumption in year $t$ compare to base year $b$. There are many choices:
+    \begin{enumerate}
+        \item \cindex{Laspeyres quantity index}: $\displaystyle L_q = \frac{p_1^b x_1^t + p_2^b x_2^t}{p_1^b x_1^b + p_2^b x_2^b}$.
+        \item \cindex{Paasche quantity index}: $\displaystyle P_q = \frac{p_1^t x_1^t + p_2^t x_2^t}{p_1^t x_1^b + p_2^t x_2^b}$.
+        \item \cindex{Laspeyres price index}: $\displaystyle L_p = \frac{p_1^t x_1^b + p_2^t x_2^b}{p_1^b x_1^b + p_2^b x_2^b}$.
+        \item \cindex{Paasche price index}: $\displaystyle P_p = \frac{p_1^t x_1^t + p_2^t x_2^t}{p_1^b x_1^t + p_2^b x_2^t}$.
+        \item expenditure index: $\displaystyle E = \frac{p_1^t x_1^t + p_2^t x_2^t}{p_1^b x_1^b + p_2^b x_2^b}$.
+    \end{enumerate}    
+\end{example}
+
+The differences are:
+\begin{itemize}
+    \item Quantity index will change quantity.
+    \item Price index will change price.
+    \item Laspeyres chooses base year.
+    \item Paasche chooses target year.
+\end{itemize}
+
+The conclusion from 4 indexes are:
+\begin{itemize}
+    \item If $P_q > 1$, we have $p_1^t x_1^t + p_2^t x_2^t > p_1^t x_1^b + p_2^t x_2^b$, so $(x_1^t,x_2^t) \succeq (x_1^b,x_2^b)$ and the target year is better off.
+    \item If $P_q < 1$, we have $p_1^t x_1^t + p_2^t x_2^t < p_1^t x_1^b + p_2^t x_2^b$. We cannot say anything because $(x_1^b,x_2^b)$ is not chosen at $t$.
+    \item If $L_q < 1$, we have $(x_1^b,x_2^b) \succeq (x_1^t,x_2^t)$.
+    \item If $P_p > E$, we have $p_1^b x_1^b + p_2^b x_2^b > p_1^b x_1^t + p_2^b x_2^t$, so the base year is better off.
+    \item If $L_p < E$, we have $p_1^t x_1^b + p_2^t x_2^b < p_1^t x_1^t + p_2^t x_2^t$, so the target year is better off.
+\end{itemize}
+
+\begin{example}
+    The indexing of social security payment is done so the average senior citizen could buy the same bundle in year $t$ as in year $b$. Because the bundle in year $b$ is affordable in year $t$, the optimal bundle in year $t$ is not worse, so they will be better off.
+\end{example}
+
+
+\subsection{Slutsky Equation}
+
+When the price of good 1 change:
+\begin{itemize}
+    \item \cindex{Slutsky substitution effect}: the exchange rate between two goods changed.
+    \item \cindex{income effect}: if we maintain the same ratio of two goods, the same income will have different purchasing power.
+\end{itemize}
+
+So the price move could be broken into two steps:
+\begin{itemize}
+    \item Change the relative price so the purchasing power remain the same.
+    \item Change the income and holding the ratio constant.
+\end{itemize}
+
+Assume the $(x_1,x_2)$ are the optimal choice in $m$. When the price of $x_1$ raise from $p_1$ to ${p_1}'$, we need to adjusted income to $m'$ to make the same $(x_1,x_2)$ affordable. So
+\begin{equation}
+    \begin{aligned}
+        p_1 x_1 + p_2 x_2 &= m \\
+        {p_1}' x_1 + p_2 x_2 &= m'
+    \end{aligned}
+\end{equation}
+
+So $m' - m = ({p_1}' - p_1)x$, which is 
+\begin{equation}
+    \Delta m = \Delta p_1 \times x_1
+\end{equation}
+
+Here is the change of optimal choice:
+\begin{enumerate}
+    \item $x_1(p_1,m)$: the original optimal choice.
+    \item $x_1(p_1^{'}, m')$: the optimal choice after substitution effect.
+    \item $x_1(p_1^{'},m)$: the optimal choice after income effect.
+\end{enumerate}
+
+So the total change in demand is:
+\begin{equation}
+    \begin{aligned}
+        x_1(p_1^{'},m) - x_1(p_1,m) &= & &x_1(p_1^{'}, m') &-&\ x_1(p_1,m) &\text{ (Slutsky effect)}\\
+        &&+\ & x_1(p_1^{'},m) &-&\ x_1(p_1^{'}, m') &\text{ (income effect)}
+    \end{aligned}
+\end{equation}
+
+
+Assume the original demand bundle is $(\overline{x}_1,\overline{x}_2,\overline{p}_1,\overline{p}_1,\overline{m})$. The Slutsky demand is
+\begin{equation}
+    x_1^s(p_1,p_2,\overline{x_1},\overline{x_2}) = x_1(p_1,p_2,p_1 \overline{x}_1 + p_2 \overline{x}_2)
+\end{equation}
+
+Take the derivative against $p_1$, we have:
+\begin{equation}
+    \dpd{x_1^s}{p_1} = \dpd{x_1}{p_1} + \dpd{x_1}{m} \times \overline{x}_1
+\end{equation}
+Rearranging the items we have:
+\begin{equation}
+    \dpd{x_1}{p_1} = \dpd{x_1^s}{p_1} - \dpd{x_1}{m} \times \overline{x}_1
+\end{equation}
+
+
+
+The substitution effect $\dpd{x_1^s}{p_1} $ is always negative. The income effect $\dpd{x_1}{m} \times \overline{x}_1$ is positive for normal good and negative for inferior. So the end result is negative for normal good, and not sure for inferior good. If it is Giffen good, the income effect has to be very large.
+
+\begin{example}
+    The perfect complement has no substitution effect. The perfect substitute and quisilinear have no income effect.
+\end{example}
+
+
+\begin{definition}[\cindex{Hicks substitution effect}]
+    The substitution effect that keeps the utility constant rather than keeping purchasing power constant. The Hicks substitution effect is always negative. And when the change to price is small, the Hicks is the same as Slutsky.
+\end{definition}
+
+So there are 3 ways to deal with price change:
+\begin{enumerate}
+    \item Hold income fixed, the demand curve
+    \item Hold purchasing power fixed (Slutsky), the Slutsky demand curve.
+    \item Hold utility fixed (Hicks), the \cindex{compensated demand curve}.
+\end{enumerate}
+
+
+\subsection{Buying and Selling}
+\subsubsection{Definition}
+In previous sections the income $m$ was given. Now the $(x_1,x_2)$ are given and we calculate the response to price change:
+\begin{itemize}
+    \item The given bundle is called \cindex{endowment} and denoted by $(\omega_1, \omega_2)$.
+    \item The endowment is always on the budget line.
+    \item The \cindex{gross demand} $(x_1,x_2)$ is the final bundle.
+    \item The \cindex{net demand} $(x_1-\omega_1,x_2 -\omega_2)$ is the difference.
+    \item If $(x_1-\omega_1) > 0$, the consumer is \cindex{net buyer} of good 1, or it is \cindex{net seller}.
+\end{itemize}
+
+
+\subsubsection{Changes caused by Endowment and Price}
+If we want to know how the gross demand changes when the endowment changes, treat it like income change. 
+
+If the price of good 1 change:
+\begin{itemize}
+    \item If the consumer is a seller of $x_1$
+        \begin{itemize}
+            \item If $p_1 \downarrow$:
+                \begin{itemize}
+                    \item If it remains a seller, worse off.
+                    \item Switch to buyer: not sure.
+                \end{itemize}
+            \item If $p_1 \uparrow$: remain a seller.
+        \end{itemize}        
+    \item If the consumer is a buyer of $x_1$:
+        \begin{itemize}
+            \item If $p_1 \uparrow$:
+                \begin{itemize}
+                    \item If it remains a buyer, worse off.
+                    \item Switch to seller: not sure.
+                \end{itemize}
+            \item If $p_1 \downarrow$: remain a buyer. 
+        \end{itemize}
+\end{itemize}
+
+
+\subsubsection{Price Offer Curve and Demand Curve}
+
+For the price offer curve :
+\begin{itemize}
+    \item The price offer curve must pass the endowment:
+        \begin{enumerate}
+            \item One utility curve will pass the endowment.
+            \item All budget line will pass through the endowment.
+            \item There must exists one budget line that is tangent to the utility curve.
+        \end{enumerate}
+    \item The price offer curve is higher than the utility curve just mentioned.
+\end{itemize}
+
+For the demand curve: There is a point $(\omega_1, p_1(\omega_1))$. For $p_1 > p_1(\omega_1)$, the consumer is a seller. Or he is a buyer.
+
+\subsubsection{Slutsky Equation with Endowment}
+
+The Slutsky equation for endowment will change because $m$ is now a function of $p_1$. let $x_1(p_1, m(p_1))$ be the demand function of good 1. Differentiate it and we have:
+\begin{equation}\label{buying:all}
+    \dpd{x_1(p_1, m(p_1))}{p_1} = \dpd{x_1(p_1, m)}{p_1} + \dpd{x_1(p_1, m)}{m} \times \dod{m(p_1)}{p_1}
+\end{equation}
+
+Because we have $m(p_1) = p_1 \omega_1 + p_2 \omega_2$, we have
+\begin{equation}\label{buying:m}
+    \dod{m(p_1)}{p_1} = \omega_1
+\end{equation}
+
+From Slutsky equation we have
+\begin{equation}\label{buying:s}
+    \dpd{x_1(p_1, m)}{p_1} = \dpd{x_1^s}{p_1} - \dpd{x_1(p_1, m)}{m} \times x_1
+\end{equation}
+
+Put \eqref{buying:m} and \eqref{buying:s} into \eqref{buying:all}, we have
+\begin{equation}
+    \dpd{x_1(p_1, m(p_1))}{p_1} = \dpd{x_1^s}{p_1} + \dpd{x_1(p_1, m)}{m} \times (\omega_1 - x_1)
+\end{equation}
+
+Now the purchasing power change due to price change has 3 components:
+\begin{enumerate}
+    \item $\dpd{x_1^s}{p_1}$: the Slutsky effect.
+    \item $-\dpd{x_1(p_1, m)}{m} \times x_1$: the \cindex{ordinary income effect} . It ignores the endowment and adjust the total income so $x_2$ of good 2 could be satisfied.
+    \item $\dpd{x_1(p_1, m)}{m} \times \omega_1$: the \cindex{endowment income effect} . It adjust the ordinary income effect so the endowment is met.
+\end{enumerate}
+
+
+\subsubsection{Labor Supply}
+
+Here is the assumption of labor supply:
+\begin{itemize}
+    \item $M$: money endowment. A constant value.
+    \item $C$: the total consumption.
+    \item $p$: price of consumption.
+    \item $w$: wage rate.
+    \item $L$: length of labor supply.
+\end{itemize}
+
+So we have the formula:
+\begin{equation}
+    \begin{aligned}
+    pC &= M + wL \\
+    pC - wL &= M \\     
+    \end{aligned}
+\end{equation}
+
+Let's define several other variables:
+\begin{itemize}
+    \item $\overline{L}$: maximum labor supply.
+    \item $R= \overline{L} - L$: relax, or leisure.
+    \item $\overline{R} = \overline{L}$: total leisure.
+    \item $\displaystyle \overline{C} = \frac{M}{p}$: how many goods could be bought using endowment.
+\end{itemize}
+
+So we could change the formula to:
+\begin{equation}
+    \begin{aligned}
+        pC - wL &= M \\
+        pC + w(\overline{L} - L) &= M + w \overline{L} \\
+        pC + w(\overline{L} - L) &= p \overline{C} + w \overline{L} \\
+        pC + wR &= p \overline{C} + w \overline{R} \\
+    \end{aligned}
+\end{equation}
+
+So the sum of consumption and leisure equals the endowment of consumption and leisure. According to the Slutsky equation, we have 
+\begin{equation}\label{laborsupply:slutsky}
+    \dpd{R}{\omega} = \dpd{R^s}{\omega} + (\overline{R} - R)\dpd{R}{m}
+\end{equation}
+
+Assume leisure is a normal good, that is we prefer more leisure when income rises. There is no direction conclusion of \eqref{laborsupply:slutsky}. However, if $\overline{R}$ is large, it is possible that $\dpd{R}{\omega}$ becomes positive. So the labor supply curve could be backward-bending
+
+
+
+\subsection{Intertemporal Choice}
+
+Assume there are two period $T_1$ and $T_2$, and the consumer will be given $m_1$ and $m_2$. The consumer could choose to consume $c_1$ and $c_2$ in two periods. Assume the interest rate is $r$. The fomula is:
+\begin{equation}
+    c_1 + \frac{c_2}{1+r} = m_1 + \frac{m_2}{1+r}
+\end{equation}
+
+The conclusion is:
+\begin{enumerate}
+    \item The consumer is \cindex{lender} if $c_1 < m_1$, and \cindex{borrower} if $c_1 > m_1$. 
+    \item Because the slope of budget line is $\dod{c_2}{c_1} = - (1+r)$, increasing $r$ will make the budget line steeper. 
+    \item According to the Slutsky equation, if $m_1 - c_1$ is negative, raising $r$ will reduce $c_1$.
+\end{enumerate}
+
+The formular above did not consider tax. If the tax rate is $t$ and tax is deductible for interest payment, the $r$ will become $(1-t)r$ in all cases.
+
+
+\subsection{Uncertainty}
+
+\begin{definition}[\cindex{expected utility function}]
+    For the utility in the \cindex{state of nature}, consumer will have \cindex{contigent consumption plan}, which is a specification of what to consume in each state of nature. Assumme the probability is $\pi_1$ and $\pi_2$, and the consumption is $c_1$ and $c_2$, the expected utility function, or \cindex{von Neumann-Morgenstern utility function}, is :
+    \begin{equation}
+        u(c_1, c_2, \pi_1, \pi_2) = \pi_1 v(c_1) + \pi_2 v(c_2)
+    \end{equation}
+    
+    The expected utility function is unique up to affine transformation $f(x) = ax + b$. 
+    
+    This form is different from other utility function because we cannot consume two goods together. We have to always consume only one of them.
+    
+    The consumer is \cindex{risk averse} if $v(x)$ is concave, and \cindex{risk lover} if it is convex. 
+\end{definition}
+
+\begin{example}[insurance]
+    Consumer has asset $a$, and when a bad event happens the asset would become $b$. The insurance cost is $\gamma$, so a $\gamma K$ insurance could protect $K$ asset. The event $b$ happens is $\pi$.
+    
+    The situations are:
+    \begin{equation}
+        \begin{aligned}
+            c_1 &= a - \gamma K \\
+            c_2 &= b - \gamma K + K
+        \end{aligned}
+    \end{equation}
+    
+    The expected utility is 
+    \begin{equation}
+        (1-\pi)u(c_1) + \pi u(c_2)
+    \end{equation}
+    
+    For insurance company, its expected income is $\gamma K - \pi K - (1-\pi)0 = (\gamma - \pi)K$. If we force the insurance company to be neutual, $\gamma - \pi = 0 \Rightarrow \gamma = \pi$.
+    
+    Let's optimize the Lagrange equation
+    \begin{equation}
+        f = (1-\pi)u(c_1) + \pi u(c_2) - L [(c_2 - b) \gamma + (c_1 - a) (1 - \gamma)]
+    \end{equation}
+    
+    We have 
+    \begin{equation}
+        \begin{aligned}
+            \dpd{f}{c_1} &= (1-\pi)\dpd{u(c_1)}{c_1} + L(1-\gamma) = 0\\
+            \dpd{f}{c_2} &= \pi \dpd{u(c_2)}{c_2} + L\gamma = 0
+        \end{aligned}
+    \end{equation}
+    
+    So $\dpd{u(c_1)}{c_1} = \dpd{u(c_2)}{c_2}$. If the consumer preference is risk averse, there exists solution. Because $u' < 0$, we have $c_1 = c_2$. so
+    \begin{equation}
+        \begin{aligned}
+            a - \gamma K &= b - \gamma + K \\
+            K &= a - b
+        \end{aligned}
+    \end{equation}
+    
+    It means if the consumer is risk averse, he will insure all the potential loss.
+\end{example}
+
+
+\subsection{CAPM}
+
+In the theory of \cindex{capital asset pricing model} (\cindex{CAPM}), there are two assets: one is risk-free asset with return $r_f$, and the other with return $rm$ and standard derivation $\sigma_m$. Assume $1-x$ percent is invested risk-free asset and $x$ in risk asset. The portfolio return and risk is:
+\begin{equation}
+    \begin{aligned}
+        r_x &= x r_m + (1-x) r_f = (r_m - r_f) x + r_f \\
+        \sigma_x &= x \sigma_m
+    \end{aligned}
+\end{equation}
+
+So there is a trade-off between return and risk, which is the \cindex{price of risk}:
+\begin{equation}
+    p = \frac{r_m - r_f}{\sigma_m}
+\end{equation}
+
+The utility $u(\mu,\sigma)$ is convex ($\sigma$ is the x-axis) because people would prefer high return for the same risk. In the optimal choice, we have 
+\begin{equation}
+    MRS = - \frac{\dpd{u}{\sigma}}{\dpd{u}{\mu}} = \frac{r_m - r_f}{\sigma_m}
+\end{equation}
+
+The \cindex{beta} of risky asset relative to the market is:
+\begin{equation}
+    \beta_i = \frac{\covariance{r_i}{r_m}}{\variance{r_m}}
+\end{equation}
+
+For an asset, its \cindex{risk adjustment} is
+\begin{equation}
+    \beta_i \sigma_m p = \beta_i \sigma_m \frac{r_m - r_f}{\sigma_m} = \beta_i (r_m - r_f)
+\end{equation}
+
+So the adjusted return of risky asset is
+\begin{equation}
+    r_m - \text{risk adjustment} = r_m - \beta_i \sigma_m p  = r_m - \beta_i (r_m - r_f)
+\end{equation}
+
+If the adjusted return is higher than $r_f$, it is a good deal. So in equilibrium case the adjusted return is $r_f$, which means
+\begin{equation}
+    r_m = r_f + \beta_i (r_m - r_f)
+\end{equation}
+
+
+
+
+
+
+
+
+

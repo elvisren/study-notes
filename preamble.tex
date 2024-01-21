@@ -1,0 +1,294 @@
+\documentclass[reqno, 10pt]{book}
+
+
+% do not use it. conflict with mtp2font
+%\usepackage{amssymb}
+
+
+\usepackage{latexsym}
+
+
+% set section level depth and re-number it from 1
+%\renewcommand{\thesection}{\arabic{section}}
+%\setcounter{secnumdepth}{3}
+
+
+% math theorem, lemma, proof
+\usepackage{amsthm}
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}
+%\newtheorem{theorem}{Theorem}
+
+\usepackage{thmtools}
+\declaretheorem{theorem}
+\declaretheorem{definition}
+\declaretheorem{example}
+\declaretheorem{axiom}
+
+
+
+% for mathematical integratoin
+\usepackage{commath}
+
+
+% create index
+\usepackage{mathtools}
+\usepackage{makeidx}
+\makeindex
+
+
+\usepackage{listings}
+
+
+% no space in itemize
+\usepackage{enumitem}
+\setenumerate{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setitemize{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+
+
+% do not float the table
+\usepackage{float}
+
+
+% set line space
+\usepackage{setspace}
+
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}
+
+% set page size
+\usepackage{geometry}
+%\geometry{a4paper}
+\geometry{a4paper,top=2cm,bottom=2cm,left=3cm,right=2cm}
+
+
+
+% set programming code highlight
+\usepackage[chapter]{minted}
+
+
+% setup bibtex
+\usepackage{cite}
+
+
+% include eps file
+\usepackage{epsfig}
+
+
+
+% user MathTime professional 2. so expensive...
+\usepackage{newtxtext}
+\usepackage[T1]{fontenc}
+\usepackage[subscriptcorrection,slantedGreek,nofontinfo,mtpcal,mtpfrak,mtphrb,zswash]{mtpro2}
+
+
+
+\usepackage{adjustbox}
+
+
+
+% algorithm
+\usepackage{algpseudocode}
+\usepackage[section]{algorithm}
+\usepackage{algorithmicx}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{float}
+
+
+%
+%
+% define new commands
+%
+%
+
+% put cite a color
+\newcommand\cindex[1]{\textcolor{blue}{#1}\index{#1}}
+
+
+\newcommand\mathhilight[1]{\mathop{\bf #1\/}}
+
+\newcommand\theoref[1]{Theorem~\ref{#1}\footnote{Page~\pageref{#1}}}
+\newcommand\defiref[1]{Definition~\ref{#1}\footnote{Page~\pageref{#1}}}
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% set theory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+% natural number, the N
+\newcommand\naturalnumber[0]{\mathbb{N}}
+
+% integer, the Z
+\newcommand\integer[0]{\mathbb{Z}}
+
+% rational, the Q
+\newcommand\rational[0]{\mathbb{Q}}
+
+% real set, the R
+\newcommand\realnumber[0]{\mathbb{R}}
+
+% position real set, the R
+\newcommand\positiverealnumber[0]{\mathbb{R}^{+}}
+
+% complex set, the C
+\newcommand\complexnumber[0]{\mathbb{C}}
+
+% the power set P(X)
+\newcommand\powerset[1]{\mathcal{P}\left( #1 \right)}
+
+% open ball, B(x, r)
+\newcommand\openball[2]{\mathbb{B}(#1, #2)}
+
+% closed ball, B[x,r]
+\newcommand\closedball[2]{\overline{\mathbb{B}}(#1, #2)}
+
+% extended real, R with -inf and inf
+\newcommand\extendedrealnumber[0]{\overline{\mathbb{R}}}
+
+
+% Range f
+\newcommand\range[1]{\mathbf{ran}(#1)}
+
+% domain f
+\newcommand\domain[1]{\mathbf{dom}(#1)}
+
+\newcommand\allordinals[0]{\mathbf{Ord}}
+
+\newcommand\transfinitesequence[1]{\left< #1 \right>}
+
+\newcommand\supremum[1]{\mathbf{sup} \set{#1}}
+
+\newcommand\infimum[1]{\mathbf{inf} \set{#1}}
+
+\newcommand\maximum[1]{\mathbf{max} \set{#1}}
+
+\newcommand\minimum[1]{\mathbf{min} \set{#1}}
+
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% group theory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\newcommand\kernel[1]{\displaystyle \mathrm{Ker}~( #1 )}
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% topology %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+% close of a set
+\newcommand\closure[1]{\overline{#1}}
+
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% linear algebra %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+
+% null space, the N(x)
+\newcommand\nullspace[1]{\mathcal{N}(#1)}
+
+% range space, the R(x)
+\newcommand\rangespace[1]{\mathcal{R}(#1)}
+
+% absolute value, the |x|
+\newcommand\absolutevalue[1]{\abs{#1}}
+
+% absolute value text, the "abs"
+\newcommand\absolutevaluetext[1]{\mathrm{abs}~#1}
+
+
+% determinate, the same as |x|
+\newcommand\determinate[1]{\absolutevalue{#1}}
+
+% determinate text, the "det"
+\newcommand\determinatetext[1]{\displaystyle \mathrm{det}~\displaystyle #1}
+
+% the coordinate, the [x]
+\newcommand\coordinate[1]{\sbr{#1}}
+
+
+\newcommand\projection[2]{\mathrm{proj}_{#2} #1}
+\newcommand\rowvector[1]{\left[ \displaystyle #1 \right]}
+\newcommand\vectorsymbol[1]{\overrightarrow{#1}}
+
+% projection, the x^-1
+\newcommand\inverse[1]{ {#1}^{-1} }
+
+% dimension text, the "dim x"
+\newcommand\dimension[1]{\displaystyle \mathrm{dim}~\left( #1 \right)}
+
+% rank text, the "rank x"
+\newcommand\rank[1]{\displaystyle \mathrm{rank}~\left( #1 \right)}
+
+% adjugate matrix, the "adj x"
+\newcommand\adjugate[1]{\displaystyle \mathrm{adj}~\left( #1 \right)}
+
+% inner product, the <x,y>
+\newcommand\innerproduct[2]{\left\langle \displaystyle #1, #2 \right\rangle}
+
+% trace, the "tr x"
+\newcommand\trace[1]{\displaystyle \mathrm{tr}~( #1 )}
+
+% span, the "span x"
+\newcommand\spanset[1]{\displaystyle \mathrm{span}~\left( #1 \right)}
+
+% pseudoinverse, the dagger
+\newcommand\pseudoinverse[1]{ {#1}^\dagger }
+
+% the length ||
+\newcommand\lengthsmall[1]{ \Vert {#1} \Vert }
+\newcommand\length[1]{ \left\Vert {#1} \right\Vert }
+
+% transpose, the T
+\newcommand\transpose[1]{ {#1}^\top }
+
+%\newcommand\adjugate[1]{\displaystyle \mathrm{adj}~\displaystyle #1 }
+\newcommand\cofactor[1]{\displaystyle \mathrm{cof}~\displaystyle #1 }
+
+% column vector
+\newcommand\columnvector[1]{\boldsymbol{#1}}
+
+% norm
+\newcommand\vectornorm[1]{\displaystyle \left\lVert #1 \right\rVert}
+
+\newcommand\conjugate[1]{\overline{#1}}
+
+
+
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% probability %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\newcommand\probability[1]{\mathop{\bf P\/}\displaystyle \left\{#1\right\}}
+\newcommand\expect[1]{\mathop{\bf E\/}\displaystyle  \left[ #1 \right]}
+\newcommand\variance[1]{\mathop{\bf Var\/}\displaystyle \left[ #1 \right]}
+\newcommand\covariance[2]{\mathop{\bf Cov\/}\displaystyle \left(#1,#2 \right)}
+
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% machine learning %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\newcommand\subscription[2]{\boldsymbol{#1}^{(#2)}}
+
+% argmin and argmax
+\newcommand\argmin[1]{\mathop{\arg\min}\limits_{#1}}
+\newcommand\argmax[1]{\mathop{\arg\max}\limits_{#1}}
+
+
+% select row
+\newcommand\selectrow[2]{{#1}^{(#2)}}
+
+% select row and column
+\newcommand\selectrowandcolumn[3]{{#1}^{(#2)}_{#3}}
+
+% expectation
+%\newcommand\expectation[1]{\mathbb{E}\left[{#1}\right]}
+\newcommand\expectation[1]{\mathbb{E}[{#1}]}

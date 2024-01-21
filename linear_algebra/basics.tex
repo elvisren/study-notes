@@ -1,0 +1,83 @@
+\chapter{Basics}
+
+The logic of this section:
+\begin{enumerate}
+    \item Define a vector space
+    \item Introduce linear combination
+    \item Define span set
+    \item Define generating set
+    \item Define linearly dependent and linearly independent
+    \item Define basis
+    \item Prove that every vector space has a basis, for both finite and infinite space
+\end{enumerate}
+
+% basics
+\section{Basic Definitions}
+
+
+
+A vector space $V$ (and its subspace) is over a field $F$ such as $\realnumber$ or $\complexnumber$. It is closed in $+$ and $*$ operation.
+
+
+Important terms in vector space: transpose, symmetric matrix, upper triangular, diagonal matrix, trace, skew symmetric.
+
+After the vector space is defined, we now check the relation among vectors. The basic relation is linear combination $v = \sum_{i=1}^{n} a_i u_i$. $n$ must be finite, and there is no restriction on $a_i \neq 0$. With linear combination, we could then define the span of a subset $\mathcal{S}$ of a vector space. 
+
+If we set restriction on linear combination, we have linearly dependent relation among $\set{u_i}$ that $\sum_{i=1}^{n} a_i u_i = 0$ and not all $a_i$ are $0$. Linearly independent means all $a_i = 0$. A linearly independent generating set is called basis.
+
+
+A vector space is finite dimensional if it has a finite span set.
+
+
+Now comes the most important theorem:
+\begin{theorem}[Replacement Theorem]\label{replacement_theorem}
+    if $G$ has $n$ vectors and they generate $V$, and $L$ is a set of $m$ linearly independent vectors, then $m \leq n$ and there is a subset $H \subseteq G$ with $n-m$ vectors that $L \cup H $ generate $V$.
+    
+\end{theorem}
+
+Theorem~\ref{replacement_theorem} means every basis has the same number of vectors, which is the dimension of a vector space. One corollary is if a subspace has the same dimension as the vector space, they are the same.
+
+
+\begin{example}
+   Famous Lagrange polynomial for $g \in \mathcal{P}_n (F)$: if $g(c_i) = b_i$, then define $f_i$ as:
+\begin{equation}
+    f_i(x) = \prod_{k=0,k \neq i}^{n} \frac{x - c_k}{c_i - c_k}
+\end{equation}
+
+Then $g = \sum_{i=0}^{n} b_i \times f_i $. (note: we have $n+1$ $f_i$, so the dimension is $n+1$). 
+\end{example}
+
+\begin{theorem}
+    \begin{equation}
+        \dimension{A\cup B} = \dimension{A} + \dimension{B} - \dimension{A \cap B}
+    \end{equation}    
+\end{theorem}
+
+
+
+\begin{theorem}
+    every vector space has a basis.
+\end{theorem}
+\begin{proof}
+    For infinite dimension vector space, we need more work to do. First define a maximal linearly independent subset that is both linearly independent and maximal (no other linearly independent set could contain it). Then we could prove that a basis must be a maximal linearly independent set. The question is now on how to create a maximal linearly independent set from a linearly independent set. Now we have to use Hausdorff Maximal Principle to select a chain of linearly independent sets and prove their union is contained in the chain, so there must exists a maximal set.
+\end{proof}
+
+
+From here we should know that the behavior of a vector is defined by its basis. So we could usually reduce the infinite space problem to a finite set of vectors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

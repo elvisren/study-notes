@@ -1,0 +1,133 @@
+\section{Cardinal Numbers}
+
+\subsection{Alephs}
+
+\begin{definition}[\cindex{cardinality}]
+    Two sets $X,Y$ have the same cardinality $\absolutevalue{X} = \absolutevalue{Y}$ if there exists a one-to-one mapping of $X$ onto $Y$.
+\end{definition}
+
+\begin{theorem}[\cindex{Cantor-Bernstein}]
+    If $\absolutevalue{A} \leq \absolutevalue{B}$ and $\absolutevalue{B} \leq \absolutevalue{A}$, then $\absolutevalue{A} = \absolutevalue{B}$.
+\end{theorem}
+\begin{proof}
+    let $f: A \rightarrow B$ and $g : B \rightarrow A$ be the two injection function. For $X \subset A$, define $h(X) = A \textbackslash g (B \textbackslash f(X)) $. Then $h$ is an increasing function in $\subset$. Define $C: \bigcup \set{X\subset A: X \subset h(X)}$. $\forall x \in C$, $\exists W, x \in W \in C$. So $x \in X \subset{h(X)} \subset h(C)$, so $C \subset h(C)$ and $h(C) \subset h \circ h (C)$. So $h(C) \in W$ and $h(C) = C$. By the definition of $h$, $g$ is a bijection from $B \textbackslash f(c)$ onto $A \textbackslash h(C) = A \textbackslash C$, and $f$ is a bijection from $C$ onto $f(C)$. Define a function $F$ that $\forall x \in C, F(x) := f(x)$ and $\forall x \in A \textbackslash C, F(x) := g^{-1}(x)$.
+\end{proof}
+
+
+\begin{definition}[\cindex{equinumerous}]
+    $A$ is equinumerous (\cindex{$\approx$}) to $B$ if there is a bijection from $A$ to $B$.
+\end{definition}
+
+\begin{theorem}
+    \begin{equation}
+        \omega \not\approx \real
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    $\forall f:\omega \rightarrow \real$, use binary expansion to prove that $f$ is not onto.
+\end{proof}
+
+
+\begin{theorem}[\cindex{Cantor Theorem}]
+    \begin{equation}
+        A \not\approx \powerset{A}
+    \end{equation}    
+\end{theorem}
+\begin{proof}
+    $\forall f: A \rightarrow \powerset{A}$, define $B = \set{ a \in A: a \notin f(a)}$. Then $B\notin \range{f}$.
+\end{proof}
+
+\begin{definition}[\cindex{cardinal}]
+    An ordinal $\alpha$ is called a cardinal number if $\forall \beta < \alpha, \absolutevalue{\beta} \neq \absolutevalue{\alpha}$. So if $\alpha$ is a cardinal, $\forall x \in \alpha, x \not\approx \alpha$.
+\end{definition}
+
+So the cardinal $\alpha$ is a representative of equinumerous class. All these cardinals are called \cindex{alephs} and denoted by $\aleph$. $\aleph^{+}$ is the \cindex{successor cardinal} to $\aleph$.
+
+Some conclusion:
+\begin{enumerate}
+    \item All $n \in \omega$ are cardinals.
+    \item $\absolutevalue{\omega} = \omega = \aleph_0$
+    \item $\absolutevalue{\real} = 2^{\aleph_0}$
+    \item The next aleph is $\aleph_1$, which may or may not be $2^{\aleph_0}$.
+\end{enumerate}
+
+Now the cardinal hierarchy is:
+\begin{equation}
+\begin{aligned}
+    & 0,1,2,..., n, ... \\
+    & \omega, \omega +1, ..., \omega + n, ... \\
+    & \omega \cdot 2, ...,  \omega \cdot n , ..., \\
+    & \omega^2, ..., \omega^n, ... \\
+    & \omega^\omega, ..., \omega^{\omega^\omega}, ... \\
+    & \aleph_1, ..., \aleph_n, ... \\
+    & \aleph_{\aleph_0}, ... , \aleph_{\aleph_{\aleph_0}}, ...
+\end{aligned}
+\end{equation}
+
+
+\subsection{Cardinal Arithmatics}
+
+\begin{definition}
+    Let $\kappa$ and $\lambda$ be cardinals:
+    \begin{enumerate}
+        \item $\displaystyle \sum_{\alpha < \beta} \kappa_\alpha = \absolutevalue{\bigcup_{\alpha < \beta} (\alpha, \kappa_\alpha)}$
+        \item $\kappa \cdot \lambda = \absolutevalue{\kappa \times \lambda}$ (cardinality of cartesian product).
+        \item $\kappa^\lambda =$ cardinality of $\set{f: \lambda \rightarrow \kappa}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    The arithmatics of cardinal is commutative:
+    \begin{enumerate}
+        \item $\kappa + (\lambda + \mu) = (\kappa + \lambda) + \mu$
+        \item $\kappa + \lambda = \lambda + \kappa$
+        \item $\kappa \cdot  (\lambda \cdot  \mu) = (\kappa \cdot  \lambda) \cdot  \mu$
+        \item $\kappa \cdot  \lambda = \lambda \cdot  \kappa$
+        \item $\kappa \cdot  (\lambda + \mu) = \kappa \cdot  \lambda + \kappa \cdot \mu$
+        \item $\kappa^{\lambda + \mu} =  \kappa^\lambda +  \kappa^\mu$
+        \item $\kappa^{\lambda \cdot  \mu} =  (\kappa^\lambda)^\mu$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    use the definition of $+,\cdot$. The proof did not rely on axiom of choice.
+\end{proof}
+
+\begin{theorem}
+    Let $\kappa \geq \aleph_0$, then $\kappa \cdot \kappa = \kappa$.
+\end{theorem}
+\begin{proof}
+    Clearly $\kappa = \kappa \cdot 1 \leq \kappa \cdot \kappa$. Assume $\exists \kappa, \kappa < \kappa \cdot \kappa$. Choose the minimum $\kappa$. Define a dictionary order $(\delta, \epsilon) \prec (\delta', \epsilon')$ which is a well order on $\kappa \times \kappa$. So there is an ordinal $\alpha$ that there is a bijection $f: (\kappa \times \kappa) \rightarrow (\alpha, <)$. so $\kappa < \kappa \cdot \kappa = \absolutevalue{\alpha} \leq \alpha$. So there is a $(\beta, \lambda) \in \kappa \times \kappa$ that $f((\beta, \lambda)) = \kappa$. Define $S = \set{(\delta, \epsilon)|(\delta, \epsilon) }\prec (\beta, \lambda)$ and $\gamma = \maximum{\beta, \gamma} + 1$. $\absolutevalue{S} = \kappa$. But $\absolutevalue{S} = \absolutevalue{\gamma \times \gamma} = \absolutevalue{\gamma} \times \absolutevalue{\gamma} = \absolutevalue{\gamma} < k$ because $\kappa$ is the minimal element. 
+    
+
+\end{proof}
+
+
+\begin{theorem}
+    Let $\kappa \leq \lambda$    , $\lambda \geq \aleph_0$, then
+    \begin{equation}
+        \kappa + \lambda = \kappa \cdot \lambda = \lambda
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}
+    Let $\kappa \geq \aleph_0$    , then
+    \begin{equation}
+        \kappa^{+} = \absolutevalue{\set{\alpha | \kappa \leq \alpha < \kappa^{+}}}
+    \end{equation}
+    So the set of all ordinals of cardinality $\kappa$ has cardinality $\kappa^{+}$.
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

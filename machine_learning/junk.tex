@@ -1,0 +1,498 @@
+\section{Basics}
+
+
+
+\section{Basics}
+
+Michael (1997) defines machine learning:
+\begin{enumerate}
+    \item learn from experience $E$
+    \item tasks $T$
+    \item performance measure $P$
+\end{enumerate}
+
+So a machine learning process performs $T$, measure by $P$, improve $E$.
+
+
+The steps to define a machine learning project:
+\begin{enumerate}
+    \item hypothesis: $h_\theta ( \selectrow{x}{i} ) = \theta_0 + \theta_1 \selectrow{x}{i}$
+    \item parameter: $\theta = \set{\theta_0, \theta_1}$
+    \item cost function: $\displaystyle J(\theta, x) = \frac{1}{2m} \sum_{i=1}^m \left( h_\theta  \left(\selectrow{x}{i}\right) - \selectrow{y}{i} \right)^2$
+    \item goal: $\displaystyle \argmin{\theta}  J(\theta,x)$
+\end{enumerate}
+
+We need to pay attention to the difference between hypothesis and cost function:
+\begin{enumerate}
+    \item Hypothesis is a function of $x$
+    \item Cost function is a function of $\theta$
+\end{enumerate}
+
+Gradient descent:
+\begin{equation}
+    \theta_{j+1} = \theta_j - \alpha  \cdot \dpd{J(\theta, x)}{\theta_j}
+\end{equation}
+Here $\alpha$ is the learning rate.
+
+
+The range of linear regression is $(\infty, -\infty)$ so it is not good for binary classification. Logistic regression is better for binary classification because its range is $(0, 1)$. Its definition is 
+\begin{equation}
+    h_\theta(x) = \frac{1}{1 + e^{- \transpose{\theta} x}}
+\end{equation}
+
+$\displaystyle h_\theta(x) = \frac{1}{1 + e^{- \transpose{\theta} x}}$ is called sigmoid activation function.
+
+regularization will add $g(\theta)$ to $J(\theta)$.
+
+Logistic regression is a classification, not regression. The result of logistic regression is a probability that $\mathbb{P}(y = 1 | x, \theta)$. So $y = 1$ when $\transpose{\theta} x > 0$.
+
+The cost function of logistic regression is carefully engineered. It is derived from maximal likelihood calculation:
+\begin{equation}
+    J(\theta,x) = -y \log \left(h_\theta (x) \right) - (1-y) \log \left(1 - h_\theta (x)\right)
+\end{equation}
+
+The gradient descent function is:
+\begin{equation}
+    \theta_{j+1} = \theta_j - \alpha  \cdot \sum_{i=1}^m \left( h_\theta (\selectrow{x}{i}) - \selectrow{y}{i} \right) \selectrowandcolumn{x}{i}{j}
+\end{equation}
+
+The gradient function for linear regression and logistic regression are almost the same. the only difference is that:
+\begin{enumerate}
+    \item $h_\theta(x) = \transpose{\theta} x$ for linear regression
+    \item $\displaystyle h_\theta (x) = \frac{1}{1 + e^{- \transpose{\theta} x}}$ for logistic regression
+\end{enumerate}
+
+For one-vs-all classification, we define $n$ hypothesis $\selectrow{h_\theta}{i}$, and choose $\argmax{i} \selectrow{h_\theta}{i}$.
+
+
+
+For neural networks, the output from layer $j$ is 
+\begin{equation}
+    x = \begin{pmatrix}
+        1 \\
+        x_1 \\
+        x_2 \\
+        \vdots \\
+        x_m
+    \end{pmatrix}_{m+1}
+\end{equation}
+
+So the input from layer $j$ is a vector of dimension $m+1$. The first element is called bias unit which is always $1$.
+
+The input to layer $j+1$ is a vector $y$ with dimension $n$ (exclude the first bias unit). We have the relation:
+\begin{equation}
+    y = \theta x
+\end{equation}
+
+Of which $\theta$ is a matrix with dimension ${(m+1) \times n}$.
+
+After the linear transformation of $x$, the neuron will then apply an activation function $g$ to $y$. So the result is an out put vector with dimension $n$ (exclude the bias unit):
+\begin{equation}
+    \begin{pmatrix}
+        g\left(\selectrow{y}{1}\right) \\
+        g\left(\selectrow{y}{2}\right) \\
+        \vdots \\
+        g\left(\selectrow{y}{n}\right)
+    \end{pmatrix}_n
+\end{equation}
+
+So the process of one forward propagation is:
+\begin{equation}
+    x = \begin{pmatrix}
+        1 \\
+        x_1 \\
+        x_2 \\
+        \vdots \\
+        x_m
+    \end{pmatrix}_{m+1} \xrightarrow{\theta_{(m+1) \times n}} y = \theta x \xrightarrow{g} \begin{pmatrix}
+        g\left(\selectrow{y}{1}\right) \\
+        g\left(\selectrow{y}{2}\right) \\
+        \vdots \\
+        g\left(\selectrow{y}{n}\right)
+    \end{pmatrix}_n
+\end{equation}
+
+
+For multi-class classification, the $y$ need to use one-hot encoding.
+
+
+For one neural network, the cost function with regularization is:
+\begin{equation}
+    \begin{aligned}
+        J(\theta) =& -\frac{1}{m} \left[\sum_{i=1}^m \sum_{k=1}^K \selectrowandcolumn{y}{i}{k} \log \left( h_\theta (\selectrow{x}{i}) \right)_k + (1-\selectrowandcolumn{y}{i}{k}) \log \left( 1- h_\theta (\selectrow{x}{i}) \right)_k \right] \\
+        &+ \frac{\lambda}{2m} \sum_{l=1}^{L-1} \sum_{i=1}^{S_l} \sum_{j=1}^{S_{l+1}} \left( \selectrowandcolumn{\theta}{l}{ij} \right)^2
+    \end{aligned}
+\end{equation}
+
+Of which:
+\begin{enumerate}
+    \item $\log \left( h_\theta (\selectrow{x}{i}) \right)_k$: the $k$th output
+    \item $L$: the number of total layer
+    \item $S_l$: the dimension of layer $l$
+    \item $K$: the dimension of last layer, the multi-class classification
+    \item $m$: the total number of input vectors
+\end{enumerate}
+
+
+
+\section{Deep Feedforward Networks}
+
+
+
+The general form of the neuron in layer $i$ is 
+\begin{equation}
+    h_i = g(\transpose{x} W + c)
+\end{equation}
+Where $c$ is the bias, $W$ is the weight, $g$ is the activation function.
+
+
+\subsection{Input Layer}
+
+\begin{definition}[Design Matrix]
+    The input $x$ with $d$ features is usually organized in column vector. However, for the training purpose, all input $x$ will be transposed to row vector and packed into a long list, which means the input $X$ is
+\begin{equation}
+    X = \begin{pmatrix}
+        \transpose{\selectrow{X}{1}} \\
+        \transpose{\selectrow{X}{2}} \\
+        \vdots \\
+        \transpose{\selectrow{X}{n}} \\
+    \end{pmatrix}_{n \times d}
+\end{equation}
+\end{definition}
+
+
+
+The weight from layer $i$ to layer $i+1$ will be transposed as well. If the dimension of layer $i$ is $S_i$, the input to the activation function is:
+\begin{equation}
+    Y_{n \times S_{i+1}} = X_{n \times S_{i}} \cdot W_{S_{i} \times S_{i+1}}
+\end{equation}
+
+
+
+\subsection{Cost Functions}
+
+Because the neural network use nonlinear activation function, the loss function is non-convex. So we cannot use global convex optimization to optimize the result. Gradient descent is always used to optimize the cost function. And there are tricks to make it convergent, such as initialize all weights to small random values and bias to zero or small positive numbers.
+
+
+
+In most cases, the neural network will output the probability distribution $p(y|x;\theta)$. So for the cost function, neural network often use the maximum likelihood, which is the cross entropy between training data and the model output:
+\begin{equation}
+    J(\theta) = - \mathbb{E} \log p_\theta (Y|X)
+\end{equation}
+
+Another view of the training is that we are not choosing the parameters. We are choosing the function $\phi$. So there is no limitation on the form of $\phi$.
+
+
+\subsection{Output Layer}
+
+
+\subsection{Hidden Layers}
+
+Some hidden layer units are not differentiable at all point. But there are only few points are are non-differentiable. So the software package could return the left and right derivatives instead.
+
+
+\begin{definition}[Rectified Linear. ReLU]
+    \begin{equation}
+        g(z) = \max \set{0, z}
+    \end{equation}
+\end{definition}
+
+For rectified linear unit $h = g(\transpose{W}x + b)$, it is a good practice to initialize $b$ with small positive number. It would then be very likely that this layer is active for most inputs and let the derivatives to pass through.
+
+
+\subsection{Architecture Design}
+
+
+\subsection{Backward Propagation}
+
+Backward propagation only calculate gradients. Stochastic gradient descent is used to perform learning using gradients.
+
+
+
+\subsection{random notes}
+
+machine learning will try to guess the probability distribution using the training set. with assumption that they are identically distributed.
+
+underfitting and overfitting is about the representational capacity of model. overfit has too much capacity, revealed on test set. underfit has low capacity on training set.
+
+hypothesis space: the set of candidate functions
+
+
+cannot train hyperparameters on training set because it will maximize capacity and overfit.
+
+
+feedforward: no feedback connection.
+
+layer is not a vector-to-vector function. but contains neurons that take vector input and generate activation value.
+
+
+
+It is feedforward so there is no backward to itself. It has 3 kinds of layers:
+\begin{itemize}
+    \item Input layer
+    \item Hidden layers
+    \item Output layer
+\end{itemize}
+
+For input $x$, the output is $y \approx \phi (x) = \selectrow{f}{3}\left( \selectrow{f}{2} \left(\selectrow{f}{1} \right) \right) $. This $\phi$ is a nonlinear transformation. And there are in general 3 ways to choose $\phi$:
+\begin{itemize}
+    \item Define a very generic $\phi$, such as an infinite-dimensional one with RBF kernel. It cannot solve advanced problems
+    \item Manually engineer $\phi$. It does not work
+    \item Deep learning will learn $\phi$. So $y = f(x; \theta, w) = \transpose{\phi(x;\theta)} w$. $\phi$ here is the hidden layer. This $\phi$ could be chosen that
+        \begin{enumerate}
+            \item Be very generic
+            \item Can encode human knowledge
+        \end{enumerate}
+\end{itemize}
+
+
+the neural network is nonlinear, and it cause loss function to be nonconvex. so gradient descent optimizer has to be used.
+
+initialize the weight to small random number, bias to small positive number.
+
+the parametric model is a distribution $p(y|x,\theta)$, and use negative log-likelihood as cost function.
+
+if we think the parameters are part of the function, the training process is about selecting different functions, so a functional process.
+
+
+
+The choice of activation functions for hidden layers are:
+\begin{itemize}
+    \item ReLU: $g(z) = \max \set{0, z}$. The problem with rectified linear unit is that if the activation is $0$, backward propagation cannot learn
+    \item $h_i = \max\set{0,z_i} + \alpha_i \min\set{0,z_i}$. So add a little $z_i$ when it is negative
+    \item leaky ReLU: $\alpha_i = 0.01$
+    \item PReLU: $\alpha_i$ could be learned. Parametric ReLU
+    \item absolute value rectification: $g(z) = \absolutevalue{z}$
+    \item tangent: $g(z) = \tanh(z)$. It is linear near $0$, so it is often used in non-feedforward networks.
+    \item no activation function
+    \item softmax
+    \item softplus
+\end{itemize}
+
+
+
+for output layer, The simplest one is to choose affine transformation $y = \transpose{W} h + b$. It is linear so gradient descent works well.
+
+\begin{definition}[logistic sigmoid]
+    \begin{equation}
+        \sigma(x) = \frac{1}{1 + \exp(-x)}    
+    \end{equation}    
+\end{definition}
+
+\begin{definition}[softplus]
+    \begin{equation}
+        \zeta(x) = \log (1 + \exp(x))
+    \end{equation}    
+\end{definition}
+
+For Bernoulli output, sigmoid function is used: $y = \sigma(\transpose{W}x + b)$. Because the cost function is $-\log p(y|x)$, the $\exp$ and $\log$ almost cancel each other, so the result doesn't saturate.
+
+
+For multinoulli output, softmax function is used:
+\begin{equation}
+    \mathrm{softmax}(z)_i = \frac{\exp(z_i)}{\sum_j \exp(z_j)}
+\end{equation}
+
+
+for linear output, affine transformation. for binomial, sigmoid. for multinomial, softmax
+
+
+
+\begin{theorem}[Universal Approximation]
+        A feedforward network with a single layer is sufficient to represent any function. However the layer would be extremely large and fail to learn. 
+\end{theorem}
+
+Special architecture are proposed for special tasks:
+\begin{itemize}
+    \item Convolutional network for computer vision
+    \item Recurrent neural network for sequence processing
+\end{itemize}
+
+Usually the layers are connected in a chain. But it does not have to be. It could connect from $i$ to $i+k$. It makes gradient to flow down from output layer to input layer more easily.
+
+The connection could be not fully connected, such as in convolutional network.
+
+
+back-propagation: compute the gradient. stochastic gradient descent is used to perform learning using this gradient.
+
+the chain rule for differentiation for $z = (f \circ g) x$ is:
+\begin{equation}
+    \nabla_x z = \pd{g}{x} \nabla_y z
+\end{equation}
+
+we may need to choose whether we cache the intermediate value, or calculate the value. it depends on the memory and time.
+
+one way to calculate back-propagation is to construct computational graph. it can even calculate higher derivatives.
+\begin{enumerate}
+    \item begin with the output $z$ that $\pd{z}{z} = 1$
+    \item calculate the Jacobian matrix and $\pd{z}{x_i}$
+    \item if a node has multiple path, sum the gradients from different path
+\end{enumerate}
+
+need to assume all inputs are distinct, even if they are the same.
+
+
+regularization is any modification that is intended to reduce generalization error but not its training error. the purpose is to encode specific prior knowledge, or to express the preference of simpler model.
+
+regularization is $\hat{J}(\theta;X,Y) = J(\theta;X,Y) + \alpha \Omega(\theta)$.
+
+bias is usually not regularized. weights connects two variables, and bias only connect one. so do not need to care too much. $\alpha$ could be different for each layer. regulate it may introduce too much underfit.
+
+in $L_2$ regularization, the $\Omega(\theta) = \transpose{w}w$. it is also called ridge regression.
+
+in $L_1$ regularization, $\Omega(\theta) = \absolutevalue{w}$. it generate sparse value and used for feature selection.
+
+
+classification takes $x$ from high dimension and summarize it into low dimension.
+
+data augmentation is effective in image object recognization, such as add few pixels in each direction, rotation, scaling. it works for speech recognization as well.
+
+neural network is not robust against noise. one way to improve is to train them with random noise.
+
+noise could be added to weights as well. this treat weight as stochastic.
+
+
+early stopping is a hyperparameter selection algorithm. when the validation error increase, we copy the current weights. if the algorithm terminate, we return the best weights saved. if it doesn't stop, stop the training when the validation error has not improved for certain number of iterations. most validation error curve is U-shape.
+
+early stopping needs validation set, so it does not use all data. one way is to restart training with all the data using the same number of iteration. but the result cannot be guaranteed to be better. the other way is to continue training with all the data. and do early stop again when the validation error drop.
+
+parameter sharing: we could tie parameters together so their difference did not vary too much, which is bounded and used as penalty. an extreme version is to use the same set of parameters. it could save much memory. it is used in CNN. 
+
+bagging is to reduce generalization error by combing several models together. also called ensemble method. bagging will perform at least as good as any of its members. and if the members are uncorrelated, it will perform better. 
+
+if bagging has $k$ model, the data will have $k$ dataset, each has the same size. it is constructed by selecting data with replacement. each set will miss some data from original data set. roughly 2/3
+
+model averaging is an extremely powerful and reliable method for reducing generalization error.
+
+
+dropout is a bagging practice for large neural networks, exponential number of sub network. it trains the ensemble of all subnetworks that can be formed by removing non-output unit from underlying base network. it could be done by multiplying its output by zero.
+
+when the minibatch is loaded, restart a new round of masking. need to mask the input data and the hidden units. such as to include input data with $0.8$ and hidden unit $0.5$. it is a hyperparameter.
+
+dropout trains exponential number of models with constant amount of memory. the parameters are shared. the next iteration will inherit it. it works on almost all models that can be trained using gradient descent.
+
+dropout is a regularization technique which reduces model capacity. so in order to maintain the capacity, we have to increase the size of the mode.
+
+dropout did not work well on small training data.
+
+another view of dropout is that it apply noise to hidden units. previous manual noise injection may not be random enough, or effective enough. dropout destroyed extracted features and is very effective.
+
+adversarial training: we could modify $x$ a little bit and the model will generate entirely different output. one cause is the extreme linearity. if the input change by $\epsilon$, the linear function with weights $w$ will change $\epsilon \norm{w}$. adversarial training will discourage this local linearity and encourage it to be locally constant. linear model is subject to this attack. neural network could represent from local linear to local constant.
+
+training is different from pure optimization. if we know the data distribution, it is optimization. or it is machine learning.
+
+use all training data: batch gradient method. use only one example: online method. minibatch sits in the middle.
+
+the size of minibatch is driven by :
+\begin{enumerate}
+    \item multicore architecture. set a bottom bar
+    \item memory
+    \item GPU requires specific size of array
+    \item small batch needs small learning rate, the time would be long
+\end{enumerate}
+
+
+gradient may not need big batch size. second order methods needs much larger batch size such as 10000.
+
+the data inside minibatch need to selected randomly. adjacent data may be highly correlated. a usual practice is to shuffle it once and store in shuffled fashion.
+
+local minimum may be a big problem. but nowadays the expert think that for sufficiently large neural network, most local minimum has a good cost value.
+
+for stochastic gradient descent (SGD), it is necessary to gradually decrease the learning $\epsilon$, so the learning rate is $\epsilon_k$. one suggestion is $\epsilon_k = (1-\alpha)\epsilon_0 + \alpha \epsilon_t$, and $\alpha = \frac{k}{t}$, until time $t$. after $t$ $\epsilon$ is constant. 
+
+$\epsilon_t$ is usually $1\%$ of $\epsilon_0$. $\epsilon_0$ is hard to choose. one suggestion is to observe the first few iterations and select a higher learning rate. 
+
+SGD may be slow, so momentum is designed to accelerate the process. it has a velocity $v$ that is set to an exponentially decaying average of the negative gradient. $\alpha$ is usually 0.5, 0.9, 0.99. it can be adapted, start small and later raised. if $\alpha$ is larger that $\epsilon$, previous gradient affect current directions more.
+\begin{equation}
+    v \leftarrow \alpha v - \epsilon \nabla_\theta \left(\frac{1}{m} \sum_i L\left(f(\selectrow{x}{i} ;\theta), \selectrow{y}{i}\right) \right) \\
+    \theta \leftarrow \theta + v
+\end{equation}
+
+one criteria for initializing weights is to break symmetry between two different units. if two hidden unit with the same activation function connect to the same input, their initial weights must be different.
+
+larger weights can break the weight symmetry easier. it avoid losing signal during forward and backward propagation. 
+
+but it may explode values. and may cause activation function to saturate.
+
+gradient explosion could be mitigated by gradient clipping (set threshold for the weights before SGD)
+
+bias is usually set to 0. if the bias is for output, the initial weights needs to be small enough so the output is determined by bias.
+
+choose bias to not cause saturation. if the activation layer is ReLU, set it to 0.1, not 0.
+
+adaptive learning rate:
+AdaGrad: inversely scale all model parameters to the square root of the sum of all historical squared value of gradient. the result is greater progress in the more gently sloped directions of parameter space. 
+
+RMSProp: change the gradient accumulation into an exponentially weighted moving average. AdaGrad is designed for convex function. for nonconvect function, it shrinks learning rate according to entire history and may make the learning rate too small. RMSProp discard history from the extreme past so it can converge faster in local convex bowl, as if it uses AdaGrad within that bowl. it is the go-to method.
+
+
+Adam: adaptive moments. a combination of RMSProp and momentum. 
+
+batch normalization: ???
+
+coordinate descent: minimize $f(x)$ by first minimize $x_i$, and then $x_j$. it is guaranteed to arrive at local minimum. a general version is to minimize a block of values, block coordinate descent. use it when different variables are be clearly separated into groups, or optimization to one group is much more efficient than optimize all. do not use it when variables strongly influence another.
+
+
+
+
+
+
+
+\section{History}
+
+In early days of artificial intelligence, the target is on solving problems that are difficult for human but straightforward for computers, such as formulas or math problems. Ironically, these are very hard for human but easy for computers.
+
+Later they found that the true challenge is on how to solve the tasks that are easy for human to performa but hard to describe. One of the key challenge is to feed knowledge into computers.
+
+The first trial is to write logical inference rules, which is known as knowledge base. But it works badly.
+
+The second trial is for AI system to learn the knowledge by itself, which is known as machine learning.
+
+One of the key to success is on how to represent the knowledge. These information is called feature.
+
+Now the challenge becomes how to design the proper features. Sometimes it is easy, but sometimes it is very hard. So there is representation learning that will try to learn the representation itself. One example is autoencoder with encoder process and decoder process.
+
+Deep learning tries to build complex representation in terms simpler representations, such as multilayer perceptron (MLP).
+
+So how deep is deep? A rule of thumb is 5000 labeled examples per category is acceptable, and at least 10 million labeled example to exceed human.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

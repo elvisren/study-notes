@@ -1,0 +1,282 @@
+\chapter{Determinant}
+
+
+\section{Definition}
+
+Determinant is a function from $A$ to $F$. The most used one is 
+\begin{equation}
+    \begin{vmatrix}
+        a & b \\
+        c & d
+    \end{vmatrix} = ad - bc
+\end{equation}
+
+
+Proper definition of determinant is a little complex. Define the cofactor of the entry of $A$ in row $i$ and column $j$ as $\cofactor{A} = (-1)^{i+j} \determinate{\tilde{A}_{ij}}$, $\tilde{A}$ is a $(n-1)\times (n-1)$ matrix obtained by removing row $i$ and column $j$ of $A$. The determinant of $A$ along row $i$ is recursively defined using Laplace Expansion:
+\begin{equation}
+    \determinate{A} = \sum_{j=1}^n A_{ij} \times \cofactor{A_{ij}} = \sum_{j=1}^n (-1)^{i+j} A_{ij}  \determinate{\tilde{A}_{ij}}
+\end{equation}
+
+
+\section{Properties}
+
+\begin{theorem}
+    The volume of $n$ vectors $\set{v_i}$ in $F^n$ is :
+    \begin{equation}
+      \absolutevaluetext{\begin{vmatrix}
+            v_1, v_2, ... v_n
+        \end{vmatrix}}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}
+    For a linear transformation $T: \realnumber^n \rightarrow \realnumber^n$ with matrix representation $M$. If $\determinate{M} < 1$, the transformation shrink the area. If $\determinate{M} > 1$, it enlarge the areas. if $\determinate{M} = 1$, it preserve the area.
+\end{theorem}
+
+
+\begin{theorem}
+    If a matrix has two identical rows, then $\determinate{A} = 0$.
+\end{theorem}
+
+
+\begin{theorem}
+    \begin{equation}
+        \determinate{AB} = \determinate{A} \times \determinate{B}
+    \end{equation}    
+\end{theorem}
+
+
+\begin{theorem}[Cramer's Rule]
+    For $A_{n \times n}x=b$, if $\determinate{A} \neq 0$, the solution is:
+    \begin{equation}
+        x_k = \frac{\determinate{M_k}}{\determinate{A}}
+    \end{equation}
+    where $M_k$ is obtained by replacing column $k$ of $A$ by $b$.
+\end{theorem}
+\begin{proof}
+    Define $X_k$ as 
+    \begin{equation*}
+        \begin{pmatrix}
+        1 &   &   & x_1 &  \\
+          & 1 &   & x_2 &  \\
+          &   & \ddots & \vdots \\
+          &   &        &  x_k & \\
+          &&& \vdots & \ddots \\
+          &&& x_n & & 1          
+        \end{pmatrix}
+    \end{equation*}
+    
+    We have $A X_k = M_k$, so $\determinate{A X_k} = \determinate{A} \times \determinate{X_k} = \determinate{A} \times x_k = \determinate{M_k}$
+\end{proof}
+
+\begin{theorem}
+    If $A$ is invertible, then let adjugate matrix be
+    \begin{equation}
+        \adjugate{A} = (\cofactor{A})^t
+    \end{equation}
+    
+    Then we have
+    \begin{equation}
+        \inverse{A} = \frac{\adjugate{A}}{\determinate{A}}
+    \end{equation}    
+\end{theorem}
+
+
+\begin{theorem}
+  For elementary operations:
+\begin{itemize}
+    \item interchange two rows: $\determinate{B} = - \determinate{A}$ 
+    \item multiply a row by $k$: $\determinate{B} = k \determinate{A}$
+    \item add a row to another $\determinate{B} = \determinate{A}$
+\end{itemize}  
+\end{theorem}
+
+\begin{theorem}
+    \begin{equation}
+        \determinate{A^t} = \determinate{A}
+    \end{equation}    
+\end{theorem}
+
+\begin{theorem}
+    If $A$ is invertible, then:
+    \begin{equation}
+        \determinate{\inverse{A}} = \frac{1}{\determinate{A}}
+    \end{equation}    
+\end{theorem}
+
+
+
+
+\begin{definition}
+    If $\beta$ and $\gamma$ are two ordered basis for $R^n$, they have the same orientation of and only if $\determinate{Q} > 0$, where $Q$ is change-of-coordinate matrix from $\beta$ to $\gamma$. If $\beta$ is the standard basis, then $\gamma$ is a right-handed coordinate system if $\determinate{Q} > 0$.
+\end{definition}
+
+
+% theory
+\section{Theory}
+
+The determinant could be viewed as the only result of special property. First we have to define two things.
+
+\begin{definition}[n-linear function]
+    $\delta$ is a n-linear function over $A$ if:
+    \begin{equation}
+        \delta \begin{pmatrix}
+            \vdots \\
+            u + kv \\
+            \vdots \\
+        \end{pmatrix} = \delta \begin{pmatrix}
+            \vdots \\
+            u \\
+            \vdots \\
+        \end{pmatrix} + k \times \delta \begin{pmatrix}
+            \vdots \\
+            v \\
+            \vdots \\
+        \end{pmatrix} 
+    \end{equation}
+\end{definition}
+
+
+\begin{definition}[alternating]
+    A n-linear function is alternating if $\delta (A) = 0$ when two adjacent rows of $A$ are identical.
+\end{definition}
+
+Then the determinant is the only function $\gamma$ that :
+\begin{enumerate}
+    \item n-linear
+    \item alternating
+    \item $\gamma(I_n) = 1$
+\end{enumerate}
+
+
+\begin{theorem}
+    Assume $A \in F^{m \times m}$, $B \in F^{m \times n}$, $C \in F^{n \times m}$, $D \in F^{n \times n}$, We have:
+    \begin{itemize}
+        \item If $A$ is invertible, \begin{equation}
+            \begin{vmatrix}
+                A & B \\
+                C & D
+                \end{vmatrix} = \determinate{A} \times \determinate{D - C \inverse{A} B}
+        \end{equation}
+    \item If $D$ is invertible, \begin{equation}
+            \begin{vmatrix}
+                A & B \\
+                C & D
+                \end{vmatrix} = \determinate{D} \times \determinate{A - B \inverse{D} C}
+        \end{equation}
+    \item If both $A$ and $D$ are invertible, \begin{equation}
+        \determinate{D - C \inverse{A} B} = \frac{\determinate{A}}{\determinate{D}} \times \determinate{A - B \inverse{D} C}
+        \end{equation}
+    \item $\determinate{\lambda I_m - BC} =\lambda^{m-n} \determinate{\lambda I_n - CB}$ ($m \geq n$)
+    \end{itemize}
+\end{theorem}
+
+
+\begin{theorem}[Vandermonde]
+    The Vandermonde matrix is:
+    \begin{equation}
+        \begin{vmatrix}
+        1 & 1  & \cdots  & 1  \\
+        x_1  & x_2 & \cdots & x_n \\
+        x_1^2 & x_2^2 & \cdots & x_n^2 \\
+        \vdots & \vdots & & \vdots \\
+        x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1} \\
+        \end{vmatrix} = \prod_{1 \leq j < i \leq n}(x_i - x_j)
+    \end{equation}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

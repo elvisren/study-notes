@@ -1,0 +1,760 @@
+\chapter{Differentiation}
+
+% derivative
+\section{Derivative}
+
+\begin{definition}
+    Let $f: X \rightarrow \realnumber$. The derivative of $f$ at $x_0$ is defined as
+    \begin{equation}
+        f'(x_0) = \lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}
+    \end{equation}
+\end{definition}
+
+
+\begin{theorem}
+    $f(x)$ is differentiable at $a$ is equivalent to the statement that there is a function $r: X \rightarrow \realnumber$ which is continuous at $a$ and $r(a)=0$, and a $m_a \in X$ that
+    \begin{equation}
+        f(x) = f(a) + m_a (x-a) + r(x)(x-a)
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Define $\displaystyle r(x) = \frac{f(x) - f(a) - m_a (x-a)}{x-a}$.
+\end{proof}
+
+\begin{theorem}
+    \begin{equation}
+        (f \cdot g)' (x) = f'(x) g(x) + f(x) g'(x)
+    \end{equation}    
+\end{theorem}
+\begin{proof}
+    \begin{equation}
+        \frac{f(x)g(x) - f(a)g(a)}{x - a} = \frac{f(x) - f(a)}{x-a} g(x) + f(a) \frac{g(x) - g(a)}{x-a}
+    \end{equation}
+\end{proof}
+
+\begin{theorem}
+    \begin{equation}
+        \left( \frac{f(x)}{g(x)} \right)' = \frac{f'(x)g(x) - f(x) g'(x)}{g(x)^2}
+    \end{equation}    
+\end{theorem}
+\begin{proof}
+    \begin{equation}
+        \frac{\frac{f(x)}{g(x)} - \frac{f(a)}{g(a)}}{x - a} = \frac{1}{g(x) g(a)} \left( \frac{f(x) - f(a)}{x-a} g(x) - f(a) \frac{g(x) - g(a)}{x-a} \right)
+    \end{equation}
+\end{proof}
+
+\begin{theorem}
+    If $f$ and $g$ are differentiable, then
+    \begin{equation}
+        (g \circ f)'(x) = g'(f(x)) f'(x)
+    \end{equation}    
+\end{theorem}
+\begin{proof}
+    Since $f$ is differentiable at $a$, we have $f(x) = f(a) + f'(a)(x-a) + r(x)(x-a)$. Let $b = f(a)$. Since $g$ is differentiable at $b$, we have $g(x) = g(b) + g'(b)(x-b) + s(x)(x-b)$. So
+    \begin{equation}
+        \begin{aligned}
+            (g \circ f)'(x) &= g(f(a)) + g'(f(a))(f(x) - f(a)) + s(f(x))(f(x) - f(a)) \\
+            &= (g \circ f)(a) + g'(f(a))f(a)(x-a) + t(x)(x-a)
+        \end{aligned}
+    \end{equation}
+\end{proof}
+
+\begin{theorem}
+    Let $f$ be injective and differentiable at $a$. Suppose $f^{-1}$ is continuous at $b=f(a)$. Then $f^{-1}$ is differentiable at $b$ if and only if $f^{-1}$ is not zero, and
+    \begin{equation}
+        (f^{-1})(b) = \frac{1}{f'(a)}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Use $1 = (f^{-1} \circ f)'(x)$.
+\end{proof}
+
+\begin{definition}[higher derivatives]
+    Define operator $\partial$ as
+    \begin{equation}
+        \begin{aligned}
+            \partial^0 f &= f\\
+            \partial^1 f &= f'\\
+            \partial^{n+1} &= \partial(\partial^n f)
+        \end{aligned}
+    \end{equation}
+    
+    $\partial^n f$ is called the $n$th derivative of $f$. If $\partial^n f$ is continuous, it is called $n$-times continuously differentiable.
+\end{definition}
+
+
+
+% mean value theorem
+\section{Mean Value Theorem}
+
+\begin{theorem}[Rolle's theorem]\label{rolle_theorem}
+    Suppose $f$ is differentiable. If $f(a) = f(b)$, then there exists $\xi \in (a,b)$ that $f'(\xi) = 0$.
+\end{theorem}
+\begin{proof}
+    If $f$ is constant, then any $\xi$ is ok. Otherwise, $f$ has an extreme at $(a,b)$ which has zero derivative.
+\end{proof}
+
+\begin{theorem}[mean value theorem]
+    If $f$ is differentiable on $(a,b)$, then there is $\xi \in (a,b)$ that
+    \begin{equation}
+        f(b) = f(a) + f'(\xi)(b-a)
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Define 
+    \begin{equation}
+        g(x) = f(x) - \frac{f(b) - f(a)}{b-a}x
+    \end{equation}
+    
+    We have $g(a) = g(b) = \frac{f(a)b - f(b) a}{b-a}$. Use \theoref{rolle_theorem}.
+\end{proof}
+
+
+\begin{theorem}
+    Suppose $f,g$ are differentiable on $(a,b)$ and $g' \neq 0$. Then there is a $\xi$ that
+    \begin{equation}
+        \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    \theoref{rolle_theorem} implies $g(a) \neq g(b)$. Define a function 
+    \begin{equation}
+        h(x) = f(x) - \frac{f(b) - f(a)}{g(b) - g(a)}(g(x) - g(a))
+    \end{equation}
+    
+    $h(a) = h(b)$. Use \theoref{rolle_theorem} again to find the $\xi$.
+\end{proof}
+
+\begin{theorem}[L'Hospital's Rule]\label{hospital_rule}
+    Suppose $f,g$ are differentiable and $g(x) \neq 0$. Suppose
+    \begin{itemize}
+        \item $\displaystyle \lim_{x\rightarrow a} f(x) = \lim_{x\rightarrow a} g(x) = 0$, or
+        \item $\displaystyle \lim_{x\rightarrow a} g(x) = \pm \infty$
+    \end{itemize}
+    Then
+    \begin{equation}
+        \lim_{x\rightarrow a}\frac{f(x)}{g(x)} = \lim_{x\rightarrow a}\frac{f'(x)}{g'(x)}
+    \end{equation}
+    if the limit on the right side exists in $\realnumber$.
+\end{theorem}
+
+
+
+
+
+% Taylor theorem
+\section{Taylor Expansion}
+
+\begin{theorem}
+    For each function $f$ with $n$th derivatives, we have
+    \begin{equation}
+        f(x) = \sum_{k=0}^n \frac{f^k (a)}{k!}(x-a)^k + R_n(f,a)(x)
+    \end{equation}
+    The remainder $R_n$ satisfies
+    \begin{equation}
+        \absolutevalue{R_n(f,a)(x)} \leq \frac{1}{(n-1)!} \sup_{0 < t < 1}\absolutevalue{f^n (a + t(x-a)) - f^n (a)} \absolutevalue{x-a}^n
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Define a function $h$:
+    \begin{equation}
+        h(t) = f(x) - \sum_{k=0}^{n-1}\frac{f^k (a + t(x-a))}{k!} (x-a)^k (1-t)^k - \frac{f^n(a)}{n!}(x-a)^n (1-t)^n
+    \end{equation}
+    
+    We have $h(0) = R_n(f,a)(x)$ and $h(1)=0$ and $h'$ is the formula to prove. So
+    \begin{equation}
+        \absolutevalue{R_n(f,a)(x)} = \absolutevalue{h(1) - h(0)} \leq \sup_{0 < t < 1} \absolutevalue{h'(t)}
+    \end{equation}
+\end{proof}
+
+\begin{theorem}[Schlomilch reminder]
+    Let $p > 0$ and $f^{n+1}$ exists. There is $\xi$ that
+    \begin{equation}
+        R_n(f,a)(x) = \frac{f^{n+1}(\xi)}{p \times n!}\left( \frac{x-\xi}{x-a} \right)^{n-p+1} (x-a)^{n+1}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Define
+    \begin{equation}
+        g(t) = \sum_{k=0}^n \frac{f^k (t)}{k!}(x-t)^k
+    \end{equation}
+    
+    We have $R_n (f,a)(x) = g(x) - g(a)$ and $g'(t) = \frac{f^{n+1}(x)}{n!}(x-t)^n$. Also define $h(t) = (x-t)^p$. Use \theoref{hospital_rule} to find the $\xi$.
+\end{proof}
+
+\begin{theorem}[Langrange reminder]
+    Set $p = n+1$
+    \begin{equation}
+        R_n (f,a)(x) = \frac{f^{n+1}(\xi)}{(n+1)!}(x-a)^{n+1}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[Cauchy reminder]
+    Set $p=1$
+    \begin{equation}
+        R_n (f,a)(x) = \frac{f^{n+1}(\xi)}{n!}\left( \frac{x-\xi}{x-a} \right)^n (x-a)^{n+1}
+    \end{equation}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

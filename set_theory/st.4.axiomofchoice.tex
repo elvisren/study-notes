@@ -1,0 +1,57 @@
+\section{Axiom of Choice}
+
+\begin{theorem}[\cindex{Axiom of Choice}]
+    Every set has a choice function.
+\end{theorem}
+
+\begin{theorem}[\cindex{Well-ordering Principle}]
+    All sets can be well-ordered.
+\end{theorem}
+
+\begin{theorem}[\cindex{Zorn's Lemma}]
+    IF $X$ is a partially ordered set where each chain has an upper bound, then $X$ has a maximal element.
+\end{theorem}
+
+\begin{theorem}[\cindex{Tukey's Lemma}]
+    If a collection of sets $U$ is of finite character then $U$ contains maximal sets under the ordering $\subseteq$.
+\end{theorem}
+
+\begin{proof}
+Axiom of Choice $\rightarrow$ Well-ordering Principle :  Let $S$ be a set and define a function $F(S) = \powerset{S} \backslash \emptyset$. Assume there is a choice function $f$ on $F(S)$. Define a function $h$ into $S$ using transfinite recursion where
+    \begin{equation}
+        h(\alpha) = \begin{cases}
+            f(S) \in S, & \alpha = 0 \\
+            f\left( \displaystyle S \backslash \bigcup_{\beta < \alpha} h(\beta) \right), & \alpha \neq 0
+        \end{cases}
+    \end{equation}
+\end{proof}    
+    
+\begin{proof}    
+Well-ordering Principle $\rightarrow$ Zorn's Lemma: Let $(P, \sqsubseteq)$ be a partially ordered set where each chain has an upper bound. Assume there is a well-ordering of $(P, \preceq)$. Define a transfinite recursive function $f: P \rightarrow \set{0,1}$ by:
+    \begin{equation}
+        f(p) = \begin{cases}
+            1, & \text{if for all } p' \prec p \text{ for which } f(p') = 1, p' \sqsubset p \\
+            0, & \text{otherwise}
+        \end{cases}
+    \end{equation}
+
+what it did is that the minimal element under $f$ is $0$. And if $f(x) = 0$, for all $y < x$ in the well-ordering, $f(y) = 1 \Rightarrow y \sqsubset x$.
+\end{proof}
+
+\begin{theorem}
+    There is no function $m : \powerset{\real} \rightarrow \real^{\geq 0} \cup \set{\infty}$ that:
+    \begin{enumerate}
+        \item $m \left([0,1) \right) = 1$
+        \item $m(A + r) = m(A)$ where $A + r = \set{s + r: s \in A}$
+        \item $m(\bigcup A_i) = \sum m(A_i)$ for all disjoint set $A_i$.
+    \end{enumerate}
+    
+    So there is no measurable function on all subsets of $\real$. Those can be measured are called measurable sets.
+\end{theorem}
+\begin{proof}
+    Define an equivalent class $[r] = \set{s \in \real : s - r \in \mathbb{Q}}$. Let $t = \set{[r] \cap [0,1)}$. Use axiom of choice, choose each point from $t$ and form a set $C$. Calculate the measure of $C$. 
+    
+    Because $\bigcup_{q \in \mathbb{Q}} C + q = R$ and $q \neq q' \Rightarrow C+q \neq C+q'$, so $\sum_{q \in \mathbb{Q}} m(C) = \sum_{q \in \mathbb{Q}} m(C+q) = m(R) \geq 1$, so $m(C) \neq 0$. 
+    
+    $\sum_{q \in \mathbb{Q} \cap [0,1)} m(C+q) \leq m([0,2) = 2$, so $m(C) = 0$.
+\end{proof}

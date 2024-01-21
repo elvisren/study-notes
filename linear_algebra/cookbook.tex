@@ -1,0 +1,40 @@
+\chapter{Cookbook}
+
+Linearity allows us to analyze multidimensional processes and transformations by studying only a small set of inputs.
+
+\section{Famous Sets}
+
+\begin{enumerate}
+    \item $\mathcal{P}(F)$: the set of all polynomials
+    \item $\mathcal{P}_n (F)$: the set of all polynomials with degree $\leq n$
+    \item $F^n$: column vector space
+    \item $\mathcal{L}(V,W)$: all linear transformation from $V$ to $W$
+    \item $C^\infty (R)$: the set of all functions that has derivatives of all orders
+    \item $H$: $\displaystyle \innerproduct{f}{g} = \frac{1}{2 \pi} \int_{0}^{2\pi} f(x) \conjugate{g(x)} \dif x$
+\end{enumerate}
+
+\section{Famous Relationship}
+\begin{enumerate}
+    \item similar: Matrix $A$ and $B$ are similar if there is a $Q$ that $A = \inverse{Q} B Q$
+    \item orthogonally equivalent (unitarily equivalent): similar, with $\inverse{Q} = Q^*$
+    \item isomorphic: $V$ and $W$ are isomorphic if there is an invertible linear transformation $T:V \rightarrow W$
+\end{enumerate}
+
+
+\section{Tricks in Proving Theorem}
+
+\begin{enumerate}
+    \item Use $T^*$ to move $T$ to either the left or the right side of inner product using $\innerproduct{T(x)}{y} = \innerproduct{x}{T^* (y)}$
+    \item If $x$ is an eigenvector and $\lambda$ is an eigenvalue, move $\lambda$ inside an inner product, such as $\lambda \innerproduct{x}{\cdot} = \innerproduct{\lambda x}{\cdot} = \innerproduct{Tx}{\cdot}$.
+    \item If $x=0$, we could create inner product $\innerproduct{x}{\cdot} = 0$ and use properties of $x$. Some tricks are:
+        \begin{itemize}
+            \item $x$ could be $Tx$, then we use $T$ and $T^*$ inside inner product
+            \item $x$ could be $Ay$ where $y \in \nullspace{A}$
+            \item $x$ could be $(T - \lambda I_n)x$. If $T$ is normal, $T-\lambda I_n$ is also normal, so we could move $T-\lambda I_n$ around the inner product
+        \end{itemize}
+    \item If there is a formula on $x$, replace $x$ by $x-y$, such as $\norm{T(x)} = \norm{x}$
+    \item If there is a formula on both $x$ and $T(x)$, replace $x$ by $T(x)$
+    \item Prove $x = y$ by proving $\norm{x - y} = 0$, which is $\innerproduct{x - y}{x - y} = 0$
+    \item To simplify the matrix of a linear transformation, find a subspace $S$ of $V$ and find its basis, then expand to a basis of $V$. The result is almost diagonal. The examples are in proving the dimension relationship of eigenspace,  the divisibility of $T$-cyclic space, and orthogonal projection
+\end{enumerate}
+

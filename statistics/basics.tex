@@ -1,0 +1,252 @@
+\chapter{Basics}
+
+\section{Probability Definition}
+
+\begin{definition}[Sample Space]
+    The set $S$ of all possible outcomes of a particular experiment is called the sample space for the experiment.
+\end{definition}
+
+The sample space could be either countable or uncountable.
+
+\begin{definition}[Event]
+    An event is any collection of possible outcomes of an experiment, i.e., a subset of $S$.
+\end{definition}
+
+\begin{definition}[Sigma Algebra]
+    A collection of subsets of $S$ is called sigma algebra $\mathcal{B}$ if
+    \begin{enumerate}
+        \item $\emptyset \in \mathcal{B}$
+        \item If $A \in \mathcal{B}$, then $A^c \in \mathcal{B}$
+        \item IF $\set{A_i} \in \mathcal{B}$, then $\cup_{i=1}^\infty A_i \in \mathcal{B}$
+    \end{enumerate}
+\end{definition}
+
+
+\begin{definition}[Probability Function]
+    For a sample space $S$ and the associated sigma algebra $\mathcal{B}$, a probability function $P$ with domain $\mathcal{B}$ satisfies:
+    \begin{enumerate}
+        \item $P(A) \geq 0$ for all $A \in \mathcal{B}$
+        \item $P(S) = 1$
+        \item If $\set{A_i}$ are pairwise disjoint, then $P(\bigcup_{i=1}^\infty A_i) = \bigcup_{i=1}^\infty P(A_i)$
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Let $S=\set{s_1, s_2, \cdots, s_n}$ be a finite set and $\mathcal{B}$ be one of the sigma algebra of $S$. Let $\set{p_1, p_2, \cdots, p_n}$ be $n$ nonnegative numbers that $\sum_{i=1}^n p_i = 1$. For any $A\in \mathcal{B}$, define $P(A)$ by
+    \begin{equation}
+        P(A) = \sum_{\set{i: s_i \in A}} p_i
+    \end{equation}
+    
+    Then $P$ is a probability function on $\mathcal{B}$.
+\end{theorem}
+
+
+\begin{theorem}[Boole's Inequality]
+    If $P$ is a probability function, then
+    \begin{equation}
+        P\left(\bigcup_{i=1}^\infty A_i \right) \leq \bigcup_{i=1}^\infty P(A_i)
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Define $A_i^*$ as
+    \begin{equation*}
+        \begin{aligned}
+            A_1^* &= A_1 \\
+            A_i^* &= A_i - \left(\bigcup_{j=1}^{i-1} A_j \right)
+        \end{aligned}
+    \end{equation*}
+    
+    These $A_i^*$ are disjoint.
+\end{proof}
+
+
+One classic example in traditional probability is to select $r$ balls from $n$ samples. We could do it with replacement or without replacement (replacement means put it back). In this experiment the sample space is finite and all outcomes are equally likely. The result is:
+
+\begin{table}[H]
+\centering
+% \renewcommand*{\arraystretch}{1.4}
+\begin{tabular}[t]{ccc}
+\hline
+ & Without replacement & With replacement \\
+Ordered & $\displaystyle \frac{n!}{(n-r)!}$ & $n^r$ \\ 
+Unordered & $\displaystyle {n \choose r}$ & $\displaystyle {{n + r -1} \choose r}$ \\
+\hline
+\end{tabular}
+\end{table}
+\begin{proof}
+    For the unordered case with replacement, we want to solve the following formula:
+    \begin{equation}
+        x_1 + x_2 + \cdots + x_n = r \text{ (} x_i \geq 0 \text{)}
+    \end{equation}
+\end{proof}
+
+
+\begin{definition}[Conditional Probability]
+    If $A$ and $B$ are events in $S$ and $P(B) > 0$, the conditional probability of $A$ given $B$ is
+    \begin{equation}
+        P(A|B) = \frac{A \cap B}{P(B)}
+    \end{equation}
+    
+    For any $B$, $P(\cdot|B)$ is a probability function.
+\end{definition}
+
+\begin{example}[3 choose 1]
+    Three prisoner A,B,C are on death row and one of them will be pardoned. A asks the warden which of B or C will be executed. The warden thinks for a while and tell a truth that $B$ is to be executed. So what is the probability that A will be pardoned?
+\end{example}
+
+\begin{theorem}[Bayes' Rule]
+    Let $\set{A_i}$ be a partition of the sample space and let $B$ be any set. Then
+    \begin{equation}
+        p(A_i|B) = \frac{P(B|A_i)P(A_i)}{\displaystyle \sum_{j=1}^\infty P(B|A_j)P(A_j)}
+    \end{equation}
+    
+    A simplified version with only $A$ and $B$ is
+    \begin{equation}
+        P(A|B) = P(A) \times \frac{P(B|A)}{P(B)}
+    \end{equation}
+\end{theorem}
+
+\begin{definition}[Statistically Independent]
+    Two events $A$ and $B$ are statistically independent if
+    \begin{equation}
+        P(A \cap B) = P(A) \times P(B)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Mutually Independent]
+    A collection of events $\set{A_i}$ are mutually independent if for any subsollection $A_{i_j}$, we have
+    \begin{equation}
+        P\left( \bigcap_{j=1}^k A_{i_j} \right) = \prod_{j=1}^k P(A_{i_j})
+    \end{equation}
+\end{definition}
+
+
+
+% random variable
+\section{Random Variable}
+
+
+\begin{definition}[Random Variable]
+    A random variable is a function $X: S \rightarrow \realnumber$. 
+\end{definition}
+
+A random variable has a derived probability function. If the experiment with outcome $s_j \in S$ has a property that $X(s_j) = x_i$, then
+\begin{equation}
+    P_X(X=x_i) = P(\set{s_j \in S: X(s_j) = x_i})
+\end{equation}
+
+The probability function $P_X$ is an induced probability function on $\mathcal{X}$.
+
+\begin{definition}[cdf]
+    The cumulative distribution function or cdf of a random variable $X$ is defined as
+    \begin{equation}
+        F_X (x) = P_X (X \leq x)
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    A function $F(x)$ is a cdf if and only if all the following conditions hold:
+    \begin{enumerate}
+        \item $\displaystyle \lim_{x \rightarrow - \infty} F(x) = 0$
+        \item $\displaystyle \lim_{x \rightarrow \infty} F(x) = 1$
+        \item $F(x)$ is a nondecreasing function of x
+        \item $F(x)$ is right-continuous: $\displaystyle \lim_{x \downarrow x_0} F(x) = F(x_0)$
+    \end{enumerate}
+\end{theorem}
+
+
+\begin{definition}
+    Random variables $X$ and $Y$ are identically distributed if for every set $A \in \mathcal{B}$, $P(X \in A) = P(Y \in A)$.
+    
+    They have the same distribution does not mean they are equal.
+    
+    If $X$ and $Y$ are identically distributed, then $F_X (x) = F_Y (x)$.
+\end{definition}
+
+
+\begin{definition}[pmf]
+    The probability mass function of a discrete random variable $X$ is defined as
+    \begin{equation}
+        f_X (x) = P(X = x)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[pdf]
+    The probability density function $f_X (x)$ of a continuous random variable $X$ is defined as 
+    \begin{equation}
+        F_X (x) = \int_{- \infty}^{x} f_X (t) \dif t
+    \end{equation}
+\end{definition}
+
+If $X$ has a distribution $F_X (x)$, it is often written as $X \sim F_X(x)$ or $X \sim f_X (x)$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

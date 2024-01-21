@@ -1,0 +1,369 @@
+\chapter{Training}
+
+\section{Problems}
+The standard loss function is maximal likelihood and backprop algorithms is used to calculate the gradient. Because the Jacobian matrix $J_i$ is not symmetric, its behavior is determined by its eigenvector which may be complex-valued. So the behavior may oscillate. It will have two problems:
+\begin{itemize}
+    \item The gradient can explode
+    \item The gradient can vanish
+\end{itemize}
+
+Gradient explosion could be fixed by gradient clipping:
+\begin{equation}
+    g' = \min \left(1, \frac{c}{\norm{g}}\right)g
+\end{equation}
+
+The vanish gradient problem is hard to fix. There are 4 ideas:
+\begin{enumerate}
+    \item Choose better activation functions
+    \item Change architecture to have additive update, not multiplicative (ResNet)
+    \item Standardize activation (batch normalization)
+    \item Choose special initial parameters
+\end{enumerate}
+
+
+% choose activation function
+\section{Choose Activation Function}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}[t]{lll}
+Name & Definition & Range \\ \hline
+Sigmoid & $\sigma(a) = \frac{1}{1 + e^{-a}}$ & $[0,1]$ \\
+Hyperbolic tangent & $\tanh(a) = 2\sigma(2a) -1$ & $[-1,1]$ \\
+Softplus & $\sigma_{+}(a) = \log(1 + e^a)$ & $[0,\infty]$ \\
+ReLU & $\text{ReLU}(a) = \max(a,0)$ & $[0,\infty]$ \\
+LRelu & $\max(a,0)+\alpha \min(a,0)$ & $[-\infty , \infty]$ \\
+ELU & $\max(a,0) + \min(\alpha(e^a - 1), 0)$ & $[-\infty, \infty]$ \\
+SELU & $\lambda \text{ELU}$ & $[-\infty, \infty]$ \\
+Swish & $a\sigma(a)$ & $[-\infty,\infty]$ \\
+GELU & $a \Phi(a)$ & $[-\infty,\infty]$\\
+\end{tabular}
+\end{table}
+
+\begin{example}[Relu]
+    The problem with ReLU is that if the weights were initialized with large negative value, it will saturate, which is called dead ReLU.    
+\end{example}
+
+\begin{example}[LReLU]
+    Leaky ReLU has a $\alpha$, which could be learned and called parametric ReLU.    
+\end{example}
+
+\begin{example}[ELU]
+    ELU (exponential linear unit) is better than LReLU for being a smooth function.    
+\end{example}
+
+
+\begin{definition}[SELU]
+    SELU (self-normalizing ELU) $\text{SELU}(a;\alpha,\lambda) = \lambda \text{ELU}(a;\alpha)$ is even better that if the input $x$ is normal, each layer keeps previous layer's mean and variance.     
+    
+    MLP is an iterative function: $x$, $\text{SELU}(x)$, $\text{SELU}(\text{SELU}(x))$, $\dots$. $\text{SELU}$ has a fixed point that $\lambda = 1.0505$ and $\alpha = 1.6732$. 
+
+\end{definition}
+
+
+\begin{example}[Swish]
+    The full definition of Swish function is $a\sigma(\beta a)$. In practice, $\beta$ is always $1$. 
+\end{example}
+
+\begin{example}[GELU]
+    GELU (gaussian error linear unit) is defined as $a \Phi(a)$ where $\Phi$ is
+    \begin{equation}
+        \Phi(a) = \mathcal{P}(\mathcal{N}(0,1) \leq a) = \frac{1}{2}\left(1+\text{erf}\left(\frac{a}{\sqrt{2}}\right)\right)
+    \end{equation}
+    
+    $\text{GELU}(a) \approx a \sigma(1.702 a)$. 
+\end{example}
+
+
+% resnet
+\section{Residual Connections}
+
+Residual network, or ResNet, is a feedforward network with layers of residual block:
+\begin{equation}
+    F_l^{'} (x) = F_l (x) + x
+\end{equation}
+
+$F_l$ compute the $\Delta(x)$. It has the same size as the model without residual, but ResNet is easier to train because the gradient could flow directly from output to earlier layers.
+
+
+% parameter initialization
+\section{Parameter Initialization}
+
+\begin{definition}[Xavier Initialization]
+    Also called Glorot initialization. Biases are initialized to $0$ and the weights at each layer is
+    \begin{equation}
+        W_{ij} \sim \mathcal{N}\left(0, \frac{2}{n_{\text{in}} + n_{\text{out}}} \right)
+    \end{equation}
+    where $n_{\text{in}}$ is the number of incoming connections and $n_{\text{out}}$ is the number of outgoing connections.
+\end{definition}
+
+\begin{definition}[He Initialization]
+    \begin{equation}
+        W_{ij} \sim \mathcal{N}\left(0, \frac{2}{n_{\text{in}}} \right)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[LeCun Initialization]
+    \begin{equation}
+        W_{ij} \sim \mathcal{N}\left(0, \frac{1}{n_{\text{in}}} \right)
+    \end{equation}
+\end{definition}
+
+
+
+% parallel training
+\section{Parallel Training}
+
+There are two ways to do parallel training:
+\begin{itemize}
+    \item Model parallelism: partition models between machines
+    \item Data parallelism: partition data to different machines
+\end{itemize}
+
+Model parallelism is difficult, so in practice data parallelism is often used. The steps are:
+\begin{enumerate}
+    \item For step $t$, split the minibatch into $K$ machines, each will receive $\mathcal{D}_t^k$
+    \item Machine $k$ train its own gradient $g_t^k = \nabla_\theta \mathcal{L}(\theta;\mathcal{D}_t^k)$
+    \item Centralize all gradients to a machine $g_t = \sum_{i=1}^K g_t^k$ (all-reduce operation)
+    \item Distribute $g_t$ to all machines
+    \item Each machine update its weights $\theta_t^k \leftarrow \theta_t^k - \lambda_t g_t$
+\end{enumerate}
+
+If all machines wait for the aggregated gradient, it is called synchronous training. If they only use their local gradient, it is called asynchronous training, which is not guaranteed to work. 
+
+
+% regularization
+\section{Regularization}
+
+\subsection{Early Stop}
+
+A heuristic method of stopping the training when the generalization gap increases.
+
+\subsection{Weight Decay}
+
+Weight decay is called $\mathcal{l}_2$ regularization. It puts penalty on the loss function:
+\begin{equation}
+    \mathcal{L}^{'}(y, f(x,w)) = \mathcal{L}(y, f(x,w)) + \lambda \transpose{w}w
+\end{equation}
+
+\subsection{Sparse DNN}
+It is called $\mathcal{l}_1$ regularization
+\begin{equation}
+    \mathcal{L}^{'}(y, f(x,w)) = \mathcal{L}(y, f(x,w)) + \lambda \absolutevalue{w}
+\end{equation}
+
+\subsection{Dropout}
+
+\begin{definition}[Co-adaptation]
+    Some neurons are highly dependent on others. If one such neuron received bad inputs, it will affect others and reduce model performance    
+\end{definition}
+
+Co-adaptation cannot be solved by $\mathcal{l}_1$ or $\mathcal{l}_2$ regularization. So this problem cannot be solved by increasing the size of the model. Dropout solved the co-adaptation problem and is used very widely.
+
+Dropout will set the output of hidden layer to zero based on Bernoulli noise $1-p$ ($p$ is the probability that a weight will be dropped out). The practice is :
+\begin{enumerate}
+    \item $p=0.5$ for hidden layers
+    \item $p= 0.25$ for input layer
+\end{enumerate}
+
+Dropout is usually used in fully-connected hidden layers. It does not change the weight or bias. 
+
+
+
+What it does it to add noise to $x$ to create $x^{'}$ so $\expectation{x^{'}}= x$. So we need to change the weight during training:
+\begin{equation}
+    \begin{aligned}
+        x^{'} = \begin{cases}
+            0 & \text{ with probability }  p \\
+            \displaystyle \frac{x}{1-p} & \text{ with probability }  1-p
+        \end{cases}
+    \end{aligned}
+\end{equation}
+
+
+It is only used in training.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

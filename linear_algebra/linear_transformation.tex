@@ -1,0 +1,225 @@
+
+% linear transformation
+\chapter{Linear Transformation}
+
+The logic of this section:
+\begin{enumerate}
+    \item Define linear transformation
+    \item Introduce linear operator
+    \item Define the coordinate of vector
+    \item Define the coordinate matrix of linear transformation
+    \item Prove linear transformation is a vector space with additional multiplication operation
+    \item Introduce matrix multiplication
+    \item Define inverse of square matrix
+    \item Define change-of-coordinate matrix
+\end{enumerate}
+
+\section{Definition}
+A function $T:V \rightarrow W$ is a linear transformation if $T(cx + y) = cT(x) + T(y)$. There are few basic terms for linear transformation:
+\begin{itemize}
+    \item $I_V$: identity transformation that $I_V (x) = x$
+    \item $I_0$: zero transformation that $I_0 (x) = 0$
+\end{itemize}
+
+$\nullspace{T}$ and $\rangespace{T}$ are all spaces. $\dimension{\rangespace{T}}$ is the rank of $T$. We have:
+\begin{equation}
+    \text{nullity}(T) + \rank{T} = \dimension{V}
+\end{equation}
+
+If (and only if) $\nullspace{T} = \set{0}$, $T$ is a one-to-one mapping.
+
+As the behavior of a vector space is completely defined by its basis, the behavior of linear transformation is also determined by its action on basis. If $\set{v_i}$ is a basis of $V$ with $n$ vectors, and we randomly pick $n$ vectors $\set{w_i}$ from $W$, there is a unique linear transformation $T$ that $T(v_i) = w_i$. Note that $v_i$ has to be linearly independent, but there is no such requirement for $w_i$.
+
+
+If $V = W$, $T$ is called linear operator. Linear operator is the focus of inner product.
+
+All linear transformation $\mathcal {L}(V,W)$ from $V$ to $W$ is a linear space.
+
+\section{Coordinates}
+
+We define the coordinate of a vector and a linear transformation. Let $\beta = \set{u_i}$ be an ordered basis. If $x = \sum_{i=1}^n a_i u_i$, we define the coordinate of $x$ relative to $\beta$ as :
+\begin{equation}
+    x = \sum_{i=1}^n a_i u_i \Longrightarrow \coordinate{x}_\beta = \begin{pmatrix}
+        a_1 \\
+        a_2 \\
+        \vdots \\
+        a_n
+    \end{pmatrix}
+\end{equation}
+
+For linear transformation $T$ from $\beta = \set{v_i} $ to $\gamma = \set{w_j}$, we have :
+\begin{equation}
+    T(v_j) = \sum_{i=1}^m a_{ij} w_i \Longrightarrow \coordinate{T}_{\beta}^{\gamma} = \begin{pmatrix}
+        \hdots & a_{1j} & \hdots \\
+        \hdots & a_{2j} & \hdots \\
+        & \vdots \\
+        \hdots & a_{nj} & \hdots \\
+    \end{pmatrix}
+\end{equation}
+
+
+
+% matrix multiplication
+\section{Matrix Multiplication}
+
+Linear transformation is linear in $+$ and $\times$ operations. So we could define the product of two linear transformations $UT$. It turns out to be the standard matrix multiplication. And we have
+
+\begin{equation}\label{matrix_coordinate}
+    \coordinate{UT}_{\alpha}^{\gamma} = \coordinate{U}_{\beta}^{\gamma} \coordinate{T}_{\alpha}^{\beta}
+\end{equation}
+
+Let $u_j$ and $v_j$ be the $j$th column of $AB$ and $B$, we have
+\begin{enumerate}
+    \item $u_j = A v_j$
+    \item $v_j = B e_j$
+\end{enumerate}
+
+\begin{theorem}
+    For $T: V \rightarrow W$,
+    \begin{equation}
+        \coordinate{T(u)}_\gamma = \coordinate{T}_{\beta}^{\gamma} \coordinate{u}_{\beta}
+    \end{equation}    
+\end{theorem}
+\begin{proof}
+    The idea is to find a linear transformation of $u$. Fix a $u$ and define a function $f: F \rightarrow V$ as $f(a) = au$, and $\set{1}$ is the standard basis for $F$. So $u = \coordinate{f}_{\set{1}}$. Let $g=Tf$ and use Formula~\ref{matrix_coordinate} to prove it: $\coordinate{T(u)}_\gamma = \coordinate{g(1)}_\gamma = \coordinate{g}_{\alpha}^{\gamma}$.
+\end{proof}
+
+From any matrix $A$, we could define a left multiplication transformation $L_A$.
+
+One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have:q
+\begin{equation}
+    \trace{AB} = \trace{BA}
+\end{equation}
+
+
+
+%
+%
+% Quotient space
+%
+%
+\section{Quotient Space}
+
+\begin{definition}[affine subset]
+    An affine subset of $V$ is a subset of the form $v + U$ for some $v\in V$ and $U \subseteq V$.
+    
+    The affine subset $v+U$ is said to be parallel to $U$.
+\end{definition}
+
+\begin{definition}[Quotient space]
+    Suppose $U$ is a subspace of $V$. Define quotient space $V/U$ to be the set of all affine sets of $V$ parallel to U:
+    \begin{equation}
+        V/U = \set{v + U: v \in V}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[quotient map]
+    The quotient map $\pi : V \rightarrow V/U$ is defined by 
+    \begin{equation}
+        \pi(v) = v + U
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    \begin{equation}
+        \dimension{V/U} = \dimension{V} - \dimension{U}
+    \end{equation}    
+\end{theorem}
+
+\begin{theorem}
+    Define $\tilde{T}$ as 
+    \begin{equation}
+        \tilde{T}(v + \nullspace{T}) = T(v)
+    \end{equation}
+    
+    Then $\tilde{T}$ is an injective linear map.
+\end{theorem}
+
+%
+%
+% inverse
+%
+%
+
+
+\section{Inverse}
+The inverse $\inverse{T}$ of a linear transformation $T:V \rightarrow W$ requires that both $T \inverse{T} = I_W$ and $\inverse{T} T = I_V$. It requires that $\dimension{V} = \dimension{W}$. We have
+\begin{equation}
+    \coordinate{\inverse{T}}_{\gamma}^{\beta} = \inverse{\left( \coordinate{T}_{\beta}^{\gamma} \right)}
+\end{equation}
+
+If we have an invertible linear transformation $T:V \rightarrow W$, $V$ and $W$ are isomorphic. The only requirement is they have to have the same dimension.
+
+
+%
+%
+% change of coordinates
+%
+%
+
+\section{Change of Coordinates}
+
+If we change the basis of a vector space, we may change the coordinate of vector and linear operatos.
+
+We now examine the coordinate relations given two basis. First we see how it impacts vector representation. Let $\beta$ and $\beta^{\prime}$ be two basis of $V$, and $Q=\coordinate{I_V}_{\beta^\prime}^\beta$ , we have 
+\begin{equation}
+    \coordinate{v}_\beta = Q \coordinate{v}_{\beta^\prime}
+\end{equation}
+
+Where $Q$ is the change of coordinate matrix that change from $\beta^\prime$ coordinates into $\beta$ coordinates. $Q$ is invertible and $\inverse{Q}$ will change from $\beta$ coordinates into $\beta^\prime$ coordinates. 
+
+Then we see how it will impact the matrix representation of linear operators:
+\begin{equation}\label{change_of_coordinate_formula}
+    \coordinate{T}_{\beta^\prime} = \inverse{Q} \coordinate{T}_{\beta} Q = \coordinate{I_V}_\beta^{\beta^\prime} \coordinate{T}_\beta \coordinate{I_V}_{\beta^\prime}^\beta
+\end{equation}
+
+A simpler version happens with $L_A$ and standard basis over $F^n$. For any non-standard basis $\gamma$, the $j$th column of $Q$ is the $j$th vector of $\gamma$, and we denote it as $[\gamma]$. It is now easy to calculate the linear transformation of $L_A$ under the new basis $\gamma$ which is $[L_A]_\gamma = \inverse{[\gamma]} A [\gamma]$.
+
+
+\begin{definition}[similar]
+    Matrix $A$ and $B$ are similar if there is a $Q$ that $A = \inverse{Q} B Q$.    
+\end{definition}
+
+
+%
+%
+% example
+%
+%
+
+\section{Linear Transformation Example}
+
+\begin{example}
+    The formula of the reflection about the line $y=tx$. It is a linear transformation $T$ with coordinates under standard basis $\beta$:
+    \begin{equation*}
+        \coordinate{T}_\beta = \frac{1}{1 + t^2} \begin{pmatrix}
+            1-t^2 & 2t \\
+            2t & t^2 -1
+        \end{pmatrix}
+    \end{equation*}
+\end{example}
+
+
+\begin{example}
+    Let's try to find the solution to homogeneous differential equation 
+    \begin{equation*}
+        \sum_{i=0}^n a_i y^{(i)} = 0
+    \end{equation*}
+    
+    Define differential operation $D$ as $D(y) = y^\prime$. $D$ turns out to be a linear operation. With a polynomial $p(t) = \sum_{i=0}^n a_i t^i$, the homogeneous equation becomes $p(D)y = 0$. So we are looking for $\nullspace{p(D)}$.
+    
+    The solution is a subspace, so we start from small. For $y^\prime + a_0 y = 0$, the solution has dimension 1 with basis $\set{e^{-a_0 t}}$.
+    
+    For advances case, we could prove that the result is of dimension $n$, so if we could find $n$ linearly independent result, it is the answer. So if $p(x) = 0$ has $n$ distinct solution $\set{c_i}$, the solution to $p(D)y = 0$ is $\set{e^{c_i t}}$. If one solution $m$ appears $k$ times, then $\set{e^{mt}, t e^{mt}, ..., t^{m-1} e^{mt}}$ are part of the solution. 
+    
+    So if 
+    \begin{equation*}
+        p(t) = (t-c_1)^{n_1} (t-c_2)^{n_2} \hdots (t-c_k)^{n_k} 
+    \end{equation*}
+    the basis for the solution is 
+    \begin{equation*}
+        \set{e^{c_1 t}, t e^{c_1 t}, ... , t^{n_1 -1} e^{c_1 t}, ... ,  e^{c_k t}, t e^{c_k t}, ..., t^{n_k -1} e^{c_k t}}
+    \end{equation*}
+\end{example}
+
+

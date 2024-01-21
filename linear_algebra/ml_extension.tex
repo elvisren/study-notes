@@ -1,0 +1,251 @@
+\chapter{Machine Learning Extension}
+
+
+The standard basis $\set{e_i}$ for $\realnumber^n$ is called one-hot vector.
+
+$A_{i,:}$ select the $i$th column, and $A_{:,j}$ select the $j$th row.
+
+A tensor is a $n$-dimension array. The $n$ is called order or rank.
+
+
+\begin{definition}[Hadamard Product]
+    The Hadamard product of $A_{m \times n}$ and $B_{m\times n}$ is defined as $(A \odot B)_{ij} = A_{ij} \cdot B_{ij}$.
+\end{definition}
+
+\section{Norm}
+
+\begin{definition}[Norm]
+    The norm is a function $f : R^n \rightarrow R$ that:
+    \begin{itemize}
+        \item $f(x) \geq 0$
+        \item $f(x) = 0$ if and only if $x = 0$
+        \item $f(tx) = t f(x)$
+        \item $f(x+y) \leq f(x) + f(y)$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    The norms of a vector $x$ are:
+\begin{itemize}
+    \item p-norm: $\displaystyle \norm{x}_p = \left(\sum_{i=1}^n \absolutevalue{x_i}^p \right)^{\frac{1}{p}}$
+    \item 0-norm: $\displaystyle \norm{x}_0 = \sum_{i=1}^n x^0$, if we define $0^0 = 0$.
+    \item 1-norm: $\displaystyle \norm{x}_1 = \sum_{i=1}^n \absolutevalue{x_i}$
+    \item 2-norm: $\displaystyle \norm{x}_{p=2} = \transpose{x} x$
+    \item max-norm: $\norm{x}_\infty = \max \set{\absolutevalue{x_i}}$
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Induced Norm]
+   For a matrix $A_{m \times n}$, its induced norm is
+\begin{equation}
+    \norm{A}_p = \max\limits_{\norm{x}=1} \norm{Ax}_p
+\end{equation}
+
+If $p=2$, $\norm{A}_2 = \sqrt{\lambda_{\mathrm{max}} ( \transpose{A}A}) = \max\limits_i \sigma_i$, where $\sigma_i$ is the $i$th singnular value.
+ 
+\end{definition}
+
+\begin{definition}[Trace Norm]
+    The trace norm, also called nuclear norm, is defined as
+\begin{equation}
+    \norm{A}_* = \trace{\sqrt{\transpose{A}A}} = \sum_i \sigma_i = \norm{\sigma}_1
+\end{equation}
+\end{definition}
+
+\begin{definition}[Forbenius Norm]
+    \begin{equation}
+        \norm{A}_F = \sqrt{\sum_i \sum_j A_{ij}^2} = \sqrt{\trace{\transpose{A}A}}
+    \end{equation}
+\end{definition}
+
+
+\section{Properties}
+
+\begin{theorem}[Cyclic Permutation Property]
+    For $A$,$B$,$C$, if the result of $ABC$ is a square matrix, then
+    \begin{equation}
+        \trace{ABC} = \trace{BCA} = \trace{CAB}
+    \end{equation}
+    
+    One of the result is that for vector $x$, we have
+    \begin{equation}
+        \transpose{x} A x = \trace{\transpose{x}Ax} = \trace{x \transpose{x} A}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}
+    For $A_{m \times n}$, we have
+    \begin{equation}
+        \rank{A} = \rank{\transpose{A}} = \rank{\transpose{A}A} = \rank{A \transpose{A}}
+    \end{equation}    
+\end{theorem}
+
+
+\begin{theorem}
+    The cosine of the angle between $x$ and $y$ is
+    \begin{equation}
+        \cos(x,y) = \frac{\transpose{x}y}{\norm{x} \times \norm{y}}
+    \end{equation}
+    
+    If we apply orthogonal transformation on $x$ and $y$, the angle will not change.
+\end{theorem}
+\begin{proof}
+    For orthogonal transformation $T$, $\displaystyle \cos(Tx, Ty) = \frac{\transpose{(Tx)} Ty}{\norm{Tx} \times \norm{Ty}} = \cos(x,y)$. So orthogonal transformation preserve both the angle and norm, and it is either rotation or reflection.
+\end{proof}
+
+
+\section{Matrix Calculus}
+
+There are two conventions in display derivative result:
+\begin{itemize}
+    \item Numerator layout: according to $y$ and $\transpose{x}$
+    \item Denominator layout: according to $\transpose{y}$ and $x$
+\end{itemize}
+
+We will choose the numerator layout convention.
+
+\begin{table}[H]
+\centering
+\renewcommand*{\arraystretch}{1}
+\begin{tabular}[t]{c|c|c|c}
+\hline
+Types & $y$: Scalar & ${y}$: Vector & $Y$:Matrix \\
+\hline
+Scalar & $\dpd{y}{x}$ & $\begin{pmatrix}
+    \dod{y_1}{x} \\
+    \vdots \\
+    \dod{y_m}{x}
+\end{pmatrix}_{\realnumber \rightarrow \realnumber^m} $ & $\begin{pmatrix}
+            \dpd{y_{1,1}}{x} & \hdots & \dpd{y_{1,n}}{x} \\
+            & \vdots \\
+            \dpd{y_{m,1}}{x} & \hdots & \dpd{y_{m,n}}{x}
+        \end{pmatrix}$ \\[4ex]
+%\hline
+Vector & $\nabla y = \begin{pmatrix}
+    \dod{y}{x_1} & \cdots & \dod{y}{x_n}
+\end{pmatrix}$ & $\begin{pmatrix}
+            \dpd{y_1}{x_1} & \hdots & \dpd{y_1}{x_n} \\
+            & \vdots \\
+            \dpd{y_m}{x_n} & \hdots & \dpd{y_m}{x_n}
+        \end{pmatrix}$ &  \\[4ex]
+%\hline
+Matrix & $\begin{pmatrix}
+            \dpd{y}{x_{1,1}} & \hdots & \dpd{y}{x_{1,n}} \\
+            & \vdots \\
+            \dpd{y}{x_{m,1}} & \hdots & \dpd{y}{x_{m,n}}
+        \end{pmatrix}$ &   & \\[4ex]
+%\hline
+\end{tabular}
+\caption{Type of matrix derivatives}
+\end{table}
+
+
+\begin{definition}[Gradient]
+    For $f: \realnumber^n \rightarrow \realnumber$, the derivative against $x$ is called gradient:
+    \begin{equation}
+    G_f (x) = \nabla f_{n \rightarrow 1} (x) = \begin{pmatrix}
+        \dpd{f}{x_1} \\
+        \vdots \\
+        \dpd{f}{x_n}
+    \end{pmatrix}
+    \end{equation}
+    
+    To be consistent with Jacobian matrix, it is preferred that
+    \begin{equation}
+        \nabla f (x) = \begin{pmatrix}
+            \dpd{f}{x_1}, \hdots, \dpd{f}{x_n}
+        \end{pmatrix}
+    \end{equation}
+    
+    So $\nabla f: \realnumber^n \rightarrow \realnumber^n$ is a vector field.
+\end{definition}
+
+
+
+
+\begin{example}    
+For directional derivative of $f$ along a vector $v$, we have 
+\begin{equation}
+    D_v f(x) = \lim\limits_{h \rightarrow 0} \frac{f(x + hv) - f(x)}{h}
+\end{equation}
+
+We have $D_v f(x) = \nabla f(x) \cdot v$.
+\end{example}
+
+\begin{definition}[Jacobian Matrix]
+    For $f: \realnumber^n \rightarrow \realnumber^m$, the derivative against $x$ is called Jacobian matrix:
+    \begin{equation}
+        J_{f_{n \rightarrow m}} (x) = \begin{pmatrix}
+            \nabla f_1 \\
+            \nabla f_2 \\
+            \vdots \\
+            \nabla f_m
+        \end{pmatrix}_{m \times n}
+    \end{equation}
+    
+%    So $J_f$ is a matrix that transform from $\realnumber^n$ to $\realnumber^m$, so it is an $m \times n$ matrix.
+\end{definition}
+
+
+\begin{definition}[Hessian Matrix]
+    For $f: \realnumber^n \rightarrow \realnumber$, the second partial derivatives is
+    \begin{equation}
+        H_f = \nabla^2 f = \begin{pmatrix}
+            \dpd[2]{f}{x_1} & \hdots & \dmd{f}{2}{x_1}{1}{x_n}{1} \\
+            & \vdots \\
+            \dmd{f}{2}{x_n}{1}{x_1}{1} & \hdots & \dpd[2]{f}{x_n}
+        \end{pmatrix}
+    \end{equation}
+    
+    So Hessian matrix is the Jacobian of the gradient.
+\end{definition}
+
+Here is the summary of useful matrix calculus:
+
+\begin{table}[H]
+\centering
+\renewcommand*{\arraystretch}{2.5}
+\begin{tabular}[t]{|c|c|c|c|}
+\hline
+Expression & Result & Expression & Result \\ \hline
+$\dpd{{x}}{{x}}$ & $I_n$ & $\dpd{A {x}}{{x}}$ & $A$\\[1ex] \hline
+$\dpd{\transpose{{x}}A}{{x}}$ & $\transpose{A}$ & $\dpd{\transpose{b}A {x}}{{x}}$ & $\transpose{b}A$ \\[1ex]  \hline
+$\dpd{\transpose{{x}}A {x}}{{x}}$ & $ \transpose{{x}}(A + \transpose{A})$ & $\dpd{x \cdot x}{{x}}$ & $ 2\transpose{{x}}$ \\[1ex]  \hline
+$\dmd{{\transpose{{x}}A {x}}}{2}{{x}}{}{{\transpose{{x}}}}{}$ & $2A$ & $\dmd{f}{2}{{x}}{}{{\transpose{{x}}}}{}$ & $\transpose{H}$  \\[1ex]  \hline
+$\dpd{\transpose{a}x}{x}$ & $\transpose{a}$ & $\dpd{\transpose{x}a}{x}$ & $\transpose{a}$  \\[1ex]  \hline
+$\dpd{u(x) \cdot v(x)}{x}$ & $\transpose{u(x)} \dpd{v}{x} + \transpose{v(x)} \dpd{v(u)}{x}$ & $\dpd{u(x) \times v(x)}{x}$ & $u(x) \dpd{v}{x} + v(x) \dpd{v(u)}{x}$  \\[1ex]  \hline
+$\dpd{f(g(x))}{x}$ & $\dpd{f}{g} \times \dpd{g}{x}$ & $\dpd{u(x) + v(x)}{x}$ & $\dpd{u(x)}{x} + \dpd{v(x)}{x}$ \\[1ex]  \hline
+$\dpd{\transpose{a}X b}{X_{m \times n}}$ & $b \transpose{a}$ & $\dpd{\transpose{a} \transpose{X} b}{X_{m \times n}}$ & $a \transpose{b}$ \\[1ex]  \hline
+\end{tabular}
+
+\caption{Type of matrix derivatives using numerator layout}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
