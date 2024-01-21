@@ -120,6 +120,13 @@
 \newcommand\theoref[1]{Theorem~\ref{#1}\footnote{Page~\pageref{#1}}}
 \newcommand\defiref[1]{Definition~\ref{#1}\footnote{Page~\pageref{#1}}}
 
+\usepackage{adjustbox}
+\NewDocumentCommand{\alignedbrackets}{m}{
+    \left[
+        \adjustbox{valign=c}{\ensuremath{\begin{aligned}#1\end{aligned}}}
+    \right]
+}
+
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% set theory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,9 +281,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% probability %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\newcommand\probability[1]{\mathop{\bf P\/}\displaystyle \left\{#1\right\}}
-\newcommand\expect[1]{\mathop{\bf E\/}\displaystyle  \left[ #1 \right]}
-\newcommand\variance[1]{\mathop{\bf Var\/}\displaystyle \left[ #1 \right]}
+\newcommand\probability[1]{\mathop{\bf P\/}\alignedbrackets{\displaystyle #1}}
+
+% E[x]
+\newcommand\expect[1]{\mathop{\bf E\/}\alignedbrackets{\displaystyle #1}}
+
+% Var[x]
+\newcommand\variance[1]{\mathop{\bf Var\/}\alignedbrackets{\displaystyle #1}}
+
+
 \newcommand\covariance[2]{\mathop{\bf Cov\/}\displaystyle \left(#1,#2 \right)}
 
 % exp { xxx }
