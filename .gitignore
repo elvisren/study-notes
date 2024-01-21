@@ -1,0 +1,52 @@
+# LaTeX generated files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.lb
+*.bbl
+*.blg
+*.brf
+*.idx
+*.ind
+*.ilg
+*.inx
+*.synctex.gz
+*.synctex(busy)
+*.synctex(busy)
+*.pdfsync
+*.nav
+*.snm
+*.vrb
+*.fls
+*.fdb_latexmk
+*.xdv
+*.run.xml
+*.bcf
+*.alg
+*.acr
+*.acn
+*.glg
+*.glo
+*.gls
+*.ist
+*.maf
+*.mtc
+*.mtc0
+*.pyg
+
+# Directories
+*_minted-*
+
+# Specific files (customize as needed)
+# main.pdf
+# main.dvi
+# main.ps
+
