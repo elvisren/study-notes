@@ -134,11 +134,39 @@
 \newcommand\theoref[1]{Theorem~\ref{#1}\footnote{Page~\pageref{#1}}}
 \newcommand\defiref[1]{Definition~\ref{#1}\footnote{Page~\pageref{#1}}}
 
+
+\usepackage{datetime2}
+
+% align the content top and bottom with "[" and "]"
 \usepackage{adjustbox}
 \NewDocumentCommand{\alignedbrackets}{m}{
     \left[
         \adjustbox{valign=c}{\ensuremath{\begin{aligned}#1\end{aligned}}}
     \right]
+}
+
+% set and read the build number
+\usepackage{ifthen}
+\newcommand{\buildnumber}{
+    \newread\buildfileread
+    \newwrite\buildfilewrite
+    \newcounter{buildnumber}
+    
+    \openin\buildfileread=buildnumber.txt
+    \read\buildfileread to \buildnumbertext
+    
+    \ifthenelse{\equal{\buildnumbertext}{}}{
+        \setcounter{buildnumber}{1}
+    }{
+        \setcounter{buildnumber}{\buildnumbertext}
+        \addtocounter{buildnumber}{1}
+    }
+    
+    \immediate\openout\buildfilewrite=buildnumber.txt
+    \immediate\write\buildfilewrite{\thebuildnumber}
+    \immediate\closeout\buildfilewrite
+    
+    \arabic{buildnumber}
 }
 
 
