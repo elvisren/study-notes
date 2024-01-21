@@ -84,6 +84,12 @@
 \usepackage{epsfig}
 
 
+% change the color of \emph to blue
+\usepackage{xcolor}
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{red}{\oldemph{#1}}}
+
+
 
 % user MathTime professional 2. so expensive...
 \usepackage{newtxtext}
@@ -91,7 +97,7 @@
 \usepackage[subscriptcorrection,slantedGreek,nofontinfo,mtpcal,mtpfrak,mtphrb,zswash]{mtpro2}
 
 
-
+% make the contents are aligned on bottom and top within "[" and "]"
 \usepackage{adjustbox}
 
 
@@ -103,6 +109,14 @@
 \usepackage{tikz}
 \usepackage{multirow}
 \usepackage{float}
+
+
+% for drawing beautiful math commutative diagram
+% note:
+%   it treat nodes as a matrix and use "&" to separate row and "\\" for line.
+%   "'" change the label from above arrow to below arrow.
+%   "l", "r" and "d" means move among matrix nodes.
+\usepackage{tikz-cd}
 
 
 %
@@ -224,14 +238,18 @@
 \newcommand\determinatetext[1]{\displaystyle \mathrm{det}~\displaystyle #1}
 
 % the coordinate, the [x]
-\newcommand\coordinate[1]{\sbr{#1}}
+%\newcommand\coordinate[1]{\sbr{#1}}
+\newcommand\coordinate[1]{\alignedbrackets{\displaystyle #1}}
 
-
+% the projection of v on S: proj_S (v)
 \newcommand\projection[2]{\mathrm{proj}_{#2} #1}
+
+
 \newcommand\rowvector[1]{\left[ \displaystyle #1 \right]}
+
 \newcommand\vectorsymbol[1]{\overrightarrow{#1}}
 
-% projection, the x^-1
+% inverse, the x^-1
 \newcommand\inverse[1]{ {#1}^{-1} }
 
 % dimension text, the "dim x"

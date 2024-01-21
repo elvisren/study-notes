@@ -15,13 +15,13 @@ The logic of this section:
 \end{enumerate}
 
 \section{Definition}
-A function $T:V \rightarrow W$ is a linear transformation if $T(cx + y) = cT(x) + T(y)$. There are few basic terms for linear transformation:
+A function $T:V \rightarrow W$ is a \cindex{linear transformation} if $T(cx + y) = cT(x) + T(y)$. There are few basic terms for linear transformation:
 \begin{itemize}
     \item $I_V$: identity transformation that $I_V (x) = x$
     \item $I_0$: zero transformation that $I_0 (x) = 0$
 \end{itemize}
 
-$\nullspace{T}$ and $\rangespace{T}$ are all spaces. $\dimension{\rangespace{T}}$ is the rank of $T$. We have:
+$\nullspace{T}$ and $\rangespace{T}$ are all spaces. $\dimension{\rangespace{T}}$ is the \cindex{rank} of $T$. We have:
 \begin{equation}
     \text{nullity}(T) + \rank{T} = \dimension{V}
 \end{equation}
@@ -37,7 +37,7 @@ All linear transformation $\mathcal {L}(V,W)$ from $V$ to $W$ is a linear space.
 
 \section{Coordinates}
 
-We define the coordinate of a vector and a linear transformation. Let $\beta = \set{u_i}$ be an ordered basis. If $x = \sum_{i=1}^n a_i u_i$, we define the coordinate of $x$ relative to $\beta$ as :
+We define the coordinate of a vector and a linear transformation. Let $\beta = \set{u_i}$ be an \cindex{ordered basis}. If $x = \sum_{i=1}^n a_i u_i$, we define the coordinate of $x$ relative to $\beta$ as :
 \begin{equation}
     x = \sum_{i=1}^n a_i u_i \Longrightarrow \coordinate{x}_\beta = \begin{pmatrix}
         a_1 \\
@@ -86,7 +86,7 @@ Let $u_j$ and $v_j$ be the $j$th column of $AB$ and $B$, we have
 
 From any matrix $A$, we could define a left multiplication transformation $L_A$.
 
-One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have:q
+One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have
 \begin{equation}
     \trace{AB} = \trace{BA}
 \end{equation}
@@ -101,20 +101,20 @@ One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have
 \section{Quotient Space}
 
 \begin{definition}[affine subset]
-    An affine subset of $V$ is a subset of the form $v + U$ for some $v\in V$ and $U \subseteq V$.
+    An \cindex{affine subset} of $V$ is a subset of the form $v + U$ for some $v\in V$ and $U \subseteq V$.
     
     The affine subset $v+U$ is said to be parallel to $U$.
 \end{definition}
 
 \begin{definition}[Quotient space]
-    Suppose $U$ is a subspace of $V$. Define quotient space $V/U$ to be the set of all affine sets of $V$ parallel to U:
+    Suppose $U$ is a subspace of $V$. Define \cindex{quotient space} $V/U$ to be the set of all affine sets of $V$ parallel to U:
     \begin{equation}
         V/U = \set{v + U: v \in V}
     \end{equation}
 \end{definition}
 
 \begin{definition}[quotient map]
-    The quotient map $\pi : V \rightarrow V/U$ is defined by 
+    The \cindex{quotient map} $\pi : V \rightarrow V/U$ is defined by 
     \begin{equation}
         \pi(v) = v + U
     \end{equation}
@@ -143,13 +143,23 @@ One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have
 
 
 \section{Inverse}
-The inverse $\inverse{T}$ of a linear transformation $T:V \rightarrow W$ requires that both $T \inverse{T} = I_W$ and $\inverse{T} T = I_V$. It requires that $\dimension{V} = \dimension{W}$. We have
+The \cindex{inverse} $\inverse{T}$ of a linear transformation $T:V \rightarrow W$ requires that both $T \inverse{T} = I_W$ and $\inverse{T} T = I_V$. It requires that $\dimension{V} = \dimension{W}$. We have
 \begin{equation}
     \coordinate{\inverse{T}}_{\gamma}^{\beta} = \inverse{\left( \coordinate{T}_{\beta}^{\gamma} \right)}
 \end{equation}
 
-If we have an invertible linear transformation $T:V \rightarrow W$, $V$ and $W$ are isomorphic. The only requirement is they have to have the same dimension.
 
+\begin{definition}
+	$V$ is \cindex{isomorphic} to $W$ if there exists a linear transformation $T:V\rightarrow W$ that is invertible. $T$ is called an \cindex{isomorphism}  from $V$ to $W$.
+\end{definition}
+
+
+\begin{theorem}
+	The function $\Phi: \mathcal{L}(V,M) \rightarrow M_{m \times n}(F)$ defined by $\Phi (T) = \coordinate{T}_\beta^\gamma$, is an isomorphism. The dimension has relation that 
+	\begin{equation}
+		\dimension{\mathcal{L}(V,M)} = \dimension{V} \times \dimension{W}
+	\end{equation}
+\end{theorem}
 
 %
 %
@@ -166,18 +176,30 @@ We now examine the coordinate relations given two basis. First we see how it imp
     \coordinate{v}_\beta = Q \coordinate{v}_{\beta^\prime}
 \end{equation}
 
-Where $Q$ is the change of coordinate matrix that change from $\beta^\prime$ coordinates into $\beta$ coordinates. $Q$ is invertible and $\inverse{Q}$ will change from $\beta$ coordinates into $\beta^\prime$ coordinates. 
+Where $Q$ is the \cindex{change of coordinate} matrix that change from $\beta^\prime$ coordinates into $\beta$ coordinates. $Q$ is invertible and $\inverse{Q}$ will change from $\beta$ coordinates into $\beta^\prime$ coordinates. 
 
 Then we see how it will impact the matrix representation of linear operators:
 \begin{equation}\label{change_of_coordinate_formula}
     \coordinate{T}_{\beta^\prime} = \inverse{Q} \coordinate{T}_{\beta} Q = \coordinate{I_V}_\beta^{\beta^\prime} \coordinate{T}_\beta \coordinate{I_V}_{\beta^\prime}^\beta
 \end{equation}
 
+
+
+\begin{theorem} \label{specialchangeofcoordinates}
+	Let $T:V\rightarrow W$, $\beta$ and $\beta^\prime$ are ordered basis of $V$, $\gamma$ and $\gamma^\prime$ are ordered basis of $W$. Then
+	\begin{equation}
+		\coordinate{T}_{\beta^\prime}^{\gamma^\prime} = \coordinate{I_W}_\gamma^{\gamma^\prime} \coordinate{T}_\beta^\gamma \coordinate{I_V}_{\beta^\prime}^\beta
+	\end{equation}
+\end{theorem}
+
+
+
+
 A simpler version happens with $L_A$ and standard basis over $F^n$. For any non-standard basis $\gamma$, the $j$th column of $Q$ is the $j$th vector of $\gamma$, and we denote it as $[\gamma]$. It is now easy to calculate the linear transformation of $L_A$ under the new basis $\gamma$ which is $[L_A]_\gamma = \inverse{[\gamma]} A [\gamma]$.
 
 
 \begin{definition}[similar]
-    Matrix $A$ and $B$ are similar if there is a $Q$ that $A = \inverse{Q} B Q$.    
+    Matrix $A$ and $B$ are \cindex{similar} if there is a $Q$ that $A = \inverse{Q} B Q$.    
 \end{definition}
 
 
@@ -188,6 +210,11 @@ A simpler version happens with $L_A$ and standard basis over $F^n$. For any non-
 %
 
 \section{Linear Transformation Example}
+
+
+\begin{definition}
+	\cindex{$\mathcal{L}(V,W)$} contains all linear transformation from $V$ to $W$.
+\end{definition}
 
 \begin{example}
     The formula of the reflection about the line $y=tx$. It is a linear transformation $T$ with coordinates under standard basis $\beta$:
@@ -221,5 +248,168 @@ A simpler version happens with $L_A$ and standard basis over $F^n$. For any non-
         \set{e^{c_1 t}, t e^{c_1 t}, ... , t^{n_1 -1} e^{c_1 t}, ... ,  e^{c_k t}, t e^{c_k t}, ..., t^{n_k -1} e^{c_k t}}
     \end{equation*}
 \end{example}
+
+%
+%
+% dual space
+%
+%
+
+\section{Dual Space}
+
+\begin{definition}
+	A \cindex{linear functional} is a linear transformation that map from $V$ into $F$.
+\end{definition}
+
+\begin{definition}
+	An $i$-th coordinate function $f_i$ with respect to basis $\beta$ is defined as $f_i(x) = a_i$ where
+	\begin{equation*}
+		\coordinate{x}_\beta = \begin{bmatrix}
+			a_1 \\
+			a_2 \\
+			\vdots \\
+			a_n
+		\end{bmatrix} = \begin{bmatrix}
+			f_1(a) \\
+			f_2(a) \\
+			\vdots \\
+			f_n(a)
+		\end{bmatrix}
+	\end{equation*}
+\end{definition}
+
+
+
+\begin{definition}
+	The \cindex{dual space}\label{dualspacedefinition} of $V$ is the vector space $V^* = \mathcal{L}(V,F)$. The \cindex{double dual space} $V^{**}$ is the dual space of $V^*$.
+\end{definition}
+
+
+The dimension of dual space is $\dimension{V^*} = \dimension{\mathcal{L}(V,F)} = \dimension{V} \times \dimension{F} = \dimension{V}$.
+
+\begin{definition}
+	Let $\beta = \set{x_i}$ be an ordered basis for finite dimensional vector space $V$. Define $f_i (x) = a_i$ where
+	\begin{equation*}
+	    \coordinate{x}_\beta = \begin{bmatrix}
+	        a_1 \\
+	        a_2 \\
+	        \vdots \\
+	        a_n
+	    \end{bmatrix}
+	\end{equation*}
+	
+	$f_i$ is the $i$-th coordinate function with respect to basis $\beta$. let $\beta^*=\set{f_i}$. Then $\beta^*$ is an ordered basis for $V^*$, and $\forall f \in V^*$, we have
+	\begin{equation}
+		f = \sum_{i=1}^n f(x_i) f_i
+	\end{equation}
+	$\beta^*$ is called the \cindex{dual basis} of $\beta$.
+\end{definition}
+\begin{proof}
+	Let $g =\displaystyle \sum_{i=1}^n f(x_i) f_i$, we have
+	\begin{equation*}
+	g(x_j) = \left( \sum_{i=1}^n f(x_i) f_i \right) (x_j) = \sum_{i=1}^n f(x_i) f_i (x_j) = \sum_{i=1}^n f(x_i) \delta_{ij} =f(x_j)
+	\end{equation*}
+\end{proof}
+
+
+\begin{theorem}
+	Let $V$ and $W$ be vector space over $F$ with ordered basis $\beta$ and $\gamma$. For any linear transformation $T:V \rightarrow W$, the mapping $T^t: W^* \rightarrow V^*$ defined as $T^\top (g) = gT, \forall g \in W^*$ is a linear transformation with property that $\left[T^\top \right]_{\gamma^*}^{\beta^*} = \left(\left[T \right]_\beta^\gamma \right)^\top$.
+\end{theorem}
+\begin{proof}
+	Let $\beta = \{x_i\}$ and $\gamma=\{y_i\}$ with dual basis $\beta^*=\{f_i\}$ and $\gamma^*=\{g_i\}$, $A=\coordinate{T}_\beta^\gamma$. we have
+	\begin{equation*}
+		T^\top (g_j) = g_j T = \sum_{s=1}^n (g_j T) (x_s) f_s
+	\end{equation*}
+	
+	So the row $i$, column $j$ entry of $[T^\top]_{\gamma^*}^{\beta^*}$ is
+	\begin{equation*}
+	(g_j T)(x_i) = g_j (T(x_i))= g_j \left( \sum_{k=1}^m A_{kj} y_k \right) = \sum_{k=1}^m A_{kj} g_j(y_k)= \sum_{k=1}^m A_{kj} \delta_{kj} = A_{ji}
+	\end{equation*}
+	
+	Hence $\left[T^\top \right]_{\gamma^*}^{\beta^*} = A^\top $.
+\end{proof}
+
+\begin{definition}
+    For $U \subset V$, the \cindex{annihilator} of $U$, denoted as $U^0_V$, is defined as
+    \begin{equation*}
+        U^0_V = \{ \phi \in V^*: \phi(u) = 0, \forall u \in U \}
+    \end{equation*}
+    So the annihilator map $U$ to $0$. For vectors in $V - U$, the mapping could be any result. The annihilator is a subspace.
+\end{definition}
+
+\begin{theorem}
+    \begin{equation}
+        \dimension{U} + \dimension{U_V^0} = \dimension{V}
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    Define $i \in \mathcal{L}(U,V)$ that $i(u) = u, \forall u \in U$. $i^* \in \mathcal{L}(V^*,U^*)$. So
+    \begin{equation*}
+        \dimension{\rangespace{i^*} } +\dimension{\nullspace{i^*}} = \dimension{V^*}
+    \end{equation*}
+    By definition, $\nullspace{i^*} = U^0_V$. Also $\rangespace{i^*} = U^*$.
+\end{proof}
+
+
+\begin{theorem}
+    Let $V$ and $W$ be two finite-dimentional vector space, and $T \in \mathcal{L}(V,W)$. Then:
+    \begin{enumerate}
+        \item $\nullspace{T^*}  = (\rangespace{T} )^0$
+        \item $\rangespace{T^*} = (\nullspace{T} )^0$
+        \item $\dimension{\rangespace{T^*}} = \dimension{\text{range } T}$
+        \item $\dimension{\nullspace{T^*}} = \dimension{\nullspace{T}} + \dimension{W} - \dimension{V}$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Suppose $\varphi \in \text{null } T^*$. Then $ 0 = T^*(\varphi) = \varphi T$. Then
+    \begin{equation*}
+        0 = (\varphi T)(v) = \varphi (Tv) 
+    \end{equation*}
+    So $\varphi \in (\text{range } T)^0_W$.
+    
+    \begin{equation*}
+        \begin{aligned}
+            \dimension{\rangespace{T^*}} &= \dimension{W^*} - \dimension{\nullspace{T^*}} \\
+            &= \dimension{W} - \dimension{\rangespace{T}^0} \\
+            &= \dimension{\rangespace{T}}
+        \end{aligned}
+    \end{equation*}
+    
+    \begin{equation*}
+        \begin{aligned}
+            \dimension{\nullspace{T^*}} &= \dimension{\rangespace{T}^0}\\
+            &= \dimension{W} - \dimension{\rangespace{T}} \\
+            &= \dimension{W} - (\dimension{V} - \dimension{\nullspace{T}} ) \\
+            &= \dimension{W} + \dimension{\nullspace{T}} - \dimension{V}
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+
+
+\begin{definition}
+    For vector $x \in V$, define $\hat{x}: V^* \rightarrow F $ by $\hat{x}(f) = f(x)$. $\hat{x}$ is a linear functional on $V^*$, so $\hat{x} \in V^{**}$.
+\end{definition}
+
+
+\begin{theorem}
+    Define $\psi : V \rightarrow V^{**}$ by $\psi (x) = \hat{X}$.  Then $\psi$ is an isomorphism.
+\end{theorem}
+
+\begin{theorem}
+    Let $V$ be a finite dimension vector space with dual space $V^*$. Every ordered basis for $V^*$ is the dual basis for some basis for $V$.
+\end{theorem}
+
+\begin{center}
+    \begin{tikzcd}
+V \arrow[rrddd, "V^*"{name=U}] \arrow[rrrr, "T"] && & & W \arrow[llddd, "W^*"'{name=W}] \\
+\\
+\\
+&& F
+\arrow[rightarrow, from=W, to=U, "T^\top"]
+\end{tikzcd}
+\end{center}
+
 
 

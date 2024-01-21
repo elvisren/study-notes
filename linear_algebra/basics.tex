@@ -14,23 +14,40 @@ The logic of this section:
 % basics
 \section{Basic Definitions}
 
+\begin{definition}
+    A \cindex{vector space} $V$ (and its subspace) is over a field $F$ such as $\realnumber$ or $\complexnumber$. It is closed in $+$ and $*$ operation.
+\end{definition}
 
 
-A vector space $V$ (and its subspace) is over a field $F$ such as $\realnumber$ or $\complexnumber$. It is closed in $+$ and $*$ operation.
 
 
-Important terms in vector space: transpose, symmetric matrix, upper triangular, diagonal matrix, trace, skew symmetric.
+Important terms in vector space: transpose, symmetric matrix\footnote{The word matrix is Latin for womb which is the same root as matrimony. The idea is that a matrix is a receptacle for holding numbers.}, upper triangular, diagonal matrix, trace, skew symmetric.
 
-After the vector space is defined, we now check the relation among vectors. The basic relation is linear combination $v = \sum_{i=1}^{n} a_i u_i$. $n$ must be finite, and there is no restriction on $a_i \neq 0$. With linear combination, we could then define the span of a subset $\mathcal{S}$ of a vector space. 
+After the vector space is defined, we now check the relation among vectors. The basic relation is \cindex{linear combination} $v = \sum_{i=1}^{n} a_i u_i$. $n$ must be finite, and there is no restriction on $a_i \neq 0$. With linear combination, we could then define the span of a subset $\mathcal{S}$ of a vector space. 
 
-If we set restriction on linear combination, we have linearly dependent relation among $\set{u_i}$ that $\sum_{i=1}^{n} a_i u_i = 0$ and not all $a_i$ are $0$. Linearly independent means all $a_i = 0$. A linearly independent generating set is called basis.
+If we set restriction on linear combination, we have \cindex{linearly dependent} relation among $\set{u_i}$ that $\sum_{i=1}^{n} a_i u_i = 0$ and not all $a_i$ are $0$. \cindex{Linearly independent} means all $a_i = 0$. A linearly independent \cindex{generating set} is called \cindex{basis}.
 
 
 A vector space is finite dimensional if it has a finite span set.
 
 
+\begin{definition}
+	the \cindex{Kronecker delta}  $\delta_{ij}$ is defined as 
+	\begin{equation}
+		\delta_{ij} = \begin{cases}
+			1 & \text{, if } i = j \\
+			0 & \text{, if } i \neq j
+ 		\end{cases}
+	\end{equation}
+\end{definition}
+
+\begin{definition}
+	The $n\times n$ \cindex{identity matrix} \cindex{$I_n$} is defined as $\left(I_n \right)_{ij} = \delta_{ij}$.
+\end{definition}
+
+
 Now comes the most important theorem:
-\begin{theorem}[Replacement Theorem]\label{replacement_theorem}
+\begin{theorem}[\cindex{Replacement Theorem}]\label{replacement_theorem}
     if $G$ has $n$ vectors and they generate $V$, and $L$ is a set of $m$ linearly independent vectors, then $m \leq n$ and there is a subset $H \subseteq G$ with $n-m$ vectors that $L \cup H $ generate $V$.
     
 \end{theorem}
@@ -39,7 +56,7 @@ Theorem~\ref{replacement_theorem} means every basis has the same number of vecto
 
 
 \begin{example}
-   Famous Lagrange polynomial for $g \in \mathcal{P}_n (F)$: if $g(c_i) = b_i$, then define $f_i$ as:
+   Famous \cindex{Lagrange polynomial} for $g \in \mathcal{P}_n (F)$: if it passed $n+1$ points $g(c_i) = b_i$, then define $f_i$ as:
 \begin{equation}
     f_i(x) = \prod_{k=0,k \neq i}^{n} \frac{x - c_k}{c_i - c_k}
 \end{equation}

@@ -38,7 +38,8 @@ The relations between $T$ and $T^*$ are:
 
 \section{Definitions}
 
-Inner product is a function $\innerproduct{x}{y}$ that:
+\begin{definition}
+    An \cindex{inner product} is a function $\innerproduct{x}{y}: V \rightarrow V \rightarrow F$ that:
 \begin{itemize}
     \item $\innerproduct{x + y}{z} = \innerproduct{x}{z} + \innerproduct{y}{z}$    
     \item $\innerproduct{x}{y+z} = \innerproduct{x}{y} + \innerproduct{x}{z}$
@@ -50,11 +51,19 @@ Inner product is a function $\innerproduct{x}{y}$ that:
     \item $\innerproduct{x}{0} = \innerproduct{0}{x} = 0$
     \item If $\innerproduct{x}{y} = \innerproduct{x}{z}$ for all $x$, then $y = z$
 \end{itemize}
+\end{definition}
+
+From the definition, we can find that
+\begin{itemize}
+    \item Inner product is linear in the first component
+    \item Inner product is \cindex{conjugate linear} in the second component
+\end{itemize}
 
 Be careful that inner product could be negative. So it is different from metric which has to be non-negative.
 
+
 \begin{definition}[conjugate transpose]
-    The conjugate transpose (adjoint) of $A_{m \times n}$ is 
+    The \cindex{conjugate transpose} (\cindex{adjoint}) of $A_{m \times n}$ is 
     \begin{equation}
         A^* = \conjugate{\transpose{A}}
     \end{equation}
@@ -64,34 +73,33 @@ Be careful that inner product could be negative. So it is different from metric 
     Here are the common inner products:
 \begin{itemize}
     \item For $x,y \in F^n$, $\displaystyle \innerproduct{x}{y} = \sum_{i=1}^n x_i \conjugate{y_i}$ (standard inner product)
-    \item For $A,B \in M_{n \times n}$, $\innerproduct{A}{B} = \trace{B^* A}$
-    \item For $f,g \in C([0,1])$, $\displaystyle \innerproduct{f}{g} = \frac{1}{2 \pi} \int_{0}^{2\pi} f(x) \conjugate{g(x)} \dif x$ (inner product space $H$)
+    \item For $A,B \in M_{n \times n}$, $\innerproduct{A}{B} = \trace{B^* A}$ (\cindex{Forbenius Inner Product})
+    \item For $f,g \in C([0,2 \pi])$, $\displaystyle \innerproduct{f}{g} = \frac{1}{2 \pi} \int_{0}^{2\pi} f(x) \conjugate{g(x)} \dif x$ (inner product space $H$)
 \end{itemize}
 \end{example}
 
 
 \begin{definition}[Norm]
-    The norm or length is defined as $\norm{x} = \sqrt{\innerproduct{x}{x}}$    
+    The \cindex{norm} or \cindex{length} is defined as $\norm{x} = \sqrt{\innerproduct{x}{x}}$    
 \end{definition}
 
 
-There are several famous equations:
-\begin{itemize}
+\begin{theorem}
+    The property of norm:
+    \begin{itemize}
     \item $\norm{cx} = \absolutevalue{c} \norm{x}$
     \item $\norm{x} \geq 0$
-    \item $\absolutevalue{\innerproduct{x}{y}} \leq \norm{x} \cdot \norm{y}$ (area of rectangle)
+    \item $\absolutevalue{\innerproduct{x}{y}} \leq \norm{x} \cdot \norm{y}$ (area of rectangle, \cindex{Cauchy-Schwarz Inequality})
     \item $\norm{x+y} \leq \norm{x} + \norm{y}$ (diagonal and edges)
-\end{itemize}
+    \end{itemize}
+\end{theorem}
+
 \begin{proof}
     The proof relies on $\norm{x} \geq 0$.
 \end{proof}
 
 
 
-
-\begin{theorem}
-    If $x \perp y$, we have $\norm{x+y}^2 = \norm{x}^2 + \norm{y}^2$    
-\end{theorem}
 
 \begin{theorem}
     For a parallelogram, the sum of the squares of the lengths of the diagonals equals the sum of the squares of the lengths of the four sides:
@@ -119,42 +127,90 @@ If the basis matrix $Q$ is orthonormal, then $\inverse{Q} = Q^*$, which is calle
 
 
 % orthogonal
-\section{Orthogonal Projection}
+\section{Orthogonal}
+
+\begin{definition}[orthogonal]
+    $x$ and $y$ are \cindex{orthogonal} if $\innerproduct{x}{y} = 0$. A subset $S$ of $V$ is orthogonal if any two vectors in $S$ are orthogonal. 
+    
+    A subset $S$ of $V$ is \cindex{orthonormal} if $S$ is orthogonal and consists entirely of unit vectors.
+    
+    A \cindex{orthonormal basis} for $V$ is an ordered basis that is orthonormal.
+\end{definition}
 
 
+\begin{definition}
+    \begin{equation}
+        \innerproduct{x}{y} = \norm{x} \cdot \norm{y} \text{cos}(\theta)
+    \end{equation}    
+\end{definition}
+
+
+\begin{definition}
+	A vector is \cindex{unit vector} if $\norm{x} = 1$. A \cindex{normalizing} to non-zero $x$ is $\dfrac{1}{\norm{x}} x$.
+\end{definition}
+
+
+\begin{theorem}
+    Let $f_n (t) = e^{i nt}$ where $0 \leq t \leq 2 \pi$. All $f_i$ are orthogonal.
+\end{theorem}
+\begin{proof}
+    \begin{equation}
+        \begin{aligned}
+            \innerproduct{f_m}{f_n} &= \frac{1}{2 \pi} \int_0^{2 \pi} e^{imt} \overline{e^{int}} \dif{t} \\
+            &= \frac{1}{2\pi} \int_0^{2\pi} e^{i (m-n) t} \dif{t} \\
+            &= \eval{\frac{1}{2\pi (m-n)} e^{i(m-n)t}}_0^{2\pi} \\
+            &= 0
+        \end{aligned}
+    \end{equation}
+\end{proof}
 
 \begin{definition}[orthogonal complement]
-    For a subset $S$ of $V$, the orthogonal complement $S^\perp$ is defined as $S^\perp=\set{x \in V: \forall y \in S, \innerproduct{x}{y} = 0}$.
+    For a subset $S$ of $V$, the \cindex{orthogonal complement} $S^\perp$ is defined as $S^\perp=\set{x \in V: \forall y \in S, \innerproduct{x}{y} = 0}$.
 \end{definition}
 
 Here $S$ does not have to be a vector space, but $S^\perp$ is a vector space. It could be any set and $(S^\perp)^\perp$ is usually not the same as $S$. 
 
 
 
-For an orthogonal subset $S=\set{v_1, v_2, ..., v_k}$ of $V$, the projection $u$ of $y$ on $S$ is 
-\begin{equation}
-    u = \sum_{i=1}^k \frac{\innerproduct{y}{v_i}}{\innerproduct{v_i}{v_i}} v_i
-\end{equation}
-
 \begin{theorem}
-If $y \in \spanset{S}$, then $\displaystyle y = u$. If $S$ is orthonormal, then $\displaystyle y = \sum_{i=1}^k \innerproduct{y}{v_i} v_i$.     
+    If $x \perp y$, we have $\norm{x+y}^2 = \norm{x}^2 + \norm{y}^2$    
 \end{theorem}
 
-
-
-
-
 \begin{theorem}
-Let $W$ be a subspace of inner product space $V$. For any $y \in V$, there exist unique $u \in W$ and $z \in W^\perp$ that $y = u + z$. Here $u$ is the projection of $y$ on $W$.
+    For an orthogonal subset $S=\set{v_1, v_2, ..., v_k}$ of $V$. Define the \cindex{projection} of $y$ on $v$ as
+    \begin{equation}
+        \projection{y}{v} = \frac{\innerproduct{y}{v}}{\innerproduct{v}{v}} v
+    \end{equation}
     
+    Then the projection of $y$ on subset $S$ is
+    \begin{equation}
+        \sum_{i=1}^{k} \projection{y}{v_i}
+    \end{equation}
+    
+    If $y \in \spanset{S}$, then
+    \begin{equation}
+        y \in \spanset{S} \Rightarrow y = \sum_{i=1}^{k} \projection{y}{v_i}
+    \end{equation}
+    
+    If $S$ is orthonormal, then
+    \begin{equation}
+        y = \sum_{i=1}^k \innerproduct{y}{v_i} v_i
+    \end{equation}
 \end{theorem}
 
-The orthogonal projection $u$ is the closest vector to $y$. So if there is any other $x \in W$, $\norm{y - x} \geq \norm{y - u}$. Another property is $y - u \perp W$.
 
 
 
+\begin{theorem}
+Let $W$ be a subspace of inner product space $V$. For any $y \in V$, there exist unique $u \in W$ and $z \in W^\perp$ that $y = u + z$. Here $u$ is the projection of $y$ on $W$.    
+\end{theorem}
 
-\begin{theorem}[Gram-Schmidt process]\label{gram_schmidt_process}
+\begin{theorem}
+    The projection $u$ is the closest vector to $y$. So if there is any other $x \in W$, $\norm{y - x} \geq \norm{y - u}$. Another property is $y - u \perp W$.
+\end{theorem}
+
+
+\begin{theorem}[\cindex{Gram-Schmidt process}]\label{gram_schmidt_process}
     The steps of converting a linearly independent subset $S=\set{w_1, w_2, ..., w_k}$ into orthogonal set $S^\prime=\set{v_1, v_2, ..., v_k}$. The idea is to 
     \begin{enumerate}
         \item Project $v_{j}$ onto $\set{v_1, v_2, ..., v_{j-1}}$
@@ -164,7 +220,7 @@ The orthogonal projection $u$ is the closest vector to $y$. So if there is any o
     
     The first two steps can be summarized as:
     \begin{equation}
-        v_j = w_j - \sum_{i=1}^{j-1} \frac{\innerproduct{w_j}{v_i}}{\innerproduct{v_i}{v_i}} v_i
+        v_j = w_j - \sum_{i=1}^{j-1} \frac{\innerproduct{w_j}{v_i}}{\innerproduct{v_i}{v_i}} v_i = w_j - \sum_{i=1}^{j-1} \projection{w_j}{v_i}
     \end{equation}
 \end{theorem}
 
@@ -186,16 +242,15 @@ The orthogonal projection $u$ is the closest vector to $y$. So if there is any o
 
 Once we have orthonormal basis $\beta = \set{v_1, v_2, ..., v_n}$,  we could directly represent vectors and linear operators using orthonormal basis:
 \begin{itemize}
-    \item $\displaystyle x = \sum_{i=1}^n \innerproduct{x}{v_i} v_i$
+    \item $\displaystyle x = \sum_{i=1}^n \innerproduct{x}{v_i} v_i$ ($\innerproduct{x}{v_i}$ are the \cindex{Fourier coefficients})
     \item $\left(\coordinate{T}_\beta\right)_{ij} = \innerproduct{T(v_j)}{v_i}$ (extremely useful. The order of $i$ and $j$ are swapped)
-    \item For $g: V \rightarrow F$, $g(x) = \innerproduct{x}{\sum_{i=1}^n \conjugate{g(v_i)} v_i}$ (Riesz representation theorem)
+    \item For $g: V \rightarrow F$, $g(x) = \innerproduct{x}{\sum_{i=1}^n \conjugate{g(v_i)} v_i}$ (\cindex{Riesz representation theorem}, proved in \theoref{eiesz_representation_theorem})
 \end{itemize}
-
 
 
 \theoref{split_means_upper_trangular} did not give requirement on the basis $\beta$. In fact we could ask $\beta$ to be orthonormal according to the theorem below.
 
-\begin{theorem}[Schur]\label{schur_theorem}
+\begin{theorem}[\cindex{Schur}]\label{schur_theorem}
     If the characteristic polynomial of $T$ splits, then there exists an orthonormal basis $\gamma$ such that $\coordinate{T}_\gamma$ is upper triangular.
 \end{theorem}
 \begin{proof}
@@ -207,7 +262,7 @@ Once we have orthonormal basis $\beta = \set{v_1, v_2, ..., v_n}$,  we could dir
 % adjoint
 \section{Adjoint}
 
-\begin{theorem}
+\begin{theorem}[Riesz representation theorem]\label{eiesz_representation_theorem}
 Let $V$ be a inner product space over $F$, and let $g: V \rightarrow F$ be a linear transformation. Then there exists a unique $y \in V$ that $g(x) = \innerproduct{x}{y}$.
 \end{theorem}
 \begin{proof}
@@ -221,13 +276,22 @@ Let $V$ be a inner product space over $F$, and let $g: V \rightarrow F$ be a lin
 
 
 \begin{theorem}[Adjoint]\label{adjoint_operator_definition}
-    Let $T$ be linear operator on a finite-dimension inner product space $V$. There is a unique linear operator $T^*$ that $\innerproduct{T(x)}{y} = \innerproduct{x}{T^* (y)}$. $T^*$ is the adjoint of $T$.
+    Let $T$ be linear operator on a finite-dimension inner product space $V$. There is a unique linear operator $T^*$ that
+    
+    \begin{equation}
+        \begin{aligned}
+            \innerproduct{T(x)}{y} &= \innerproduct{x}{T^* (y)} \\
+            \innerproduct{x}{T(y)} &= \innerproduct{T^* (x)}{y}
+        \end{aligned}
+    \end{equation}
+    
+    
+    $T^*$ is the \cindex{adjoint} of $T$. So we could move $T$ into the left or right side of the inner product.
 \end{theorem}
 \begin{proof}
     Linearity is easy to prove. To find $T^*$, for each $y$, there is a function $g_y (x) = \innerproduct{T(x)}{y} = \innerproduct{x}{g^\prime (y)}$. This $g^\prime$ is the $T^*$.
 \end{proof}
 
-$T^*$ has a nice property that $\innerproduct{x}{T(y)} = \innerproduct{T^* (x)}{y}$. So we could move $T$ left or right inside the inner product.
 
 For matrix $A_{m \times n}$, it has a nice property:
 \begin{equation}
@@ -263,21 +327,20 @@ For matrix $A_{m \times n}$, it has a nice property:
 \end{proof}
 
 
+$T$ above are all linear operators. The adjoin could also be defined on linear transformation:
+
+\begin{definition}
+    Let $T : V \rightarrow W$ be a linear transformation where $V$ and $W$ are finite dimensional inner product space with inner product $\innerproduct{\cdot{}}{\cdot{}}_V$ and $\innerproduct{\cdot{}}{\cdot{}}_W$. A function $T^* : W \rightarrow V$ is called \cindex{adjoint} of $T$ if $\innerproduct{T(x)}{y}_W = \innerproduct{x}{T^*(y)}_V$.
+\end{definition}
+
+The extended definition of adjoint is used in SVD \theoref{svd_theorem}.
+
 \begin{theorem}
-    Let $L_A$ be a linear operator. We have
+    Let $T^*$ be an adjoint of $T: V \rightarrow W$. If $\beta$ and $\gamma$ are orthonormal basis for $V$ and $W$, then
     \begin{equation}
-        \begin{aligned}
-            \rangespace{L_{A^*}}^\perp &= \nullspace{L_A} \\
-            \rangespace{L_{A}}^\perp &= \nullspace{L_A^*} \\
-            \rangespace{L_{A^*}} &= \nullspace{L_A}^\perp \\
-            \rangespace{L_{A}} &= \nullspace{L_A^*}^\perp \
-        \end{aligned}        
+        [T^*]_\beta^\alpha = \left( [T]_\alpha^\beta \right)^*
     \end{equation}
-    It means $\rangespace{L_{A^*}}$ and $\nullspace{L_A}$ are orthogonal to each other and they are the direct sum of $V$. This formula is \emph{very useful} because it find two perpendicular subspaces from $A$.
 \end{theorem}
-\begin{proof}
-    For $x \in \nullspace{L_A}$ and $y \in \rangespace{L_{A^*}}$, we have $\innerproduct{A^*y}{x} = \innerproduct{y}{Ax} = \innerproduct{y}{0} = 0$. So $x \perp A^*y$.
-\end{proof}
 
 
 
@@ -309,11 +372,11 @@ Diagonalizable matrix has many good properties so we like to find them. We want 
 
 The answer is yes. It obviously puts requirement on both the $V$ and $T$. It turns out that the $T$ must be normal (in $\complexnumber$) or self-adjoint (in $\realnumber$). So we prefer complex normal and real symmetric matrices. The operators here are complex normal or real symmetric.
 
-\begin{definition}[Normal]
-    $T$ is normal if $TT^* = T^* T$. $A$ is normal if $AA^* = A^* A$.
+\begin{definition}[Normal]\label{normal_definition}
+    $T$ is \cindex{normal} if $TT^* = T^* T$. $A$ is normal if $AA^* = A^* A$.
 \end{definition}
 
-A common mistake is to think that $T$ is normal if and only if $\coordinate{T}_\beta$ is normal. $\beta$ must be orthonormal according to \theoref{operator_conjugate_transpose_requirement}.
+A common mistake is to think that $T$ is normal if and only if $\coordinate{T}_\beta$ is normal. \emph{$\beta$ must be orthonormal} according to \theoref{operator_conjugate_transpose_requirement}.
 
 \begin{theorem}
     $T$ will have many nice properties if it is normal:
@@ -343,11 +406,40 @@ A common mistake is to think that $T$ is normal if and only if $\coordinate{T}_\
 \end{proof}
 
 
+\begin{theorem}
+    Let $T$ be a linear operator. We have
+    \begin{equation}
+        \begin{aligned}
+            \rangespace{T^*}^\perp &= \nullspace{T} \\
+            \rangespace{T}^\perp &= \nullspace{T^*} \\
+            \rangespace{T^*} &= \nullspace{T}^\perp \\
+            \rangespace{T} &= \nullspace{T^*}^\perp \
+        \end{aligned}        
+    \end{equation}
+    It means $\rangespace{T^*}$ and $\nullspace{T}$ are orthogonal to each other and they are the direct sum of $V$. This formula is \emph{very useful} because it find two perpendicular subspaces from $A$.
+    
+    Be careful that in general $\rangespace{T}^\perp \neq \nullspace{T}$. They are equal when $T$ is normal. So
+    \begin{equation}
+        T \text{ is normal } \Rightarrow \rangespace{T}^\perp = \nullspace{T}
+    \end{equation}    
+\end{theorem}
+\begin{proof}
+    For $x \in \nullspace{T}$ and $y \in \rangespace{T^*}$, we have $\innerproduct{T^*y}{x} = \innerproduct{y}{Tx} = \innerproduct{y}{0} = 0$. So $x \perp T^* y$.
+    
+    
+    If $T$ is normal, for $x \in \nullspace{T}$, $\norm{T(x)} = \norm{T^*} = 0$, so $T^*(x) = 0$ and $x \in \nullspace{T^*}$.
+\end{proof}
+
 
 Now we come the most important theorem of this section.
 
 \begin{theorem}\label{normal_orthonormal_with_complex_space}
-    For finite-dimension inner product space $V$ on $F=\complexnumber$, $T$ is normal if and only if there exists orthonormal basis that are eigenvectors of $T$.
+    For finite-dimension inner product space $V$ on $F=\complexnumber$,
+    \begin{equation}
+        T \text{ is normal } \Leftrightarrow \text{there exists orthonormal basis that are eigenvectors of } T
+    \end{equation}
+    
+    Note that it does not work for infinite dimensional complex inner product space.
 \end{theorem}
 \begin{proof}
     If such basis exists, the coordinates of $T$ and $T^*$ are diagonal matrix, so they commute. We do not need the complex feature here. The difficult is on the other side of proof and we need the complex property.
@@ -381,14 +473,16 @@ Being both orthonormal and eigenvector means there is a diagonal of eigenvalues 
 \theoref{normal_orthonormal_with_complex_space} did not work for $F=\realnumber$ because polynomials do not always split. So we need stronger restriction to make it split in $\realnumber$, which is self-adjoint.
 
 \begin{definition}[Hermitian, self-adjoint]
-    $T$ is Hermitian (self-adjoint) if $T = T^*$. So is it for $A$.
+    $T$ is \cindex{Hermitian} (\cindex{self-adjoint}) if $T = T^*$. So is it for $A$.
 \end{definition}
 
-If $T$ is self-adjoint, it has even better properties:
+\begin{theorem}
+    If $T$ is self-adjoint, it has even better properties:
 \begin{enumerate}
     \item Every eigenvalue of $T$ is real, regardless of $F$ is $\complexnumber$ or $\realnumber$
     \item If $V$ is on $F=\realnumber$, $T$ still splits
 \end{enumerate}
+\end{theorem}
 \begin{proof}
     \begin{equation*}
         \lambda x = Tx = T^* x = \conjugate{\lambda} x
@@ -399,7 +493,10 @@ If $T$ is self-adjoint, it has even better properties:
 \end{proof}
 
 \begin{theorem}
-    For finite-dimension inner product space $V$ on $F=\realnumber$, $T$ is self-adjoint if and only if there exists orthonormal basis that are eigenvectors of $T$.
+    For finite-dimension inner product space $V$ on $F=\realnumber$, 
+    \begin{equation}
+        T \text{ is self-adjoint} \Leftrightarrow \text{there exists orthonormal basis that are eigenvectors of } T
+    \end{equation}
 \end{theorem}
 \begin{proof}
     If $T$ is self-adjoint, it splits. So we apply \theoref{schur_theorem} to find orthonormal basis $\beta$ that $A = \coordinate{T}_\beta$ is upper triangular. But
@@ -429,10 +526,8 @@ So the conclusion is, if the matrix $A$ is complex normal or real symmetric, the
 Adjoint operation ($T^*$ and $T$) works pretty like conjugate in $\complexnumber$. There is a special $i \in C$  that $i \conjugate{i} = 1$, so we would like to examine what happens when $TT^* = T^* T = I_n$. It turns out that these $T$ could preserve length.
 
 \begin{definition}\label{unitary}
-    If $\norm{T(x)} = \norm{x}$, $T$ is called unitary if $F=C$ and orthogonal if $F=R$.
+    If $\norm{T(x)} = \norm{x}$, $T$ is called \cindex{unitary} if $F=C$ and \cindex{orthogonal} if $F=R$.
 \end{definition}
-
-
 
 
 \begin{theorem}\label{normal_zero_operator}
@@ -498,7 +593,7 @@ If $AA^* = I$, the rows of $A$ are orthonormal basis for $F^n$. Also if $A^*A = 
 
 
 \begin{definition}[Unitarily Equivalent]    
-    If $D$ and $A$ are similar, we have $D = \inverse{Q} A Q$. If, in addition, $\inverse{Q} = Q^*$, $D$ and $A$ are called unitarily equivalent (or orthogonally equivalent). Here we did not require $A$ to be unitary or orthogonal.
+    If $D$ and $A$ are similar, we have $D = \inverse{Q} A Q$. If, in addition, $\inverse{Q} = Q^*$, $D$ and $A$ are called \cindex{unitarily equivalent} (or \cindex{orthogonally equivalent}). Here we did not require $A$ to be unitary or orthogonal.
 \end{definition}
 
 
@@ -532,13 +627,13 @@ So the unitary is sometimes on $A$ and sometimes on $Q$.
 Rigid motion analyze how to move a thing without changing its shape.
 
 \begin{definition}[Rigid Motion]
-    Let $V$ be real inner product space. A function $f$ is called rigid motion if 
+    Let $V$ be real inner product space. A function $f$ is called \cindex{rigid motion} if 
     \begin{equation}
         \norm{f(x) - f(y)} = \norm{x - y}
     \end{equation}
 \end{definition}
 
-One rigid motion example is rotation:
+One rigid motion example is \cindex{rotation}:
 \begin{equation}
     \begin{pmatrix}
         \cos \theta & - \sin \theta \\
@@ -552,7 +647,9 @@ Another example is orthogonal operator because $\norm{T(x-y)} = \norm{x - y}$.
 We have two more example of rigid motion: reflection and translation.
 
 \begin{definition}[Reflection]
-    Let $L$ be a linear in $R^2$ that passes through the original. $T$ is called reflection about $L$ if $T(x) = x$ for $x \in L$ and $T(x) = -x$ for $x \in L^\perp$. If $L$ has angle $\theta$, reflection $T$ has matrix representation:
+    Let $L$ be a line in $R^2$ that passes through the original. $T$ is called \cindex{reflection} about $L$ if $T(x) = x$ for $x \in L$ and $T(x) = -x$ for $x \in L^\perp$. 
+    
+    If $L$ has angle $\theta$, the reflection $T$ has matrix representation:
 \begin{equation}
     \begin{pmatrix}
         \cos 2\theta & \sin 2\theta \\
@@ -564,7 +661,7 @@ We have two more example of rigid motion: reflection and translation.
 Reflection and rotation are unitary operator because $\norm{T(x)} = \norm{x}$.
 
 \begin{definition}[Translation]
-    For a vector $v$, a translation $T$ is $T(x) = x + v$ for all $x$. Translation is a rigid motion.
+    For a vector $v$, a \cindex{translation} $T$ is $T(x) = x + v$ for all $x$. Translation is a rigid motion.
 \end{definition}
 
 A orthogonal operator is a rigid motion, and a translation is a rigid motion. So what happens if we combine the two?
@@ -649,7 +746,7 @@ So the algorithm to simplify a quadratic form is:
 \section{Spectral Theorem}
 
 \begin{definition}[Projection]
-    Let $V = W_1 \oplus W_2$. For $x = a + b$ where $a \in W_1$ and $b \in W_2$, if $T(x) = a$, then $T$ is a projection on $W_2$ along $W_1$.
+    Let $V = W_1 \oplus W_2$. For $x = a + b$ where $a \in W_1$ and $b \in W_2$, if $T(x) = a$, then $T$ is a \cindex{projection} on $W_2$ along $W_1$.
 \end{definition}
 
 
@@ -661,7 +758,7 @@ So the algorithm to simplify a quadratic form is:
 \end{proof}
 
 \begin{definition}[Orthogonal Projection]
-    $T$ is an orthogonal projection if $\rangespace{T}^\perp = \nullspace{T}$ and $\nullspace{T}^\perp = \rangespace{T}$. If $V$ is finite-dimension, either one is ok.
+    $T$ is an \cindex{orthogonal projection} if $\rangespace{T}^\perp = \nullspace{T}$ and $\nullspace{T}^\perp = \rangespace{T}$. If $V$ is finite-dimension, either one is ok.
     
     If $T$ is an orthogonal projection $U$ ($U = \rangespace{T} \subseteq V$), for any $v \in V$, write $v = u + w$ where $u \in U$ and $w \in U^\perp$, we have $T(v) = u$.
 \end{definition}
@@ -669,7 +766,7 @@ So the algorithm to simplify a quadratic form is:
 Be careful that orthogonal projection operator is not an orthogonal operator.
 
 \begin{theorem}
-    If $T$ is an orthogonal projection on $U \subseteq V$, and $\set{e_{i, ..., m}}$ is the orthonormal basis of $U$, then for any $v \in V$, we have
+    If $T$ is an orthogonal projection on $U \subseteq V$, and $\set{e_1, \cdots, e_m}$ is the orthonormal basis of $U$, then for any $v \in V$, we have
     \begin{equation}
         T(v) = \sum_{i=1}^{m} \innerproduct{v}{e_i} e_i
     \end{equation}
@@ -787,9 +884,12 @@ Some conclusions are:
 \section{Positive Definite}
 
 \begin{definition}[Positive Definite]
-    A linear operator $T$ is positive definite if $T$ is self-adjoint and $\innerproduct{T(x)}{x} > 0$ for $x \in R^+$.
+    A linear operator $T$ is \cindex{positive definite} if $T$ is self-adjoint and for $x \in V$,
+    \begin{equation}
+        \innerproduct{T(x)}{x} > 0
+    \end{equation}
     
-    It is called positive semidefinite if $\innerproduct{T(x)}{x} \geq 0$.
+    It is called \cindex{positive semidefinite} if $\innerproduct{T(x)}{x} \geq 0$.
 \end{definition}
 
 \begin{theorem}
@@ -803,11 +903,15 @@ Some conclusions are:
 \end{proof}
 
 \begin{theorem}
-$T$ is positive definite (semidefinite) if and only if $A$ is positive definite (semidefinite). Here $A = \coordinate{T}_\beta $ where $\beta$ is an orthonormal basis for $V$    
+$T$ is positive definite (semidefinite) if and only if $A$ is positive definite (semidefinite). Here $A = \coordinate{T}_\beta $ where $\beta$ is an orthonormal basis for $V$.
 \end{theorem}
 
-\begin{theorem}[Positive Semidefinite Square Root]
-    $T$ is positive semidefinite if there is a unique $B$ which is positive semidefinite that $B^2 = T$.
+
+\begin{theorem}[$\sqrt{T}$]
+   A positive semidefinite $T$ could have many \cindex{square root}, that is $BB = T$, but it only have one \cindex{positive semidefinite square root}. This square root is called \cindex{$\sqrt{T}$}. $\sqrt{T}$ has a property that
+   \begin{equation}
+       \left(\sqrt{T}\right)^* = \sqrt{T}
+   \end{equation}   
 \end{theorem}
 \begin{proof}
     Since $T$ is self-adjoint, we have orthonormal eigenvectors $\set{v_i}$ of $T$. If $T$ is positive semidefinite, all eigenvalues are non-negative, so we define a function $B$ as
@@ -824,12 +928,6 @@ $T$ is positive definite (semidefinite) if and only if $A$ is positive definite 
     
 \end{proof}
 
-\begin{definition}[$\sqrt{T}$]
-   A positive semidefinite $T$ could have many square root, but it only have one positive semidefinite square root. This square root is called $\sqrt{T}$. $\sqrt{T}$ has a property that
-   \begin{equation}
-       \left(\sqrt{T}\right)^* = \sqrt{T}
-   \end{equation}   
-\end{definition}
 
 
 \begin{theorem}
@@ -875,7 +973,7 @@ Previous sections examine the property of linear operator. SVD is concerned with
 
 
 
-\begin{theorem}[SVD]
+\begin{theorem}[\cindex{SVD}]\label{svd_theorem}
     Let $T: V \rightarrow W$ be a linear transformation with rank $r$. We have:
     \begin{enumerate}
         \item Orthonormal eigenvectors $\set{v_1, v_2, ..., v_n}$ for $T^*T$ for each eigenvalue $\lambda_{i\leq n}$
@@ -915,7 +1013,7 @@ Previous sections examine the property of linear operator. SVD is concerned with
 
 
 \begin{definition}[Singular Value]
-    $\set{v_i}$ might be different because there are multiple choices of orthonormal, but $\sigma_i$ are always the same. $\sigma_i$ are called the singular value of $T$.
+    $\set{v_i}$ might be different because there are multiple choices of orthonormal, but $\sigma_i$ are always the same. $\sigma_i$ are called the \cindex{singular value} of $T$.
 \end{definition}
 
 
@@ -963,7 +1061,7 @@ Steps of calculating the SVD for $T:V \rightarrow W$:
 For linear transformation $T: V \rightarrow W$, it does not have inverse if it is not invertible. The psudoinverse catches the part that is invertible.
 
 \begin{definition}[Pseudoinverse]
-    Let $T: V \rightarrow W$ be a linear transformation, and $L: \nullspace{T}^\perp \rightarrow \rangespace{T}$. The pseudoinverse (Moore-Penrose generalized inverse) $\pseudoinverse{T}$ is defined as the unique linear transformation $\pseudoinverse{T}: W \rightarrow V$ that
+    Let $T: V \rightarrow W$ be a linear transformation, and $L: \nullspace{T}^\perp \rightarrow \rangespace{T}$. The \cindex{pseudoinverse} (\cindex{Moore-Penrose generalized inverse}) $\pseudoinverse{T}$ is defined as the unique linear transformation $\pseudoinverse{T}: W \rightarrow V$ that
     \begin{equation}
         \pseudoinverse{T}(y) = \begin{aligned}
             \begin{cases}
@@ -1033,6 +1131,81 @@ For a system of linear equations $Ax=b$, we would like to know what is the relat
 \end{theorem}
 
 
+%
+%
+% conditioning
+%
+%
+
+\section{Conditioning}
+
+
+\begin{definition}
+    For $Ax=b$, if a small change to $A$ and $b$ cause small change to $x$, the property is called \cindex{well-conditioned}. Otherwise the system is \cindex{ill-conditioned}.
+\end{definition}
+
+\begin{definition}
+    The \cindex{relative change} in $b$ is $\dfrac{\norm{\dif{b}}}{\norm{b}}$ with $\norm{\cdot}$ be the standard norm on $\mathcal{C}^n$.
+\end{definition}
+
+\begin{definition}
+    The \cindex{Euclidean norm} of square matrix $A$ is 
+    \begin{equation}
+        \norm{A} = \max_{x \neq 0} \frac{\norm{Ax}}{\norm{x}}
+    \end{equation}
+\end{definition}
+
+
+\begin{definition}
+    Let $B$ be a self-adjoint matrix. The \cindex{Rayleigh quotient} for $x \neq 0$ is $R(x) = \dfrac{\innerproduct{Bx}{x}}{\norm{x}^2}$
+\end{definition}
+
+
+\begin{theorem}
+For a self-adjoint matrix $B$, the $\displaystyle \max_{x \neq 0} R(x)$ is the largest eigenvalue of $B$ and $\displaystyle \min_{x \neq 0} R(x)$ is the smallest eigenvalue of $B$.
+\end{theorem}
+\begin{proof}
+    Choose the orthonormal basis $v_i$ of $B$ such that $Bv_i = \lambda_i v_i$ where $\lambda_1 \geq \lambda_2 \geq \lambda_n$. $\forall x \in F^n$, $\exists a_i$ that $\displaystyle x = \sum_{i=1}^n a_i v_i$. So
+    \begin{equation*}
+        R(x) = \frac{\innerproduct{Bx}{x}}{\norm{x}^2} = \frac{\innerproduct{\sum_{i=1}^n a_i \lambda_i v_i}{\sum_{j=1}^n a_j v_j}}{\norm{x}^2} = \frac{\sum_{i=1}^n \lambda_i \absolutevalue{a_i}^2}{\norm{x}^2} \leq \frac{\lambda_1 \sum_{i=1}^n \absolutevalue{a_i}^2}{\norm{x}^2} = \frac{\lambda_1 \norm{x}^2}{\norm{x}^2} = \lambda_1
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}
+    $\norm{A} = \sqrt{\lambda}$ where $\lambda$ is the largest eigenvalue of $A^* A$.
+\end{theorem}
+
+\begin{theorem}
+    $\lambda$ is an eigenvalue of $A^* A$ if and only if $\lambda$ is an eigenvalue of $AA^*$.
+\end{theorem}
+
+\begin{theorem}
+    Let $A$ be invertible matrix. Then $\norm{A^{-1}} = \dfrac{1}{\sqrt{\lambda}}$ where $\lambda$ is the smallest eigenvalue of $A^*A$.
+\end{theorem}
+
+\begin{definition}
+    $\norm{A} \times \norm{A^{-1}}$ is the \cindex{condition number} of $A$ and denoted as $\text{cond}(A)$.
+\end{definition}
+
+\begin{theorem}
+    For system $Ax=b$ where $A$ is invertible and $b \neq 0$, we have:
+    \begin{enumerate}
+        \item For any norm $\norm{\cdot}$, we have $\dfrac{1}{\text{cond}(A)} \dfrac{\norm{\dif b}}{\norm{b}} \leq \dfrac{\norm{\dif x}}{\norm{x}} \leq \text{cond}(A) \dfrac{\norm{\dif b}}{\norm{b}}$.
+        \item If $\norm{\cdot}$ is the Euclidean norm, then $\text{cond}(A) = \sqrt{\dfrac{\lambda_1}{\lambda_n}}$ where $\lambda_1$ and $\lambda_n$ are the largest and smallest eigenvalue of $A^*A$.
+    \end{enumerate}
+    
+    So when $\text{cond} (b) \geq 1$. If $\text{cond}(b)$ is close to $1$, the relative error in $x$ is small when relative error of $b$ is small. However when $\text{cond}(b)$ is large, the relative error in $x$ could be large or small. 
+    
+    $\text{cond}(x)$ is seldom calculated because when calculating $A^{-1}$ in computer, there are rounding errors which is related to $\text{cond}(A)$.
+\end{theorem}
+
+
+
+%
+%
+% matrix decomposition
+%
+%
 
 \section{Matrix Decomposition}
 
@@ -1040,17 +1213,17 @@ The list of famous decomposition:
 
 \begin{table}[H]
 \centering
-\begin{tabular}[t]{|c|c|c|}
+\begin{tabular}[t]{ccc}
 \hline
 Name & Result & Requirement \\ \hline
-Polar & unitary + positive semidefinite & \\ \hline
-QR & orthogonal + upper triangular & rank $n$ \\ \hline
-LU & lower triangular + upper triangular & \\ \hline
+Polar & unitary + positive semidefinite & \\
+QR & orthogonal + upper triangular & rank $n$ \\
+LU & lower triangular + upper triangular & \\
 Cholesky & lower triangular & positive semidefinite \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{theorem}[Polar Decomposition]
+\begin{theorem}[\cindex{Polar Decomposition}]
     A square matrix $A$ could be expressed as 
     \begin{equation}
         A = WP = W \sqrt{A^*A}
@@ -1065,27 +1238,35 @@ Cholesky & lower triangular & positive semidefinite \\ \hline
 \end{proof}
 
 
-\begin{theorem}[QR Decomposition]
-    For square matrix $A$ with rank $n$, it could be composed into two factors: an orthogonal matrix $Q$ and an upper triangular matrix $R$ that 
-    \begin{equation}
-        A = QR
-    \end{equation}
-\end{theorem}
-\begin{proof}
-    Assume $A=[a_1, a_2, ..., a_n]$. Use the Gram-Schmidt process to calculate orthonormal vector $\set{e_i}$, we have
+\begin{theorem}[\cindex{QR Decomposition}]
+    Let $A_{m \times n} = \rowvector{a_1, a_2, \dots, a_n}$ with $\rank{A} = n$, so $\set{a_i}$ is linearly independent. Use Gram-Schmidt process to form $n$ orthonomal basis:
     \begin{equation*}
         \begin{aligned}
-            a_1 &= \innerproduct{e_1}{a_1}a_1 \\
-            a_2 &= \innerproduct{e_1}{a_2} a_2 + \innerproduct{e_2}{a_2} a_2\\
-            &\vdots \\
-            a_n &= \sum_i \innerproduct{e_i}{a_n} a_n
+            u_1 &= a_1 & \text{ , } e_1 = \frac{u_1}{\norm{u_1}} \\
+            u_2 &= a_2 - \projection{a_2}{u_1} & \text{ , } e_2 = \frac{u_2}{\norm{u_2}} \\
+            \dots \\
+            u_n &= a_n - \sum_{j=1}^{n-1} \projection{a_n}{u_j} & \text{ , } e_n = \frac{u_n}{\norm{u_n}} 
         \end{aligned}
     \end{equation*}
-    So $Q=[e_1, e_2, ..., e_n]$, and $R_{ij} = \innerproduct{e_j}{a_j}$.
-\end{proof}
+    Then $\forall k$, $\displaystyle a_k = \sum_{j=1}^k \innerproduct{a_k}{e_k} e_k$. So
+    \begin{equation}
+        A = QR = [e_1, e_2, \dots, e_n] \times \begin{bmatrix}
+            \innerproduct{a_1}{e_1} & \innerproduct{a_2}{e_1} & \innerproduct{a_3}{e_1} & \cdots & \innerproduct{a_n}{e_1}\\
+            0 & \innerproduct{a_2}{e_2} & \innerproduct{a_3}{e_2} & \cdots & \innerproduct{a_n}{e_2}\\
+            0 & 0 & \innerproduct{a_3}{e_3} & \cdots & \innerproduct{a_n}{e_3} \\            
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & 0 & \innerproduct{a_n}{e_n}
+        \end{bmatrix}
+    \end{equation}
+    
+    The $Q$ is an orthonormal matrix. $R$ could be calculated by:
+    \begin{equation}
+        R = Q^\top Q R = Q^\top A
+    \end{equation}
+\end{theorem}
 
 
-\begin{theorem}[LU Decomposition]
+\begin{theorem}[\cindex{LU Decomposition}]
     For square matrix $A$, it could be composed into two factors: a lower triangular matrix $L$ and an upper triangular matrix $U$ that
     \begin{equation}
         A = LU
@@ -1098,7 +1279,7 @@ Cholesky & lower triangular & positive semidefinite \\ \hline
     Sometimes we need to permutate the rows of $A$ so the leading value is nonzero. So we need to multiply a permutation matrix $P$ to $A$ to have $PA = LU$. This is called partial pivoting. If we permutate the columns as well, it is called full pivoting $PAQ = LU$.
 \end{theorem}
 
-\begin{theorem}[Cholesky Decomposition]
+\begin{theorem}[\cindex{Cholesky Decomposition}]
     For a positive semidefinite matrix $A$, it could be decomposed into 
     \begin{equation}
         A = L L^*

@@ -3,19 +3,19 @@
 
 \section{Definition}
 
-Determinant is a function from $A$ to $F$. The most used one is 
-\begin{equation}
-    \begin{vmatrix}
-        a & b \\
-        c & d
-    \end{vmatrix} = ad - bc
-\end{equation}
-
-
-Proper definition of determinant is a little complex. Define the cofactor of the entry of $A$ in row $i$ and column $j$ as $\cofactor{A} = (-1)^{i+j} \determinate{\tilde{A}_{ij}}$, $\tilde{A}$ is a $(n-1)\times (n-1)$ matrix obtained by removing row $i$ and column $j$ of $A$. The determinant of $A$ along row $i$ is recursively defined using Laplace Expansion:
-\begin{equation}
+\begin{definition}[determinate]
+    Define the \cindex{cofactor} of the entry of $A$ in row $i$ and column $j$ as
+    \begin{equation}
+        \cofactor{A} = (-1)^{i+j}\determinate{\tilde{A}_{ij}}
+    \end{equation}
+    
+    where $\tilde{A}_{ij}$ is a $(n-1)\times (n-1)$ matrix obtained by removing row $i$ and column $j$ of $A$. The \cindex{determinant} of $A$ along row $i$ is recursively defined using \cindex{Laplace expansion}:
+    \begin{equation}
     \determinate{A} = \sum_{j=1}^n A_{ij} \times \cofactor{A_{ij}} = \sum_{j=1}^n (-1)^{i+j} A_{ij}  \determinate{\tilde{A}_{ij}}
-\end{equation}
+    \end{equation}
+\end{definition}
+
+
 
 
 \section{Properties}
@@ -24,7 +24,7 @@ Proper definition of determinant is a little complex. Define the cofactor of the
     The volume of $n$ vectors $\set{v_i}$ in $F^n$ is :
     \begin{equation}
       \absolutevaluetext{\begin{vmatrix}
-            v_1, v_2, ... v_n
+            v_1, v_2, \cdots,  v_n
         \end{vmatrix}}
     \end{equation}
 \end{theorem}
@@ -46,7 +46,7 @@ Proper definition of determinant is a little complex. Define the cofactor of the
 \end{theorem}
 
 
-\begin{theorem}[Cramer's Rule]
+\begin{theorem}[\cindex{Cramer's Rule}]
     For $A_{n \times n}x=b$, if $\determinate{A} \neq 0$, the solution is:
     \begin{equation}
         x_k = \frac{\determinate{M_k}}{\determinate{A}}
@@ -70,7 +70,7 @@ Proper definition of determinant is a little complex. Define the cofactor of the
 \end{proof}
 
 \begin{theorem}
-    If $A$ is invertible, then let adjugate matrix be
+    If $A$ is invertible, then let \cindex{adjugate matrix} be
     \begin{equation}
         \adjugate{A} = (\cofactor{A})^t
     \end{equation}

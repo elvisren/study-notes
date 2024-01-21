@@ -15,7 +15,7 @@ A tensor is a $n$-dimension array. The $n$ is called order or rank.
 \section{Norm}
 
 \begin{definition}[Norm]
-    The norm is a function $f : R^n \rightarrow R$ that:
+    The \cindex{norm} is a function $f : R^n \rightarrow R$ that:
     \begin{itemize}
         \item $f(x) \geq 0$
         \item $f(x) = 0$ if and only if $x = 0$
@@ -36,7 +36,7 @@ A tensor is a $n$-dimension array. The $n$ is called order or rank.
 \end{definition}
 
 \begin{definition}[Induced Norm]
-   For a matrix $A_{m \times n}$, its induced norm is
+   For a matrix $A_{m \times n}$, its \cindex{induced norm} is
 \begin{equation}
     \norm{A}_p = \max\limits_{\norm{x}=1} \norm{Ax}_p
 \end{equation}
@@ -46,13 +46,13 @@ If $p=2$, $\norm{A}_2 = \sqrt{\lambda_{\mathrm{max}} ( \transpose{A}A}) = \max\l
 \end{definition}
 
 \begin{definition}[Trace Norm]
-    The trace norm, also called nuclear norm, is defined as
+    The \cindex{trace norm}, also called \cindex{nuclear norm}, is defined as
 \begin{equation}
     \norm{A}_* = \trace{\sqrt{\transpose{A}A}} = \sum_i \sigma_i = \norm{\sigma}_1
 \end{equation}
 \end{definition}
 
-\begin{definition}[Forbenius Norm]
+\begin{definition}[\cindex{Forbenius Norm}]
     \begin{equation}
         \norm{A}_F = \sqrt{\sum_i \sum_j A_{ij}^2} = \sqrt{\trace{\transpose{A}A}}
     \end{equation}
@@ -141,7 +141,7 @@ Matrix & $\begin{pmatrix}
 
 
 \begin{definition}[Gradient]
-    For $f: \realnumber^n \rightarrow \realnumber$, the derivative against $x$ is called gradient:
+    For $f: \realnumber^n \rightarrow \realnumber$, the derivative against $x$ is called \cindex{gradient}:
     \begin{equation}
     G_f (x) = \nabla f_{n \rightarrow 1} (x) = \begin{pmatrix}
         \dpd{f}{x_1} \\
@@ -173,7 +173,7 @@ We have $D_v f(x) = \nabla f(x) \cdot v$.
 \end{example}
 
 \begin{definition}[Jacobian Matrix]
-    For $f: \realnumber^n \rightarrow \realnumber^m$, the derivative against $x$ is called Jacobian matrix:
+    For $f: \realnumber^n \rightarrow \realnumber^m$, the derivative against $x$ is called \cindex{Jacobian matrix}:
     \begin{equation}
         J_{f_{n \rightarrow m}} (x) = \begin{pmatrix}
             \nabla f_1 \\
@@ -183,7 +183,7 @@ We have $D_v f(x) = \nabla f(x) \cdot v$.
         \end{pmatrix}_{m \times n}
     \end{equation}
     
-%    So $J_f$ is a matrix that transform from $\realnumber^n$ to $\realnumber^m$, so it is an $m \times n$ matrix.
+    So $J_f$ is a matrix that transform from $\realnumber^n$ to $\realnumber^m$, so it is an $m \times n$ matrix.
 \end{definition}
 
 
@@ -197,25 +197,87 @@ We have $D_v f(x) = \nabla f(x) \cdot v$.
         \end{pmatrix}
     \end{equation}
     
-    So Hessian matrix is the Jacobian of the gradient.
+    So \cindex{Hessian matrix} is the Jacobian of the gradient.
 \end{definition}
+
+
+\begin{definition}[element-wise binary operator]
+    for \cindex{element-wise binary operator}
+\begin{equation}
+	\mathbf{y}= \mathbf{f}(\mathbf{w}) \bigcirc \mathbf{g}(\mathbf{x})
+\end{equation}
+
+$\bigcirc$ could be $+,-,\times\footnote{called \cindex{hadamard product}}, \div, \max$. The gradient is:
+
+\begin{equation}
+	\nabla{}_{\mathbf{x}} \mathbf{y} = 
+	\left [ \begin{matrix}
+		y_1 \\
+		y_2 \\
+		\vdots \\
+		y_n
+	\end{matrix} \right ] = \left [ \begin{matrix}
+	f_1 (\mathbf{w}) \bigcirc g_1 (\mathbf{x}) \\
+	f_2 (\mathbf{w}) \bigcirc g_2 (\mathbf{x}) \\
+	\vdots \\
+	f_n (\mathbf{w}) \bigcirc g_n (\mathbf{x})
+\end{matrix} \right ]
+\end{equation}
+
+The expanded matrix could be differentiated using Jacobian matrix.
+\end{definition}
+
+\begin{definition}[chain rule]     
+In machine learning there are two ways of taking \cindex{chain rules}:
+\begin{itemize}
+	\item forward differentiation: $\frac{dy}{dx} =\frac{du}{dx} \times \frac{dy}{du}$
+	\item backward differentiation: $\frac{dy}{dx}=\frac{dy}{du} \times \frac{du}{dx}$
+\end{itemize}
+
+Backward differentiation is preferred for matrix operation.
+
+
+
+The full expression of $\mathbf{y}=\mathbf{f}(\mathbf{g}(\mathbf{x}))$ is:
+
+\begin{equation}
+\begin{aligned}
+	\nabla{}_{\mathbf{x}} f &=  \pd{\mathbf{f}(\mathbf{g}(\mathbf{x}))}{\mathbf{x}} \\
+	&= \pd{\mathbf{f}}{\mathbf{g}} \times \pd{\mathbf{g}}{\mathbf{x}} \\
+	&= \left [ \begin{matrix}
+\frac{\partial f_1({\mathbf{x}})}{g_1} & \frac{\partial f_1({\mathbf{x}})}{g_2} & \dots & \frac{\partial f_1({\mathbf{x}})}{g_n} \\
+\frac{\partial f_2({\mathbf{x}})}{g_1} & \frac{\partial f_2({\mathbf{x}})}{g_2} & \dots & \frac{\partial f_2({\mathbf{x}})}{g_n} \\
+\vdots & \vdots & \ddots & \vdots  \\
+\frac{\partial f_m({\mathbf{x}})}{g_1} & \frac{\partial f_m({\mathbf{x}})}{g_2} & \dots & \frac{\partial f_m({\mathbf{x}})}{g_n}
+\end{matrix} \right ]_{m \times n}
+\times % multiple another one
+\left [ \begin{matrix}
+\frac{\partial g_1({\mathbf{x}})}{x_1} & \frac{\partial g_1({\mathbf{x}})}{x_2} & \dots & \frac{\partial g_1({\mathbf{x}})}{x_r} \\
+\frac{\partial g_2({\mathbf{x}})}{x_1} & \frac{\partial g_2({\mathbf{x}})}{x_2} & \dots & \frac{\partial g_2({\mathbf{x}})}{x_r} \\
+\vdots & \vdots & \ddots & \vdots  \\
+\frac{\partial g_n({\mathbf{x}})}{x_1} & \frac{\partial g_n({\mathbf{x}})}{x_2} & \dots & \frac{\partial g_n({\mathbf{x}})}{x_r}
+\end{matrix} \right ]_{n \times r}
+\end{aligned}
+\end{equation}
+\end{definition}
+
 
 Here is the summary of useful matrix calculus:
 
 \begin{table}[H]
 \centering
 \renewcommand*{\arraystretch}{2.5}
-\begin{tabular}[t]{|c|c|c|c|}
+\begin{tabular}[t]{cccc}
 \hline
 Expression & Result & Expression & Result \\ \hline
-$\dpd{{x}}{{x}}$ & $I_n$ & $\dpd{A {x}}{{x}}$ & $A$\\[1ex] \hline
-$\dpd{\transpose{{x}}A}{{x}}$ & $\transpose{A}$ & $\dpd{\transpose{b}A {x}}{{x}}$ & $\transpose{b}A$ \\[1ex]  \hline
-$\dpd{\transpose{{x}}A {x}}{{x}}$ & $ \transpose{{x}}(A + \transpose{A})$ & $\dpd{x \cdot x}{{x}}$ & $ 2\transpose{{x}}$ \\[1ex]  \hline
-$\dmd{{\transpose{{x}}A {x}}}{2}{{x}}{}{{\transpose{{x}}}}{}$ & $2A$ & $\dmd{f}{2}{{x}}{}{{\transpose{{x}}}}{}$ & $\transpose{H}$  \\[1ex]  \hline
-$\dpd{\transpose{a}x}{x}$ & $\transpose{a}$ & $\dpd{\transpose{x}a}{x}$ & $\transpose{a}$  \\[1ex]  \hline
-$\dpd{u(x) \cdot v(x)}{x}$ & $\transpose{u(x)} \dpd{v}{x} + \transpose{v(x)} \dpd{v(u)}{x}$ & $\dpd{u(x) \times v(x)}{x}$ & $u(x) \dpd{v}{x} + v(x) \dpd{v(u)}{x}$  \\[1ex]  \hline
-$\dpd{f(g(x))}{x}$ & $\dpd{f}{g} \times \dpd{g}{x}$ & $\dpd{u(x) + v(x)}{x}$ & $\dpd{u(x)}{x} + \dpd{v(x)}{x}$ \\[1ex]  \hline
-$\dpd{\transpose{a}X b}{X_{m \times n}}$ & $b \transpose{a}$ & $\dpd{\transpose{a} \transpose{X} b}{X_{m \times n}}$ & $a \transpose{b}$ \\[1ex]  \hline
+$\dpd{{x}}{{x}}$ & $I_n$ & $\dpd{A {x}}{{x}}$ & $A$\\[1ex]
+$\dpd{\transpose{{x}}A}{{x}}$ & $\transpose{A}$ & $\dpd{\transpose{b}A {x}}{{x}}$ & $\transpose{b}A$ \\[1ex] 
+$\dpd{\transpose{{x}}A {x}}{{x}}$ & $ \transpose{{x}}(A + \transpose{A})$ & $\dpd{x \cdot x}{{x}}$ & $ 2\transpose{{x}}$ \\[1ex] 
+$\dmd{{\transpose{{x}}A {x}}}{2}{{x}}{}{{\transpose{{x}}}}{}$ & $2A$ & $\dmd{f}{2}{{x}}{}{{\transpose{{x}}}}{}$ & $\transpose{H}$  \\[1ex] 
+$\dpd{\transpose{a}x}{x}$ & $\transpose{a}$ & $\dpd{\transpose{x}a}{x}$ & $\transpose{a}$  \\[1ex] 
+$\dpd{u(x) \cdot v(x)}{x}$ & $\transpose{u(x)} \dpd{v}{x} + \transpose{v(x)} \dpd{v(u)}{x}$ & $\dpd{u(x) \times v(x)}{x}$ & $u(x) \dpd{v}{x} + v(x) \dpd{v(u)}{x}$  \\[1ex] 
+$\dpd{f(g(x))}{x}$ & $\dpd{f}{g} \times \dpd{g}{x}$ & $\dpd{u(x) + v(x)}{x}$ & $\dpd{u(x)}{x} + \dpd{v(x)}{x}$ \\[1ex] 
+$\dpd{\transpose{a}X b}{X_{m \times n}}$ & $b \transpose{a}$ & $\dpd{\transpose{a} \transpose{X} b}{X_{m \times n}}$ & $a \transpose{b}$ \\[1ex] \hline
 \end{tabular}
 
 \caption{Type of matrix derivatives using numerator layout}
