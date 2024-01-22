@@ -19,7 +19,7 @@ It is conventional to designate $E \cup F$ as $EF$.
 
 
 \begin{definition}[sigma algebra]
-    A collection of subsets of $S$ is called \cindex{sigma algebra} $\mathcal{B}$ if
+    A collection of subsets of $S$ is called \cindex{sigma algebra} (or \cindex{Borel field}) $\mathcal{B}$ if
     \begin{enumerate}
         \item $\emptyset \in \mathcal{B}$
         \item If $A \in \mathcal{B}$, then $A^c \in \mathcal{B}$
@@ -38,6 +38,8 @@ It is conventional to designate $E \cup F$ as $EF$.
                 P \left(\bigcup_{n=1}^\infty E_n \right) = \sum_{n=1}^\infty P(E_n)
             \end{equation}
     \end{enumerate}
+    
+    This definition is called the \cindex{axiom of probability}, or \cindex{Kolmogorov Axiom}. The countable additivity was rejected by deFinetti who choose the finite additivity.
 \end{definition}
 
 
@@ -76,7 +78,7 @@ If the experiment is repeated over and over again, with probability $1$ the prop
 \end{definition}
 
 \begin{definition}
-    For mutually exclusive event $F_i$ that $\displaystyle \bigcup_{i=1}^n F_i = S$ .The \cindex{Bayes' formula} is defined as:
+    For mutually exclusive event $F_i$ that $\displaystyle \bigcup_{i=1}^n F_i = S$ .The \cindex{Bayes' rule} is defined as:
     \begin{equation}
     \displaystyle P(F_j | E) = \frac{P(EF_j)}{\sum\limits_{i=1}^n P(EF_i)} = \frac{P(E|F_j) P(F_j)}{\sum\limits_{i=1}^n P(E|F_i) P(F_i)}
     \end{equation}
@@ -215,103 +217,6 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 
 
 
-\section{Common Distributions}
-
-
-\begin{center} 
-   \begin{tabular}{ccccc}
-  \hline
-  name & density & $\phi(t)$ & mean & var \\
-
-  \cindex{binomial} & $\displaystyle \binom{n}{x} p^x (1-p)^{n-x}$  &$(p e^t + q)^n$ & np & npq \\
-
-  \cindex{poisson} & $\displaystyle e^{-\lambda} \frac{\lambda^x}{x!}$  & $\displaystyle e^{\lambda (e^t -1)}$& $\lambda$ & $\lambda$ \\
-
-  \cindex{geometric} & $p (1-p)^{x-1}$& $\displaystyle \frac{pe^t}{1-(1-p)e^t}$ & $\displaystyle \frac{1}{p}$ & $\displaystyle \frac{1-p}{p^2}$ \\
-
-  \cindex{uniform} &$\displaystyle \frac{1}{b-a}$ & $\displaystyle \frac{e^{tb} - e^{ta}}{t(b-a)}$ & $\displaystyle \frac{a + b}{2}$ & $\displaystyle \frac{(b-a)^2}{12}$ \\
-
-  \cindex{normal} & $\displaystyle \frac{1}{\sqrt{2 \pi} \sigma} \exponential{- \frac{(x - \mu)^2}{2 \sigma^2}}$ & $\exponential{\displaystyle \mu t + \frac{\sigma^2 t^2}{2}}$&$\mu$& $\sigma^2$ \\
-  
-  \cindex{exponential} & $\lambda e^{-\lambda x}$ & $\displaystyle \frac{\lambda}{\lambda - t}$ & $\displaystyle \frac{1}{\lambda}$ & $\displaystyle \frac{1}{\lambda^2}$ \\
-
-  \cindex{gamma} & $\displaystyle \frac{\beta e^{-\beta x} (\beta x)^{n - 1}}{\Gamma(\alpha)}$ & $\displaystyle \left(\frac{\beta }{\beta - t} \right)^\alpha$ & $\displaystyle \frac{\alpha}{\beta}$ & $\displaystyle \frac{\alpha}{\beta^2}$ \\
-  
-  
-  \cindex{beta} & $\displaystyle \frac{\Gamma(\alpha + \beta)}{ \Gamma(\alpha) \Gamma(\beta) } x^{\alpha -1} (1-x)^{\beta - 1}$ & & $\displaystyle \frac{\alpha}{\alpha + \beta}$ & $\displaystyle \frac{\alpha\beta}{(\alpha+\beta)^2 (\alpha+\beta+1)}$ \\
-  
-  \cindex{chi-square} & $\displaystyle \frac{x^{\frac{k}{2} - 1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}} \Gamma(\frac{k}{2})}$ & $\displaystyle (1-2s)^{- \frac{k}{2}}$ & k & 2k \\
-
-  \hline
-\end{tabular} 
-\end{center}
-
-
-\begin{theorem}
-    If $X$ is normally distributed $\normaldistribution{\mu}{\sigma^2}$, then $Y = aX + b$ is a normal distribution with $a\mu + b$ and $(a\sigma)^2$. So $Y =\displaystyle \frac{X - \mu}{\sigma}$ is normally distributed $\normaldistribution{0}{1}$, which is called \cindex{standard normal distribution}.
-\end{theorem}
-
-
-
-\begin{definition}[gamma function]
-    \cindex{gamma function} is an extension of $n!$ to $\realnumber$ which is defined as
-    \begin{equation}
-        \Gamma(\alpha) = \int_0^\infty e^{-x} x^{\alpha - 1} \dif{x}
-    \end{equation}
-
-    Gamma function has the following property:
-    \begin{equation}
-        \Gamma \left(\frac{1}{2} \right) = \sqrt{\pi}
-    \end{equation}
-    
-    \begin{equation}
-        \Gamma (a + 1) = a \Gamma(a)
-    \end{equation}
-    \begin{equation}
-        \Gamma (n) = (n-1)!
-    \end{equation}
-\end{definition}
-
-
-\begin{definition}[gamma distribution]
-    A random variable $X$ is a \cindex{gamma distribution} $\gammadistribution{\alpha}{\beta}$ if the pdf is:
-    \begin{equation}
-        f(x|\alpha, \beta) = \frac{\beta e^{-\beta x} (\beta x)^{\alpha - 1}}{\Gamma(\alpha)}
-    \end{equation}
-    
-    Let $x_i$ be $n$ independent random variables with exponential distribution $\lambda$, then
-    \begin{equation}
-        \sum_{i=1}^n x_i \sim \gammadistribution{n}{\lambda}
-    \end{equation}
-    
-    exponential distribution is gamma distribution with $\alpha = 1$.
-\end{definition}
-
-\begin{theorem}
-    If $X_i$ are independent gamma distribution $\gammadistribution{\alpha_i}{\beta}$, then the sum $\displaystyle \sum_{i=1}^n X_i$ is a gamma distribution $\gammadistribution{\sum \alpha_i}{\beta}$.
-\end{theorem}
-
-
-
-\begin{definition}[beta distribution]
-    For $0 \leq X \leq 1$, $X$ is a \cindex{beta distribution} $\betadistribution{\alpha}{\beta}$ if the pdf is:
-    \begin{equation}
-        f(x|\alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} x^{\alpha - 1} (1-x)^{\beta - 1}
-    \end{equation}
-    
-    If $X \sim \gammadistribution{\alpha}{\theta}$, $Y \sim \gammadistribution{\beta}{\theta}$, and they are independent, then
-    \begin{equation}
-        \frac{X}{X+Y} \sim \betadistribution{\alpha}{\beta}
-    \end{equation}
-\end{definition}
-
-\begin{definition}[Chi-Square distribution]
-    If $\set{x_i}$ are independent $\normaldistribution{0}{1}$. The sum of their square $\sum_{i=1}^k x_i^2$ is the \cindex{chi-square distribution} with $k$ degrees of freedom. So
-    \begin{equation}
-        \sum_{i=1}^k x_i^2 \sim \chisquaredistribution{k}
-    \end{equation}
-\end{definition}
-
 % joint distribution
 \section{Joint Distribution}
 
@@ -384,6 +289,27 @@ So the process of calculating $f_{Y_i}$ are:
     \item replace $x_i$ by $y_i$ in $f(x_i)$ and multiply by $\displaystyle \frac{1}{\absolutevalue{J}}$.
 \end{enumerate}
 
+\begin{theorem}
+    Let $X$ has continuous cdf $F(X)$ and define a random variable $Y = F(X)$. Then $Y$ is a uniform distribution on $(0,1)$.
+    
+    The implication is, if we want to generate random samples with distribution $F(X)$, we can choose a uniform random variable on $(0,1)$ and generate a sample $y$, and calculate $x = \inverse{F}(y)$.
+\end{theorem}
+\begin{proof}
+    Calculate the cdf of $Y$:
+    \begin{equation}
+        \begin{aligned}
+            \probability{Y \leq y} &= \probability{F(X) \leq y} \\
+            &= \probability{ \inverse{F} \left(F(X)\right) \leq \inverse{F} (y) }\\
+            &= \probability{X \leq \inverse{F} (y) } \\
+            &= F\left(\inverse{F} (y) \right) \\
+            &= y
+        \end{aligned}
+    \end{equation}
+\end{proof}
+
+
+
+% independence
 
 \section{Independence}
 
@@ -569,20 +495,18 @@ If $X_i$ are independent and identically distributed normal random variable $\no
 \section{Inequality}
 
 \begin{theorem}[\cindex{Markov's Inequality}]
-If $X$ is a random variable that is non-negative. Then for any $a > 0$ we have 
+If $X$ is a random variable that is non-negative. Then for any nonnegative function $g(x)$ and any $a > 0$ we have 
 \begin{equation}
-    \probability{X \geq a} \leq \frac{\expect{X}}{a}
+    \probability{g(X) \geq a} \leq \frac{\expect{g(X)}}{a}
 \end{equation}    
 \end{theorem}
 \begin{proof}
     \begin{equation*}
         \begin{aligned}
-            \expect{X} &= \int_0^\infty x f(x) \dif{x} \\
-            &= \int_0^a x f(x) \dif{x} + \int_a^\infty x f(x) \dif{x} \\
-            & \geq \int_a^\infty x f(x) \dif{x} \\
-            & \geq \int_a^\infty a f(x) \dif{x} \\
-            &= a \int_a^\infty f(x) \dif{x} \\
-            &= \probability{X \geq a}
+            \expect{g(X)} &= \int_0^\infty g(x) f(x) \dif{x} \\
+            & \geq \int_{\set{x: g(x) \geq a}}^\infty g(x) f(x) \dif{x} \\
+            & \geq a \int_{\set{x: g(x) \geq a}}^\infty f(x) \dif{x} \\
+            &= a \probability{g(X) \geq a}
         \end{aligned}
     \end{equation*}
 \end{proof}
@@ -594,10 +518,7 @@ If $X$ is a random variable that is non-negative. Then for any $a > 0$ we have
     \end{equation}
 \end{theorem}
 \begin{proof}
-    Since $(X - \mu)^2$ is nonnegative, using Markov's Inequality we have
-    \begin{equation*}
-        \probability{\absolutevalue{(X - \mu)} \geq k} = \probability{(X - \mu)^2 \geq k^2} \leq \frac{\expect{(X-\mu)^2}}{k^2}
-    \end{equation*}
+    Set $g(X) = (X - \mu)^2$ in Markov's Inequality.
 \end{proof}
 
 \begin{theorem}[\cindex{Strong Law of Large Numbers}]
