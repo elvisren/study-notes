@@ -1,4 +1,4 @@
-\chapter{Basics}
+\chapter{Vector Space}
 
 The logic of this section:
 \begin{enumerate}
@@ -12,7 +12,7 @@ The logic of this section:
 \end{enumerate}
 
 % basics
-\section{Basic Definitions}
+\section{Definitions}
 
 \begin{definition}
     A \cindex{vector space} $V$ (and its subspace) is over a field $F$ such as $\realnumber$ or $\complexnumber$. It is closed in $+$ and $*$ operation.
@@ -46,6 +46,8 @@ A vector space is finite dimensional if it has a finite span set.
 \end{definition}
 
 
+
+\section{Replacement Theorem}
 Now comes the most important theorem:
 \begin{theorem}[\cindex{Replacement Theorem}]\label{replacement_theorem}
     if $G$ has $n$ vectors and they generate $V$, and $L$ is a set of $m$ linearly independent vectors, then $m \leq n$ and there is a subset $H \subseteq G$ with $n-m$ vectors that $L \cup H $ generate $V$.
@@ -55,6 +57,14 @@ Now comes the most important theorem:
 Theorem~\ref{replacement_theorem} means every basis has the same number of vectors, which is the dimension of a vector space. One corollary is if a subspace has the same dimension as the vector space, they are the same.
 
 
+\begin{theorem}
+    \begin{equation}
+        \dimension{A\cup B} = \dimension{A} + \dimension{B} - \dimension{A \cap B}
+    \end{equation}    
+\end{theorem}
+
+
+\section{Lagrange Polynomial}
 \begin{example}
    Famous \cindex{Lagrange polynomial} for $g \in \mathcal{P}_n (F)$: if it passed $n+1$ points $g(c_i) = b_i$, then define $f_i$ as:
 \begin{equation}
@@ -64,14 +74,9 @@ Theorem~\ref{replacement_theorem} means every basis has the same number of vecto
 Then $g = \sum_{i=0}^{n} b_i \times f_i $. (note: we have $n+1$ $f_i$, so the dimension is $n+1$). 
 \end{example}
 
-\begin{theorem}
-    \begin{equation}
-        \dimension{A\cup B} = \dimension{A} + \dimension{B} - \dimension{A \cap B}
-    \end{equation}    
-\end{theorem}
 
 
-
+\section{Basis Theorem}
 \begin{theorem}
     every vector space has a basis.
 \end{theorem}
