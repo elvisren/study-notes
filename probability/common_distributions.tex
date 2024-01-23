@@ -39,7 +39,14 @@
 % poisson
 \section{Poisson Distribution}
 
-Poisson distribution is an approximate to binomial distribution. Set $\lambda = n p $ for large $n$ and small $p$.
+Poisson distribution is an approximate to binomial distribution. Set $\lambda = n p $ for large $n$ and small $p$, then:
+\begin{equation*}
+    \begin{aligned}
+        \binom{n}{i}p^i (1-p)^{n-i} &= \frac{n!}{(n-i)! i!} \left(\frac{\lambda}{n} \right)^i \left(1-\frac{\lambda}{n} \right)^{n-i} \\
+        &= \frac{n (n-1) \cdots (n - i + 1)}{n^i} \frac{\lambda^i}{i!} \frac{(1- \frac{\lambda}{n})^n}{(1- \frac{\lambda}{n})^i} \\
+        & \approx 1 \times \frac{\lambda^i}{i!} \times \frac{e^{- \lambda}}{1} = e^{- \lambda} \frac{\lambda^i}{ i !}
+    \end{aligned}
+\end{equation*}
 
 
 % geometric

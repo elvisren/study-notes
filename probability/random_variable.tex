@@ -149,16 +149,6 @@ $\probability{X < b} \neq F(b)$ because $F(b)$ also include the probability that
 
 
 
-
-Poisson random variable is an approximate of binomial random variable when $n$ is large and $p$ is small. Let $\lambda = np$, then:
-\begin{equation*}
-    \begin{aligned}
-        \binom{n}{i}p^i (1-p)^{n-i} &= \frac{n!}{(n-i)! i!} \left(\frac{\lambda}{n} \right)^i \left(1-\frac{\lambda}{n} \right)^{n-i} \\
-        &= \frac{n (n-1) \cdots (n - i + 1)}{n^i} \frac{\lambda^i}{i!} \frac{(1- \frac{\lambda}{n})^n}{(1- \frac{\lambda}{n})^i} \\
-        & \approx 1 \times \frac{\lambda^i}{i!} \times \frac{e^{- \lambda}}{1} = e^{- \lambda} \frac{\lambda^i}{ i !}
-    \end{aligned}
-\end{equation*}
-
 \begin{definition}
     $f(x)$ is called \cindex{probability density function} (pdf) if $\probability{X \in B} = {\displaystyle \int_B f(x) \dif{x}} $.
 \end{definition}

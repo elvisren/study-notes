@@ -28,7 +28,11 @@ $\nullspace{T}$ and $\rangespace{T}$ are all spaces. $\dimension{\rangespace{T}}
 
 If (and only if) $\nullspace{T} = \set{0}$, $T$ is a one-to-one mapping.
 
-As the behavior of a vector space is completely defined by its basis, the behavior of linear transformation is also determined by its action on basis. If $\set{v_i}$ is a basis of $V$ with $n$ vectors, and we randomly pick $n$ vectors $\set{w_i}$ from $W$, there is a unique linear transformation $T$ that $T(v_i) = w_i$. Note that $v_i$ has to be linearly independent, but there is no such requirement for $w_i$.
+
+\begin{theorem}
+    As the behavior of a vector space is completely defined by its basis, the behavior of linear transformation is also determined by its action on basis. If $\set{v_i}$ is a basis of $V$ with $n$ vectors, and we randomly pick $n$ vectors $\set{w_i}$ from $W$, there is a unique linear transformation $T$ that $T(v_i) = w_i$. Note that $v_i$ has to be linearly independent, but there is no such requirement for $w_i$.
+\end{theorem}
+
 
 
 If $V = W$, $T$ is called linear operator. Linear operator is the focus of inner product.
@@ -193,9 +197,11 @@ Then we see how it will impact the matrix representation of linear operators:
 \end{theorem}
 
 
+\begin{example}
+    A simpler version happens with $L_A$ and standard basis over $F^n$. For any non-standard basis $\gamma$, the $j$th column of $Q$ is the $j$th vector of $\gamma$, and we denote it as $[\gamma]$. It is now easy to calculate the linear transformation of $L_A$ under the new basis $\gamma$ which is $[L_A]_\gamma = \inverse{[\gamma]} A [\gamma]$.
+\end{example}
 
 
-A simpler version happens with $L_A$ and standard basis over $F^n$. For any non-standard basis $\gamma$, the $j$th column of $Q$ is the $j$th vector of $\gamma$, and we denote it as $[\gamma]$. It is now easy to calculate the linear transformation of $L_A$ under the new basis $\gamma$ which is $[L_A]_\gamma = \inverse{[\gamma]} A [\gamma]$.
 
 
 \begin{definition}[similar]

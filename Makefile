@@ -1,4 +1,4 @@
-SOURCES := note.tex probability.tex
+SOURCES := note.tex probability.tex linear_algebra.tex topology.tex analysis.tex
 
 PDFS := $(SOURCES:.tex=.pdf)
 

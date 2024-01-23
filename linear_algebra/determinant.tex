@@ -54,7 +54,7 @@
     where $M_k$ is obtained by replacing column $k$ of $A$ by $b$.
 \end{theorem}
 \begin{proof}
-    Define $X_k$ as 
+    Assume the solution is $\set{x_i}$. Define $X_k$ as 
     \begin{equation*}
         \begin{pmatrix}
         1 &   &   & x_1 &  \\
@@ -108,7 +108,7 @@
 
 
 \begin{definition}
-    If $\beta$ and $\gamma$ are two ordered basis for $R^n$, they have the same orientation of and only if $\determinate{Q} > 0$, where $Q$ is change-of-coordinate matrix from $\beta$ to $\gamma$. If $\beta$ is the standard basis, then $\gamma$ is a right-handed coordinate system if $\determinate{Q} > 0$.
+    If $\beta$ and $\gamma$ are two ordered basis for $R^n$, they have the same \cindex{orientation} of and only if $\determinate{Q} > 0$, where $Q$ is change-of-coordinate matrix from $\beta$ to $\gamma$. If $\beta$ is the standard basis, then $\gamma$ is a right-handed coordinate system if $\determinate{Q} > 0$.
 \end{definition}
 
 
@@ -138,7 +138,7 @@ The determinant could be viewed as the only result of special property. First we
 
 
 \begin{definition}[alternating]
-    A n-linear function is alternating if $\delta (A) = 0$ when two adjacent rows of $A$ are identical.
+    A \cindex{n-linear function} is alternating if $\delta (A) = 0$ when two adjacent rows of $A$ are identical.
 \end{definition}
 
 Then the determinant is the only function $\gamma$ that :
@@ -149,6 +149,7 @@ Then the determinant is the only function $\gamma$ that :
 \end{enumerate}
 
 
+\section{Useful Equations}
 \begin{theorem}
     Assume $A \in F^{m \times m}$, $B \in F^{m \times n}$, $C \in F^{n \times m}$, $D \in F^{n \times n}$, We have:
     \begin{itemize}
@@ -167,7 +168,7 @@ Then the determinant is the only function $\gamma$ that :
     \item If both $A$ and $D$ are invertible, \begin{equation}
         \determinate{D - C \inverse{A} B} = \frac{\determinate{A}}{\determinate{D}} \times \determinate{A - B \inverse{D} C}
         \end{equation}
-    \item $\determinate{\lambda I_m - BC} =\lambda^{m-n} \determinate{\lambda I_n - CB}$ ($m \geq n$)
+    \item $\determinate{\lambda I_m - BC} =\lambda^{m-n} \determinate{\lambda I_n - CB}$ (for $B_{m \times n}$, $m \geq n$)
     \end{itemize}
 \end{theorem}
 
