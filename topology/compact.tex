@@ -1,0 +1,282 @@
+\chapter{Compact}
+
+
+
+% definition
+\section{Compact Spaces}
+
+\begin{definition}[\cindex{cover}]
+    A collection $\mathcal{A}$ of subsets of a space $X$ is said to cover $X$ if $\bigcup \mathcal{A} = X$. It is called \cindex{open covering} of $X$ if its elements are all open subsets of $X$.
+\end{definition}
+
+\begin{definition}[\cindex{compact}]
+    A space $X$ is said to be compact if every open covering of $X$ contains a finite subcollection that covers $X$.
+\end{definition}
+
+\begin{theorem}
+    Every close subspace of a compact space is compact.    
+\end{theorem}
+
+\begin{theorem}\label{compact_subspace_closed}
+    Every compact subspace of Hausdorff space is closed.    
+\end{theorem}
+\begin{proof}
+    Let $Y$ be such a subspace. Now prove $X - Y$ is open. Select $x_0 \in X - Y$. Because $X$ is Hausdorff, for each $y_i \in Y$, there are $x \in U_x$ and $y_i \in V_i$ that $U_x \cap V_i = \emptyset$. $\set{V_i}$ is an open covering of compact subspace $Y$, so it has a finite cover $V_n$. Choose $\cup V_n$ and $\cap U_x$. These two are disjoint open sets. So for any $x \in X - Y$, there is a neighborhood of $x$ that does not intersect $Y$. So $Y$ is an closed set.
+\end{proof}
+
+\begin{theorem}\label{disjoint_openset_of_x_and_compact_set}
+    If $Y$ is a compact subspace of the Hausdorff space $X$ and $x_0$ is not in $Y$, then there exists disjoint open sets $U$ and $V$ of $X$ containing $x_0$ and $Y$.    
+\end{theorem}
+\begin{proof}
+    Follow the construction in proving \theoref{compact_subspace_closed}.
+\end{proof}
+
+\begin{theorem}
+    The image of a compact space under a continuous map is compact.    
+\end{theorem}
+
+\begin{theorem}
+    Let $f: X \rightarrow Y$ be a bijective continuous function. If $X$ is compact and $Y$ is Hausdorff, then $f$ is a homeomorphism.
+\end{theorem}
+\begin{proof}
+    For a closed set $A$ in $X$. Because $X$ is compact, $A$ is compact. And because $f$ is continuous, the image $f(A)$ is compact. Because compact subset in Hausdorff space is closed, $f(A)$ is closed.
+\end{proof}
+
+\begin{theorem}\label{finite_product_of_compact_space}
+    The product of finitely many compact space is compact.
+\end{theorem}
+\begin{proof}
+    First check the space of $x_0 \times Y$. Because $Y$ is compact, for any open covering of $X \times Y$, there are $V_n \times V_n$ that covers $x_0 \times Y$. The set $w_0 = \cap U_n$ is open and covers $x_0$. Then for each of the $x_i$, there is $w_i$ that covers it. Since $X$ is compact, there are finite cover $w_n$ that covers all $X$.
+\end{proof}
+
+\begin{theorem}[\cindex{the tube lemma}]
+    If $Y$ is compact. If $N$ is an open set of $X \times Y$ containing the slice $x_0 \times Y$, then $N$ contains some tube $W \times Y$ that contains $x_0 \times Y$, where $W$ is a neighborhood of $x_0$.
+\end{theorem}
+\begin{proof}
+    Follow the proof of \theoref{finite_product_of_compact_space}.
+\end{proof}
+
+\begin{definition}[\cindex{finite intersection property}]
+    A collection $\mathbf{C}$ of subsets of $X$ is said to have the finite intersection property if for every finite subcollection $C_i$ of $\mathbf{C}$, $\bigcap_{i \leq n} C_i \neq \emptyset$ .
+\end{definition}
+
+\begin{theorem}
+    $X$ is compact if and only if for every $\mathbf{C}$ of closed sets in $X$ having the finite intersection property, $\bigcap_{C \in \mathbf{C}} C \neq \emptyset$.
+    
+    One conclusion is that for a nested sequence of closed set $C_1 \supset C_2 \supset C_3 ...$ in a compact space $X$, $\bigcap_{i \in \mathbb{Z}_{+}} C_i \neq \emptyset$.
+\end{theorem}
+
+
+% infinite product of compact space is compact
+\section{Tychonoff Theorem}
+
+The idea is to use Zorn's lemma to choose a maximal set with finite intersection property.
+
+\begin{theorem}
+    Let $\mathcal{A}$ be a collection of subset of $X$ having finite intersection property.. Then there is a collection $\mathcal{D}$ of subset of $X$ that $\mathcal{A} \subseteq \mathcal{D}$, and no other collection has this property.
+\end{theorem}
+\begin{proof}
+    For a simply order set $\mathcal{A} \subseteq B_i$ which all have the finite intersection property, the set $C = \cup B_i$ also has a finite intersection property. So every chain has an upper bound. So there is a maximum element.
+\end{proof}
+
+\begin{theorem}
+    Let $\mathcal{D}$ be a collection of subset of $X$ that is maximal in respect to finite intersection property. Then:
+    \begin{itemize}
+        \item Any finite intersection of elements of $\mathcal{D}$ is in $\mathcal{D}$
+        \item If $A$ is a subset of $X$ that intersect every element of $\mathcal{D}$, then $A \in \mathcal{D}$
+    \end{itemize}    
+\end{theorem}
+\begin{proof}
+    If $B$ is a finite intersection of elements, the set $\mathcal{D} \cup B$ is also finite intersection, so $B \in \mathcal{D}$. If $A$ intersect with every set of $\mathcal{D}$, $\mathcal{D} \cup {A}$ is also finite intersection.
+\end{proof}
+
+\begin{theorem}
+    An arbitrary product of compact space is compact in product topology.    
+\end{theorem}
+\begin{proof}
+    Let $X = \prod_{\alpha} X_\alpha$, and $\mathcal{A}$ is a collection of $X$ with finite intersection property. Choose a maximal collection $\mathcal{D}$ that contains $\mathcal{A}$ and with finite intersection property. Now we prove $\cap_{D \in \mathcal{D}} \closure{D}$ is nonempty.
+    
+    Let $\pi_\alpha: X \rightarrow X_\alpha$ be a project map. The collection $\set{\pi_\alpha(D)| D \in \mathcal{D}}$ has a finite intersection property. Because $X_\alpha$ is compact, there is $x_\alpha \in X_\alpha$ that $x_\alpha \in \cap_{D \in \mathcal{D}} \closure{\pi_\alpha(D)}$. Let $x$ be the point $(x_\alpha)$. Now prove $x$ is in all $\closure{D}$.
+    
+    
+    First show that if $\inverse{\pi}_\beta$ is a subbasis that contains $x$, it intersect every element of $\mathcal{D}$. So this subbasis is in $\mathcal{D}$. Its finite intersection is a basis and also contained in $\mathcal{D}$. Since $\mathcal{D}$ has finite intersection property, every basis that contains $x$ intersect with every element of $\mathcal{D}$, so $x \in \closure{D}$ for every $D \in \mathcal{D}$.
+\end{proof}
+
+
+
+
+
+% application in analysis
+\section{Application in Analysis}
+
+\begin{theorem}[\cindex{extreme value theorem}]
+    Let $f: X \rightarrow Y$ be continuous, where $Y$ is an ordered set in the order topology. If $X$ is compact, then there exists $c,d \in X$ that $\forall x \in X, f(c) \leq f(x) \leq f(d)$.
+\end{theorem}
+\begin{proof}
+    The image $Y$ is compact. For each $y_i \in Y$, the set $(-\infty, y_i)$ is an open covering with finite sub-cover. So one of the $y_i$ is the largest.
+\end{proof}
+
+\begin{definition}
+    The distance from $x$ to $A$ is $d(x,A) = \infimum{d(x,a) | a \in A}$.
+\end{definition}
+
+\begin{theorem}
+    For a fixed $A$, the function $d(x,A)$ is continuous.
+\end{theorem}
+\begin{proof}
+    For any given $x,y$ and $a \in A$, we have $d(x,A) \leq d(x,a) \leq d(x,y) + d(y,a)$. So $d(x,A) - d(x,y) \leq \infimum{d(y,a)} = d(y,A)$, and $d(x,A) - d(y,A) \leq d(x,y)$.
+\end{proof}
+
+
+\begin{theorem}[\cindex{Lebesgue number}]
+    Let $\mathcal{A}$ be an open covering of the metric space $(X, d)$. If $X$ is compact, $\exists \delta > 0$ that for each subset of $X$ having diameter less than $\delta$, there exists an element of $\mathcal{A}$ containing it. The $\delta$ is called the Lebesgue number for the covering $\mathcal{A}$.
+    
+    So the Lebesgue number exists for an open covering of compact metric space.
+\end{theorem}
+\begin{proof}
+    Define a continuous function $f : X \rightarrow \realnumber$. For each finite covering $\set{A_i}$, choose $C_i = X - A_i$. $\displaystyle \forall x, f(x) = \frac{1}{n} \sum d(x,C_i)$. $f(x) > 0$ because we could choose $x_i \in A_i$ and then $d(x_i, C_i) > 0$.
+    
+     Since $f$ is a sum of continuous function $d(x,C_i)$ on compact space $X$, the image has a minimum value $\delta$. For any $B$ with diameter less than $\delta$, and choose $x_0 \in B$, there is an $C_m$ that $\delta < f(x_0) \leq d(x_0, C_m)$. So $B \in X - C_m$.
+\end{proof}
+
+\begin{definition}[\cindex{uniformly continuous}]
+    A function $f$ from metric space $(X, d_X)$ to the metric space $(Y, d_Y)$ is uniformly continuous if $\forall \epsilon > 0, \exists \delta > 0, \forall a,b \in X, d_X (a,b) < \delta \Rightarrow d_Y \left(f(a), f(b)\right) < \epsilon$.
+\end{definition}
+
+\begin{theorem}
+    Let $f: X \rightarrow Y$ be a continuous function. $X$ is compact metric and $Y$ is metric. Then $f$ is uniformly continuous.    
+\end{theorem}
+\begin{proof}
+    Cover $Y$ by balls $B(y_i, \frac{\epsilon}{2})$. Let $\mathcal{A}$ be an open covering of $\inverse{f}(B(y_i, \frac{\epsilon}{2}))$. Choose the Lebesgue number $\delta$ of $\mathcal{A}$. So if $d(x_i, x_j) < \delta$, their image is in one of the $B(y_i, \frac{\epsilon}{2})$.
+\end{proof}
+
+
+
+
+% closed set in real number is compact
+
+\section{Compact Subspace of $\realnumber$}
+
+\begin{theorem}
+    Let $X$ be a simply ordered set with least upper bound property. In the order topology, every close interval in $X$ is compact.     
+\end{theorem}
+\begin{proof}
+    Assume the closed interval is $[a,b]$ and for any open covering $\mathcal{A}$. First prove that for $x \neq b$, there is $x < y \leq b$ that $[x,y]$ can be covered by at most two sets of $\mathcal{A}$. If $x$ has an immediate successor, choose $y$ be the immediate successor. If not, for any set that covers $x$, choose an element $y$ from $(x,c)$.
+    
+    Now for the all set $[a,y_i]$ that have finite cover, the set $\set{y_i}$ has a least upper bound $c$. $[a,c]$ has a finite cover too. For any set that covers $c$, it should cover $(d,c]$ which contains at least a point $z$. The set $[a,z]$ has a finite cover, so $[a,c]$ has a finite cover.
+    
+    The last step is to prove $c = y$. If $c \neq y$, there is $y_c$ that $[c, y_c]$ can be covered by at least two set of $\mathcal{A}$.
+\end{proof}
+
+Conclusion:
+    \begin{enumerate}
+        \item Every closed interval in $\realnumber$ is compact.
+        \item A subspace $A$ of $\realnumber^n$ is compact if and only if it is closed and bounded in euclidean metrid $d$ or the square metric $\rho$.
+    \end{enumerate}
+
+
+% limit point compactness
+
+\section{Limit Point Compactness}
+
+\begin{definition}[\cindex{limit point compact}]
+    A space $X$ is limit point compact if every infinite subset of $X$ has a limit point. It is also called \cindex{Frechet compactness} or \cindex{Bolzano-Weierstrass property}.
+\end{definition}
+
+\begin{theorem}
+    Compactness implies limit point compactness, but not conversely.    
+\end{theorem}
+\begin{proof}
+    Let $A$ be a subset of $X$. Prove that if $A$ has no limit point, it is finite. 
+    
+    Since $A$ has no limit point, it contains all its limit point and is closed, hence compact. For each $a \in A$, since $a$ is not a limit point, it has a neighborhood $U_a$ that $U_a \cap A = a$. All these $U_i$ forms an open covering of $A$ which has a finite cover, so $A$ is finite.
+\end{proof}
+
+\begin{definition}[\cindex{sequentially compact}]
+    A space $X$ is said to be sequentially compact if every sequence of points of $X$ has a convergent subsequence.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a \emph{metrizable space}. Then the followings are equivalent:
+    \begin{enumerate}
+        \item $X$ is compact.
+        \item $X$ is limit point compact.
+        \item $X$ is sequentially compact.
+    \end{enumerate}
+    
+    Note: compact means limit point compact without the metrizable assumption.
+\end{theorem}
+\begin{proof}
+    For (2) $\rightarrow$ (3), for a sequence $x_i$ and $A = \set{x_i}$. If $A$ is finite, it has a constant subsequence which is convergent. If $A$ is infinite, it has a limit point $x$. For each $i$, choose a point $x_{n_i} \in B(x, \frac{1}{i})$ which is a convergent subsequence.
+    
+    For (3) $\rightarrow$ (1), first prove it has Lebesgue number. For each $i$, there is a $C_i$ ball with diameter less than $\frac{1}{i}$ that is not contained in $\mathcal{A}$. Choose $x_i \in C_i$ which has a convergent subsequence $x_{n_i}$ that converge to $a$. $a$ is contained in a open set $A \in \mathcal{A}$, so there is a ball $B(a, \epsilon) \subseteq A$. This ball will contain $x_{n_i}$ if $n_i > \frac{2}{\epsilon}$.
+    
+    Secondly show that for any $\epsilon > 0$, $X$ has a finite cover by $\epsilon$-balls. Assume it cannot. Let $x_1$ be a random point. For each $i$, select $x_i$ that is not in the ball of $B(x_{j < i}, \epsilon)$ and build ball $B(x_i, \epsilon)$. This can continue because these $\epsilon$-balls cannot cover $X$. But $d(x_i, x_j) \geq \epsilon$ so $\set{x_i}$ is not convergent.
+    
+    Finally the conclusion. Since $X$ is sequentially compact, it has Lebesgue number $\delta$. Choose $\epsilon = \frac{\delta}{3}$ Then $X$ has a finite covering of $\epsilon$-balls. These $\epsilon$-balls has diameter less than $\delta$, so they were contained in $\mathcal{A}$, and $\mathcal{A}$ has finite cover of $X$.
+\end{proof}
+
+
+\section{Local Compactness}
+
+\begin{definition}[\cindex{locally compact}]
+    A space $X$ is said to be locally compact at $x$ if there is some compact subspace $C \subset X$ that contains a neighborhood of $x$. If $X$ is locally compact at every points, it is locally compact.
+\end{definition}
+
+
+\begin{theorem}
+    $X$ is locally compact \emph{Hausdorff} if and only if $\exists Y$ that:
+    \begin{enumerate}
+        \item $Y = X \cup \set{\infty}$.
+        \item $Y$ is a compact Hausdorff space.
+    \end{enumerate}
+    
+    If there are $Y$ and $Y'$ satisfying these conditions, there there is a homeomorphism between them. Also $\infty$ is a limit point of $X$ in $Y$.
+\end{theorem}
+\begin{proof}
+    The open set in $Y$ is defined by:
+    \begin{enumerate}
+        \item The open sets of $X$.
+        \item $Y -C$ where $C$ is compact in $X$.
+    \end{enumerate}
+    
+    Then $Y$ is a compact space. For any covering of $Y$, it must cover $\infty$ by $U$. Then $Y-U$ is compact and has finite cover. $Y$ is also Hausdorff. If $x,y \in X$, they are Hausdorff. If $x =\infty$, find a compact subspace that contains a neighbor of $y$ using locally compact property of $X$.
+\end{proof}
+
+\begin{definition}[\cindex{compactification}]
+    If $Y$ is a compact Hausdorff space and $X \subset Y$ and $\closure{X} = Y$, then $Y$ is said to be a compactification of $X$. If $\absolutevalue{Y - X} = 1$, $Y$ is called the \cindex{one-point compactification} of $X$.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a Hausdorff space. $X$ is locally compact if and only if $\forall x \in X$ and a neighborhood $U$ of $x$, there is a neighborhood $V$ of $x$ that $\closure{V}$ is compact and $\closure{V} \subset U$.
+    The key:
+    \begin{enumerate}
+        \item $x \in V$  and $V$ is open
+        \item $\closure{V}$ is compact
+        \item $\closure{V} \subset U$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $Y$ be the one-point compactification of $X$. So $C = Y - U$ is a closed subspace and compact. According to \theoref{disjoint_openset_of_x_and_compact_set}, there are $v$ and $W$ that $x \in v$ and $C \subset W$, and $V \cap W = \emptyset$. So $\closure{V}$ is compact in $Y$ and $\closure{V} \subset U$.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a locally compact Hausdorff and $A \subset X$. If $A$ is closed in $X$ or open in $X$, then $A$ is locally compact.
+\end{theorem}
+\begin{proof}
+    If $A$ is open, find $V$ that $\closure{V} \subset A$ and is compact, so $\closure{A}$ is the result. 
+    
+    If $A$ is closed, for $x$, find a compact space $C$ that $x \in C$, and calculate $C \cap A$.
+\end{proof}
+
+\begin{theorem}
+    $X$ is homeomorphic to an open subspace of a compact Hausdorff space if and only if $X$ is locally compact Hausdorff.
+\end{theorem}
+\begin{proof}
+    If $X$ is locally compact Hausdorff, find its one-point compactification. A compact Hausdorff space is also locally compact Hausdorff, so its open subset is locally compact Hausdorff.
+\end{proof}
+
+
+
+
+
