@@ -63,6 +63,9 @@ The set $X$ with a topology is called \cindex{topological space}. The set $U$ in
     Let $A$ be a subset of topological space $X$. $x$ is a limit point of $A$ if every neighborhood of $x$ intersects $A$ in some point \emph{other than $x$}.
 \end{definition}
 
+\begin{definition}[\cindex{isolated point}]
+    $x$ is called isolated point of $X$ if there is an open set that contains $x$ but do not intersect with other point of $X$.
+\end{definition}
 
 
 \begin{theorem}
@@ -332,7 +335,12 @@ This is the reason why product topology is preferred over box topology.
     Define $f: \realnumber \rightarrow \realnumber^{\omega}$ by $f(t) = (t,t,t, \cdots)$. Define a open set in box topology $B = (-1, 1) \times (- \frac{1}{2}, \frac{1}{2}) \times  (- \frac{1}{3}, \frac{1}{3}) \times \cdots$. $f^{-1}(B)$ is not open in $R$.
 \end{example}
 
+
+
+% metric topology
 \section{Metric Topology}
+
+A metric is to measure how close two points are.
 
 \begin{definition}[\cindex{metric}]
     A metric on a set $X$ is a function $d: X \times X \rightarrow \realnumber$ with the following property:

@@ -1,5 +1,18 @@
 \chapter{Connected}
 
+
+
+Note: 
+\begin{enumerate}
+    \item Each component of $X$ is closed in $X$ because it contains all limit points
+    \item If the number of components is finite, each component is also open
+    \item The component needs not be open. ($\mathbb{Q}$)
+    \item Path component could be neither open or closed
+    \item If $X$ is locally (path) connected, each (path) component of open set is open
+    \item If $X$ is locally path connected, its components and path components are the same
+\end{enumerate}
+
+
 \section{Connected Spaces}
 
 \begin{definition}[\cindex{separation}]\label{separation}
@@ -42,7 +55,7 @@ Let $A$ be a connected subspace of $X$. If $A \subset B \subset \closure{A}$, th
 \end{proof}
 
 \begin{theorem}
-The image of a connected space under continuous map is connected.    
+The image of a connected space under continuous map is connected. So it means connectedness is a topological property.
 \end{theorem}
 
 \begin{theorem}
@@ -98,9 +111,11 @@ For $X,Y$, find a line $x \times Y$. This line is homomorphic to $Y$ and connect
 \end{proof}
 
 \begin{definition}[\cindex{path}]
-    A path in $X$ from $x$ to $y$ is a continuous map $f: [a,b] \rightarrow X$ that $f(a) = x$ and $f(b) = y$.
-    
-    A space is said to be \cindex{path connected} if every pair of points of $X$ can be joined by a path in $X$.
+    A path in $X$ from $x$ to $y$ is a continuous map $f: [a,b] \rightarrow X$ that $f(a) = x$ and $f(b) = y$. 
+\end{definition}
+
+\begin{definition}[\cindex{path connected}]
+    A space is said to be path connected if every pair of points of $X$ can be joined by a path in $X$.
 \end{definition}
 
 \begin{example}
@@ -124,13 +139,6 @@ The components of $X$ are connected disjoint subspace of $X$ whose union is $X$.
     Like component, but the connected subspace is now path connected.
 \end{definition}
 
-Note: 
-\begin{enumerate}
-    \item Each component of $X$ is closed in $X$ because it contains all limit points
-    \item If the number of components is finite, each component is also open
-    \item The component needs not be open. ($\mathbb{Q}$)
-    \item Path component could be neither open or closed
-\end{enumerate}
 
 \begin{definition}[\cindex{locally connected}]
     A space is locally connected at $x$ if for all neighborhood $U$ of $x$, there is a connected neighborhood $V$ of $x$ that $V \subset U$. It is called locally connected if it is locally connected at every point.
@@ -157,7 +165,7 @@ A space $X$ is locally path connected if and only if for every open set $U$ of $
     Each path component of $X$ lies in component of $X$. If $X$ is locally path connected, the components and the path components are the same.    
 \end{theorem}
 \begin{proof}
-    For a component $U$ of $X$, choose one of its path component $P$. Because $X$ is locally path connected, all its path connected components are open. So for all remaining path components of $U$, their union $Q$ is open, so $P$ and $Q$ form a partition of $U$.
+    Because $X$ is locally path connected, all its path connected components are open. For a component $U$ of $X$, choose one of its path component $P$. So for all remaining path components of $U$, their union $Q$ is open, so $P$ and $Q$ form a partition of $U$.
 \end{proof}
 
 
