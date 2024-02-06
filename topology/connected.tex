@@ -2,8 +2,11 @@
 
 \section{Connected Spaces}
 
-\begin{definition}[\cindex{separation}]
+\begin{definition}[\cindex{separation}]\label{separation}
     A separation of $X$ is a pair $U,V$ of disjoint nonempty open subsets of $X$ whose union is $X$.
+    
+    
+    Note: separation is different from separable (see \defiref{separable}).
 \end{definition}
 
 \begin{definition}[\cindex{connected}]
@@ -15,8 +18,13 @@
 \end{theorem}
 
 \begin{theorem}
-    A subspace $Y$ of $X$ is connected if a pair $A,B$ of subsets of $Y$ whose union is $Y$, neither of which contains the limit point of the other.    
+    A subspace $Y$ of $X$ is connected if a pair $A,B$ of subsets of $Y$ whose union is $Y$, neither of which contains the limit point of the other.
+    
+    $A$ and $B$ do not have to be open or closed. But we can prove they are both open and closed.
 \end{theorem}
+\begin{proof}
+    Assume $A$ and $B$ did not contain limit point of each other. $\closure{A} \cap B = \emptyset$, so $\closure{A} \cap Y = A$. So $A$ is closed. $B$ is closed as well.
+\end{proof}
 
 \begin{theorem}
     If $C,D$ forms a separation of $X$, and if $Y$ is a connected subspace of $X$, then $Y$ lies entirely within either $C$ or $D$.
@@ -27,7 +35,7 @@ The union of a collection of connected subspace of $X$ that have a point in comm
 \end{theorem}
 
 \begin{theorem}
-Let $A$ be a connected subspace of $X$. If $A \subset B \subset \closure{A}$, then $B$ is also connected. So the result of adding limit points to a connected subspace is connected.
+Let $A$ be a connected subspace of $X$. If $A \subset B \subset \closure{A}$, then $B$ is also connected. So \emph{adding limit points to a connected subspace is connected}.
 \end{theorem}
 \begin{proof}
     Assume there is a separation of $B$. Then $A$ must be in one of them, which is a closed set.
@@ -69,15 +77,18 @@ For $X,Y$, find a line $x \times Y$. This line is homomorphic to $Y$ and connect
 \end{definition}
 
 \begin{theorem}
-    If $\mathcal{L}$ is a linearly continuum topology, then $\mathcal{L}$ is connected, so are the convex subset in $\mathcal{L}$.
+    If $\mathcal{L}$ is a linearly continuum topology, then $\mathcal{L}$ is connected, so are the convex subset in $\mathcal{L}$. 
+    
+    So $\realnumber$ is connected.
 \end{theorem}
 \begin{proof}
-    Assume there is a separation $A,B$ of $Y$. Find $c = \supremum{A}$. If $c \in B$, find conflict in $(d, c]$. If $c \in A$, find conflict in $[c, e)$.
+    Assume there is a separation $A,B$ of $Y$. Find $a \in A$ and $b \in B$, and check the interval $A_0 = A \cap [a,b]$ and $B_0 = B \cap [a,b]$. Find $c = \supremum{A_0}$. 
+    
+    If $c \in B_0$. Because $B_0$ is open, there is a set $(d,c] \subseteq B_0$ and $(d,c] \cap A_0 = \emptyset$. By linear continuum, there is $d < e < c$, so $e$ is a smaller upper bound.
+    
+    If $c \in A_0$, there is open set $(f,c] \subseteq A_0$. By linear continuum, there is a $f < g < c$, a contradiction as well.
 \end{proof}
 
-\begin{theorem}
-    $\realnumber$ is connected
-\end{theorem}
 
 \begin{theorem}[\cindex{intermediate value theorem}]
     Let $f : X \rightarrow Y$ be a continuous map, where $X$ is connected and $Y$ is an ordered set. If $a,b \in X$ and $f(a) < r < f(b)$, $\exists c \in X, f(c) = r$.
@@ -115,7 +126,7 @@ The components of $X$ are connected disjoint subspace of $X$ whose union is $X$.
 
 Note: 
 \begin{enumerate}
-    \item Each component of $X$ is closed in $X$
+    \item Each component of $X$ is closed in $X$ because it contains all limit points
     \item If the number of components is finite, each component is also open
     \item The component needs not be open. ($\mathbb{Q}$)
     \item Path component could be neither open or closed
@@ -133,7 +144,9 @@ Note:
 A space $X$ is locally connected if and only if for every open set $U$ of $X$, each component of $U$ is open in $X$.    
 \end{theorem}
 \begin{proof}
-    The open components are for any open set $U$, not $X$.
+    For any $x$ and open set $U$, find an open component $V$ of $U$ that contains $x$. So for any $x \in X$ and open set $x \in U$, there is connected neighborhood of $x$, so $X$ is locally connected.
+    
+    If $X$ is connected, for any open set $U$ and $x \in U$ and $x$ is in a component $W$, there is a connected neighborhood $V$ that $x \in V \subseteq U$. Because $V$ is connected, it is in $W$. So for any $x \in W$, there is an open neighborhood of $x$ that is in $W$, so $W$ is open.
 \end{proof}
 
 \begin{theorem}
@@ -141,8 +154,11 @@ A space $X$ is locally path connected if and only if for every open set $U$ of $
 \end{theorem}
 
 \begin{theorem}
-Each path component of $X$ lies in component of $X$. If $X$ is locally path connected, the components and the path components are the same.    
+    Each path component of $X$ lies in component of $X$. If $X$ is locally path connected, the components and the path components are the same.    
 \end{theorem}
+\begin{proof}
+    For a component $U$ of $X$, choose one of its path component $P$. Because $X$ is locally path connected, all its path connected components are open. So for all remaining path components of $U$, their union $Q$ is open, so $P$ and $Q$ form a partition of $U$.
+\end{proof}
 
 
 

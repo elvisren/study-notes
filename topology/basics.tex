@@ -20,9 +20,11 @@ The set $X$ with a topology is called \cindex{topological space}. The set $U$ in
 \begin{definition}
     Let $X$ be a topological space. Then:
     \begin{enumerate}
-        \item $\emptyset$ and $X$ are closed.
-        \item Arbitrary intersections of closed sets are closed.
-        \item Finite unions of closed sets are closed.
+        \item $\emptyset$ and $X$ are closed
+        \item Arbitrary union of open sets are open
+        \item Arbitrary intersections of closed sets are closed
+        \item Finite unions of closed sets are closed
+        \item Finite intersection of open sets are open
     \end{enumerate}
 \end{definition}
 
@@ -51,10 +53,6 @@ The set $X$ with a topology is called \cindex{topological space}. The set $U$ in
     \end{equation}
 \end{definition}
 
-\begin{theorem}
-    Let $Y$ be s subspace of $X$, and $A \subset Y$. The closure of $A$ in $Y$ is the same as $\closure{A}_X \cap Y$.
-\end{theorem}
-
 
 \begin{definition}[\cindex{neighborhood}]
     A neighborhood of $x$ is an open set $U$ containing $x$.
@@ -62,7 +60,7 @@ The set $X$ with a topology is called \cindex{topological space}. The set $U$ in
 
 
 \begin{definition}[\cindex{limit point}]
-    Let $A$ be a subset of topological space $X$. $x$ is a limit point of $A$ if every neighborhood of $x$ intersects $A$ in some point other than $x$.
+    Let $A$ be a subset of topological space $X$. $x$ is a limit point of $A$ if every neighborhood of $x$ intersects $A$ in some point \emph{other than $x$}.
 \end{definition}
 
 
@@ -71,15 +69,18 @@ The set $X$ with a topology is called \cindex{topological space}. The set $U$ in
     Here are the list of properties around interior, closure and boundary:
     \begin{itemize}
         \item $x \in \overline{A}$ if and only if every open set $U$ containing $x$ intersects $A$
-        \item $x$ is a limit point of $A$ if and only if every open set $U$ containing $x$ intersects $A$ other than $x$
         \item $\interior{A}$ is the largest open set contained in $A$
         \item $\closure{A}$ is the smallest closed set that contains $A$
         \item $Y \cap \closure{A}_X = \closure{A}_Y$
         \item $Y \cap \interior{A}_X \subseteq \interior{A}_Y$
+        \item $x$ is a limit point of $A$ if and only if every open set $U$ containing $x$ intersects $A$ other than $x$
         \item $x$ is a limit point of $A$ if it belongs to $\closure{A - \set{x}}$
         \item A limit point $x$ of $A$ may or may not in $A$
     \end{itemize}
 \end{theorem}
+\begin{proof}
+    For the counterexample of $Y \cap \interior{A}_X \subseteq \interior{A}_Y$, let $A = [0,1)$, $Y = [0,2]$. $\interior{A}_X = (0,1)$ while $\interior{A}_Y = [0,1)$.
+\end{proof}
 
 
 
@@ -101,8 +102,10 @@ A subset of $A$ is closed if and only if it contains all its limit points. So if
     A subset $E$ of a topological space is dense if $\closure{E} = X$
 \end{definition}
 
-\begin{definition}[\cindex{separable}]
+\begin{definition}[\cindex{separable}]\label{separable}
     A topological space is separable if it has a countable dense subset.
+    
+    Note: separable is different from separation (see \defiref{separation})
 \end{definition}
 
 
@@ -186,10 +189,6 @@ How to understand the relation among topology, basis and subbasis:
 
 The subspace topology $Y$ need not be the same as the topology in $X$. For example, for $Y=[0,1]$ as the subspace of order topology on $\realnumber$. $[0,a)$ is not open on $\realnumber$ but open on $Y$.
 
-\begin{definition}[\cindex{ordered square}]
-    Let $I=[0,1]$. The dictionary order on $I \times I$ is called ordered square, and denoted as \cindex{$I_o^2$}. 
-\end{definition}
-
 
 \begin{theorem}[\cindex{convex}]
     A subset $Y$ of $X$ is convex in $X$ if for each pair of points $a < b$ of $Y$, the entire interval $(a,b)$ of points of $X$ is in $Y$.     
@@ -199,6 +198,10 @@ The subspace topology $Y$ need not be the same as the topology in $X$. For examp
     Let $X$ be an ordered set in order topology, and let $Y$ be a subset of $X$ that is convex in $X$. Then the order topology on $Y$ is the same as the topology inherits as a subspace of $X$.    
 \end{theorem}
 
+
+\begin{example}[\cindex{ordered square}]
+    Let $I=[0,1]$. The dictionary order on $I \times I$ is called ordered square, and denoted as \cindex{$I_o^2$}. 
+\end{example}
 
 
 
@@ -288,8 +291,8 @@ If the condition (4) holds for a point $x$ of $X$, then $f$ is continuous at the
     Let $X = A \cup B$ where $A$ and $B$ are closed in $X$. Let $f: A \rightarrow Y$ and $g: B \rightarrow Y$ be continuous. If $\forall x \in A \cap B, f(x) = g(x)$, then $f$ and $g$ combine to give a continuous function $h: X \rightarrow Y$, defined by $\forall x \in A, h(x) = f(x) $ and $\forall x \in B , h(x) = g(x)$.
 \end{theorem}
 
-\begin{theorem}
-Let $f: A \rightarrow X \times Y$ defined as $f(a) = \left(f_1(a), f_2(a) \right)$. Then $f$ is continuous if and only if $f_1$ and $f_2$ are continuous. The map $f_1$ and $f_2$ are called the \cindex{coordinate functions} of $f$.
+\begin{theorem}[\cindex{coordinate functions}]
+Let $f: A \rightarrow X \times Y$ defined as $f(a) = \left(f_1(a), f_2(a) \right)$. Then $f$ is continuous if and only if $f_1$ and $f_2$ are continuous. The map $f_1$ and $f_2$ are called the coordinate functions of $f$.
 \end{theorem}
 
 
@@ -385,7 +388,7 @@ Let $f: X \rightarrow Y$. Let $X$ and $Y$ be metrizable with $d_X$ and $d_Y$. $f
     Note: the sequence lemma is quite useful in proving a topology space is not metrizable.
 \end{theorem}
 \begin{proof}
-    Use \theoref{first_countability_axiom}. For a $x$, choose neighbor $B_d(x, \frac{1}{n})$, and let it intersect with $A$.
+    Use \defiref{first_countability_axiom}. For a $x$, choose neighbor $B_d(x, \frac{1}{n})$, and let it intersect with $A$.
 \end{proof}
 
 
@@ -393,7 +396,7 @@ Let $f: X \rightarrow Y$. Let $X$ and $Y$ be metrizable with $d_X$ and $d_Y$. $f
     Let $f: X \rightarrow Y$. If $f$ is continuous, then for every convergent sequence $x_n \rightarrow x$ in $X$, the sequence $f(x_n) \rightarrow f(x)$. The converse holds if $X$ is metrizable ($Y$ does not need to be metrizable).
 \end{theorem}
 \begin{proof}
-    For a $A \subset X$,  $x_n \rightarrow x \Rightarrow x \in \closure{A}$. $f(x_n) \rightarrow f(x) \Rightarrow f(x) \in \closure{f(A)}$. What we need is a way to find a sequence of $x_n$, and use \theoref{first_countability_axiom}.
+    For a $A \subset X$,  $x_n \rightarrow x \Rightarrow x \in \closure{A}$. $f(x_n) \rightarrow f(x) \Rightarrow f(x) \in \closure{f(A)}$. What we need is a way to find a sequence of $x_n$, and use \defiref{first_countability_axiom}.
 \end{proof}
 
 
