@@ -128,7 +128,7 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \end{proof}
 
 
-\begin{theorem}[\cindex{Lebesgue number}]
+\begin{theorem}[\cindex{Lebesgue number}]\label{lebesgue_number}
     Let $\mathcal{A}$ be an open covering of the metric space $(X, d)$. If $X$ is compact, $\exists \delta > 0$ that for each subset of $X$ having diameter less than $\delta$, there exists an element of $\mathcal{A}$ containing it. The $\delta$ is called the Lebesgue number for the covering $\mathcal{A}$.
     
     So the Lebesgue number exists for an open covering of compact metric space.
@@ -147,7 +147,7 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
     Let $f: X \rightarrow Y$ be a continuous function. $X$ is compact metric and $Y$ is metric. Then $f$ is uniformly continuous.    
 \end{theorem}
 \begin{proof}
-    Cover $Y$ by balls $B(y_i, \frac{\epsilon}{2})$. Let $\mathcal{A}$ be an open covering of $\inverse{f}(B(y_i, \frac{\epsilon}{2}))$. Choose the Lebesgue number $\delta$ of $\mathcal{A}$. So if $d(x_i, x_j) < \delta$, their image is in one of the $B(y_i, \frac{\epsilon}{2})$.
+    Cover $Y$ by balls $B(y_i, \frac{\epsilon}{2})$. Let $\mathcal{A}$ be an open covering of $\inverse{f}(B(y_i, \frac{\epsilon}{2}))$. Choose the Lebesgue number $\delta$ of $\mathcal{A}$ (in \theoref{lebesgue_number}). So if $d(x_i, x_j) < \delta$, their image is in one of the $B(y_i, \frac{\epsilon}{2})$.
 \end{proof}
 
 
@@ -158,7 +158,9 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \section{Compact Subspace of $\realnumber$}
 
 \begin{theorem}
-    Let $X$ be a simply ordered set with least upper bound property. In the order topology, every close interval in $X$ is compact.     
+    Let $X$ be a simply ordered set with \emph{least upper bound property}. In the order topology, every close interval in $X$ is compact. 
+    
+    So every closed interval in $\realnumber$ is compact.
 \end{theorem}
 \begin{proof}
     Assume the closed interval is $[a,b]$ and for any open covering $\mathcal{A}$. First prove that for $x \neq b$, there is $x < y \leq b$ that $[x,y]$ can be covered by at most two sets of $\mathcal{A}$. If $x$ has an immediate successor, choose $y$ be the immediate successor. If not, for any set that covers $x$, choose an element $y$ from $(x,c)$.
@@ -168,11 +170,13 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
     The last step is to prove $c = y$. If $c \neq y$, there is $y_c$ that $[c, y_c]$ can be covered by at least two set of $\mathcal{A}$.
 \end{proof}
 
-Conclusion:
-    \begin{enumerate}
-        \item Every closed interval in $\realnumber$ is compact.
-        \item A subspace $A$ of $\realnumber^n$ is compact if and only if it is closed and bounded in euclidean metrid $d$ or the square metric $\rho$.
-    \end{enumerate}
+\begin{theorem}
+    A subspace $A$ of $\realnumber^n$ is compact if and only if it is closed and bounded in euclidean metric $d$ or the square metric $\rho$.    
+\end{theorem}
+\begin{proof}
+    According to \theoref{compact_subspace_closed}, $A$ is closed.
+\end{proof}
+
 
 
 % limit point compactness
@@ -209,7 +213,7 @@ Conclusion:
 \begin{proof}
     For (2) $\rightarrow$ (3), for a sequence $x_i$ and $A = \set{x_i}$. If $A$ is finite, it has a constant subsequence which is convergent. If $A$ is infinite, it has a limit point $x$. For each $i$, choose a point $x_{n_i} \in B(x, \frac{1}{i})$ which is a convergent subsequence.
     
-    For (3) $\rightarrow$ (1), first prove it has Lebesgue number. For each $i$, there is a $C_i$ ball with diameter less than $\frac{1}{i}$ that is not contained in $\mathcal{A}$. Choose $x_i \in C_i$ which has a convergent subsequence $x_{n_i}$ that converge to $a$. $a$ is contained in a open set $A \in \mathcal{A}$, so there is a ball $B(a, \epsilon) \subseteq A$. This ball will contain $x_{n_i}$ if $n_i > \frac{2}{\epsilon}$.
+    For (3) $\rightarrow$ (1), first prove it has Lebesgue number. Assume it's not the case. For each $i$, there is a $C_i$ ball with diameter less than $\frac{1}{i}$ that is not contained in $\mathcal{A}$. Choose $x_i \in C_i$ which has a convergent subsequence $x_{n_i}$ that converge to $a$. $a$ is contained in a open set $A \in \mathcal{A}$, so there is a ball $B(a, \epsilon) \subseteq A$. This ball will contain $x_{n_i}$ if $n_i > \frac{2}{\epsilon}$.
     
     Secondly show that for any $\epsilon > 0$, $X$ has a finite cover by $\epsilon$-balls. Assume it cannot. Let $x_1$ be a random point. For each $i$, select $x_i$ that is not in the ball of $B(x_{j < i}, \epsilon)$ and build ball $B(x_i, \epsilon)$. This can continue because these $\epsilon$-balls cannot cover $X$. But $d(x_i, x_j) \geq \epsilon$ so $\set{x_i}$ is not convergent.
     

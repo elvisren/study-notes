@@ -51,10 +51,10 @@ The union of a collection of connected subspace of $X$ that have a point in comm
 Let $A$ be a connected subspace of $X$. If $A \subset B \subset \closure{A}$, then $B$ is also connected. So \emph{adding limit points to a connected subspace is connected}.
 \end{theorem}
 \begin{proof}
-    Assume there is a separation of $B$. Then $A$ must be in one of them, which is a closed set.
+    Assume there is a separation of $B$. So $C \cup D = B$. Then $A$ must be in one of them, assume it is $C$. So $\closure{A} \subseteq \closure{C}$, a contradiction.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{cont_func_from_cont_to_cont}
 The image of a connected space under continuous map is connected. So it means connectedness is a topological property.
 \end{theorem}
 
@@ -107,7 +107,7 @@ For $X,Y$, find a line $x \times Y$. This line is homomorphic to $Y$ and connect
     Let $f : X \rightarrow Y$ be a continuous map, where $X$ is connected and $Y$ is an ordered set. If $a,b \in X$ and $f(a) < r < f(b)$, $\exists c \in X, f(c) = r$.
 \end{theorem}
 \begin{proof}
-    Define two open set $f(x) \cap (-\infty, r)$ and $f(x) \cap (r, +\infty)$. They are a separation if there is no $c$.
+    By \theoref{cont_func_from_cont_to_cont}, the image is connected. Define two open set $f(x) \cap (-\infty, r)$ and $f(x) \cap (r, +\infty)$. They are a separation if there is no $c$ in the image.
 \end{proof}
 
 \begin{definition}[\cindex{path}]
