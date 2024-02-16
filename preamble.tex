@@ -119,6 +119,11 @@
 \usepackage{tikz-cd}
 
 
+
+% split a page into multiple columns
+\usepackage{multicol}
+
+
 %
 %
 % define new commands
@@ -310,7 +315,7 @@
 
 % the length ||
 \newcommand\lengthsmall[1]{ \Vert {#1} \Vert }
-\newcommand\length[1]{ \left\Vert {#1} \right\Vert }
+\newcommand\length[1]{\enVert{#1}}
 
 % transpose, the T
 \newcommand\transpose[1]{ {#1}^\top }
@@ -327,6 +332,19 @@
 \newcommand\conjugate[1]{\overline{#1}}
 
 
+
+
+
+
+%
+% ----------------------------------------- analysis -----------------------------------------
+%
+
+\newcommand\sequence[1]{\intoo{#1}}
+
+\newcommand\realpartofcomplexnumber[1]{\boldmathtext{Re}\text{(}#1\text{)}}
+
+\newcommand\imaginarypartofcomplexnumber[1]{\boldmathtext{Im}\text{(}#1\text{)}}
 
 
 

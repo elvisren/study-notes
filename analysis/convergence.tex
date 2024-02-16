@@ -1,5 +1,14 @@
 \chapter{Convergence}
 
+The order of research:
+\begin{itemize}
+    \item Define sequence    
+    \item Define series
+    \item Analyze monotone sequence
+    \item Analyze alternating sequence
+    \item Analyze absolute convergent sequence
+    \item Define power series and radius
+\end{itemize}
 
 %
 %
@@ -9,71 +18,45 @@
 
 \section{Convergence of Sequence}
 
+First we need to borrow the definitions from topology: metric, open ball, closed ball, neighborhood, $\epsilon$-neighborhood, bounded, diameter.
 
-\begin{definition}[metric]
-    Let $X$ be a set. A metric $d: X \times X \rightarrow \positiverealnumber$ has the following property:
+The key is to define limit and cluster point (which are different terms).
+
+\begin{definition}[\cindex{sequence}]
+    A sequence is a function $f: \naturalnumber \rightarrow X$, which is written as
+    \begin{equation}
+        \sequence{x_n}
+    \end{equation}
+    
+    \emph{A sequence $\sequence{x_n}$ is different from set $\set{x_n}$}.
+\end{definition}
+
+\begin{definition}[\cindex{cluster point}]
+    $a$ is a cluster point of $\sequence{x_n}$ if every neighborhood of $a$ contains infinitely many terms of the sequence.
+    
+    For example, $\sequence{(-1)^n}$ has two cluster points: $1$ and $-1$.
+\end{definition}
+
+\begin{definition}[\cindex{limit}]
+    A sequence $\sequence{x_n}$ converges to limit $a$ if every neighborhood of $a$ contains almost all terms of the sequence, which is written as
+    \begin{equation}
+        \lim_{n \rightarrow \infty} x_n = a \text{ or } x_n \rightarrow a
+    \end{equation}
+    
+    $x_n \rightarrow a$ means for each $\epsilon>0$, there is $m$ that for all $n > m$, $x_n \in \openball{a}{\epsilon}$
+\end{definition}
+
+\emph{Limit point is different from cluster point}. The cluster point did not require its open ball contains all the rest of sequence.
+
+
+\begin{theorem}\label{property_of_limit}
+    Properties of limit and convergent sequence:
     \begin{itemize}
-        \item $d(x,y) = 0 \Leftrightarrow x = y$
-        \item $d(x,y) = d(y,x)$
-        \item $d(x,y) \leq d(x,z) + d(z y)$
+        \item A sequence has a unique limit point
+        \item A convergent sequence is bounded
+        \item A convergent sequence has a unique cluster point
+        \item A point $a$ is a cluster point if there is subsequence which converges to $a$
     \end{itemize}
-\end{definition}
-
-\begin{definition}
-    An open ball is
-    \begin{equation}
-        \openball{x}{r} := \set{y \in X; d(x,y) < r}
-    \end{equation}
-    
-    An closed ball is
-    \begin{equation}
-        \closedball{x}{r} := \set{y \in X; d(x,y) \leq r}
-    \end{equation}
-\end{definition}
-
-\begin{definition}[neighborhood]
-    A subset $U \subseteq X$ is a neighborhood of $x$ if there is $r>0$ that $\openball{x}{r} \subseteq U$. 
-\end{definition}
-
-\begin{definition}[$\epsilon$-neighborhood]
-    $\openball{x}{\epsilon}$ and $\closedball{x}{\epsilon}$ are called open and closed $\epsilon$-neighborhood of $x$.
-\end{definition}
-
-\begin{definition}[sequence]
-    A sequence is a function $\naturalnumber \rightarrow X$, which is written as
-    \begin{equation}
-        (x_n)
-    \end{equation}
-\end{definition}
-
-\begin{definition}[cluster point]
-    $a$ is a cluster point of $(x_n)$ if every neighborhood of $a$ contains infinitely many terms of the sequence.
-    
-    For example, $(-1)^n$ has two cluster points: $1$ and $-1$.
-\end{definition}
-
-\begin{definition}[limit]
-    A sequence $(x_n)$ converges to limit $a$ if every neighborhood of $a$ contains almost all terms of the sequence, which is written as
-    \begin{equation}
-        \lim_{n \rightarrow \infty} x_n = a \text{    or    } x_n \rightarrow a
-    \end{equation}
-\end{definition}
-
-\begin{theorem}
-    $x_n \rightarrow a$ means for each $\epsilon>0$, there is $m$ that for all $n > m$, $x_n \in \openball{a}{\epsilon}$.
-\end{theorem}
-
-\begin{definition}[bounded]
-    A subset $Y \subseteq X$ is bounded if there is $M$ that $d(x,y) \leq M$ for all $x,y \in Y$. In this case, the diameter of $Y$ is defined as
-    \begin{equation}
-        \text{diam }(y) := \underset{x,y \in Y}{\text{sup}} d(x,y)
-    \end{equation}
-    
-    It is easy to show that every convergent sequence is bounded.
-\end{definition}
-
-\begin{theorem}
-    Let $x_n \rightarrow a$. Then $a$ is the unique cluster point of $(x_n)$. So the limit is unique.
 \end{theorem}
 
 
@@ -88,18 +71,29 @@
 
 \section{Real and Complex and Normed Vector Sequence}
 
+\begin{definition}[\cindex{null sequence}]
+    A sequence $\sequence{x_n}$ is called null sequence if it converges to $0$. So a sequence $x_n \rightarrow a$ if and only if $\sequence{x_n - a}$ is a null sequence.
+\end{definition}
+
 \begin{theorem}
-    Let $(x_n)$ and $(y_n)$ be convergent sequence with limit $a$ and $b$, we have
+    Let $\sequence{x_n}$ and $(y_n)$ be convergent sequence with limit $a$ and $b$. The operations on sequence are:
     \begin{itemize}
-        \item $(x_n + y_n)$ converge to $a + b$
-        \item $c (x_n)$ converge to $ca$
-        \item $(x_n y_n)$ converge to $ab$
+        \item $\sequence{x_n + y_n} \rightarrow a + b$
+        \item $\sequence{c \cdot x_n} \rightarrow c a$
+        \item $\sequence{x_n y_n} \rightarrow ab$
+        \item $\intoo{\frac{1}{x_n}} \rightarrow \frac{1}{a}$ if $a > 0$
+        \item $\sequence{\absolutevalue{x_n}} \rightarrow \absolutevalue{a}$
     \end{itemize}
+    
+    So the convergent sequence is a subalgebra of all sequences.
 \end{theorem}
 
 \begin{theorem}
-    For three real sequence $(x_n)$, $(y_n)$ and $(z_n)$ with property that $x_i \leq y_i \leq z_i$ for almost all $i$. If $x_n \rightarrow a$ and $z_n \rightarrow a$, we have $y_n \rightarrow a$.
-\end{theorem}
+    Comparison test:
+    \begin{itemize}
+        \item Let $\sequence{x_n}$ and $\sequence{y_n}$ be convergent sequence in $\realnumber$ that $x_n \leq y_n$ for almost all $n$. Then $\lim x_n \leq \lim y_n$.
+        \item For three real sequence $\sequence{x_n}$, $(y_n)$ and $(z_n)$ with property that $x_i \leq y_i \leq z_i$ for almost all $i$. If $x_n \rightarrow a$ and $z_n \rightarrow a$, we have $y_n \rightarrow a$.
+    \end{itemize}\end{theorem}
 
 \begin{theorem}
     For a sequence $(z_n)$ in $\complexnumber$, the following are equivalent:
@@ -107,15 +101,18 @@
         \item $(z_n)$ converges
         \item Real and imaginary part converge
     \end{itemize}
-\end{theorem}
-
-\begin{definition}
-    For a inner product vector space $E$, define a norm as 
+    
+    So 
     \begin{equation}
-        d(x,y) := \vectornorm{x - y}
+        \lim x_n = \lim \realpartofcomplexnumber{x_n} + i \lim \imaginarypartofcomplexnumber{x_n}
     \end{equation}
-\end{definition}
+\end{theorem}
+\begin{proof}
+    use $\absolutevalue{\realpartofcomplexnumber{x_n} - \realpartofcomplexnumber{x}} \leq \absolutevalue{x_n - x}$ and $\absolutevalue{x_n -x} = \sqrt{\absolutevalue{\realpartofcomplexnumber{x_n} - a}^2 + \absolutevalue{\imaginarypartofcomplexnumber{x_n} - a}^2}$
+\end{proof}
 
+
+For vector space, we need to define a metric on it. So either it is a metric space with metric $\length{\cdot}$, $\length{\cdot}_\infty$, or inner product $\innerproduct{\cdot}{\cdot}$.
 
 
 
@@ -127,15 +124,24 @@
 
 \section{Monotone Sequence}
 
-\begin{definition}[increasing]
-    A sequence $(x_n)$ is increasing if $x_n \leq x_{n+1}$.
+\begin{definition}[\cindex{increasing}]
+    A sequence $\sequence{x_n}$ is increasing if $x_n \leq x_{n+1}$.
 \end{definition}
+
+
+\begin{theorem}
+    Every increasing (decreasing) bounded sequence $\sequence{x_n}$ in $\realnumber$ converges. \theoref{property_of_limit} said boundedness is a necessary condition for the convergence of a sequence. For monotone sequence, it is sufficient condition.
+\end{theorem}
+\begin{proof}
+    By \theoref{dedekind_real_order_complete}, since $\realnumber$ is order complete and $\sequence{x_n}$ is bounded above, it has upper bound which is the limit.
+\end{proof}
+
 
 \begin{theorem}
     Every real sequence has a monotone subsequence.    
 \end{theorem}
 \begin{proof}
-    for a sequence $(a_n)$, find all indices $m$ that for all terms $(a_n)$ after $a_m$ is strictly smaller than $a_m$:
+    for a sequence $\sequence{a_n}$, find all indices $m$ that for all terms $\sequence{a_n}$ after $a_m$ is strictly smaller than $a_m$:
     \begin{equation}
         V = \set{m \in \integer: a_j < a_m \text{ for all } j > m}
     \end{equation}
@@ -144,79 +150,59 @@
 \end{proof}
 
 
-\begin{theorem}
-    Every increasing (decreasing) bounded sequence $(x_n)$ in $\realnumber$ converges. 
+\begin{theorem}[\cindex{Bolzano-Weierstrass Theorem}]
+    If $\sequence{a_n}$ is a bounded sequence, then there exists a subsequence that is convergent.
 \end{theorem}
 \begin{proof}
-    Since $\realnumber$ is order complete and $(x_n)$ is bounded above, it has upper bound which is the limit.
+    $\sequence{a_n}$ has a monotone subsequence which is bounded, so it is convergent.
 \end{proof}
 
 
-\begin{theorem}[Bolzano-Weierstrass Theorem]
-    If $(a_n)$ is a bounded sequence, then there exists a subsequence that is convergent.
-\end{theorem}
-\begin{proof}
-    $(a_n)$ has a monotone subsequence which is bounded, so it is convergent.
-\end{proof}
+The order of limit: $n^k < a^n < n!$
 
 
-Some important limits are:
+% infinite limits
+
+\section{Infinite Limits}
+
+Now consider the limit over $\closure{\realnumber}$ which extend $\realnumber$ to $\extendedrealnumber$ by adding $\pm \infty$ to the cluster points.
+ The extended definitions are:
 \begin{itemize}
-    \item $\displaystyle \lim_{n \rightarrow \infty} \frac{n^k}{a^n} = 0$
-    \item $\displaystyle \lim_{n \rightarrow \infty} \frac{a^n}{n!} = 0$
-    \item $\displaystyle \lim_{n \rightarrow \infty} \sqrt[n]{n} = 1$
-    \item $\displaystyle \lim_{n \rightarrow \infty} \left(1+\frac{1}{n} \right)^n = e$
+    \item A neighborhood around $\infty$ is the set $(a, \infty)$
+    \item $\infty$ is a cluster point if every neighborhood of $\infty$ contains infinitely many terms of $\sequence{x_n}$
+    \item $\sequence{x_n}$ converges in $\closure{\realnumber}$ if there is $x \in \closure{\realnumber}$ that $\lim_{n \rightarrow \infty} x_n = x$
+    \item If a sequence is convergent in $\closure{\realnumber}$ but divergent in $\realnumber$, it is said to \cindex{converge improperly}
 \end{itemize}
 
-
-% Cauchy sequence
-
-\section{Cauchy Sequence}
-
-\begin{definition}
-    A real sequence $(a_n)$ is a Cauchy sequence if for every $\epsilon > 0$, there is a $N \in \naturalnumber$ that for every $m,n \geq N$, we have $\absolutevalue{a_m - a_n} < \epsilon$.
-\end{definition}
-
 \begin{theorem}
-    A real sequence $(a_n)$ converges if and only if it is Cauchy.
+    Every monotone sequence in $\realnumber$ converges in $\closure{\realnumber}$.
 \end{theorem}
 \begin{proof}
-    $(a_n)$ has a monotone subsequence $(a_m)$. Since $(a_n)$ is Cauchy, it is bounded. So $(a_m)$ is a bounded monotone subsequence, so it has a limit $L$. Prove $(a_n)$ converges to $L$ as well.
+    If it is bounded, it is convergent in $\realnumber$. Or it is convergent in $\closure{\realnumber}$.
 \end{proof}
 
-
-% infinity limit
-\section{Infinity Limit}
-
-Extend $\realnumber$ to $\extendedrealnumber$ by adding $\pm \infty$ to the cluster points.
-
-\begin{theorem}
-    Every monotone sequence in $\realnumber$ converged in $\extendedrealnumber$.
-\end{theorem}
-
-
 \begin{definition}
-    Let $(x_n)$ be a sequence in $\realnumber$. Define limit superior as
+    Let $\sequence{x_n}$ be a sequence in $\realnumber$. Define \cindex{limit superior} as
     \begin{equation}
         S = \limsup_{n \rightarrow \infty} x_n = \varlimsup_{n\rightarrow \infty} x_n = \lim_{n \rightarrow \infty} \underset{k \geq n}{\text{ sup }} x_k
     \end{equation}
     
-    and limit inferior as
+    and \cindex{limit inferior} as
     \begin{equation}
         I = \liminf_{n \rightarrow \infty} x_n = \varliminf_{n\rightarrow \infty} x_n = \lim_{n \rightarrow \infty} \underset{k \geq n}{\text{ inf }} x_k
     \end{equation}    
 \end{definition}
 
-Be noted that $\displaystyle \varlimsup_{n\rightarrow \infty} x_n$ is a decreasing sequence and $\displaystyle \varliminf_{n\rightarrow \infty} x_n$ is an increasing sequence.
+Be noted that $\sequence{\underset{k \geq n}{\text{ sup }} x_k}$ is a decreasing sequence and $\sequence{\underset{k \geq n}{\text{ inf }} x_k}$ is an increasing sequence.
 
 
 \begin{theorem}\label{definition_of_limit_superium_infinium}
-    Let $(a_n)$ be a bounded sequence, then
+    Let $\sequence{a_n}$ be a bounded sequence, then
     \begin{equation}
         \begin{aligned}
-            \varlimsup_{n\rightarrow \infty} x_n &= \sup \set{r \in \realnumber: a_n > r \text{ for infinity many } n} \\
+            \varlimsup_{n\rightarrow \infty} x_n &= \sup \set{r \in \realnumber: a_n > r \text{ for all but finite many } n} \\
             &= \inf \set{r \in \realnumber: a_n > r \text{ for finitely many } n} \\
-            \varliminf_{n\rightarrow \infty} x_n &= \inf \set{r \in \realnumber: a_n < r \text{ for infinity many } n} \\
+            \varliminf_{n\rightarrow \infty} x_n &= \inf \set{r \in \realnumber: a_n < r \text{ for all but finite many } n} \\
             &= \sup \set{r \in \realnumber: a_n < r \text{ for finitely many } n} 
         \end{aligned}
     \end{equation}
@@ -224,7 +210,7 @@ Be noted that $\displaystyle \varlimsup_{n\rightarrow \infty} x_n$ is a decreasi
     
     If limit superior S is a real number $s$, it means that for any $\epsilon>0$, there is a $N$ that $s + \epsilon$ is an upper bound for $x_{n > N}$. The reverse is true for limit inferior I.
 
-    $[I,S]$ may not contain any number from $(x_n)$. But for any $\epsilon >0$, $[I - \epsilon, S + \epsilon]$ contains all but finite numbers from $(x_n)$, and this is the smallest closed interval with this property.
+    $[I,S]$ may not contain any number from $\sequence{x_n}$. But for any $\epsilon >0$, $[I - \epsilon, S + \epsilon]$ contains all but finite numbers from $\sequence{x_n}$, and this is the smallest closed interval with this property.
 \end{theorem}
 
 
@@ -255,7 +241,7 @@ The additivity of limit superior and inferior is
 \end{proof}
 
 \begin{theorem}
-    Any sequence $(x_n)$ in $\realnumber$ has a smallest cluster point $x_*$ and greatest cluster point $x^*$ in $\extendedrealnumber$ that
+    Any sequence $\sequence{x_n}$ in $\realnumber$ has a smallest cluster point $x_*$ and greatest cluster point $x^*$ in $\extendedrealnumber$ that
     \begin{equation}
         \begin{aligned}
             \limsup_{n \rightarrow \infty} x_n &= \varlimsup_{n\rightarrow \infty} x_n &= x^* \\
@@ -266,7 +252,7 @@ The additivity of limit superior and inferior is
 \begin{proof}
     Let's check $x^*$. 
     
-    If $x^* = - \infty$. Then for any $m < 0$, there is $n$ that $m > \underset{k \geq n}{\text{ sup }} x_k$, so $x_k < m$ for all $m$. So $x^* = -\infty$ is the only cluster point of $(x_n)$.
+    If $x^* = - \infty$. Then for any $m < 0$, there is $n$ that $m > \underset{k \geq n}{\text{ sup }} x_k$, so $x_k < m$ for all $m$. So $x^* = -\infty$ is the only cluster point of $\sequence{x_n}$.
     
     If $x^* = \infty$, the case is the same.
         
@@ -279,26 +265,106 @@ limit superior and inferior are useful because they always exist but limit may n
 
 
 
+% Cauchy sequence
+
+\section{Completeness}
+
+A complete space gives us a way to prove the convergence of a sequence without knowing the actual limit.
+
+\begin{definition}[\cindex{Cauchy sequence}]
+    A real sequence $\sequence{a_n}$ is a Cauchy sequence if for every $\epsilon > 0$, there is a $N \in \naturalnumber$ that for every $m,n \geq N$, we have $\absolutevalue{a_m - a_n} < \epsilon$.
+\end{definition}
+
+\begin{theorem}
+    A real sequence $\sequence{a_n}$ converges if and only if it is Cauchy.
+\end{theorem}
+\begin{proof}
+    $\sequence{a_n}$ has a monotone subsequence $\sequence{a_m}$. Since $\sequence{a_n}$ is Cauchy, it is bounded. So $\sequence{a_m}$ is a bounded monotone subsequence, so it has a limit $L$. Prove $\sequence{a_n}$ converges to $L$ as well.
+\end{proof}
+
+\begin{definition}[\cindex{Banach space}]
+    A complete normed vector space is called Banach space.
+\end{definition}
+
+\begin{definition}[\cindex{Hilbert space}]
+    A complete inner product space is called Hilbert space.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be non-empty set and $E$ a Banach space. Then the set of all bounded function $\set{f: X \rightarrow E}$ is a Banach space.
+\end{theorem}
+\begin{proof}
+    For any $\epsilon$, we have $\norm{u_m - u_n}_\infty \leq \epsilon$, so for any $x \in X$, we have $\norm{u_m (x) - u_n (x)} \leq \norm{u_m - u_n}_\infty \leq \epsilon$. So each $\sequence{u_m (x)}$ is a Cauchy sequence in $E$, so it converges to $a_x$. Define the function $f: x \rightarrow a_x$, and prove they converge to it.
+\end{proof}
+
+
 
 % real series
-\section{Real Series}
+\section{Series}
 
-\begin{definition}[convergent series]
-    A real series $\sum_{i=1}^\infty a_i$ is convergent if the sequence of its partial sum converges, which is defined as
+\begin{definition}[\cindex{series}]
+    Let $\sequence{x_k}$ be a sequence in $E$. A series is a new $\sequence{s_k}$ in $E$ which is defined as
     \begin{equation}
-        \sum_{i=1}^\infty a_i = \lim_{n \rightarrow \infty} \sum_{i=1}^n a_i \in \realnumber
+        s_n = \sum_{k=0}^n x_k
+    \end{equation}
+    
+    Each $s_k$ is called \cindex{partial sum} and $x_k$ is called \cindex{summand}. The series $\sum x_k$ converges if the sequence $\sequence{s_k}$ of its partial sum converges.
+\end{definition}
+
+\begin{theorem}
+    if the series $\sum x_k$ converges, then $\sequence{x_k}$ is a null sequence.
+\end{theorem}
+\begin{proof}
+    Since the partial sum $\sequence{s_k}$ converges, the partial sum is a Cauchy sequence, so $\absolutevalue{s_{k+1} - s_k} = x_k < \epsilon$.
+\end{proof}
+
+
+\begin{theorem}[\cindex{Cauchy criterion test}]\label{cauchy_convergent_criterion}
+    The real series $\sum_{i=1}^\infty a_i$ in Banach space converges if for every $\epsilon > 0$, there is an $N$ that for $m > n > N$, we have $\absolutevalue{a_{m+1} + a_{m+2} + \cdots + a_n} < \epsilon$.
+\end{theorem}
+
+
+% alternating series
+
+\section{Alternating Series}
+
+\begin{definition}[\cindex{alternating}]
+    A series $\sum y_k$ is alternating if $y_k$ and $y_{k+1}$ have opposite sign for all $k$. It could be written as
+    \begin{equation}
+        \pm \sum_{k=1}^\infty (-1)^k x_k \text{, with } x_k \geq 0
     \end{equation}
 \end{definition}
 
-\begin{theorem}[Cauchy criterion test]\label{cauchy_convergent_criterion}
-    The real series $\sum_{i=1}^\infty a_i$ converges if for every $\epsilon > 0$, there is an $N$ that for $m,n > N$, we have $\absolutevalue{a_{m+1} + a_{m+2} + \cdots + a_n} < \epsilon$.
-\end{theorem}
 
-\begin{definition}[absolute convergence]
+\begin{theorem}[\cindex{Lebniz criterion}]
+    An alternating series of the form $\sum_{i=1}^\infty (-1)^i b_j$ with $b_j > 0$ converges if $(b_j)$ is decreasing and $b_j \rightarrow 0$.
+\end{theorem}
+\begin{proof}
+    Define $s_n = \sum_{i=1}^{n+1} (-1)^i b_i$. For $s_{2n}$, we have
+    \begin{equation}
+        \begin{aligned}
+            s_{2n} &= b_1 - b_2 + b_3 - b_4 + \cdots -b_{2n-2} + b_{2n-1} - b_{2n} \\
+            &= b_1 - (b_2 - b_3) - \cdots - (b_{2n-2} - b_{2n-1}) - b_{2n} \leq b_1
+        \end{aligned}
+    \end{equation}
+    
+    So $\sequence{s_{2n}}$ is bounded above. Also $s_{2n+2} - s_{2n} = b_{2n+2} - b_{2n+1} > 0$ so $\sequence{s_{2n}}$ is increasing. Therefore $s_{2n}$ is convergent. $\sequence{s_{2n-1}}$ is convergent too. And their different is $a_{2n} \rightarrow 0$ so two limits are the same.
+\end{proof}
+
+
+
+
+% absolute convergence
+
+\section{Absolute Convergence}
+
+The test for absolute convergence is built on the test of geometric series.
+
+\begin{definition}[\cindex{absolute convergence}]
     A real series $\sum_{i=1}^\infty a_i$ is called absolute convergent if the absolute series $\sum_{i=1}^\infty \absolutevalue{a_i}$ converges.
 \end{definition}
 
-\begin{definition}[conditionally convergence]
+\begin{definition}[\cindex{conditionally convergence}]
     A real series is called conditionally convergent if it is convergent but not absolutely convergent.
 \end{definition}
 
@@ -309,23 +375,8 @@ limit superior and inferior are useful because they always exist but limit may n
     Use \theoref{cauchy_convergent_criterion}.
 \end{proof}
 
-\begin{theorem}[alternating series test]
-    An alternating series of the form $\sum_{i=1}^\infty (-1)^i b_j$ with $b_j > 0$ converges if $(b_j)$ is decreasing and $b_j \rightarrow 0$.
-\end{theorem}
-\begin{proof}
-    Define $s_n = \sum_{i=1}^n (-1)^i b_j$. For $s_{2n}$, we have
-    \begin{equation}
-        \begin{aligned}
-            s_{2n} &= b_1 - b_2 + b_3 - b_4 + \cdots -b_{2n-2} + b_{2n-1} - b_{2n} \\
-            &= b_1 - (b_2 - b_3) - \cdots - (b_{2n-2} - b_{2n-1}) - b_{2n} \leq b_1
-        \end{aligned}
-    \end{equation}
-    
-    So $s_{2n}$ is bounded above. Also $s_{2n+2} - s_{2n} = b_{2n+2} - b_{2n+1} > 0$ so $s_{2n}$ is increasing. Therefore $s_{2n}$ is convergent. $s_{2n-1}$ is convergent too. And their different is $a_{2n} \rightarrow 0$ and two limits are the same.
-\end{proof}
 
-
-\begin{theorem}[ratio test]
+\begin{theorem}[\cindex{ratio test}]
     For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Let $L = \lim_{j \rightarrow \infty} \absolutevalue{\frac{a_{j+1}}{a_j}}$, we have
     \begin{itemize}
         \item If $L < 1$, the series converges absolutely
@@ -333,15 +384,18 @@ limit superior and inferior are useful because they always exist but limit may n
     \end{itemize}
 \end{theorem}
 
-\begin{theorem}[root test]
-    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Let $L = \lim_{j \rightarrow \infty}  \sqrt[j]{\absolutevalue{a_j}}$, we have
+\begin{theorem}[\cindex{root test}]
+    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Let $L = \varlimsup_{j \rightarrow \infty}  \sqrt[j]{\absolutevalue{a_j}}$, we have
     \begin{itemize}
         \item If $L < 1$, the series converges absolutely
         \item If $L > 1$, the series diverges
     \end{itemize}
 \end{theorem}
+\begin{proof}
+    If $L < 1$, choose $a$ that $L < a < 1$. According to the definition of limit superior, there is $N$ that for $n > N$, we have $\sqrt[n]{\absolutevalue{a_n}} < a$, so $\absolutevalue{a_n} < a^n$.
+\end{proof}
 
-\begin{theorem}[Raabe's test]
+\begin{theorem}[\cindex{Raabe's test}]
     For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Suppose there is 
     \begin{equation}
         L = \lim_{n \rightarrow \infty} n \left( \absolutevalue{\frac{a_n}{a_{n+1}}} - 1 \right)
@@ -355,7 +409,28 @@ limit superior and inferior are useful because they always exist but limit may n
 \end{theorem}
 
 
-\begin{theorem}[Riemann rearrangement theorem]
+
+% rearrangement of series
+
+\section{Rearrangement}
+
+Addition $+$ is not commutative when there are infinitely many summands.
+
+\begin{theorem}
+    Every rearrangement of absolutely convergent series is absolutely convergent and they have the same value as original series.    
+\end{theorem}
+\begin{proof}
+    Since $\sum x_k$ is absolutely convergent, it is a Cauchy series. So for any $\epsilon$, there is $N$ that $\sum_{k=N+1}^\infty \absolutevalue{x_k} < \epsilon$.
+    
+    Let $\sigma$ be a permutation of $\naturalnumber$. Let $M = \max \set{\inverse{\sigma}(0), \inverse{\sigma}(1), \cdots, \inverse{\sigma}(N) }$. We have
+    \begin{equation}
+        \absolutevalue{\sum_{k=0}^m \absolutevalue{x_{\sigma (k)}} - \sum_{k=0}^N \absolutevalue{x_k} } \leq \absolutevalue{\sum_{k=0}^m x_{\sigma (k)} - \sum_{k=0}^N x_k } \leq \sum_{k=N+1}^\infty \absolutevalue{x_k} < \epsilon
+    \end{equation}
+    
+    Take $m \rightarrow \infty$.
+\end{proof}
+
+\begin{theorem}[\cindex{Riemann rearrangement theorem}]
     Let $\sum_{i=1}^\infty a_i$ be a real series that converges conditionally. For any $L \in \realnumber$, there is a rearrangement of the series so that $\sum_{i=1}^\infty a_{\sigma (i)} = L$.
 \end{theorem}
 \begin{proof}
@@ -392,6 +467,41 @@ limit superior and inferior are useful because they always exist but limit may n
 
 
 
+% power series
+
+\section{Power Series}
+
+\begin{definition}[\cindex{power series}]
+    A power series is a function $f$ that the following series converges:
+    \begin{equation}
+        f(x) = \sum_{k=0}^n a_k \cdot x^k
+    \end{equation}
+\end{definition}
+
+\begin{theorem}[\cindex{radius of convergence}]
+    There is a $\rho \in [0, \infty]$ that power series $\sum a_k x^k$ converges absolutely if $\absolutevalue{x} < p$ and diverges if $\absolutevalue{x} > p$. $\rho$ is called the radius of convergence. It could be calculated by the \cindex{Hadamard's formula}:
+    \begin{equation}
+        \rho = \frac{1}{\displaystyle \varlimsup_{k \rightarrow \infty} \sqrt[k]{\absolutevalue{a_k}} } \in \closure{\realnumber}
+    \end{equation}
+    
+    So the power series $\sum a_k x^k$ will converge if
+    \begin{equation}
+        x \in \left(- \frac{1}{\displaystyle \varlimsup_{k \rightarrow \infty} \sqrt[k]{\absolutevalue{a_k}} }, \frac{1}{\displaystyle \varlimsup_{k \rightarrow \infty} \sqrt[k]{\absolutevalue{a_k}} } \right)
+    \end{equation}
+    
+    It could also be calculated by 
+    \begin{equation}
+        \rho = \lim_{k \rightarrow \infty} \absolutevalue{\frac{a_k}{a_{k+1}}}
+    \end{equation}
+    
+    Note:
+    \begin{itemize}
+        \item $\rho$ could be $\infty$
+        \item There is no statement of convergence on boundary that $x = \pm \rho$. Counterexamples are $\sum x^k$, $\sum \frac{1}{k} x^k$, $\sum \frac{1}{k^2} x^k$. On boundary condition $x=1$, the first two diverge and the third one converges.
+    \end{itemize}
+    
+     
+\end{theorem}
 
 
 

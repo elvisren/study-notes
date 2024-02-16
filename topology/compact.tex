@@ -24,6 +24,14 @@
     Let $Y$ be such a subspace. Now prove $X - Y$ is open. Select $x_0 \in X - Y$. Because $X$ is Hausdorff, for each $y_i \in Y$, there are $x \in U_x$ and $y_i \in V_i$ that $U_x \cap V_i = \emptyset$. $\set{V_i}$ is an open covering of compact subspace $Y$, so it has a finite cover $V_n$. Choose $\cup V_n$ and $\cap U_x$. These two are disjoint open sets. So for any $x \in X - Y$, there is a neighborhood of $x$ that does not intersect $Y$. So $Y$ is an closed set.
 \end{proof}
 
+\begin{theorem}
+    Every compact subspace of a metric space is bounded and closed.    
+\end{theorem}
+\begin{proof}
+    For a $x \in Y$, cover $Y$ by all $B(x, \epsilon)$. There is a finite cover.
+\end{proof}
+
+
 \begin{theorem}\label{disjoint_openset_of_x_and_compact_set}
     If $Y$ is a compact subspace of the Hausdorff space $X$ and $x_0$ is not in $Y$, then there exists disjoint open sets $U$ and $V$ of $X$ containing $x_0$ and $Y$.    
 \end{theorem}
@@ -60,7 +68,7 @@
     A collection $\mathbf{C}$ of subsets of $X$ is said to have the finite intersection property if for every finite subcollection $C_i$ of $\mathbf{C}$, $\bigcap_{i \leq n} C_i \neq \emptyset$ .
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{finite_intersection_in_compact_not_empty}
     $X$ is compact if and only if for every $\mathbf{C}$ of closed sets in $X$ having the finite intersection property, $\bigcap_{C \in \mathbf{C}} C \neq \emptyset$.
     
     One conclusion is that for a nested sequence of closed set $C_1 \supset C_2 \supset C_3 ...$ in a compact space $X$, $\bigcap_{i \in \mathbb{Z}_{+}} C_i \neq \emptyset$.
@@ -141,6 +149,8 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 
 \begin{definition}[\cindex{uniformly continuous}]
     A function $f$ from metric space $(X, d_X)$ to the metric space $(Y, d_Y)$ is uniformly continuous if $\forall \epsilon > 0, \exists \delta > 0, \forall a,b \in X, d_X (a,b) < \delta \Rightarrow d_Y \left(f(a), f(b)\right) < \epsilon$.
+    
+    Note: uniformly continuous is for a single function. Converge uniformly (\theoref{converge_uniformly}) is for a sequence of functions.
 \end{definition}
 
 \begin{theorem}
@@ -177,6 +187,15 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
     According to \theoref{compact_subspace_closed}, $A$ is closed.
 \end{proof}
 
+\begin{theorem}
+    If $X$ is a set that every closed interval is compact, it has least upper bound property.    
+    
+    The key to the proof: \emph{if a set does not have a least upper bound, all upper bounds form an open set}.
+\end{theorem}
+\begin{proof}
+    Assume there is $\set{y_i}$ without least upper bound. Define set $C = X - \cup_i (-\infty,y_i)$. $C$ is not empty because $\set{y_i}$ is bounded above. $C$ is open because for every $c\in C$, there is $\epsilon$-ball around $c$ that $c-\epsilon > \cup_i (-\infty,y_i)$, or $c$ is the least upper bound. $C$ is open means $\cup_i (-\infty,y_i)$ is closed, which means it is a compact space. For each $y_i$, the set $[y_i, \infty) \cap \cup_i (-\infty,y_i)$ is a closed set in compact set with finite intersection property. According to \theoref{finite_intersection_in_compact_not_empty}, $\cap_i \set{[y_i, \infty) \cap \cup_i (-\infty,y_i)}$ is empty, a contradiction.
+\end{proof}
+
 
 
 % limit point compactness
@@ -208,7 +227,11 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
         \item $X$ is sequentially compact.
     \end{enumerate}
     
-    Note: compact means limit point compact without the metrizable assumption.
+    Note:
+    \begin{itemize}
+        \item compact means limit point compact without the metrizable assumption
+        \item for non-metric space, compact and sequentially compact have no relationship
+    \end{itemize}
 \end{theorem}
 \begin{proof}
     For (2) $\rightarrow$ (3), for a sequence $x_i$ and $A = \set{x_i}$. If $A$ is finite, it has a constant subsequence which is convergent. If $A$ is infinite, it has a limit point $x$. For each $i$, choose a point $x_{n_i} \in B(x, \frac{1}{i})$ which is a convergent subsequence.
@@ -225,6 +248,8 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 
 \begin{definition}[\cindex{locally compact}]
     A space $X$ is said to be locally compact at $x$ if there is some compact subspace $C \subset X$ that contains a neighborhood of $x$. If $X$ is locally compact at every points, it is locally compact.
+    
+    A compact space is by default locally compact.
 \end{definition}
 
 
@@ -235,7 +260,16 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
         \item $Y$ is a compact Hausdorff space.
     \end{enumerate}
     
-    If there are $Y$ and $Y'$ satisfying these conditions, there there is a homeomorphism between them. Also $\infty$ is a limit point of $X$ in $Y$.
+    If there are $Y$ and $Y'$ satisfying these conditions, there there is a homeomorphism between them. 
+    
+    
+    The $\infty$ is:
+    \begin{itemize}
+        \item a limit point in $Y$ if $X$ is locally compact but not compact
+        \item an isolated point if $X$ is compact
+    \end{itemize}
+    
+     
 \end{theorem}
 \begin{proof}
     The open set in $Y$ is defined by:
@@ -264,7 +298,7 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
     Let $Y$ be the one-point compactification of $X$. So $C = Y - U$ is a closed subspace and compact. According to \theoref{disjoint_openset_of_x_and_compact_set}, there are $v$ and $W$ that $x \in v$ and $C \subset W$, and $V \cap W = \emptyset$. So $\closure{V}$ is compact in $Y$ and $\closure{V} \subset U$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}[construct locally compact subspace]
     Let $X$ be a locally compact Hausdorff and $A \subset X$. If $A$ is closed in $X$ or open in $X$, then $A$ is locally compact.
 \end{theorem}
 \begin{proof}

@@ -53,17 +53,29 @@
     \end{itemize}
 \end{definition}
 
-\begin{definition}[uniform continuous]
+
+\begin{theorem}
+    Let $X,Y$ be metric spaces. Then a function $f: X\rightarrow Y$ is continuous at $x$ if and only if it is sequentially continuous at $x$, which is for every sequence $\set{x_i}$ such that $\lim x_i = x$, we have $\lim f(x_i) = f(x)$. A better expression is:
+    \begin{equation}
+        \lim f(x_i) = f(\lim x_i )
+    \end{equation}
+\end{theorem}
+
+
+
+\begin{definition}[\cindex{uniform continuous}]
     A function $f$ is uniform continuous if for any $x_0 \in X$ and $\epsilon > 0$, there is $\delta(\epsilon) > 0$ that for all $\absolutevalue{x - x_0} < \delta$, we have $\absolutevalue{f(x) - f(x_0)} < \epsilon$.
     
     So $\delta$ does not depends on $x_0$, compared with \defiref{continuous_function_definition}.
 \end{definition}
 
-\begin{definition}[Lipschitz continuity]
+\begin{definition}[\cindex{Lipschitz continuity}]
     A function $f$ is Lipschitz continuous if there exists $L > 0$ that for all $x,y \in X$, we have 
     \begin{equation}
         \absolutevalue{f(x) - f(y)} \leq L \absolutevalue{x - y}
     \end{equation}
+    
+    There is no restriction that $L < 1$.
 \end{definition}
 
 \begin{theorem}
@@ -73,6 +85,15 @@
         \text{Lipschitz continuous} \Rightarrow \text{uniformly continuous} \Rightarrow \text{continuous}
     \end{equation}    
 \end{theorem}
+
+
+\begin{theorem}[\cindex{continuous extension}]
+    Let $X$ and $Y$ be metric spaces, and $D \subseteq X$, and $f: D\rightarrow Y$ is continuous. Suppose $a \in D^c$ is a limit point of $D$ and there is $y \in Y$ that $\lim_{x \rightarrow a} f(x) = y$. Then $\closure{f}: D \cup \set{a} \rightarrow Y$ is a continuous extension of $f$ to $D \cup \set{a}$.
+\end{theorem}
+
+
+
+
 
 
 % function sequence

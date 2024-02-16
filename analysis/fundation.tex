@@ -7,89 +7,12 @@
     \item Corollary: a proposition follows directly from a theorem
 \end{enumerate}
 
-\section{Combinatorics}
-
-
-\begin{theorem}[multinomial formula]
-    for $\alpha=(\alpha_1, ... \alpha_m) \in \naturalnumber^m$ and $x=(x_1, ..., x_m) \in \realnumber^m$, define these operations:
-    \begin{equation}
-        \begin{aligned}
-            \absolutevalue{\alpha} &= \sum_{j=1}^m a_j \\
-            \alpha ! &= \prod_{j=1}^m \alpha_j ! \\
-            x^\alpha &= \prod_{j=1}^m {x_j}^{\alpha_j}
-        \end{aligned}
-    \end{equation}
-    
-    We have
-    \begin{equation}
-        \left(\sum_{j=1}^m x_j \right)^k = \sum_{\absolutevalue{\alpha = k}} \frac{k!}{\alpha !} x^\alpha
-    \end{equation}
-\end{theorem}
 
 
 
-\section{Trigonometry}
-
-\begin{theorem} 
-    Here are the essential trigonometry functions:    
-    
-\begin{equation}
-    \begin{aligned}
-        \sin(\alpha + \beta) &=\sin\alpha\cos\beta + \cos\alpha\sin\beta \\
-        \sin(\alpha - \beta) &=\sin\alpha\cos\beta - \cos\alpha\sin\beta \\
-        \cos(\alpha + \beta) &=\cos\alpha\cos\beta - \sin\alpha\sin\beta \\
-        \cos(\alpha - \beta) &=\cos\alpha\cos\beta + \sin\alpha\sin\beta \\
-        \tan(\alpha+\beta) &= \frac{\tanh\alpha + \tan\beta}{1 - \tan\alpha \tan\beta} \\   
-    \end{aligned}
-\end{equation}
 
 
-\begin{equation}
-    \begin{aligned}
-        \sin\alpha\cos\beta &=\frac{1}{2}[\sin(\alpha+\beta) + \sin(\alpha - \beta)] \\
-        \cos\alpha\sin\beta &=\frac{1}{2}[\sin(\alpha+\beta) - \sin(\alpha - \beta)] \\
-        \cos\alpha\cos\beta &=\frac{1}{2}[\cos(\alpha + \beta) + \cos(\alpha - \beta)] \\
-        \sin\alpha\sin\beta &=-\frac{1}{2}[\cos(\alpha + \beta) - \cos(\alpha - \beta)] \\
-    \end{aligned}
-\end{equation}
-
-
-\begin{equation}
-    \begin{aligned}   
-        \sin\alpha + \sin\beta &= 2 \sin\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} \\
-        \sin\alpha - \sin\beta &= 2 \cos\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} \\
-        \cos\alpha + \cos\beta &= 2 \cos\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} \\
-        \cos\alpha - \cos\beta &= 2 \sin\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} \\ 
-    \end{aligned}
-\end{equation}
-
-
-\begin{equation}
-    \begin{aligned}    
-        \sin 2\alpha &= 2 \sin\alpha \cos\alpha \\
-        \cos 2\alpha &= \cos^2 \alpha - \sin^2 \alpha \\
-        &= 2 \cos^2 \alpha - 1 \\
-        &= 1 - 2 \sin^2 \alpha \\
-        \sin 3\alpha &= 3 \sin\alpha - 4 \sin^3 \alpha \\
-        \cos 3\alpha &= -3 \cos\alpha + 4 \cos^3 \alpha \\
-    \end{aligned}
-\end{equation}
-
-\begin{equation}
-    \begin{aligned}       
-        \sin \alpha &= \frac{2 \tan \frac{\alpha}{2}}{1 + \tan^2 \frac{\alpha}{2}} \\
-        \cos \alpha &= \frac{1 - \tan^2 \frac{\alpha}{2}}{1 + \tan^2 \frac{\alpha}{2}} \\
-        \tan \alpha &= \frac{2 \tan \frac{\alpha}{2}}{1 - \tan^2 \frac{\alpha}{2}} \\  
-    \end{aligned}
-\end{equation}
-
-
-\begin{equation}
-    a \sin\alpha + b \cos\alpha = \sqrt{a^2 + b^2}\sin\left(\alpha + \arcsin\frac{b}{\sqrt{a^2 + b^2}}\right)
-\end{equation}
-
-\end{theorem}
-
+% logic and set theory
 
 \section{Logic and Set Theory}
 
@@ -309,7 +232,7 @@ Natural number $\naturalnumber$ did not support the inverse $-n$. Integer $\inte
 \subsection{Rational Number}
 Integer $\integer$ did not support the $m/n$. Rational number $\rational$ is the smallest field that contains $\integer$. $\rational$ has a limitation too. For example, there is no rational $x$ that $x^2 = 2$. So we need to extend $\rational$ too.
 
-\begin{definition}[order complete]
+\begin{definition}[\cindex{order complete}]
     Let $X$ be a totally ordered set. It is order complete if every nonempty subset is bounded below. It is also called complete.
 \end{definition}
 
@@ -338,7 +261,7 @@ Real number $\realnumber$ is the order completion of rational number $\rational$
     Let $F$ be a field. A Dedekind cut $(L,R)$ on $F$ is a partition of $F$ into two disjoint set $L$ and $R$ that
     \begin{itemize}
         \item $L \neq \emptyset, F$
-        \item $L$ is closed downwards: for any $x,y \in F$ that $x < y$. If $y \in L$, then $x \in L$
+        \item $L$ is closed downwards: for any $x,y \in F$ that if $y \in L$ and $x < y$, then $x \in L$
         \item $L$ does not have maximum element: for any $x \in L$, there is $y\in L$ that $x < y$
     \end{itemize}
 \end{definition}
@@ -360,7 +283,7 @@ For $q \in \rational$, there is a Dedekind cut $L_q = \set{x\in \rational: x < q
 
 We could define the $\times$ on $L_\rational$ as well. Now we extend the $+$ and $\times$ operation to all $C$ and becomes the operations on real number.
 
-\begin{theorem}
+\begin{theorem}\label{dedekind_real_order_complete}
     The Dedekind cut $C$ with $+$, $\times$ is order complete.    
 \end{theorem}
 \begin{proof}
@@ -389,6 +312,13 @@ Let $x \in \realnumber$. It could be expressed as the supremum of the set $x = \
         \item For any $a,b\in \realnumber$ that $a < b$, there is $r \in \realnumber \textbackslash \rational $ that $a < r < b$
     \end{itemize}    
 \end{theorem}
+\begin{proof}
+    To prove $\frac{1}{n} < a$, there is $n$ that $n > \frac{1}{a}$. 
+    
+    To prove $a < q < b$. There is $n \in \naturalnumber$ that $n > \frac{1}{b-a}$, so $na + 1 < nb$. For $na$, there is $m \in \integer$ that $m - 1 \leq na < m$, so $na < m \leq na + 1$. So $na < m \leq na + 1 < nb$, and $a < \frac{m}{n} < b$. Let $r = \frac{m}{n} \in \rational$.
+    
+    To prove $a < r < b$, find $q_1, q_r \in \rational$ that $a < q_1 < q_2 < b$. Define $\xi = q_1 + \frac{q_2 - q_2}{\sqrt{2}} \in \realnumber - \rational$.
+\end{proof}
 
 
 \begin{example}[decimal expression of rational number]
@@ -416,21 +346,40 @@ Let $x \in \realnumber$. It could be expressed as the supremum of the set $x = \
 
 The real number $\realnumber$ still has limitation. It cannot solve $x^2 = -1$. The smallest extension field $\complexnumber$ to $\realnumber$ is the complex number.
 
-\begin{theorem}
-    For all $a,b \in \realnumber$ such that $a < b$. There is $r \in \rational$ that $a < r < b$.
-\end{theorem}
-\begin{proof}
-    Since $b - a > 0$, there is $n$ that $n > \frac{2}{b-a} > 0$. So $nb > na + 2$ and there is $m$ that $na < m < na + 2 < nb$. So $a < \frac{m}{n} < b$.
-\end{proof}
 
-
+\begin{definition}[\cindex{extended number line}]
+    The set $\closure{\realnumber} = \realnumber \cup \set{\pm \infty}$ is the extended number line. 
+    
+    Defined operations are: $x + \infty = \infty$, $x - \infty = -\infty$, $\displaystyle \frac{x}{\pm \infty} = 0$, $\infty + \infty = \infty$, $- \infty - \infty = - \infty$, $\infty \cdot \infty = \infty$.
+    \begin{equation}
+        \begin{aligned}
+            x \cdot \pm \infty &= \begin{cases}
+                \mp \infty \text{, } x > 0 \\
+                \pm \infty \text{, } x < 0 \\
+            \end{cases} \\
+            \frac{x}{0} &= \begin{cases}
+                \infty \text{, } x > 0 \\
+                -\infty \text{, } x < 0 \\
+            \end{cases} \\
+        \end{aligned}
+    \end{equation}
+    
+    Undefined operations are: $\infty - \infty$, $0 \times \pm \infty$, $\displaystyle \frac{\pm \infty}{\pm \infty}$, $\displaystyle \frac{0}{0}$, $\displaystyle \frac{\pm \infty}{0}$.
+    
+    It has the following property:
+    \begin{itemize}
+        \item $\closure{\realnumber}$ is a totally ordered set
+        \item $\closure{\realnumber}$ is not a field
+    \end{itemize}
+\end{definition}
 
 % complex number
 \subsection{Complex Number}
 
+The complex number $\complexnumber$ is the smallest extension field of $\realnumber$ that $x^2 = -1$ is solvable.
 
 \begin{theorem}[De Moivre's Identity]
-    For $z = a + b i \neq 0$ and $n \infty \integer$, we have 
+    For $z = a + b i \neq 0$ and $n \in \integer$, we have 
     \begin{equation}
         z^n = (a+bi)^n = r^n(\cos \theta + i \sin \theta)^n = r^n (\cos n\theta + i \sin n\theta)
     \end{equation}

@@ -1,0 +1,224 @@
+\chapter{Recite}
+
+
+\section{High School}
+
+\begin{multicols}{3}
+    \begin{equation*}
+        \sum_{i=1}^n i = \frac{n (n+1)}{2}
+    \end{equation*}
+    \columnbreak
+
+    \begin{equation*}
+        \sum_{i=1}^n i^2 = \frac{n (n+1) (2n+1)}{6}
+    \end{equation*}
+    \columnbreak
+
+    \begin{equation*}
+        \sum_{i=1}^n i^3 = \frac{n^2 (n+1)^2}{4}
+    \end{equation*}
+    \columnbreak
+
+\end{multicols}
+
+
+
+% combinatorics
+\section{Combinatorics}
+
+
+\begin{theorem}[multinomial formula]
+    for $\alpha=(\alpha_1, ... \alpha_m) \in \naturalnumber^m$ and $x=(x_1, ..., x_m) \in \realnumber^m$, define these operations:
+    
+    \begin{multicols}{3}
+        \begin{equation*}
+            \absolutevalue{\alpha} = \sum_{j=1}^m a_j
+        \end{equation*}
+        \columnbreak
+        
+        \begin{equation*}
+            \alpha ! = \prod_{j=1}^m \alpha_j !
+        \end{equation*}
+        \columnbreak
+        
+        \begin{equation*}
+            x^\alpha = \prod_{j=1}^m {x_j}^{\alpha_j}
+        \end{equation*}
+        \columnbreak
+    \end{multicols}
+    
+    We have
+    \begin{equation}
+        \left(\sum_{j=1}^m x_j \right)^k = \sum_{\absolutevalue{\alpha = k}} \frac{k!}{\alpha !} x^\alpha
+    \end{equation}
+\end{theorem}
+
+% trigonometry
+
+\section{Trigonometry}
+
+
+\begin{multicols}{2}
+
+
+
+
+\begin{equation*}
+    \begin{aligned}   
+        \sin\alpha + \sin\beta &= 2 \sin\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} \\
+        \sin\alpha - \sin\beta &= 2 \cos\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} \\
+        \cos\alpha + \cos\beta &= 2 \cos\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} \\
+        {\color{red} \cos\alpha - \cos\beta} &={\color{red} 2 \sin\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2}} \\ 
+        \tan\alpha + \tan\beta &= \frac{\sin(\alpha + \beta)}{\cos\alpha\cos\beta}
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    \begin{aligned}
+        \sin\alpha\cos\beta &=\frac{1}{2}[\sin(\alpha+\beta) + \sin(\alpha - \beta)] \\
+        \cos\alpha\sin\beta &=\frac{1}{2}[\sin(\alpha+\beta) - \sin(\alpha - \beta)] \\
+        \cos\alpha\cos\beta &=\frac{1}{2}[\cos(\alpha + \beta) + \cos(\alpha - \beta)] \\
+        \sin\alpha\sin\beta &=-\frac{1}{2}[\cos(\alpha + \beta) - \cos(\alpha - \beta)] \\
+    \end{aligned}
+\end{equation*}
+
+
+\begin{equation*}
+    \begin{aligned}
+        \sin(\alpha + \beta) &=\sin\alpha\cos\beta + \cos\alpha\sin\beta \\
+        \sin(\alpha - \beta) &=\sin\alpha\cos\beta - \cos\alpha\sin\beta \\
+        \cos(\alpha + \beta) &=\cos\alpha\cos\beta - \sin\alpha\sin\beta \\
+        \cos(\alpha - \beta) &=\cos\alpha\cos\beta + \sin\alpha\sin\beta \\
+        \tan(\alpha+\beta) &= \frac{\tanh\alpha + \tan\beta}{1 - \tan\alpha \tan\beta} \\   
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    \begin{aligned}    
+        \sin 2\alpha &= 2 \sin\alpha \cos\alpha \\
+        \cos 2\alpha &= \cos^2 \alpha - \sin^2 \alpha \\
+        &= 2 \cos^2 \alpha - 1 \\
+        &= 1 - 2 \sin^2 \alpha \\
+        \sin 3\alpha &= 3 \sin\alpha - 4 \sin^3 \alpha \\
+        \cos 3\alpha &= -3 \cos\alpha + 4 \cos^3 \alpha \\
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    \begin{aligned}       
+        \sin \alpha &= \frac{2 \tan \frac{\alpha}{2}}{1 + \tan^2 \frac{\alpha}{2}} \\
+        \cos \alpha &= \frac{1 - \tan^2 \frac{\alpha}{2}}{1 + \tan^2 \frac{\alpha}{2}} \\
+        \tan \alpha &= \frac{2 \tan \frac{\alpha}{2}}{1 - \tan^2 \frac{\alpha}{2}} \\  
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    \begin{aligned}
+        \sec^2 x - \tan^2 x &= 1 \\
+        \cosh^2 x - \sinh^2 x &= 1
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    a \sin\alpha + b \cos\alpha = \sqrt{a^2 + b^2}\sin\left(\alpha + \arcsin\frac{b}{\sqrt{a^2 + b^2}}\right)
+\end{equation*}
+
+
+\end{multicols}
+
+
+
+
+
+
+
+
+
+
+% derivative
+\section{Derivatives}
+
+\begin{multicols}{2}
+\begin{equation*}
+    \begin{aligned}
+        (\sin x)' &= \cos x \\
+        (\cos x)' &= - \sin x \\
+        (\tan x)' &= \sec^2 x\\
+        (\cot x)' &= - \csc^2 x \\
+        (\sec x)' &= \sec x \tan x \\
+        (\csc x)' &= -\csc x \cot x \\
+        (a^x)' &= a^2 \ln a \\
+    \end{aligned}
+\end{equation*}
+\begin{equation*}
+    \begin{aligned}
+        (\log_a x)' &= \frac{1}{x \ln a} \\
+        (\arcsin x)' &= \frac{1}{\sqrt{1-x^2}} \\
+        (\arccos x)' &= -\frac{1}{\sqrt{1-x^2}} \\
+        (\arctan x)' &= \frac{1}{1+x^2} \\
+        (\text{arccot } x)' &= -\frac{1}{1+x^2}
+    \end{aligned}
+\end{equation*}
+\end{multicols}
+
+
+
+
+
+
+% integration
+\section{Integration}
+
+\begin{multicols}{2}
+\begin{equation*}
+    \begin{aligned}
+        \int x^n \dif x &= \frac{x^{n+1}}{n+1} + C \\
+        \int \frac{1}{x} \dif x &= \ln \absolutevalue{x} + C \\
+        \int \sin x \dif x &= -\cos x + C \\
+        \int \cos x \dif x &= \sin x + C \\
+        \int \tan x \dif x &= - \ln \absolutevalue{\cos x} + C \\
+        \int \cot x \dif x &= \ln \absolutevalue{\sin x} + C \\
+        \int \csc x \dif x &= \frac{1}{2} \ln \absolutevalue{\frac{1 - \cos x}{1 + \cos x}} + C \\
+        \int \sec x \dif x &= \frac{1}{2} \ln \absolutevalue{\frac{1+\sin x}{1- \sin x}} + C \\      
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    \begin{aligned}
+        \int a^x \dif x &= \frac{a^x}{\ln x} + C \\
+        \int \frac{1}{a^2 + x^2} \dif x &= \frac{1}{a} \arctan \frac{x}{a} + C \\
+        \int \frac{1}{a^2 - x^2} \dif x &= \frac{1}{2a} \ln \absolutevalue{\frac{a+x}{a-x}} + C \\
+        \int \frac{1}{\sqrt{a^2 - x^2}} \dif x &= \arcsin \frac{x}{a} + C \\
+        \int \frac{1}{\sqrt{x^2 \pm a^2}} \dif x &= \ln \absolutevalue{x + \sqrt{x^2 \pm a^2}} + C \\         
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    \begin{aligned}
+        I_n &= \int_0^\frac{\pi}{2} \sin^n \dif x = \int_0^\frac{\pi}{2} \cos^n \dif x  \\
+        &= \frac{n-1}{n} I_{n-2} \\
+        &= \begin{cases}
+            \displaystyle \frac{n-1}{n} \frac{n-3}{n-2} \cdots \frac{4}{5} \frac{2}{3} & \text{ (} n \text{ is odd)}\\
+            \\
+            \displaystyle \frac{n-1}{n} \frac{n-3}{n-2} \cdots \frac{3}{4} \frac{1}{2} \frac{\pi}{2} & \text{ (} n \text{ is even)}
+        \end{cases}
+    \end{aligned}
+\end{equation*}    
+\end{multicols}
+
+
+% common Taylor expansion
+\section{Common Taylor Expansions}
+
+\begin{center} 
+   \begin{tabular}{clllll}
+    \hline
+    $\displaystyle \frac{1}{1-x}$ & $ = $ & $1 + x + x^2 + x^3 + x^4 + \cdots$ & $=$ & $\displaystyle \sum_{n=0}^\infty x^n$ & $x \in (-1,1)$ \\
+    $e^x$ & $=$ & $\displaystyle 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots$ & $=$ & $\displaystyle \sum_{n=0}^\infty \frac{x^n}{n!}$ & $x \in \realnumber$ \\
+    $\cos x$ & $=$ & $\displaystyle 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \frac{x^8}{8!} - \cdots$ & $=$ & $\displaystyle \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!}$ & $x \in \realnumber$ \\
+    $\sin x$ & $=$ & $\displaystyle x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \frac{x^9}{9!} - \cdots$ & $=$ & $\displaystyle \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!}$ & $x \in \realnumber$ \\
+    $\ln (1+x)$ & $=$ & $\displaystyle x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \frac{x^5}{5} - \cdots$ & $=$ & $\displaystyle \sum_{n=1}^\infty (-1)^{n+1} \frac{x^n}{n}$ & $x \in (-1, 1]$ \\
+    \hline
+\end{tabular} 
+\end{center}
+
