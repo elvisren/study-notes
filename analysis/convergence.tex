@@ -10,6 +10,18 @@ The order of research:
     \item Define power series and radius
 \end{itemize}
 
+
+How to check whether a series converges:
+\begin{itemize}
+    \item The item $x_i \rightarrow 0$. If not, the series is not converging
+    \item If we can guess the converged value, prove it
+    \item If we cannot, use Cauchy criterion test
+    \item If it is monotone, check boundedness
+    \item If it is alternating, check whether $\absolutevalue{x_i}$ decreases
+    \item Check the convergence of absolute value, use ratio test, root test, etc
+    \item If it is power series, calculate the radius of convergence
+\end{itemize}
+
 %
 %
 % convergence of sequence
@@ -69,7 +81,7 @@ The key is to define limit and cluster point (which are different terms).
 %
 %
 
-\section{Real and Complex and Normed Vector Sequence}
+\section{Algebra of Convergent Sequence}
 
 \begin{definition}[\cindex{null sequence}]
     A sequence $\sequence{x_n}$ is called null sequence if it converges to $0$. So a sequence $x_n \rightarrow a$ if and only if $\sequence{x_n - a}$ is a null sequence.
@@ -93,7 +105,13 @@ The key is to define limit and cluster point (which are different terms).
     \begin{itemize}
         \item Let $\sequence{x_n}$ and $\sequence{y_n}$ be convergent sequence in $\realnumber$ that $x_n \leq y_n$ for almost all $n$. Then $\lim x_n \leq \lim y_n$.
         \item For three real sequence $\sequence{x_n}$, $(y_n)$ and $(z_n)$ with property that $x_i \leq y_i \leq z_i$ for almost all $i$. If $x_n \rightarrow a$ and $z_n \rightarrow a$, we have $y_n \rightarrow a$.
-    \end{itemize}\end{theorem}
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}[\cindex{sandwich lemma}]
+    Let $\sequence{a_n}$, $\sequence{b_n}$ and $\sequence{c_n}$ be three sequence such that $a_n \leq b_n \leq c_n$. Suppose $\sequence{a_n} \rightarrow L$ and $\sequence{c_n} \rightarrow L$, then $\sequence{b_n} \rightarrow L$.
+\end{theorem}
+
 
 \begin{theorem}
     For a sequence $(z_n)$ in $\complexnumber$, the following are equivalent:
@@ -158,15 +176,13 @@ For vector space, we need to define a metric on it. So either it is a metric spa
 \end{proof}
 
 
-The order of limit: $n^k < a^n < n!$
 
 
 % infinite limits
 
 \section{Infinite Limits}
 
-Now consider the limit over $\closure{\realnumber}$ which extend $\realnumber$ to $\extendedrealnumber$ by adding $\pm \infty$ to the cluster points.
- The extended definitions are:
+Now consider the limit over $\closure{\realnumber}$. The extended definitions are:
 \begin{itemize}
     \item A neighborhood around $\infty$ is the set $(a, \infty)$
     \item $\infty$ is a cluster point if every neighborhood of $\infty$ contains infinitely many terms of $\sequence{x_n}$
@@ -180,6 +196,13 @@ Now consider the limit over $\closure{\realnumber}$ which extend $\realnumber$ t
 \begin{proof}
     If it is bounded, it is convergent in $\realnumber$. Or it is convergent in $\closure{\realnumber}$.
 \end{proof}
+
+
+
+
+% infinite superior and inferior
+
+\section{Limit Superior and Inferior}
 
 \begin{definition}
     Let $\sequence{x_n}$ be a sequence in $\realnumber$. Define \cindex{limit superior} as
@@ -210,24 +233,26 @@ Be noted that $\sequence{\underset{k \geq n}{\text{ sup }} x_k}$ is a decreasing
     
     If limit superior S is a real number $s$, it means that for any $\epsilon>0$, there is a $N$ that $s + \epsilon$ is an upper bound for $x_{n > N}$. The reverse is true for limit inferior I.
 
-    $[I,S]$ may not contain any number from $\sequence{x_n}$. But for any $\epsilon >0$, $[I - \epsilon, S + \epsilon]$ contains all but finite numbers from $\sequence{x_n}$, and this is the smallest closed interval with this property.
+    $[I,S]$ may not contain any number from $\sequence{x_n}$. \emph{But for any $\epsilon >0$, $[I - \epsilon, S + \epsilon]$ contains all but finite numbers from $\sequence{x_n}$, and this is the smallest closed interval with this property}.
 \end{theorem}
 
-
-
-
-In general we have 
-\begin{equation}
-    \inf_{n \rightarrow \infty} x_n \leq \varliminf_{n \rightarrow \infty} x_n \leq \varlimsup_{n \rightarrow \infty} x_n \leq \sup_{n \rightarrow \infty} x_n
-\end{equation}
-
-The additivity of limit superior and inferior is
-\begin{equation}
-    \begin{aligned}
+\begin{theorem}
+    Here is the algebra over limit superior and inferior (multiplication is for non-negative sequence):
+    
+    \begin{equation}
+        \begin{aligned}
+        \inf_{n \rightarrow \infty} x_n \leq \varliminf_{n \rightarrow \infty} x_n &\leq \varlimsup_{n \rightarrow \infty} x_n \leq \sup_{n \rightarrow \infty} x_n \\
         \varliminf_{n \rightarrow \infty} (a_n + b_n) &\geq \varliminf_{n \rightarrow \infty} a_n + \varliminf_{n \rightarrow \infty} b_n \\
         \varlimsup_{n \rightarrow \infty} (a_n + b_n) &\leq \varlimsup_{n \rightarrow \infty} a_n + \varlimsup_{n \rightarrow \infty} b_n \\
+        \varlimsup_{n \rightarrow \infty} (a_n  b_n) &\leq \varlimsup_{n \rightarrow \infty} (a_n) \varlimsup_{n \rightarrow \infty} (a_n) \\
+        \varliminf_{n \rightarrow \infty} (a_n  b_n) &\geq \varliminf_{n \rightarrow \infty} (a_n) \varliminf_{n \rightarrow \infty} (a_n)
     \end{aligned}
-\end{equation}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Fix a $n$, for any $j \geq n$, we have $a_j + b_j \leq \sup_{m\geq n} a_m + \sup_{m\geq n} b_m$. Take supremum over $j \geq n$, we have $\sup_{j \geq n} (a_j + b_j ) \leq \sup_{m\geq n} a_m + \sup_{m\geq n} b_m$. Then take $n \rightarrow \infty$.
+\end{proof}
+
 
 
 \begin{theorem}
@@ -248,6 +273,8 @@ The additivity of limit superior and inferior is
             \liminf_{n \rightarrow \infty} x_n &= \varliminf_{n\rightarrow \infty} x_n &= x_*
         \end{aligned}
     \end{equation}
+    
+    So every sequence has at least one cluster point, but it may not have limit.
 \end{theorem}
 \begin{proof}
     Let's check $x^*$. 
@@ -261,7 +288,7 @@ The additivity of limit superior and inferior is
     By \theoref{definition_of_limit_superium_infinium}, for any $\epsilon>0$, there are infinitely many $x_i$ that $x^* < x_i < x^* + \epsilon$. So $x^*$ is a cluster point.
 \end{proof}
 
-limit superior and inferior are useful because they always exist but limit may not exist. So they are good substitute when we want to study the behavior of a sequence towards infinity.
+limit superior and inferior are useful because \emph{they always exist but limit may not exist}. So they are good substitute when we want to study the behavior of a sequence towards infinity.
 
 
 
@@ -311,7 +338,7 @@ A complete space gives us a way to prove the convergence of a sequence without k
     Each $s_k$ is called \cindex{partial sum} and $x_k$ is called \cindex{summand}. The series $\sum x_k$ converges if the sequence $\sequence{s_k}$ of its partial sum converges.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{convergent_series_is_null_sequence}
     if the series $\sum x_k$ converges, then $\sequence{x_k}$ is a null sequence.
 \end{theorem}
 \begin{proof}
@@ -368,6 +395,22 @@ The test for absolute convergence is built on the test of geometric series.
     A real series is called conditionally convergent if it is convergent but not absolutely convergent.
 \end{definition}
 
+\begin{theorem}\label{conditional_converge_requirement}
+    For a real series $\sum_{i=1}^\infty a_i$, define the \cindex{positive part} $a^{+}_i = \max \set{a_i, 0}$ and the \cindex{negative part} $a_i^{-} = - \min \set{a_i, 0}$. We have
+    \begin{equation}
+        \begin{aligned}
+            a_i &= a_i^{+} - a_i^{-} \\
+            \absolutevalue{a_i} &= a_i^{+} + a_i^{-}
+        \end{aligned}
+    \end{equation}
+    
+    A series converges absolutely if and only if both the positive and negative part converge. 
+\end{theorem}
+\begin{proof}
+    $\absolutevalue{a_i} = a_i^{+} + a_i^{-}$. So if the series is conditionally convergent, then both positive and negative part diverge.   
+\end{proof}
+
+
 \begin{theorem}[absolute convergence test]
     If $\sum_{i=1}^\infty a_i$ is absolutely convergent, it is convergent.
 \end{theorem}
@@ -377,15 +420,15 @@ The test for absolute convergence is built on the test of geometric series.
 
 
 \begin{theorem}[\cindex{ratio test}]
-    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Let $L = \lim_{j \rightarrow \infty} \absolutevalue{\frac{a_{j+1}}{a_j}}$, we have
+    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$,
     \begin{itemize}
-        \item If $L < 1$, the series converges absolutely
-        \item If $L > 1$, the series diverges
+        \item If $\displaystyle \varlimsup_{j \rightarrow \infty} \absolutevalue{\frac{a_{j+1}}{a_j}} < 1$, the series converges absolutely
+        \item If $\displaystyle \varliminf_{j \rightarrow \infty} \absolutevalue{\frac{a_{j+1}}{a_j}} > 1$, the series diverges
     \end{itemize}
 \end{theorem}
 
 \begin{theorem}[\cindex{root test}]
-    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Let $L = \varlimsup_{j \rightarrow \infty}  \sqrt[j]{\absolutevalue{a_j}}$, we have
+    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Let $\displaystyle L = \varlimsup_{j \rightarrow \infty}  \sqrt[j]{\absolutevalue{a_j}}$, we have
     \begin{itemize}
         \item If $L < 1$, the series converges absolutely
         \item If $L > 1$, the series diverges
@@ -395,17 +438,27 @@ The test for absolute convergence is built on the test of geometric series.
     If $L < 1$, choose $a$ that $L < a < 1$. According to the definition of limit superior, there is $N$ that for $n > N$, we have $\sqrt[n]{\absolutevalue{a_n}} < a$, so $\absolutevalue{a_n} < a^n$.
 \end{proof}
 
-\begin{theorem}[\cindex{Raabe's test}]
-    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Suppose there is 
+\begin{theorem}
+    Let $\sequence{a_n}$ be a sequence with $a_i \neq 0$. We have
     \begin{equation}
-        L = \lim_{n \rightarrow \infty} n \left( \absolutevalue{\frac{a_n}{a_{n+1}}} - 1 \right)
+        \varliminf_{j \rightarrow \infty} \absolutevalue{\frac{a_{j+1}}{a_j}} \leq \varliminf_{j \rightarrow \infty}  \sqrt[j]{\absolutevalue{a_j}} \leq \varlimsup_{j \rightarrow \infty}  \sqrt[j]{\absolutevalue{a_j}} \leq \varlimsup_{j \rightarrow \infty} \absolutevalue{\frac{a_{j+1}}{a_j}}
+    \end{equation}
+\end{theorem}
+
+
+\begin{theorem}[\cindex{Raabe's test}]
+    For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Define a new sequence $\sequence{b_n}$ that
+    \begin{equation}
+        b_n = n \left( \absolutevalue{\frac{a_n}{a_{n+1}}} - 1 \right)
     \end{equation}
     
     Then:
     \begin{itemize}
-        \item If $L > 1$, the series converges absolutely
-        \item If $L < 1$, the series diverges
+        \item If $\varliminf_{j \rightarrow \infty} b_n > 1$, the series converges absolutely
+        \item If $\varlimsup_{j \rightarrow \infty} b_n < 1$, the series diverges
     \end{itemize}
+    
+    \emph{Rabbe's test is useful when ratio and root test fail}. For example, the sum $\sum \frac{1}{n^2}$ will have limit $1$ in both root and ratio test.
 \end{theorem}
 
 
@@ -434,15 +487,14 @@ Addition $+$ is not commutative when there are infinitely many summands.
     Let $\sum_{i=1}^\infty a_i$ be a real series that converges conditionally. For any $L \in \realnumber$, there is a rearrangement of the series so that $\sum_{i=1}^\infty a_{\sigma (i)} = L$.
 \end{theorem}
 \begin{proof}
-    For a real series $\sum_{i=1}^\infty a_i$, define the positive part $a^{+}_i = \max \set{a_i, 0}$ and the negative part$a_i^{-} = - \min \set{a_i, 0}$. We have $a_i = a_i^{+} - a_i^{-}$ and $\absolutevalue{a_i} = a_i^{+} + a_i^{-}$. 
     
-    First we could prove a theorem that the original series converges absolutely if and only if both the positive and negative part converge. It uses the property that $\absolutevalue{a_i} = a_i^{+} + a_i^{-}$. So if the series is conditionally convergent, then both positive and negative part diverge.
-
-    Now construct the arrangement. Assume $a_i \neq 0$ and $L > 0$. Split $(a_i)$ into two parts:
+    Now construct the arrangement. Assume $a_i \neq 0$ and $L > 0$. Split $\sequence{a_i}$ into two parts:
     \begin{itemize}
-        \item $(p_i)$ are all positive numbers
-        \item $(q_i)$ are all negative numbers
+        \item $\sequence{p_i}$ are all positive numbers
+        \item $\sequence{q_i}$ are all negative numbers
     \end{itemize}
+    
+    According to \theoref{conditional_converge_requirement}, both $\sequence{p_i}$ and $\sequence{q_i}$ diverge. 
     
     First find $j_1$ that
     \begin{equation*}
@@ -460,7 +512,7 @@ Addition $+$ is not commutative when there are infinitely many summands.
         \end{aligned}
     \end{equation*}
     
-    Keep creating these $s_{k_n}$. We have $s_{k_n} \leq L$ and $\absolutevalue{L - s_{k_n}} < - q_{i_n} \rightarrow 0$.
+    Keep creating these $s_{k_n}$. We have $s_{k_n} \leq L$ and $\absolutevalue{L - s_{k_n}} < - q_{i_n} \rightarrow 0$ (according to \theoref{convergent_series_is_null_sequence}).
 \end{proof}
 
 

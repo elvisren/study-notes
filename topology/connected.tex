@@ -4,12 +4,13 @@
 
 Note: 
 \begin{enumerate}
+    \item The closure of connected subspace is connected
     \item Each component of $X$ is closed in $X$ because it contains all limit points
     \item If the number of components is finite, each component is also open
-    \item The component needs not be open. ($\mathbb{Q}$)
     \item Path component could be neither open or closed
     \item If $X$ is locally (path) connected, each (path) component of open set is open
     \item If $X$ is locally path connected, its components and path components are the same
+    \item Prove a space is connected: show it is a closure of a connected space.
 \end{enumerate}
 
 
@@ -31,7 +32,7 @@ Note:
 \end{theorem}
 
 \begin{theorem}
-    A subspace $Y$ of $X$ is connected if a pair $A,B$ of subsets of $Y$ whose union is $Y$, neither of which contains the limit point of the other.
+    A subspace $Y$ of $X$ is connected if there is no pair $A,B$ of disjoint subsets of $Y$ whose union is $Y$, neither of which contains the limit point of the other.
     
     $A$ and $B$ do not have to be open or closed. But we can prove they are both open and closed.
 \end{theorem}
@@ -119,6 +120,11 @@ For $X,Y$, find a line $x \times Y$. This line is homomorphic to $Y$ and connect
     By \theoref{cont_func_from_cont_to_cont}, the image is connected. Define two open set $f(x) \cap (-\infty, r)$ and $f(x) \cap (r, +\infty)$. They are a separation if there is no $c$ in the image.
 \end{proof}
 
+
+% path connected
+
+\section{Path Connected}
+
 \begin{definition}[\cindex{path}]
     A path in $X$ from $x$ to $y$ is a continuous map $f: [a,b] \rightarrow X$ that $f(a) = x$ and $f(b) = y$. 
 \end{definition}
@@ -133,7 +139,7 @@ For $X,Y$, find a line $x \times Y$. This line is homomorphic to $Y$ and connect
 \end{example}
 
 \begin{example}[closure of path connected may not be path connected]
-    The \cindex{topologist's sine curve} $\closure{S} = \closure{\set{x \times \sin \left(\frac{1}{x} \right) | 0 < x \leq 1}}$ is connected but not path connected. So if $X$ is path connected, $\closure{X}$ may not be path connected.
+    The topologist's sine curve (\defiref{topologist_sine_curve}) is connected but not path connected. So if $X$ is path connected, $\closure{X}$ may not be path connected.
     
     So path connected is connected, but connected may not be path connected.
 \end{example}
@@ -149,10 +155,8 @@ For $X,Y$, find a line $x \times Y$. This line is homomorphic to $Y$ and connect
 \end{definition}
 
 \begin{theorem}
-The components of $X$ are connected disjoint subspace of $X$ whose union is $X$. Each nonempty connected subspace of $X$ intersects only one of them.    
+\emph{The components of $X$ are connected disjoint closed subspace of $X$} whose union is $X$. Each nonempty connected subspace of $X$ intersects only one of them.    
 \end{theorem}
-
-
 
 
 \begin{definition}[\cindex{path component}]

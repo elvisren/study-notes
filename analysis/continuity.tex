@@ -1,0 +1,750 @@
+\chapter{Continuity}
+
+\section{Function Limit}
+
+\begin{definition}[\cindex{limit}]
+    Let $f: X \rightarrow \realnumber$. The function $f$ has a limit $L\in \realnumber$ as $x \rightarrow x_0$ if for every $\epsilon > 0$, there is a $\delta_{\epsilon, x_0} > 0$ such that for all $0 < \absolutevalue{x - x_0} < \delta$, we have $\absolutevalue{f(x) - L} < \epsilon$. it has expression
+    \begin{equation}
+        \lim_{x \rightarrow x_0} f(x) = L
+    \end{equation}
+    
+    The key is that $x$ cannot be $x_0$. Also $\delta_{\epsilon, x_0}$ depends on $x_0$.    
+\end{definition}
+
+\begin{definition}[\cindex{one-sided limit}]
+    For every sequence $(x_n)$ that $x_n > x_0$ and $x_n \rightarrow x_0$, the image sequence $f(x_n) \rightarrow L$. It is also denoted as
+    \begin{equation}
+        \lim_{x \downarrow x_0} f(x) = L
+    \end{equation}
+    
+    Similarly, we have 
+    \begin{equation}
+        \lim_{x \uparrow x_0} f(x) = L
+    \end{equation}
+\end{definition}
+
+
+% continuous
+\section{Continuous Function}
+
+\begin{definition}[\cindex{continuous}]\label{continuous_function_definition}
+    A function is continuous at $x_0$ if 
+    \begin{equation}
+        \lim_{x \rightarrow x_0} f(x) = f(x_0)
+    \end{equation}
+    
+    Similarly, we have \cindex{right side continuous}:
+    \begin{equation}
+        \lim_{x \downarrow x_0} f(x) = f(x_0)
+    \end{equation}
+    
+    and \cindex{left side continuous}:
+    \begin{equation}
+        \lim_{x \uparrow x_0} f(x) = f(x_0)
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    There are 3 types of discontinuities:
+    \begin{itemize}
+        \item If $\lim_{x \downarrow x_0} f(x)$ and $\lim_{x \uparrow x_0} f(x)$ both exist and are equal, but not equal to $f(x_0)$, it is a \cindex{removable discontinuity} at the point $x_0$.
+        \item If they both exist, but not equal to each other, it is a \cindex{jump discontinuity} at the point $x_0$.
+        \item If either one does not exist, it is an \cindex{essential discontinuity} at the point $x_0$.
+    \end{itemize}
+\end{definition}
+
+
+\begin{theorem}
+    Let $X,Y$ be metric spaces. Then a function $f: X\rightarrow Y$ is continuous at $x$ if and only if it is sequentially continuous at $x$, which is for every sequence $\set{x_i}$ such that $\lim x_i = x$, we have $\lim f(x_i) = f(x)$. A better expression is:
+    \begin{equation}
+        \lim f(x_i) = f(\lim x_i )
+    \end{equation}
+\end{theorem}
+
+
+
+\begin{definition}[\cindex{uniform continuous}]
+    A function $f$ is uniform continuous if for any $x_0 \in X$ and $\epsilon > 0$, there is $\delta(\epsilon) > 0$ that for all $\absolutevalue{x - x_0} < \delta$, we have $\absolutevalue{f(x) - f(x_0)} < \epsilon$.
+    
+    So $\delta$ does not depends on $x_0$, compared with \defiref{continuous_function_definition}.
+\end{definition}
+
+\begin{definition}[\cindex{Lipschitz continuity}]
+    A function $f$ is Lipschitz continuous if there exists $L > 0$ that for all $x,y \in X$, we have 
+    \begin{equation}
+        \absolutevalue{f(x) - f(y)} \leq L \absolutevalue{x - y}
+    \end{equation}
+    
+    There is no restriction that $L < 1$.
+\end{definition}
+
+\begin{theorem}
+    The relationship among Lipschitz, uniform and normal continuity is
+    
+    \begin{equation}
+        \text{Lipschitz continuous} \Rightarrow \text{uniformly continuous} \Rightarrow \text{continuous}
+    \end{equation}    
+\end{theorem}
+
+
+\begin{theorem}[\cindex{continuous extension}]
+    Let $X$ and $Y$ be metric spaces, and $D \subseteq X$, and $f: D\rightarrow Y$ is continuous. Suppose $a \in D^c$ is a limit point of $D$ and there is $y \in Y$ that $\lim_{x \rightarrow a} f(x) = y$. Then $\closure{f}: D \cup \set{a} \rightarrow Y$ is a continuous extension of $f$ to $D \cup \set{a}$.
+\end{theorem}
+
+
+% properties of continuous function on compact domain
+
+\section{Compact and Connected Use Cases}
+
+\begin{theorem}
+    The image of continuous function from compact space is compact. The use case is the \cindex{intermediate value theorem}.
+\end{theorem}
+
+\begin{theorem}
+    The image of continuous function fro connected space is connected. The use case is the \cindex{extreme value theorem}.
+\end{theorem}
+
+\begin{theorem}
+    A continuous function over compact domain is uniformly continuous. The compact domain in metric space must be closed and bounded.
+\end{theorem}
+
+\begin{theorem}
+    Let $f \in C^0([0,\infty))$ be a continuous real valued function. If $f$ is continuous and \emph{$\displaystyle \lim_{x\rightarrow \infty} f(x)$ exists}, then $f$ is uniformly continuous on $[0, \infty)$.
+\end{theorem}
+\begin{proof}
+    Since $f$ has a limit $L$, for any $\epsilon > 0$, there is $K$ that for all $x > K$, $\absolutevalue{f(x) - L} < \frac{\epsilon}{2}$. Now split $[0, \infty)$ into two parts: $[0, K+1]$ and $[K+1, \infty)$.
+    
+    Since $[0, K+1]$ is compact, $f$ is uniformly continuous on it, so there is $\delta>0$ that for all $x,y \in [0,K+1]$ and $\absolutevalue{x-y} < \delta$, we have $\absolutevalue{f(x) - f(y)} < \epsilon$.
+    
+    For $[K, \infty)$, for any $x,y \in [K, \infty)$ and $\absolutevalue{x - y} < \delta$, we have
+    \begin{equation*}
+        \absolutevalue{f(x) - f(y)} = \absolutevalue{(f(x) - L) - (f(y) - L)} \leq \absolutevalue{f(x) - L} + \absolutevalue{f(y) - L} = \epsilon
+    \end{equation*}
+    
+    Now carefully handle the case of $[K, K+1]$ by choosing $\delta < 1$. The result is whenever $\absolutevalue{x - y } < \delta$, $\absolutevalue{f(x) - f(y)} < \epsilon$.
+\end{proof}
+
+\begin{theorem}\label{uniform_on_r_with_linear_function}
+    Let $f:\realnumber \rightarrow \realnumber$ be a uniformly continuous function. Then there is constant $a,b >0$ that $\absolutevalue{f(x)} < a \absolutevalue{x} + b$    .
+\end{theorem}
+\begin{proof}
+    Since $f$ is uniformly continuous, there is $\delta$ that when $\absolutevalue{x-y} < \delta$, $\absolutevalue{f(x) - f(y)} < 1$. For any $x > 0$, split $[0,x]$ into $m = \lfloor \frac{x}{\delta} \rfloor$ small pieces $m_i$. So
+    \begin{equation*}
+        \absolutevalue{f(0) - f(x)} = \absolutevalue{f(0) - f(m_1) + f(m_1) - f(m_2) + \cdots} \leq \sum \absolutevalue{f(m_i) - f(m_{i+1})} = m
+    \end{equation*}
+    
+    So $\absolutevalue{f(x)} = \absolutevalue{f(x) - f(0) + f(0)} \leq \absolutevalue{f(x) - f(0)} + \absolutevalue{f(0)} \leq m + f(0) \leq \frac{\absolutevalue{x}}{\delta} + 1 + \absolutevalue{f(0)}$. Let $a = \frac{1}{\delta}$ and $b = 1 + \absolutevalue{f(0)}$.
+\end{proof}
+
+\begin{theorem}
+    Let $f: \realnumber \rightarrow \realnumber$ be a uniformly continuous function. If $X \subset \realnumber$ is a bounded set, then $f(X)$ is bounded.
+\end{theorem}
+\begin{proof}
+    Use \theoref{uniform_on_r_with_linear_function} and check the boundedness of $ax+b$.
+\end{proof}
+
+
+
+% asymptotic notation
+
+\section{Asymptotic Notations}
+
+\begin{definition}
+    Let $f,g: [a, \infty) \rightarrow \realnumber$.
+    \begin{itemize}
+        \item $f$ and $g$ are \cindex{asymptotically equivalent} as $x \rightarrow \infty$ if $\lim_{x \rightarrow \infty} \frac{f(x)}{g(x)} = 1$. It is written as \cindex{$f \sim g$} as $x \rightarrow \infty$.
+        \item If there is $M > 0$ and $K > a$ that for all $x \geq K$, we have $\absolutevalue{f(x)} < M g(x)$, $f$ is big-O of $g$, which is written as \cindex{$f \in O(g)$}.
+        \item If for any $\epsilon > 0$, there is $K > 0$ that for all $x > K$, we have $\absolutevalue{f(x) < \epsilon g(x)}$, $f$ is small-O of $g$, which is written as \cindex{$f \in o(g)$}.
+    \end{itemize}
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

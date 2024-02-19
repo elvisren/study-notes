@@ -4,7 +4,9 @@
     A set is a collection of objects.
 \end{definition}
 
-In ZFC, the only noun is $\emptyset$ so there is no atoms. And the only vocabulary is $\in$.
+In ZFC, the only noun is $\emptyset$, so there is no atoms. And the only vocabulary is $\in$.
+
+Set theory measure the ability to regard any collection of objects as a single element (set).
 
 \begin{axiom}[\cindex{Axiom of Extensionality}]\label{axiomofextensionality}
     If $X$ and $Y$ have the same elements, then $X=Y$.
@@ -21,7 +23,12 @@ It means that a set is determined by its elements.
         \forall a \forall b \exists c \forall x (x \in c \leftrightarrow x = a \vee x = b )
     \end{equation}
 \end{axiom}
-By \thmref{axiomofextensionality} this pair is unique. A \cindex{singleton} $\set{a}$ is the set $\set{a} = \set{a, a}$. An \cindex{ordered pair} $(a,b)$ is the set $(a,b) = \set{\set{a}, \set{a,b}}$.
+
+By \theoref{axiomofextensionality} this pair is unique. A \cindex{singleton} $\set{a}$ is the set $\set{a} = \set{a, a}$. An \cindex{ordered pair} $(a,b)$ is the set 
+    \begin{equation}
+        (a,b) = \set{\set{a}, \set{a,b}}
+    \end{equation}
+
 
 
 \begin{axiom}[\cindex{Axiom Schema of Seperation}]
@@ -42,7 +49,7 @@ If we define class $C = \varphi(u, p)$, then $\forall X \exists Y (C \wedge X )=
         \forall X \exists Y \forall u \left(u \in Y \leftrightarrow \exists z (z \in X \wedge u \in z ) \right)
     \end{equation}
     
-    It is a generalized version of two set union. There is an implication that the elements in $A$ are sets.
+    It is a generalized version of two set union. There is \emph{an assumption that the elements in $A$ are sets}.
 \end{axiom}
 
 \begin{axiom}[\cindex{Axiom of Power Set}]
@@ -76,7 +83,7 @@ If we define class $C = \varphi(u, p)$, then $\forall X \exists Y (C \wedge X )=
     Every family of nonempty set has a choice function.
 \end{axiom}
 
-The \thmref{axiomofextensionality} to \thmref{axiomofregularation} is the \cindex{Zermelo-Fraenkel} axiomatic set theory \cindex{ZF}. \cindex{ZFC} denote the ZF + \cindex{AC}, the axiom of choice.
+The \theoref{axiomofextensionality} to \theoref{axiomofregularation} is the \cindex{Zermelo-Fraenkel} axiomatic set theory \cindex{ZF}. \cindex{ZFC} denote the ZF + \cindex{AC}, the axiom of choice.
 
 Now we have three ways to create new set from existing sets:
 \begin{enumerate}

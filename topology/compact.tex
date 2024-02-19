@@ -69,7 +69,7 @@
 \end{definition}
 
 \begin{theorem}\label{finite_intersection_in_compact_not_empty}
-    $X$ is compact if and only if for every $\mathbf{C}$ of closed sets in $X$ having the finite intersection property, $\bigcap_{C \in \mathbf{C}} C \neq \emptyset$.
+    $X$ is compact if and only if for every $\mathbf{C}$ of closed sets in $X$ having the finite intersection property, $\bigcap_{c \in \mathbf{C}} c \neq \emptyset$.
     
     One conclusion is that for a nested sequence of closed set $C_1 \supset C_2 \supset C_3 ...$ in a compact space $X$, $\bigcap_{i \in \mathbb{Z}_{+}} C_i \neq \emptyset$.
 \end{theorem}
@@ -110,6 +110,40 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
     First show that if $\inverse{\pi}_\beta$ is a subbasis that contains $x$, it intersect every element of $\mathcal{D}$. So this subbasis is in $\mathcal{D}$. Its finite intersection is a basis and also contained in $\mathcal{D}$. Since $\mathcal{D}$ has finite intersection property, every basis that contains $x$ intersect with every element of $\mathcal{D}$, so $x \in \closure{D}$ for every $D \in \mathcal{D}$.
 \end{proof}
 
+
+
+% closed set in real number is compact
+
+\section{Compact Subspace of $\realnumber$}
+
+\begin{theorem}
+    Let $X$ be a simply ordered set with \emph{least upper bound property}. In the order topology, every close interval in $X$ is compact. 
+    
+    So every closed interval in $\realnumber$ is compact.
+\end{theorem}
+\begin{proof}
+    Assume the closed interval is $[a,b]$ and for any open covering $\mathcal{A}$. First prove that for $x \neq b$, there is $x < y \leq b$ that $[x,y]$ can be covered by at most two sets of $\mathcal{A}$. If $x$ has an immediate successor, choose $y$ be the immediate successor. If not, for any set that covers $x$, choose an element $y$ from $(x,c)$.
+    
+    Now for the all set $[a,y_i]$ that have finite cover, the set $\set{y_i}$ has a least upper bound $c$. $[a,c]$ has a finite cover too. For any set that covers $c$, it should cover $(d,c]$ which contains at least a point $z$. The set $[a,z]$ has a finite cover, so $[a,c]$ has a finite cover.
+    
+    The last step is to prove $c = y$. If $c \neq y$, there is $y_c$ that $[c, y_c]$ can be covered by at least two set of $\mathcal{A}$.
+\end{proof}
+
+\begin{theorem}
+    A subspace $A$ of $\realnumber^n$ is compact if and only if it is closed and bounded in euclidean metric $d$ or the square metric $\rho$.    
+\end{theorem}
+\begin{proof}
+    According to \theoref{compact_subspace_closed}, $A$ is closed.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is a set that every closed interval is compact, it has least upper bound property.    
+    
+    The key to the proof: \emph{if a set does not have a least upper bound, all upper bounds form an open set}.
+\end{theorem}
+\begin{proof}
+    Assume there is $\set{y_i}$ without least upper bound. Define set $C = X - \cup_i (-\infty,y_i)$. $C$ is not empty because $\set{y_i}$ is bounded above. $C$ is open because for every $c\in C$, there is $\epsilon$-ball around $c$ that $c-\epsilon > \cup_i (-\infty,y_i)$, or $c$ is the least upper bound. $C$ is open means $\cup_i (-\infty,y_i)$ is closed, which means it is a compact space. For each $y_i$, the set $[y_i, \infty) \cap \cup_i (-\infty,y_i)$ is a closed set in compact set with finite intersection property. According to \theoref{finite_intersection_in_compact_not_empty}, $\cap_i \set{[y_i, \infty) \cap \cup_i (-\infty,y_i)}$ is empty, a contradiction.
+\end{proof}
 
 
 
@@ -163,40 +197,6 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 
 
 
-% closed set in real number is compact
-
-\section{Compact Subspace of $\realnumber$}
-
-\begin{theorem}
-    Let $X$ be a simply ordered set with \emph{least upper bound property}. In the order topology, every close interval in $X$ is compact. 
-    
-    So every closed interval in $\realnumber$ is compact.
-\end{theorem}
-\begin{proof}
-    Assume the closed interval is $[a,b]$ and for any open covering $\mathcal{A}$. First prove that for $x \neq b$, there is $x < y \leq b$ that $[x,y]$ can be covered by at most two sets of $\mathcal{A}$. If $x$ has an immediate successor, choose $y$ be the immediate successor. If not, for any set that covers $x$, choose an element $y$ from $(x,c)$.
-    
-    Now for the all set $[a,y_i]$ that have finite cover, the set $\set{y_i}$ has a least upper bound $c$. $[a,c]$ has a finite cover too. For any set that covers $c$, it should cover $(d,c]$ which contains at least a point $z$. The set $[a,z]$ has a finite cover, so $[a,c]$ has a finite cover.
-    
-    The last step is to prove $c = y$. If $c \neq y$, there is $y_c$ that $[c, y_c]$ can be covered by at least two set of $\mathcal{A}$.
-\end{proof}
-
-\begin{theorem}
-    A subspace $A$ of $\realnumber^n$ is compact if and only if it is closed and bounded in euclidean metric $d$ or the square metric $\rho$.    
-\end{theorem}
-\begin{proof}
-    According to \theoref{compact_subspace_closed}, $A$ is closed.
-\end{proof}
-
-\begin{theorem}
-    If $X$ is a set that every closed interval is compact, it has least upper bound property.    
-    
-    The key to the proof: \emph{if a set does not have a least upper bound, all upper bounds form an open set}.
-\end{theorem}
-\begin{proof}
-    Assume there is $\set{y_i}$ without least upper bound. Define set $C = X - \cup_i (-\infty,y_i)$. $C$ is not empty because $\set{y_i}$ is bounded above. $C$ is open because for every $c\in C$, there is $\epsilon$-ball around $c$ that $c-\epsilon > \cup_i (-\infty,y_i)$, or $c$ is the least upper bound. $C$ is open means $\cup_i (-\infty,y_i)$ is closed, which means it is a compact space. For each $y_i$, the set $[y_i, \infty) \cap \cup_i (-\infty,y_i)$ is a closed set in compact set with finite intersection property. According to \theoref{finite_intersection_in_compact_not_empty}, $\cap_i \set{[y_i, \infty) \cap \cup_i (-\infty,y_i)}$ is empty, a contradiction.
-\end{proof}
-
-
 
 % limit point compactness
 
@@ -222,9 +222,9 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \begin{theorem}
     Let $X$ be a \emph{metrizable space}. Then the followings are equivalent:
     \begin{enumerate}
-        \item $X$ is compact.
-        \item $X$ is limit point compact.
-        \item $X$ is sequentially compact.
+        \item $X$ is compact
+        \item $X$ is limit point compact
+        \item $X$ is sequentially compact
     \end{enumerate}
     
     Note:
@@ -256,8 +256,8 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \begin{theorem}
     $X$ is locally compact \emph{Hausdorff} if and only if $\exists Y$ that:
     \begin{enumerate}
-        \item $Y = X \cup \set{\infty}$.
-        \item $Y$ is a compact Hausdorff space.
+        \item $Y = X \cup \set{\infty}$
+        \item $Y$ is a compact Hausdorff space
     \end{enumerate}
     
     If there are $Y$ and $Y'$ satisfying these conditions, there there is a homeomorphism between them. 
@@ -274,8 +274,8 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \begin{proof}
     The open set in $Y$ is defined by:
     \begin{enumerate}
-        \item The open sets of $X$.
-        \item $Y -C$ where $C$ is compact in $X$.
+        \item The open sets of $X$
+        \item $Y -C$ where $C$ is compact in $X$
     \end{enumerate}
     
     Then $Y$ is a compact space. For any covering of $Y$, it must cover $\infty$ by $U$. Then $Y-U$ is compact and has finite cover. $Y$ is also Hausdorff. If $x,y \in X$, they are Hausdorff. If $x =\infty$, find a compact subspace that contains a neighbor of $y$ using locally compact property of $X$.
