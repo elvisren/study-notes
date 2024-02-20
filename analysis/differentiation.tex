@@ -3,11 +3,21 @@
 % derivative
 \section{Derivative}
 
-\begin{definition}
+\begin{definition}[\cindex{derivative}]
     Let $f: X \rightarrow \realnumber$. The derivative of $f$ at $x_0$ is defined as
     \begin{equation}
         f'(x_0) = \lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}
-    \end{equation}
+    \end{equation}    
+    
+    Note: if $f$ is a function from $\realnumber$ to normed vector space, then $f$ and $f'$ are vectors.
+\end{definition}
+
+\begin{definition}[\cindex{perfect}]
+    Let $M$ be a metric space. A subset $A \subset M$ is called perfect if every $a \in A$ is a limit point of $A$.
+\end{definition}
+
+\begin{definition}
+    Let $X \subset K$ be perfect. Then $f: X \rightarrow E$ is differentiable on $X$ if $f$ is differentiable at each point of $X$.
 \end{definition}
 
 
@@ -69,7 +79,7 @@
     Use $1 = (f^{-1} \circ f)'(x)$.
 \end{proof}
 
-\begin{definition}[higher derivatives]
+\begin{definition}[\cindex{higher derivatives}]
     Define operator $\partial$ as
     \begin{equation}
         \begin{aligned}
@@ -79,22 +89,46 @@
         \end{aligned}
     \end{equation}
     
-    $\partial^n f$ is called the $n$th derivative of $f$. If $\partial^n f$ is continuous, it is called $n$-times continuously differentiable.
+    \cindex{$\partial^n f$} is called the \cindex{$n$th derivative} of $f$. If $\partial^n f$ is \emph{continuous}, it is called \cindex{$n$-times continuously differentiable}. If $f$ is infinitely differentiable, it is called \cindex{smooth function}.
+    
+    The set of $n$-times continuously differentiable is denoted as \cindex{$C^n (X, F)$}. Here \emph{$C^0(X,F) = C(X,F)$ is the set of continuous function}.
 \end{definition}
 
+
+\begin{theorem}[\cindex{Leibniz' rule}]
+    Let $f,g \in C^k (X)$, then
+    \begin{equation}
+        \partial^k (fg) = \sum_{j=0}^k {k \choose j} \partial^j f \times \partial^{k-j} g
+    \end{equation}
+\end{theorem}
+
+
+% one side derivative
+
+\section{One-sided Derivative}
+
+\begin{definition}
+    We define one-sided derivative as
+    \begin{equation}
+        \begin{aligned}
+            \partial_{+} f(a) &= \lim_{x \rightarrow a^{+}} \frac{f(x) - f(a)}{x - a} \\
+            \partial_{-} f(a) &= \lim_{x \rightarrow a^{-}} \frac{f(x) - f(a)}{x - a} 
+        \end{aligned}        
+    \end{equation}
+\end{definition}
 
 
 % mean value theorem
 \section{Mean Value Theorem}
 
-\begin{theorem}[Rolle's theorem]\label{rolle_theorem}
+\begin{theorem}[\cindex{Rolle's theorem}]\label{rolle_theorem}
     Suppose $f$ is differentiable. If $f(a) = f(b)$, then there exists $\xi \in (a,b)$ that $f'(\xi) = 0$.
 \end{theorem}
 \begin{proof}
     If $f$ is constant, then any $\xi$ is ok. Otherwise, $f$ has an extreme at $(a,b)$ which has zero derivative.
 \end{proof}
 
-\begin{theorem}[mean value theorem]
+\begin{theorem}[\cindex{mean value theorem}]
     If $f$ is differentiable on $(a,b)$, then there is $\xi \in (a,b)$ that
     \begin{equation}
         f(b) = f(a) + f'(\xi)(b-a)
@@ -110,7 +144,7 @@
 \end{proof}
 
 
-\begin{theorem}
+\begin{theorem}[\cindex{second mean value theorem}]
     Suppose $f,g$ are differentiable on $(a,b)$ and $g' \neq 0$. Then there is a $\xi$ that
     \begin{equation}
         \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)}
@@ -125,8 +159,47 @@
     $h(a) = h(b)$. Use \theoref{rolle_theorem} again to find the $\xi$.
 \end{proof}
 
-\begin{theorem}[L'Hospital's Rule]\label{hospital_rule}
-    Suppose $f,g$ are differentiable and $g(x) \neq 0$. Suppose
+\begin{theorem}
+    The mean value theorem does not work for vector valued function. Suppose $E$ is a normed vector space and $f \in C([a,b], E)$ is differentiable on $(a,b)$. Then
+    \begin{equation}
+        \norm{f(b) - f(a)} \leq \sup_{\xi \in (a,b)} \norm{f'(\xi)}(b-a)
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    If $\displaystyle \sup_{\xi \in (a,b)} \norm{f'(\xi)}$ is unbounded, the inequality stands. So assume $\norm{f'(\xi)} < \alpha$. For $\epsilon \in (a,b)$, the set
+    \begin{equation*}
+        S = \set{\sigma \in [a+\epsilon, b]: \norm{f(\sigma) - f(a + \epsilon)} \leq \alpha (\sigma - (a + \epsilon))}
+    \end{equation*}
+    
+    is not empty because $a + \epsilon \in S$. Because $f$ is continuous, $\norm{f(\sigma) - f(a + \epsilon)}$ is continuous on $\sigma$, so $S$ is a closed set on $[a+\epsilon, b]$, so $S$ is compact and has an upper bound $s \in [a+\epsilon,b]$.
+    
+    Now assume $s \neq b$ and arrive at a contradiction. Then for $t \in (s,b)$, we have
+    \begin{equation}
+        \norm{f(t) - f(a+\epsilon)} \leq \norm{f(t) - f(s)} + \norm{f(s) - f(a + \epsilon)} \leq \norm{f(t) - f(s)} + \alpha (\sigma - (a + \epsilon))
+    \end{equation}
+    
+    Since $f$ is differentiable on $[a+\epsilon, b)$, we have $\frac{\norm{f(t) -f(s)}}{t-s} \rightarrow \norm{f'(s)}$ when $t \downarrow s$. Because $\norm{f'(s)} < \alpha$, there is $\delta \in (0, b-s)$ that $\norm{f(t) - f(s)} \leq \alpha(t-s)$ when $0 \leq t-s < \delta$. So 
+    \begin{equation*}
+        \norm{f(t) - f(a+\epsilon)} \leq \norm{f(t) - f(s)} + \alpha (\sigma - (a + \epsilon)) \leq \alpha(t-s) + \alpha (\sigma - (a + \epsilon)) = \alpha(t - (a + \epsilon))
+    \end{equation*}
+    
+    So $t \in S$ and $t > s$, a contradiction. Therefore $s = b$ and $\norm{f(b) - f(a+\epsilon)} \leq \alpha \norm{f'(\xi)}(b-a)$ for each upper bound $\alpha$ of $\norm{f'(\xi)}$. so $\displaystyle \norm{f(b) - f(a+\epsilon)} \leq \sup_{\xi \in (a,b)} \norm{f'(\xi)}(b-a)$. Then $\epsilon \rightarrow 0$.
+\end{proof}
+
+\begin{theorem}
+    Suppose $I$ is a compact perfect interval, $E$ is a normed vector space, and $f \in C(I,E)$ is a continuous function that is also differentiable on $\interior{I}$ ($C(I,E)$ means continuous, not differentiable). Then
+    \begin{itemize}
+        \item If $f'$ is bounded on $\interior{I}$, then $f$ is Lipschitz continuous\footnote{\defiref{lipschitz_continuity}}
+        \item Any function in $C^1(I,E)$ is Lipschitz continuous
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    If $f'$ is bounded, then $\norm{f(b) - f(a)} \leq \sup_{\xi \in (a,b)} \norm{f'(\xi)}(b-a)$ is Lipschitz continuous. If $f \in C^1(I,E)$, $f'$ is continuous on a compact space, so $f'$ is bounded.
+\end{proof}
+
+
+\begin{theorem}[\cindex{L'Hospital's Rule}]\label{hospital_rule}
+    Suppose $f,g: \realnumber \rightarrow \realnumber$ are differentiable and $g(x) \neq 0$ for all $x$. Suppose
     \begin{itemize}
         \item $\displaystyle \lim_{x\rightarrow a} f(x) = \lim_{x\rightarrow a} g(x) = 0$, or
         \item $\displaystyle \lim_{x\rightarrow a} g(x) = \pm \infty$
@@ -135,9 +208,57 @@
     \begin{equation}
         \lim_{x\rightarrow a}\frac{f(x)}{g(x)} = \lim_{x\rightarrow a}\frac{f'(x)}{g'(x)}
     \end{equation}
-    if the limit on the right side exists in $\realnumber$.
+    if the limit on the right side exists in \emph{$\closure{\realnumber}$}. Here \emph{$a$ could be $\pm \infty$}.
 \end{theorem}
+\begin{proof}
+    (wrong proof) use second mean value theorem, for $a < x < \epsilon < y$, $\frac{f(y) - f(x)}{g(y) - g(x)} = \frac{f'(\epsilon)}{g'(\epsilon)}$. Then take $x \downarrow 0$.
+\end{proof}
 
+
+
+
+
+% convexity
+
+\section{Convexity}
+
+\begin{definition}[\cindex{convex}]
+    Let $C$ be a convex subset of vector space $V$. Then $f:V \rightarrow \realnumber$ is convex if for $x,y \in C$ and $t \in (0,1)$, we have
+    \begin{equation}
+        f\left( (1-t)x + ty \right) \leq (1-t) f(x) + t f(y)
+    \end{equation}
+    
+    $f$ is strictly convex if we change from $\leq$ to $<$. It is concave if $-f$ is convex.
+\end{definition}
+
+\begin{theorem}
+    Suppose $I \subset \realnumber$ is a perfect interval and $f: I \rightarrow \realnumber$. Then the following are equivalent:
+    \begin{itemize}
+        \item $f$ is convex
+        \item For all $a,b \in I$ that $a < x < b$, we have \begin{equation}
+            f(x) \leq f(a) + \frac{f(b) - f(a)}{b-a} (x-a)
+        \end{equation}
+        \item Same condition, we have \begin{equation}
+            \frac{f(x) - f(a)}{x - a} \leq \frac{f(b) - f(a)}{b - a} \leq \frac{f(b) - f(x)}{b - x}
+        \end{equation}
+        \item Same condition, we have \begin{equation}
+            \frac{f(x) - f(a)}{x - a} \leq \frac{f(b) - f(x)}{b - x}
+        \end{equation}
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let $t = \frac{x-a}{b-a}$, we have $f(x) \leq \left(1 - \frac{x-a}{b-a}\right)f(a) + \frac{x-a}{b-a}f(b) = f(a) + \frac{f(b) - f(a)}{b-a}(x-a) $
+\end{proof}
+
+\begin{theorem}
+    Suppose $I$ is a perfect interval and $f: I \rightarrow \realnumber$ is differentiable. Then $f$ is (strictly) convex if and only if $f'$ is (strictly) increasing.
+\end{theorem}
+\begin{proof}
+    Define two sequence $x_n \downarrow a$ and $y_n \uparrow b$ and $x_0 < y_0$. We have
+    \begin{equation}
+        \frac{f(x_n) - f(a)}{x_n - a} < \frac{f(x_0) - f(a)}{x_0 - a} < \frac{f(y_0) - f(x_0)}{y_0 - x_0} < \frac{f(y_0) - f(b)}{y_0 - b} < \frac{f(y_n) - f(b)}{y_n - b}
+    \end{equation}
+\end{proof}
 
 
 
@@ -145,12 +266,38 @@
 % Taylor theorem
 \section{Taylor Expansion}
 
+\begin{definition}[\cindex{Landau symbol}]
+    Let $X$ and $E$ be normed vector space, and $D$ is a subset of $X$, and $f: D\rightarrow E$. If $\alpha \geq 0$, we say $f$ has a zero of order $\alpha$ at $m$ as 
+    \begin{equation}
+        f_{x \rightarrow m} (x) = o(\norm{x-m}^\alpha)
+    \end{equation}
+    
+    if 
+    \begin{equation}
+        \lim_{x \rightarrow m} \frac{f(x)}{\norm{x - m}^\alpha} = 0
+    \end{equation}
+    
+    When there is $K > 0$ that
+    \begin{equation}
+        \norm{f(x)} \leq K \norm{x - m}^\alpha
+    \end{equation}
+    
+    We write 
+    \begin{equation}
+        f_{x \rightarrow m} (x) = O(\norm{x-m}^\alpha)
+    \end{equation}
+    
+    In particular, $f_{x \rightarrow m}(x) = O(1)$ means $f$ is bounded around $m$.
+\end{definition}
+
+
+
 \begin{theorem}
-    For each function $f$ with $n$th derivatives, we have
+    Let $D$ be convex perfect subset of $F$ ($F$ is $\realnumber$ or $\complexnumber$), and $E$ is a Banach space. For $f \in C^n (D, E)$ and $a \in D$, there is $R_n(f,a) \in C(D,E)$ that
     \begin{equation}
         f(x) = \sum_{k=0}^n \frac{f^k (a)}{k!}(x-a)^k + R_n(f,a)(x)
     \end{equation}
-    The remainder $R_n$ satisfies
+    The remainder function $R_n$ satisfies
     \begin{equation}
         \absolutevalue{R_n(f,a)(x)} \leq \frac{1}{(n-1)!} \sup_{0 < t < 1}\absolutevalue{f^n (a + t(x-a)) - f^n (a)} \absolutevalue{x-a}^n
     \end{equation}

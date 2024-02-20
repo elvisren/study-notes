@@ -69,7 +69,7 @@
     So $\delta$ does not depends on $x_0$, compared with \defiref{continuous_function_definition}.
 \end{definition}
 
-\begin{definition}[\cindex{Lipschitz continuity}]
+\begin{definition}[\cindex{Lipschitz continuity}]\label{lipschitz_continuity}
     A function $f$ is Lipschitz continuous if there exists $L > 0$ that for all $x,y \in X$, we have 
     \begin{equation}
         \absolutevalue{f(x) - f(y)} \leq L \absolutevalue{x - y}
@@ -143,20 +143,6 @@
     Use \theoref{uniform_on_r_with_linear_function} and check the boundedness of $ax+b$.
 \end{proof}
 
-
-
-% asymptotic notation
-
-\section{Asymptotic Notations}
-
-\begin{definition}
-    Let $f,g: [a, \infty) \rightarrow \realnumber$.
-    \begin{itemize}
-        \item $f$ and $g$ are \cindex{asymptotically equivalent} as $x \rightarrow \infty$ if $\lim_{x \rightarrow \infty} \frac{f(x)}{g(x)} = 1$. It is written as \cindex{$f \sim g$} as $x \rightarrow \infty$.
-        \item If there is $M > 0$ and $K > a$ that for all $x \geq K$, we have $\absolutevalue{f(x)} < M g(x)$, $f$ is big-O of $g$, which is written as \cindex{$f \in O(g)$}.
-        \item If for any $\epsilon > 0$, there is $K > 0$ that for all $x > K$, we have $\absolutevalue{f(x) < \epsilon g(x)}$, $f$ is small-O of $g$, which is written as \cindex{$f \in o(g)$}.
-    \end{itemize}
-\end{definition}
 
 
 
