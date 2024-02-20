@@ -108,8 +108,14 @@
     A continuous function over compact domain is uniformly continuous. The compact domain in metric space must be closed and bounded.
 \end{theorem}
 
+
+
+% property of uniformly continuous
+
+\section{Property of Uniformly Continuous}
+
 \begin{theorem}
-    Let $f \in C^0([0,\infty))$ be a continuous real valued function. If $f$ is continuous and \emph{$\displaystyle \lim_{x\rightarrow \infty} f(x)$ exists}, then $f$ is uniformly continuous on $[0, \infty)$.
+    Let $f: [0, \infty) \rightarrow \realnumber$ be a continuous real valued function. If $f$ is continuous and \emph{$\displaystyle \lim_{x\rightarrow \infty} f(x)$ exists}, then $f$ is uniformly continuous.
 \end{theorem}
 \begin{proof}
     Since $f$ has a limit $L$, for any $\epsilon > 0$, there is $K$ that for all $x > K$, $\absolutevalue{f(x) - L} < \frac{\epsilon}{2}$. Now split $[0, \infty)$ into two parts: $[0, K+1]$ and $[K+1, \infty)$.
@@ -125,7 +131,7 @@
 \end{proof}
 
 \begin{theorem}\label{uniform_on_r_with_linear_function}
-    Let $f:\realnumber \rightarrow \realnumber$ be a uniformly continuous function. Then there is constant $a,b >0$ that $\absolutevalue{f(x)} < a \absolutevalue{x} + b$    .
+    Let $f:\realnumber \rightarrow \realnumber$ be a uniformly continuous function. Then there is constant $a,b >0$ that $\absolutevalue{f(x)} < a \absolutevalue{x} + b$. So a uniformly continuous function cannot be too big.
 \end{theorem}
 \begin{proof}
     Since $f$ is uniformly continuous, there is $\delta$ that when $\absolutevalue{x-y} < \delta$, $\absolutevalue{f(x) - f(y)} < 1$. For any $x > 0$, split $[0,x]$ into $m = \lfloor \frac{x}{\delta} \rfloor$ small pieces $m_i$. So
@@ -140,7 +146,7 @@
     Let $f: \realnumber \rightarrow \realnumber$ be a uniformly continuous function. If $X \subset \realnumber$ is a bounded set, then $f(X)$ is bounded.
 \end{theorem}
 \begin{proof}
-    Use \theoref{uniform_on_r_with_linear_function} and check the boundedness of $ax+b$.
+    Use \theoref{uniform_on_r_with_linear_function} and check the boundedness of $a\absolutevalue{x}+b$.
 \end{proof}
 
 

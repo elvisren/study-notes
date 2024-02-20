@@ -159,7 +159,10 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \end{proof}
 
 \begin{definition}
-    The distance from $x$ to $A$ is $d(x,A) = \infimum{d(x,a) | a \in A}$.
+    The distance from $x$ to $A$ is
+    \begin{equation}
+        d(x,A) = \infimum{d(x,a) | a \in A}
+    \end{equation}
 \end{definition}
 
 \begin{theorem}
@@ -299,7 +302,7 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \end{proof}
 
 \begin{theorem}[construct locally compact subspace]
-    Let $X$ be a locally compact Hausdorff and $A \subset X$. If $A$ is closed in $X$ or open in $X$, then $A$ is locally compact.
+    Let $X$ be a locally compact Hausdorff and $A \subset X$. If $A$ is \emph{closed or open} in $X$, then $A$ is locally compact.
 \end{theorem}
 \begin{proof}
     If $A$ is open, find $V$ that $\closure{V} \subset A$ and is compact, so $\closure{A}$ is the result. 

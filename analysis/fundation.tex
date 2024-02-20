@@ -8,88 +8,11 @@
 \end{enumerate}
 
 
-
-
-
-
-% logic and set theory
-
-\section{Logic and Set Theory}
-
-
-\begin{definition}    
-The implication $A \Rightarrow B$ is defined as:
-\begin{equation}
-    A \Rightarrow B := \neg A \vee B
-\end{equation}
-
-Here $A$ is the sufficient condition for $B$, and $B$ is the necessary condition for $A$.
-
-Another observation is:
-\begin{equation}
-    A \Rightarrow B \Leftrightarrow \neg B \Rightarrow \neg A
-\end{equation}
-
-$\neg B \Rightarrow \neg A$ is the contrapositive of the statement $A \Rightarrow B$
-\end{definition}
-
-\begin{definition}
-    A function $f : X \rightarrow Y$ is a rule that for each element of $X$, there is only one element of $Y$.
-\end{definition}
-
-\begin{definition}[\label{fiber}]
-    The fiber of $f$ at $y$ is $f^{-1}$ that:
-    \begin{equation}
-        f^{-1}(y) := \set{x \in X; f(x) = y}
-    \end{equation}
-\end{definition}
-
-\begin{definition}[\cindex{equivalent relation}]
-    A relation on $X$ which is reflective, transitive and symmetric is called an equivalent relation on $X$, and is denoted as $\sim$.
-    
-    It defines a surjection $X \rightarrow X / \sim$ which is called quotient function.
-\end{definition}
-
-
-
-\begin{theorem}
-    The natural number $\naturalnumber$ are well ordered, that is, each nonempty subset of $\naturalnumber$ has a minimum.
-\end{theorem}
-
-
-\begin{definition}
-    A set $X$ is \cindex{finite} if it is empty, or if there are $n \in \naturalnumber^{\times}$ and a bijection from $\set{1, ..., n}$ to $X$.
-    
-    If a set is not finite, it is infinite.
-    
-    A set $X$ is \cindex{countably infinite} if there is a bijection from $X$ to $\naturalnumber$. A set is countable if it is countably infinite or finite. Or it is uncountable.
-\end{definition}
-
-\begin{theorem}
-    There is no surjection from $X$ to $\powerset{X}$. So $\powerset{\naturalnumber}$ is uncountable.
-\end{theorem}
-\begin{proof}
-    Define a function $\varphi: X \rightarrow \powerset{X}$, and consider the set $A = \set{x\in X, x \notin \varphi(x)}$.
-\end{proof}
-
-
-\begin{theorem}
-A countable union of countable sets is countable.    
-\end{theorem}
-
-\begin{theorem}
-The set $\set{0,1}^{\naturalnumber}$ is uncountable.
-\end{theorem}
-\begin{proof}
-    Define a bijection from $\powerset{\naturalnumber}$ to $\set{0,1}^{\naturalnumber}$.
-\end{proof}
-
-
-\section{Group Theory}
-
 %
 % group theory 
 %
+
+\section{Group Theory}
 
 \begin{definition}[\cindex{magma}]
     A magma $(M, \cdot)$ has the property that
@@ -251,7 +174,9 @@ Natural number $\naturalnumber$ did not support the inverse $-n$. Integer $\inte
 Integer $\integer$ did not support the $m/n$. Rational number $\rational$ is the smallest field that contains $\integer$. $\rational$ has a limitation too. For example, there is no rational $x$ that $x^2 = 2$. So we need to extend $\rational$ too.
 
 \begin{definition}[\cindex{order complete}]
-    Let $X$ be a totally ordered set. It is order complete if every nonempty subset is bounded above has superium. It is also called complete.
+    Let $X$ be a totally ordered set. It is order complete if every nonempty subset is bounded above has supremum. It is also called complete.
+    
+    Compared with well-ordering: well-ordering says any set has a minimum.
 \end{definition}
 
 

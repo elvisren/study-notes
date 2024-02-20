@@ -129,7 +129,7 @@
 \end{proof}
 
 \begin{theorem}[\cindex{mean value theorem}]
-    If $f$ is differentiable on $(a,b)$, then there is $\xi \in (a,b)$ that
+    If $f \in C([a,b], \realnumber)$ is differentiable on $(a,b)$, then there is $\xi \in (a,b)$ that
     \begin{equation}
         f(b) = f(a) + f'(\xi)(b-a)
     \end{equation}
@@ -159,8 +159,8 @@
     $h(a) = h(b)$. Use \theoref{rolle_theorem} again to find the $\xi$.
 \end{proof}
 
-\begin{theorem}
-    The mean value theorem does not work for vector valued function. Suppose $E$ is a normed vector space and $f \in C([a,b], E)$ is differentiable on $(a,b)$. Then
+\begin{theorem}[mean value theorem for vector valued function]
+    Suppose $E$ is a normed vector space and $f \in C([a,b], E)$ is differentiable on $(a,b)$. Then
     \begin{equation}
         \norm{f(b) - f(a)} \leq \sup_{\xi \in (a,b)} \norm{f'(\xi)}(b-a)
     \end{equation}
@@ -228,7 +228,7 @@
         f\left( (1-t)x + ty \right) \leq (1-t) f(x) + t f(y)
     \end{equation}
     
-    $f$ is strictly convex if we change from $\leq$ to $<$. It is concave if $-f$ is convex.
+    $f$ is \cindex{strictly convex} if we change from $\leq$ to $<$. It is concave if $-f$ is convex.
 \end{definition}
 
 \begin{theorem}
@@ -240,9 +240,6 @@
         \end{equation}
         \item Same condition, we have \begin{equation}
             \frac{f(x) - f(a)}{x - a} \leq \frac{f(b) - f(a)}{b - a} \leq \frac{f(b) - f(x)}{b - x}
-        \end{equation}
-        \item Same condition, we have \begin{equation}
-            \frac{f(x) - f(a)}{x - a} \leq \frac{f(b) - f(x)}{b - x}
         \end{equation}
     \end{itemize}
 \end{theorem}
@@ -299,7 +296,7 @@
     \end{equation}
     The remainder function $R_n$ satisfies
     \begin{equation}
-        \absolutevalue{R_n(f,a)(x)} \leq \frac{1}{(n-1)!} \sup_{0 < t < 1}\absolutevalue{f^n (a + t(x-a)) - f^n (a)} \absolutevalue{x-a}^n
+        \absolutevalue{R_n(f,a)(x)} \leq \frac{\displaystyle \sup_{0 < t < 1}\norm{f^n (a + t(x-a)) - f^n (a)} }{(n-1)!}  \times \absolutevalue{x-a}^n
     \end{equation}
 \end{theorem}
 \begin{proof}
@@ -314,8 +311,19 @@
     \end{equation}
 \end{proof}
 
-\begin{theorem}[Schlomilch reminder]
-    Let $p > 0$ and $f^{n+1}$ exists. There is $\xi$ that
+\begin{definition}[\cindex{Taylor series}]
+    Let $f \in C^\infty (D, F)$. The expression
+    \begin{equation}
+        T_f (a) = \sum_{k=0}^\infty \frac{f^k(a)}{k!}(x-a)^k
+    \end{equation}
+    
+    is called the Taylor series of $f$ at $a$. If it has positive radius of convergence $\rho$, then $T_f$ is a well defined function on $B(a,\rho)$. 
+    
+    Then $f = T_f$ in some neighborhood $U$ of $a$ if and only if $\displaystyle \lim_{n \rightarrow \infty} R_n(f,a) = 0$ for $x \in U$.
+\end{definition}
+
+\begin{theorem}[\cindex{Schlomilch reminder formula}]
+    Let $I$ be a perfect interval, $a \in I$, $p > 0$. Suppose $f \in C^n(I, \realnumber)$ and $f^{n+1}$ exists on $\interior{I}$.For all $x \in I - \set{a}$, there is $\xi_x$ such that
     \begin{equation}
         R_n(f,a)(x) = \frac{f^{n+1}(\xi)}{p \times n!}\left( \frac{x-\xi}{x-a} \right)^{n-p+1} (x-a)^{n+1}
     \end{equation}
@@ -329,14 +337,14 @@
     We have $R_n (f,a)(x) = g(x) - g(a)$ and $g'(t) = \frac{f^{n+1}(x)}{n!}(x-t)^n$. Also define $h(t) = (x-t)^p$. Use \theoref{hospital_rule} to find the $\xi$.
 \end{proof}
 
-\begin{theorem}[Langrange reminder]
+\begin{theorem}[\cindex{Langrange reminder}]
     Set $p = n+1$
     \begin{equation}
         R_n (f,a)(x) = \frac{f^{n+1}(\xi)}{(n+1)!}(x-a)^{n+1}
     \end{equation}
 \end{theorem}
 
-\begin{theorem}[Cauchy reminder]
+\begin{theorem}[\cindex{Cauchy reminder}]
     Set $p=1$
     \begin{equation}
         R_n (f,a)(x) = \frac{f^{n+1}(\xi)}{n!}\left( \frac{x-\xi}{x-a} \right)^n (x-a)^{n+1}
