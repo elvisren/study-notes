@@ -34,6 +34,8 @@
 
 \begin{theorem}\label{disjoint_openset_of_x_and_compact_set}
     If $Y$ is a compact subspace of the Hausdorff space $X$ and $x_0$ is not in $Y$, then there exists disjoint open sets $U$ and $V$ of $X$ containing $x_0$ and $Y$.    
+    
+    It proves that \emph{compact Hausdorff space is regular}.
 \end{theorem}
 \begin{proof}
     Follow the construction in proving \theoref{compact_subspace_closed}.
@@ -176,7 +178,7 @@ The idea is to use Zorn's lemma to choose a maximal set with finite intersection
 \begin{theorem}[\cindex{Lebesgue number}]\label{lebesgue_number}
     Let $\mathcal{A}$ be an open covering of the metric space $(X, d)$. If $X$ is compact, $\exists \delta > 0$ that for each subset of $X$ having diameter less than $\delta$, there exists an element of $\mathcal{A}$ containing it. The $\delta$ is called the Lebesgue number for the covering $\mathcal{A}$.
     
-    So the Lebesgue number exists for an open covering of compact metric space.
+    So the Lebesgue number exists for an open covering of \emph{compact metric space}.
 \end{theorem}
 \begin{proof}
     Define a continuous function $f : X \rightarrow \realnumber$. For each finite covering $\set{A_i}$, choose $C_i = X - A_i$. $\displaystyle \forall x, f(x) = \frac{1}{n} \sum d(x,C_i)$. $f(x) > 0$ because we could choose $x_i \in A_i$ and then $d(x_i, C_i) > 0$.

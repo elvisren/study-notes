@@ -85,7 +85,7 @@ For different metrics:
     \item \cindex{discrete topology}: the collection of all subsets of $X$.
     \item \cindex{finite complement topology}: a collection of subsets $U$ of $X$ that $X - U$ is either finite or all of $X$.
     \item \cindex{standard topology} on order set: a collection of all open intervals $(a,b) = \set{x | a < x < b}$.
-    \item \cindex{lower limit topology} \cindex{$\mathcal{R}_l$}: $[a,b) = \set{x | a \leq x < b}$.
+    \item \cindex{lower limit topology} \cindex{$\realnumber_l$}: $[a,b) = \set{x | a \leq x < b}$.
 \end{itemize}
 \end{example}
 
@@ -180,6 +180,8 @@ The set $X$ with a topology is called \cindex{topological space}. The set $U$ in
 
 \begin{definition}[\cindex{limit point}]
     Let $A$ be a subset of topological space $X$. $x$ is a limit point of $A$ if every neighborhood of $x$ intersects $A$ in some point \emph{other than $x$}.
+    
+    It is also called \cindex{cluster point}.
 \end{definition}
 
 \begin{definition}[\cindex{isolated point}]
@@ -542,28 +544,6 @@ Let $f: X \rightarrow Y$. Let $X$ and $Y$ be metrizable with $d_X$ and $d_Y$. $f
 \end{theorem}
 
 
-\begin{definition}[\cindex{first countability axiom}]\label{first_countability_axiom}
-    A space $X$ that has a countable basis at each of its points is said to satisfy the first countability axiom. 
-    
-    A metric space always satisfies the first countability axiom.
-\end{definition}
-
-\begin{theorem}[\cindex{sequence lemma}]\label{sequence_lemma}
-    Let $A \subset X$. If there is a sequence of points of $A$ converging to $x$, then $x \in \closure{A}$. The converse holds if $X$ is metrizable.
-\end{theorem}
-\begin{proof}
-    Use \defiref{first_countability_axiom}. For a $x$, choose neighbor $B_d(x, \frac{1}{n})$, and let it intersect with $A$.
-\end{proof}
-
-
-\begin{theorem}
-    Let $f: X \rightarrow Y$. If $f$ is continuous, then for every convergent sequence $x_n \rightarrow x$ in $X$, the sequence $f(x_n) \rightarrow f(x)$. The converse holds if $X$ is metrizable (\emph{$Y$ does not need to be metrizable}).
-\end{theorem}
-\begin{proof}
-    For a $A \subset X$,  $x_n \rightarrow x \Rightarrow x \in \closure{A}$. $f(x_n) \rightarrow f(x) \Rightarrow f(x) \in \closure{f(A)}$. Use \defiref{first_countability_axiom}, for every $x \in \closure{A}$, we could find $x_i \rightarrow x$.
-\end{proof}
-
-
 
 
 \begin{definition}[\cindex{converge uniformly}]\label{converge_uniformly}
@@ -595,7 +575,7 @@ The uniform topology on $\realnumber_{J}$ is finer than the product topology and
 
 
 
-\begin{theorem}[$\realnumber^{\omega}$ is metrizable]
+\begin{theorem}[\emph{$\realnumber^{\omega}$ is metrizable}]
     Define $\displaystyle D(x,y) = \supremum{\frac{\closure{d}(x_i, y_i )}{i}} $. Then $D$ is a metric that induces the product topology on $\realnumber^\omega$.
 \end{theorem}
 \begin{proof}
@@ -603,12 +583,12 @@ The uniform topology on $\realnumber_{J}$ is finer than the product topology and
 \end{proof}
 
 
-\begin{example}[$\realnumber^\omega$ is not metrizable in box topology]
+\begin{example}[\emph{$\realnumber^\omega$ is not metrizable in box topology}]
     Let $A = \set{(x_1, x_2, \cdots ) | x_i > 0}$. We have $(0,0,0, \cdots) \in \closure{A}$. For a sequence $a_n = (x_{n_1}, x_{n_2}, \cdots)$, the open set $\set{(- x_{1_1}, x_{1_1}) \times (- x_{2_2}, x_{2_2}) \times \cdots}$ contains no $a_i$. Use \theoref{sequence_lemma} to prove that it is not metrizable.
 \end{example}
 
 
-\begin{example}[$\realnumber^J$ is not metrizable in product topology]
+\begin{example}[\emph{$\realnumber^J$ is not metrizable in product topology}]
     Assume $J$ is uncountable. Let $A$ contains all $x$ that $\pi_{\beta}(x) = 1$ for all but finite many $\beta$. Then $0^J$ is in $\closure{A}$.
     
     Assume there is a sequence $a_n$ that converge to $0^J$. Let $J_i = \set{\beta | \pi_\beta (a_i) \neq 1 }$. Then $\Sigma_{i\in \naturalnumber} \absolutevalue{J_i}$ is countable sum of finite value, which is countable. Because $J$ is uncountable, there exists a $\beta$ that $\forall i \in \naturalnumber, \pi_\beta (a_i) = 1$. Take a basis $\pi_{\beta}^{-1}(-1,1)$, which contains $0^J$ but intersect with no $a_i$.
