@@ -74,8 +74,40 @@
 \end{example}
 
 
+\begin{theorem}[Stolz-Cesaro theorem, $\frac{*}{\infty}$ case]
+    Let $\sequence{a_n}$ and $\sequence{b_n}$ be two sequence. Assume that $\sequence{b_n}$ is strictly monotone and divergent, and the following limit exists:
+    \begin{equation}
+        \lim_{n \rightarrow \infty} \frac{a_{n+1} - a_n}{b_{n+1} - b_n} = l
+    \end{equation}
+    
+    Then the following limit exists:
+    \begin{equation}
+        \lim_{n \rightarrow \infty} \frac{a_n}{b_n} = l
+    \end{equation}
+\end{theorem}
 
 
+
+\begin{theorem}[Stolz-Cesaro theorem, $\frac{0}{0}$ case]
+    Let $\sequence{a_n}$ and $\sequence{b_n}$ be two sequence. Assume that $a_n \rightarrow 0$ and $b_n \rightarrow 0$, and $\sequence{b_n}$ is strictly decreasing. If the following limit exists:
+    \begin{equation}
+        \lim_{n \rightarrow \infty} \frac{a_{n+1} - a_n}{b_{n+1} - b_n} = l
+    \end{equation}
+    
+    Then the following limit exists:
+    \begin{equation}
+        \lim_{n \rightarrow \infty} \frac{a_n}{b_n} = l
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[Cauchy result]
+    If $x_n \rightarrow l$, then
+    \begin{equation}
+        \lim_{n \rightarrow \infty} \frac{x_1 + x_2 + \cdots + x_n}{n} = l
+    \end{equation}
+\end{theorem}
+
+Note: Cauthy result can change the question from $\lim a_n$ into $\lim \frac{\sum a_n}{n}$. Stolz can change from $\lim \frac{a_n}{b_n}$ into $\lim \frac{a_n - a_m}{b_n - b_m}$. We will use it when $\sum a_n$ or $a_n - a_m$ is easier to calculate.
 
 
 

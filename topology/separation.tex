@@ -197,14 +197,55 @@ Here is the conclusion:
 \end{theorem}
 
 
+% Urysohn lemma
+
+\section{Urysohn Lemma}
+
+\begin{theorem}
+    Let $X$ be a normal space. Let $A$ and $B$ be disjoint closed set of $X$. There exists a continuous function $f: X \rightarrow [a,b]$ that $f(x) = a$ for every $x \in A$, and $f(x) = b$ for $b \in B$.
+    
+    If $A$ and $B$ are two disjoint subset of $X$ and there is a continuous function $f: X \rightarrow [0,1]$ that $f(A) = {0}$ and $f(B) = {1}$, we say that $A$ and $B$ ca be separated by a continuous function.
+    
+    So Urysohn lemma says that if every pair of disjoint closed set in $X$ can be separated by disjoint open sets, then every pair can be separated by a continuous function.
+\end{theorem}
+\begin{proof}
+    Check the case on $[0,1]$. Let $P$ be all the rational numbers in $[0,1]$. Create countable open set $U_p \subset X$ that when $p < q$, $\closure{U_p} \subset U_q$. Let $U_0 = A$, $U_1 = X - B$. Suppose $U_p$ and $U_q$ are defined, and for $p < r < q$, define $U_r$. Since $X$ is normal, there is $U_r$ that $\closure{U_P} < U_r < U_q$. 
+\end{proof}
+
+\begin{definition}[\cindex{completely regular}]
+    A space $X$ is completely regular if it is $T_1$ and for each $x$ and closed set $A$ that does not contain $x$.
+\end{definition}
+
+\begin{theorem}
+    The subspace and product of completely regular space is completely regular.    
+\end{theorem}
+
+\begin{definition}
+    Separation number:
+    \begin{itemize}
+        \item $T_1$
+        \item $T_2$: Hausdorff
+        \item $T_3$: regular
+        \item $T_{3 \frac{1}{2}}$: completely regular
+        \item $T_4$: normal
+        \item $T_5$: completely normal
+    \end{itemize}
+\end{definition}
 
 
+\begin{theorem}
+    Let $X$ be a $T_1$ space. Suppose $\sequence{f_\alpha}_{\alpha \in J}$ is an indexed family of cintinuous function $f_\alpha : X \rightarrow \realnumber$ such that for each $x_0\in X$ and each neighborhood $U$ of $x_0$, there is an index $\alpha$ that $f_\alpha$ is positive at $x_0$ and zero outside $U$. Then The function $F: X \rightarrow \realnumber^J$ defined by 
+    \begin{equation}
+        F(x) = \left(f_\alpha(x)\right)_{\alpha \in J}
+    \end{equation}
+    
+    is an imbedding of $X$ in $\realnumber^J$. if $f_\alpha$ maps $X$ into $[0,1]$ for each $\alpha$, then $F$ imbed $X$ in $[0,1]^J$.
+\end{theorem}
 
 
-
-
-
-
+\begin{theorem}
+    Every second-countable regular space is metrizable.    
+\end{theorem}
 
 
 
