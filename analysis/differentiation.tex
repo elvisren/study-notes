@@ -159,7 +159,12 @@
     $h(a) = h(b)$. Use \theoref{rolle_theorem} again to find the $\xi$.
 \end{proof}
 
-\begin{theorem}[mean value theorem for vector valued function]
+\begin{example}[Counterexample of mean value theorem in vector space]
+    \emph{Mean value did not work for vector space}. For example, for function $f: \theta \rightarrow e^{i\theta}$, $f'(\theta) = i e^{i\theta} \neq 0$. So for $\theta_1 = 2\pi$ and $\theta_2 = 0$, $f(\theta_1) = f(\theta_2)$, but there is no $\xi$ that $0 < \xi < 2\pi$ that $f'(\xi) = 0$.
+\end{example}
+
+
+\begin{theorem}[mean value theorem for vector valued function]\label{mean_value_theorem_for_vector_valued_function}
     Suppose $E$ is a normed vector space and $f \in C([a,b], E)$ is differentiable on $(a,b)$. Then
     \begin{equation}
         \norm{f(b) - f(a)} \leq \sup_{\xi \in (a,b)} \norm{f'(\xi)}(b-a)
@@ -311,13 +316,13 @@
     \end{equation}
 \end{proof}
 
-\begin{definition}[\cindex{Taylor series}]
+\begin{definition}[\cindex{Taylor series}]\label{taylor_series}
     Let $f \in C^\infty (D, F)$. The expression
     \begin{equation}
         T_f (a) = \sum_{k=0}^\infty \frac{f^k(a)}{k!}(x-a)^k
     \end{equation}
     
-    is called the Taylor series of $f$ at $a$. If it has positive radius of convergence $\rho$, then $T_f$ is a well defined function on $B(a,\rho)$. 
+    $T$ is called the Taylor series of $f$ at $a$. If it has positive radius of convergence $\rho$, then $T_f$ is a well defined function on $B(a,\rho)$. 
     
     Then $f = T_f$ in some neighborhood $U$ of $a$ if and only if $\displaystyle \lim_{n \rightarrow \infty} R_n(f,a) = 0$ for $x \in U$.
 \end{definition}

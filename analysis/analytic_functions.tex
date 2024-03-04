@@ -1,0 +1,897 @@
+\chapter{Analytic Functions}
+
+
+% convergence
+
+\section{Sequence of Functions}
+
+There are two ways to check the property of a sequence of function $\sequence{f_n (x)}$:
+\begin{itemize}
+    \item Pointwise: check $f_n (x_0)$ for one $x_0$
+    \item Uniformly: check $f_n$ for all $x$
+\end{itemize}
+
+For example, pointwise increasing means for any $x$, $f_i (x) < f_{i+1}$. Uniformly bounded means $f_n \leq M$ for all $n$.
+
+\begin{definition}[\cindex{pointwise convergence}]
+    Let $(f_n)$ be a sequence of functions $f_n : X \rightarrow \realnumber$. The sequence $(f_n)$ converges pointwise to a function $f$ if for every $x_0 \in X$ and $\epsilon > 0$, there is an $N_{x_0, \epsilon} \in \naturalnumber$ such that $\absolutevalue{f_n (x_0) - f(x_0)} < \epsilon$ for all $n > N_{x_0, \epsilon}$, which is written as
+    \begin{equation}
+        \lim_{n \rightarrow \infty} f_n (x) = f(x)
+    \end{equation}
+\end{definition}
+
+Pointwise convergence is weak because it only consider the property of a single point. We often need surrounding guarantees.
+
+\begin{definition}
+    Let $\sequence{f_n}$ be a sequence of functions $f_n : X \rightarrow \realnumber$:
+    \begin{itemize}
+        \item If $\sequence{f_n}$ is pointwise increasing and uniformly bounded from above, it pointwisely converge to a function $f$, which is written as \cindex{$f_n \uparrow f$}.
+        \item If $\sequence{f_n}$ is pointwise decreasing and uniformly bounded from below, it pointwisely converge to a function $f$, which is written as \cindex{$f_n \downarrow f$}.
+        \item If $\sequence{f_n}$ is pointwise monotone and uniformly bounded, it pointwisely converge to a function $f$.
+    \end{itemize}
+\end{definition}
+
+
+\begin{definition}[\cindex{uniformly convergence}]
+    The function sequence $\sequence{f_n (x)}$ converges uniformly to $f$ if for every $\epsilon >0$, there is $N_\epsilon \in \naturalnumber$ that for all $x \in X$ and $n \geq N_\epsilon$, we have $\absolutevalue{f_n (x) - f(x)} < \epsilon$.
+\end{definition}
+
+\begin{theorem}[\cindex{Dini's theorem}]
+    Let $\sequence{f_n}$ be a sequence of continuous function from a compact metric space $X \rightarrow \realnumber$ that $f_n \downarrow f$ (or $f_n \uparrow f$), and $f$ is continuous. Then this convergence is uniform.
+\end{theorem}
+\begin{proof}
+    Define $d_n = f_n - f$. Since $f_n$ and $f$ is continuous, \emph{$d_n$ is continuous} and $d_n \downarrow 0$. Now prove the uniformly convergence. For any $\epsilon > 0$, The reverse image $X_n = \inverse{d_n}(-\epsilon, \epsilon)$ has the following property:
+    \begin{itemize}
+        \item $X_n$ is open because $d_n$ is continuous
+        \item $X_n \subset X_{n+1}$ because $d_n$ is decreasing
+        \item $\cup_n X_n = X$ because $d_n$ pointwisely converge to $0$
+    \end{itemize}
+    
+    So $\cup_n X_n$ is an open cover of compact space $X$, there is finite cover. Choose the $m = \max n$. So for any $k > m$, $\absolutevalue{f_k - f} < \epsilon$.
+\end{proof}
+
+
+\begin{theorem}
+    Let $X \subset \realnumber$ and $\sequence{f_n}$ be a sequence of functions $f: X \rightarrow \realnumber$. Then $\sequence{f_n}$ converge uniformly to $f$ if and only if 
+    \begin{equation}
+        \sup_{x \in X} \absolutevalue{f_n(x) - f(x)} \rightarrow 0
+    \end{equation}
+    
+    Using Cauchy test for convergence, it could also be expressed as for any $\epsilon > 0$, there is $N \in \realnumber$ that for all $m,n>N$, we have
+    \begin{equation}
+        \sup_{x \in X} \absolutevalue{f_m(x) - f_n(x)} < \epsilon
+    \end{equation}
+    
+    This simplifies the check by considering only the supremum of function difference. It converts from the function sequence to point sequence.
+\end{theorem}
+  
+
+
+% continuity and differentiability of sequence of fucntions
+
+\section{Continuity and Differentiability}
+
+Note: $\sum f_n$ means a series of partial sum. $\sum_{n=0}^\infty f_n$ means the limit function.
+
+\begin{definition}[\cindex{locally uniformly convergent}]\label{locally_uniformly_convergent}
+    A sequence of functions $\sequence{f_n}$ is called locally uniformly convergent if for each $x \in X$ has a neighborhood $U$ that $f_n$ converges uniformly on $U$.
+\end{definition}
+
+
+\begin{theorem}
+    If $X$ is compact and $\sequence{f_n}$ is locally uniformly convergent, then $\sequence{f_n}$ converges uniformly.
+\end{theorem}
+
+\begin{theorem}
+    If a sequence of continuously function $\sequence{f_n}$ converges locally uniformly to $f$, then $f$ is continuous.
+    
+    It means we could \emph{exchange the limits}:
+    \begin{equation}
+        \lim_{x \rightarrow a} \lim_{n \rightarrow \infty} f_n(x) = \lim_{n \rightarrow\infty} \lim_{x \rightarrow a} f_n(x) = \lim_{n \rightarrow \infty}f_n(a) = f(a)
+    \end{equation}
+    
+    Or for a locally uniformly convergent series of functions, we have
+    \begin{equation}
+        \lim_{x\rightarrow a} \sum_{k=0}^\infty f_k(x) = \sum_{k=0}^\infty \lim_{x \rightarrow a} f_k (x) = \sum_{k=0}^\infty f_k (a)
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Continuity is a local property.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be an open (or convex) perfect subset of $F$ and $E$ is a Banach space. Assume that
+    \begin{itemize}
+        \item $\sequence{f_n} \in C^1(X,E)$
+        \item $\sequence{f_n}$ converges pointwise to $f$
+        \item $\sequence{f'_n}$ converges locally uniformly to $g$
+    \end{itemize}
+    
+    Then
+    \begin{itemize}
+        \item $f \in C^1(X,E)$
+        \item $f' = g$
+        \item $\sequence{f_n}$ converges locally uniformly to $f$
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let $a \in X$, for $x$ that is close to $a$, define a function $m(t) = f_n(a + t(x-a)) - t f'_n(a)(x-a)$. Use \theoref{mean_value_theorem_for_vector_valued_function}, we have
+    \begin{equation}
+        \absolutevalue{f_n(x) - f_n(a) - f'_n(a)(x-a)} \leq \sup_{0 < t < 1}\absolutevalue{f'_n(a + t(x-a)) - f'_n(a)} \absolutevalue{x-a}
+    \end{equation}
+    
+    Take $n \rightarrow \infty$, we have
+    \begin{equation}
+        \absolutevalue{f(x) - f(a) - g(a)(x-a)} \leq \sup_{0 < t < 1}\absolutevalue{g(a + t(x-a)) - g(a)} \absolutevalue{x-a}
+    \end{equation}
+    
+    \theoref{locally_uniformly_convergent} shows $g \in C(X,E)$, so we have
+    \begin{equation}
+        f(x) - f(a) -g(a)(x-a) = o(\absolutevalue{x-a})
+    \end{equation}
+    
+    So $f$ is differentiable at $a$ and $f' = g$.
+    
+    To prove that $\sequence{f_n}$ converge locally uniformly to $f$, define function $p(t) = (f_n - f)(a + t(x-a))$ and use the vector version of mean value theorem.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be an open (or convex) perfect subset of $F$ and $E$ is a Banach space. Assume that
+    \begin{itemize}
+        \item $\sequence{f_n} \in C^1(X,E)$
+        \item $\sum f_n$ converges pointwise
+        \item $\sum f'_n$ converges locally uniformly
+    \end{itemize}
+    
+    Then we have
+    \begin{itemize}
+        \item $\sum_{n=0}^\infty f_n \in C^1(X,E)$
+        \item $\sum f_n$ converges locally uniformly
+        \item And we could take differentiation inside the sum: \begin{equation}
+        \left( \sum_{n=0}^\infty f_n \right)' = \sum_{n=0}^\infty f'_n
+    \end{equation}
+    \end{itemize}
+\end{theorem}
+
+
+\begin{example}
+    Let $\sequence{f_n} \in C^1(X,E)$ which converge uniformly to $f$. $f$ is continuously differentiable does not mean $\sequence{f'_n}$ converge pointwise to $f'$.
+    
+    Choose $f_n(x) = \frac{1}{n} \sin (nx)$. We have
+    \begin{itemize}
+        \item $\sequence{f_n}$ converge uniformly to $0$
+        \item $f'_n(0) = 1 \neq 0$
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    Let $\sequence{f_n} \in C^1(X,E)$ and $\sum f_n$ converges uniformly. $\sum f'_n$ does not even converge pointwise.
+    
+    Choose $f_n = \frac{1}{n^2} \sin (nx)$. We have
+    \begin{itemize}
+        \item $\norm{f}_\infty = \frac{1}{n^2}$, so it converges uniformly
+        \item $f'n(x) = \frac{1}{n} \cos (nx)$, and $\sum f'_n(0) = \sum \frac{1}{n}$ does not converge
+    \end{itemize}
+\end{example}
+
+
+
+
+
+% analytic functions
+\section{Analytic Functions}
+
+\begin{theorem}
+    Let $a = \sum_k a_k X^k$ be a power series with radius of $\rho > 0$. Then $\sum_k k a_k X^{k-1}$ has radius of convergence $\rho$.
+\end{theorem}
+
+\begin{definition}[\cindex{analytic}]
+    Let $D$ be open in $F$. A function $f: D \rightarrow F$ is called analytic if for $x_0 \in D$, there is some $r >0$ that $B(x_0, r) \subset D$ and a power series $\sum_k a_k X^k$ with radius of convergence $\rho \geq r$ that for $x \in B(x_0, r)$, we have
+    \begin{equation}
+        f(x) = \sum_{k=0}^\infty a_k (x - x_0)^k
+    \end{equation}
+    
+    Analytic is a local property. In this case, $\sum_{k=0}^\infty a_k (x - x_0)^k$ is called \cindex{power series expansion} for $f$ at $x_0$. 
+    
+    The set of all analytic function on $D$ is $C^\omega (D,F)$.
+\end{definition}
+
+\begin{theorem}
+    $f$ is analytic if and only if $f \in C^\infty(D)$ and for each $x_0 \in D$, there is a neighborhood $U \subset D$ that $f = T_f(x_0)$ where $T$ is the Taylor series defined in \defiref{taylor_series}.
+\end{theorem}
+
+\begin{theorem}
+    A power series $\sum a_k X^k$ represent an analytic function on its disk of convergence.
+\end{theorem}
+
+\begin{definition}[\cindex{antiderivative}]
+    A function $F$ is an antiderivative of $f$ if $F' = f$.
+\end{definition}
+
+\begin{theorem}
+    If $f \in C^\omega(D,E)$ has an antiderivative $F$, then $F$ is analytic.
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
