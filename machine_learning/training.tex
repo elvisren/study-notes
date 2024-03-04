@@ -21,61 +21,6 @@ The vanish gradient problem is hard to fix. There are 4 ideas:
 \end{enumerate}
 
 
-% choose activation function
-\section{Choose Activation Function}
-
-
-\begin{table}[H]
-\centering
-\begin{tabular}[t]{lll}
-Name & Definition & Range \\ \hline
-Sigmoid & $\sigma(a) = \frac{1}{1 + e^{-a}}$ & $[0,1]$ \\
-Hyperbolic tangent & $\tanh(a) = 2\sigma(2a) -1$ & $[-1,1]$ \\
-Softplus & $\sigma_{+}(a) = \log(1 + e^a)$ & $[0,\infty]$ \\
-ReLU & $\text{ReLU}(a) = \max(a,0)$ & $[0,\infty]$ \\
-LRelu & $\max(a,0)+\alpha \min(a,0)$ & $[-\infty , \infty]$ \\
-ELU & $\max(a,0) + \min(\alpha(e^a - 1), 0)$ & $[-\infty, \infty]$ \\
-SELU & $\lambda \text{ELU}$ & $[-\infty, \infty]$ \\
-Swish & $a\sigma(a)$ & $[-\infty,\infty]$ \\
-GELU & $a \Phi(a)$ & $[-\infty,\infty]$\\
-\end{tabular}
-\end{table}
-
-\begin{example}[Relu]
-    The problem with ReLU is that if the weights were initialized with large negative value, it will saturate, which is called dead ReLU.    
-\end{example}
-
-\begin{example}[LReLU]
-    Leaky ReLU has a $\alpha$, which could be learned and called parametric ReLU.    
-\end{example}
-
-\begin{example}[ELU]
-    ELU (exponential linear unit) is better than LReLU for being a smooth function.    
-\end{example}
-
-
-\begin{definition}[SELU]
-    SELU (self-normalizing ELU) $\text{SELU}(a;\alpha,\lambda) = \lambda \text{ELU}(a;\alpha)$ is even better that if the input $x$ is normal, each layer keeps previous layer's mean and variance.     
-    
-    MLP is an iterative function: $x$, $\text{SELU}(x)$, $\text{SELU}(\text{SELU}(x))$, $\dots$. $\text{SELU}$ has a fixed point that $\lambda = 1.0505$ and $\alpha = 1.6732$. 
-
-\end{definition}
-
-
-\begin{example}[Swish]
-    The full definition of Swish function is $a\sigma(\beta a)$. In practice, $\beta$ is always $1$. 
-\end{example}
-
-\begin{example}[GELU]
-    GELU (gaussian error linear unit) is defined as $a \Phi(a)$ where $\Phi$ is
-    \begin{equation}
-        \Phi(a) = \mathcal{P}(\mathcal{N}(0,1) \leq a) = \frac{1}{2}\left(1+\text{erf}\left(\frac{a}{\sqrt{2}}\right)\right)
-    \end{equation}
-    
-    $\text{GELU}(a) \approx a \sigma(1.702 a)$. 
-\end{example}
-
-
 % resnet
 \section{Residual Connections}
 

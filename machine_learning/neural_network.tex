@@ -2,20 +2,228 @@
 
 
 % definition
-\section{Definition}
 
-\defiref{multi_layer_percepton} defined $l$ layers of MLP (multi-layer percepton). Each layer is a hidden unit $z_l$ with differentiable activation function $\varphi$:
+\section{Shallow Neural Network}
+
+\subsection{Scalar Input}
+
+In the simplest case, the shallow network is an affine transformation which has linear behavior:
+\begin{equation}
+    y = b + wx
+\end{equation}
+
+Here $b$ is called \cindex{bias}, and $w$ is called \cindex{weight}.
+
+ReLU function is usually used as the activation function that add non-linearity. So let $\phi = \text{ReLU}$, we have
+\begin{equation}
+    y = \phi (b + wx)
+\end{equation}
+
+In shallow neural network, it has only one hidden layer with $n$ \cindex{hidden unit}s. So
+\begin{equation}
+    y = b + \sum_{i=1}^n \phi (b_i + w_i x)
+\end{equation}
+
+Each ReLU function will create two piece-wise linear function. So $n$ hidden unit will create a $n+1$ piece-wise linear function. There is an \cindex{universal approximation theorem} that proves for any continuous function, there is a shallow network that can approximate this function to any specified precision.
+
+\subsection{Vector Input}
+
+When the input is a vector, the hidden unit will first aggregate all value and then apply the activation function. If the dimension of vector input is $m$ and the size of hidden input is $n$, the number of linear regions is between $2^m$ and $2^n$.
+
+
+
+
+% activation functions
+
+\section{Activation Functions}
+
+\begin{table}[H]
+\centering
+\begin{tabular}[t]{lll}
+Name & Definition & Range \\ \hline
+Sigmoid & $\sigma(a) = \frac{1}{1 + e^{-a}}$ & $[0,1]$ \\
+Hyperbolic tangent & $\tanh(a) = 2\sigma(2a) -1$ & $[-1,1]$ \\
+Softplus & $\sigma_{+}(a) = \log(1 + e^a)$ & $[0,\infty]$ \\
+ReLU & $\text{ReLU}(a) = \max(a,0)$ & $[0,\infty]$ \\
+LRelu & $\max(a,0)+\alpha \min(a,0)$ & $[-\infty , \infty]$ \\
+ELU & $\max(a,0) + \min(\alpha(e^a - 1), 0)$ & $[-\infty, \infty]$ \\
+SELU & $\lambda \text{ELU}$ & $[-\infty, \infty]$ \\
+Swish & $a\sigma(a)$ & $[-\infty,\infty]$ \\
+GELU & $a \Phi(a)$ & $[-\infty,\infty]$\\
+\end{tabular}
+\end{table}
+
+\begin{example}[Relu]
+    The problem with ReLU is that if the weights were initialized with large negative value, it will saturate, which is called \cindex{dead ReLU}.
+\end{example}
+
+\begin{example}[LReLU]
+    Leaky ReLU has a $\alpha$, which could be learned and called parametric ReLU.    
+\end{example}
+
+\begin{example}[ELU]
+    ELU (exponential linear unit) is better than LReLU for being a smooth function.    
+\end{example}
+
+
+\begin{definition}[SELU]
+    SELU (self-normalizing ELU) $\text{SELU}(a;\alpha,\lambda) = \lambda \text{ELU}(a;\alpha)$ is even better that if the input $x$ is normal, each layer keeps previous layer's mean and variance.     
+    
+    MLP is an iterative function: $x$, $\text{SELU}(x)$, $\text{SELU}(\text{SELU}(x))$, $\dots$. $\text{SELU}$ has a fixed point that $\lambda = 1.0505$ and $\alpha = 1.6732$. 
+
+\end{definition}
+
+
+\begin{example}[Swish]
+    The full definition of Swish function is $a\sigma(\beta a)$. In practice, $\beta$ is always $1$. 
+\end{example}
+
+\begin{example}[GELU]
+    GELU (gaussian error linear unit) is defined as $a \Phi(a)$ where $\Phi$ is
+    \begin{equation}
+        \Phi(a) = \mathcal{P}(\mathcal{N}(0,1) \leq a) = \frac{1}{2}\left(1+\text{erf}\left(\frac{a}{\sqrt{2}}\right)\right)
+    \end{equation}
+    
+    $\text{GELU}(a) \approx a \sigma(1.702 a)$. 
+\end{example}
+
+
+
+% definition
+\section{Deep Neural Network}
+
+\defiref{multi_layer_percepton} defined $l$ layers of \cindex{MLP} (\cindex{multi-layer percepton}). Each layer is a hidden unit $z_l$ with differentiable activation function $\varphi$:
 \begin{equation}
     z_l = f_l (z_{l-1}) = \varphi (b_l + W_l \times z_{l-1})
 \end{equation}
 
+The dimension of the matrix $W_l$ is $z_l \times z_{l-1}$.
 
 There are rules in choosing the activation function $\varphi$:
 \begin{enumerate}
-    \item It cannot be linear because the whole model would become linear
-    \item The derivative cannot vanish, or saturate. So sigmoid function is not good. ReLU is better, but it still has half plane with zero gradient
+    \item It cannot be linear because the whole model would become linear.
+    \item The derivative cannot vanish, or saturate. So sigmoid function is not good. ReLU is better, but it still has half plane with zero gradient.
 \end{enumerate}
 
+The number of hidden layers is the \cindex{depth} of the network. The number of hidden units for each layer is called \cindex{width} of the network. The total number of hidden units is called the \cindex{capacity} of the network.
+
+\begin{table}[H]
+\centering
+\begin{tabular}[t]{p{5cm}ll}
+Network & Regions & Parameters \\ \hline
+shallow with $n$ hidden units & $n+1$ & $3n+1$\\
+deep with one input, one output, and $k$ layers of $n$ hidden units & $(n+1)^k$ & $3n+1+(k-1)n(n+1)$ \\
+\end{tabular}
+\end{table}
+
+
+Efficiency of deep network:
+\begin{itemize}
+    \item \cindex{depth efficiency}: a shallow network may need exponential number of hidden units.
+    \item \cindex{width efficiency}: a wide shallow network can be expressed by narrow network with polynomial depth.
+\end{itemize}
+
+
+% loss function
+
+\section{Loss Function}
+
+Cost function = loss function + regularization.
+
+The recipe for constructing loss function:
+\begin{enumerate}
+    \item Choose a suitable probability function $\probability{y|\theta}$
+    \item Set machine learning model $\theta = f(x;\phi)$. So $\probability{y|\theta} = \probability{y|f(x;\phi)}$
+    \item Find a parameter $\hat\phi$ that minimize the negative log-likelihood loss function over all training dataset pairs $\set{x_i, y_i}$:\begin{equation}
+        \hat\phi = \argmin{\phi} L(\phi) = \argmin{\phi} \left( - \sum_{i=1}^n \ln \left(\probability{y|f(x;\phi)} \right)\right)
+    \end{equation}
+\end{enumerate}
+
+So the loss function is a least square loss function. 
+
+\subsection{Homoscedastic Regression}
+
+In \cindex{homoscedastic regression}, the variance is a constant value. Assume $y$ follows normal distribution with $\mu = f(x;\phi)$ and $\sigma^2$ is a constant. We have 
+\begin{equation}
+    \begin{aligned}
+        L(\phi) &= - \sum_{i=1}^n \ln \left( \frac{1}{\sqrt{2\pi \sigma^2}} \exponential{- \frac{\left(y_i - f(x_i;\phi)\right)^2}{2 \sigma^2}} \right) \\
+        &= \sum_{i=1}^n \left(y_i - f(x_i;\phi)\right)^2 + \text{constant}
+    \end{aligned}
+\end{equation}
+
+\subsection{Heteroscedastic Regression}
+
+In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x;\phi)$ and $\sigma^2 = g(x;\phi)$, the loss function now becomes:
+\begin{equation}
+    L(\phi) = \sum_{i=1}^n \frac{1}{2} \ln g(x_i;\phi) + \frac{\left(y_i - f(x_i;\phi)\right)^2}{2 g(x_i;\phi)}
+\end{equation}
+
+\subsection{Binary Classification}
+
+In binary classification, $y \in \set{0,1}$. The probability function is
+\begin{equation}
+    \probability{y|p} = (1-p)^{1-y} \times p^y
+\end{equation}
+
+Because $P$ is a trained variable, it could exceed the range $[0, 1]$. So the sigmoid function is used instead $p = \sigma(x) = \frac{1}{1+e^{-x}}$.
+
+\subsection{Multiclass classification}
+
+In multiclass classification, the prediction is a conditional probability distribution. So we define $f_c$ as
+    \begin{equation}
+        f_c(x;\theta) = p(y=c|x;\theta)
+    \end{equation}
+    So $f_C$ is a function $f_C: X \rightarrow [0,1]^C$ and $\displaystyle \sum_{i=1}^C f_i = 1$. This is a strong requirement on $f_C$. We could relax the requirement of $f_C$ by using the \cindex{softmax} function $\mathcal{S}$. Let $\columnvector{a} = f(x;\theta)$ be the logic, we have:
+    \begin{equation}
+        \mathcal{S}(\columnvector{a}) = \begin{pmatrix}\displaystyle
+            \frac{e^{a_1}}{\sum_{i=1}^C e^{a_i}}, ..., \frac{e^{a_C}}{\sum_{i=1}^C e^{a_i}}
+        \end{pmatrix}
+    \end{equation}
+    
+    So the probability distribution could be simplified as
+    \begin{equation}
+        p(y=c|x;\theta) = \mathcal{S}_c \left(f(x;\theta)\right)
+    \end{equation}
+    
+    The loss function in the probability case is 
+    \begin{equation}
+        L(y, f(x;\theta)) = - \log p(y|f(x;\theta))
+    \end{equation}
+
+
+
+
+% fitting model
+\section{Fitting Model}
+
+
+% backprop
+\section{Backpropagation}
+
+Backpropagation is also called \cindex{automatic differentiation} or \cindex{autodiff}. It will construct a computation graph and calculate the gradient of $x_i$ by summing up all child $k$:
+\begin{equation}
+    \dpd{o}{x_i} = \sum_{k \in \text{children}(i)} \dpd{o}{x_k} \dpd{x_k}{x_i}
+\end{equation}
+
+If the MLP is fully connected, each layer is a proper Jacobian matrix:
+\begin{equation}
+    J_f(x) = J_{f_L} \circ J_{f_{L-1}} \circ \cdots \circ J_{f_1}(x)
+\end{equation}
+
+The computation graph could be build ahead of time, which is called \cindex{static graph}. It could be computed just in time by tracing the execution of the function on an input, which is called \cindex{dynamic graph}.
+
+
+
+% Initialization
+\section{Initialization}
+
+
+
+% measure performance
+\section{Measure Performance}
+
+% regularization
+\section{Regularization}
 
 
 % regression
@@ -31,24 +239,6 @@ So the result is a learned normal distribution
 \begin{equation}
     p(y|x,\theta) = \mathcal{N}\left(y| \transpose{w_\mu} f(x;w_{\text{shared}}), \sigma_{+} \left( \transpose{w_\mu} f(x;w_{\text{shared}}) \right)  \right)
 \end{equation}
-
-
-% backprop
-\section{Backpropagation}
-
-Backpropagation is also called automatic differentiation or autodiff. It will construct a computation graph and calculate the gradient of $x_i$ by summing up all child $k$:
-\begin{equation}
-    \dpd{o}{x_i} = \sum_{k \in \text{children}(i)} \dpd{o}{x_k} \dpd{x_k}{x_i}
-\end{equation}
-
-If the MLP is fully connected, each layer is a proper Jacobian matrix:
-\begin{equation}
-    J_f(x) = J_{f_L} \circ J_{f_{L-1}} \circ \cdots \circ J_{f_1}(x)
-\end{equation}
-
-The computation graph could be build ahead of time, which is called static graph. It could be computed just in time by tracing the execution of the function on an input, which is called dynamic graph.
-
-
 
 
 

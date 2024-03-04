@@ -409,39 +409,6 @@ In classification, $Y = \set{1, 2, ... , C}$.
     \end{equation}
 \end{definition}
 
-\begin{definition}
-    In \defiref{empirical_risk}, $f$ will give just one output. But in many cases, the prediction is a conditional probability distribution. So we define $f_c$ as
-    \begin{equation}
-        f_c(x;\theta) = p(y=c|x;\theta)
-    \end{equation}
-    So $f_C$ is a function $f_C: X \rightarrow [0,1]^C$ and $\displaystyle \sum_{i=1}^C f_i = 1$. This is a strong requirement on $f_C$. We could relax the requirement of $f_C$ by using the softmax function $\mathcal{S}$. Let $\columnvector{a} = f(x;\theta)$ be the logic, we have:
-    \begin{equation}
-        \mathcal{S}(\columnvector{a}) = \begin{pmatrix}\displaystyle
-            \frac{e^{a_1}}{\sum_{i=1}^C e^{a_i}}, ..., \frac{e^{a_C}}{\sum_{i=1}^C e^{a_i}}
-        \end{pmatrix}
-    \end{equation}
-    
-    So the probability distribution could be simplified as
-    \begin{equation}
-        p(y=c|x;\theta) = \mathcal{S}_c \left(f(x;\theta)\right)
-    \end{equation}
-    
-    The loss function in the probability case is 
-    \begin{equation}
-        \mathcal{l}(y, f(x;\theta)) = - \log p(y|f(x;\theta))
-    \end{equation}
-\end{definition}
-
-\begin{example}[Weights and Bias]
-    A common choice of $f$ is an affine function that
-\begin{equation}
-    f(x;\theta) = b + \transpose{w}x
-\end{equation}
-
-Here $w$ is called weights and $b$ is called bias. The terminology is from electrical engineering. Each input is fed into the circuit on wires and have weights. The circuit calculates the weighted sum of results and add a constant bias.
-\end{example}
-
-
 \section{Regression}
 
 In regression, $y \in \realnumber$. The loss function is no longer the entropy. Instead it is $\mathcal{l}_2 (y, \hat{y}) = (y - \hat{y})^2$. So the empirical risk is $\mathrm{MSE}$ (mean squared error).

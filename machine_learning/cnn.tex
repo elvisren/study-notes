@@ -1,8 +1,53 @@
 \chapter{CNN}
 
-\section{Definition}
+\section{Introduction}
 
-\begin{definition}[Convolution]
+Here are the list of keywords and their use cases in CNN:
+    \begin{itemize}
+        \item \cindex{input feature map}
+        \item \cindex{kernel}: the dimension of kernel must be the same as input feature map
+        \item \cindex{output feature map}
+        \item \cindex{padding}: keep the result shape
+        \item \cindex{same padding}. Also called \cindex{half padding}
+        \item \cindex{full padding}: increase result size
+        \item \cindex{stride}: reduce result size
+        \item \cindex{pooling}: summary of neighbor information using non-convolution function
+        \item \cindex{transposed convolution}: reverse of convolution. Also called \cindex{deconvolution}
+        \item \cindex{dilated convolution}: jump in selecting input feature map (from French \cindex{convolution \`a trous})
+        \item \cindex{channel}
+    \end{itemize}
+
+
+A typical layer of convolutional network consists of 3 stages:
+\begin{itemize}
+    \item Convolution stage with convolution calculation
+    \item Detector stage with nonlinear activation, such as ReLU
+    \item Pooling stage with pooling function
+\end{itemize}
+
+Note: \emph{convolution is linear, pooling is non-linear}.
+
+
+The motivation for convolution are:
+\begin{itemize}
+    \item Sparse interaction. Not every pixel in the picture is related to each other
+    \item Parameter sharing. In neural network, each element of $W$ is used only once for each input feature. In convolution, it is used multiple times
+    \item \cindex{equivariance}. $f$ and $g$ is equivariant if $f \circ g(x) = g \circ f(x)$. If we apply some change, such as shift and color change, to a image, the output will have the same change
+    \item Space and time saving in calculation
+\end{itemize}
+
+
+The requirement to image classification:
+\begin{itemize}
+    \item Translation invariance. the result did not change after linear transformation of the image
+    \item Respect ordering. nearby image pixels are closed related, so respect locality.
+\end{itemize}
+
+
+% convolution
+\section{Convolution}
+
+\begin{definition}[\cindex{convolution}]
 
 The general definition of convolution is:
 \begin{equation}
@@ -31,46 +76,53 @@ There are several requirement for the convolution:
 
 Because convolution flipped the calculation (one is $0 \rightarrow m$, and the other is $i \rightarrow 0$), it is commutative, which means $I \circledast K = K \circledast I$.
 
-\begin{definition}[Cross-correlation]
+\begin{definition}[\cindex{cross-correlation}]
     Neural network libraries did not flip the order. The result is cross-correction but the library call it convolution. For a 2d kernel $W_{H \times W}$, the convolution is
     \begin{equation}
         z_{i,j} = (W_{H \times W} \circledast X) (i,j) = \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} w_{u,v} x_{i+u,j+v}
     \end{equation}
     
-    So it will iterate over all kernel items and multiply it with input.
+    So it will iterate over all kernel items and multiply it with input. 
 \end{definition}
 
-\begin{example}[Multiple channels]
+\begin{example}[\cindex{multiple channels}]
     Image is not always gray-scale. It may have multiple channels (RGB, or hyper-spetral bands for satellite images), we could define a kernel for each channel. The kernel is now a tensor. With $c$ convolution channels, the output is
 \begin{equation}
-    z_{i,j} = b + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c} x_{i+u,j+v,c}
+    z_{i,j} = b + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c} \times x_{i+u,j+v,c}
 \end{equation}
     where $b$ is the bias.
 \end{example}
 
 
-\begin{example}[Multiple features]
+\begin{example}[\cindex{multiple features}]
     Each convolution calculation above calculate one feature. Sometimes we would like to detect multiple features from the same input. So we will change $W$ to a $4$d weighted matrix to detect $d$ features:
     \begin{equation}
-        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c,d} x_{i+u,j+v,c}
-    \end{equation}
-\end{example}
-
-\begin{example}[$1 \times 1$ convolution]
-    Sometimes we just want to combine features at a location, not across location. Also we want to change the number of channels from $C$ to $D$. This could be done by using $1 \times 1$ kernel.
-    \begin{equation}
-        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{0,0,c,d} x_{i+u,j+v,c}
+        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c,d} \times x_{i+u,j+v,c,d}
     \end{equation}
     
-    $1 \times 1$ convolution could change the number of channel or feature without change the channel shape.
+    Note: one kernel has just one bias. So if the input feature map shape is $K \times K$ with $C_i$ channels, the kernel is a 3D tensor with shape $K \times K \times C_i$. If the output feature map has $C_o$ channels, the total weights are $K \times K \times C_i \times C_o$ and the total bias are $C_o$.
+\end{example}
+
+\begin{example}
+    In dilation, there are holes in the values extracted from input feature map. The number $r$ is called dilation factor. The formula now becomes
+    \begin{equation}
+        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c,d} \times x_{i+{\color{red}r}u,j+{\color{red}r}v,c,d}
+    \end{equation}
+\end{example}
+
+
+\begin{example}[\cindex{$1 \times 1$ convolution}]
+    $1 \times 1$ kernel is used to change the number of channels. The kernel size is $1 \times 1$, and it doesn't change the shape of output feature map. It loses the capability of summarizing surrounding information.
 \end{example}
 
 
 
 
 
-% analysis
-\section{Analysis}
+
+
+% Matrix Representation
+\section{Matrix Representation}
 
 Convolution could be viewed as special matrix multiplication. For an input $X_{3 \times 3}$ with kernel $W_{2 \times 2}$, we will flatten $X$ to a $9 \times 1$ vector. For the result, we could convert it back from $4 \times 1$ vector to $2 \times 2$ matrix. The calculation is:
 \begin{equation}
@@ -80,7 +132,7 @@ Convolution could be viewed as special matrix multiplication. For an input $X_{3
             0 & w_1 & w_2 & 0 & w_3 & w_4 & 0 & 0 & 0 \\
             0 & 0 & 0 & w_1 & w_2 & 0 & w_3 & w_4 & 0 \\
             0 & 0 & 0 & 0 & w_1 & w_2 & 0 & w_3 & w_4 \\
-        \end{pmatrix}_{4 \times 9} \begin{pmatrix}
+        \end{pmatrix}_{4 \times 9} \times \begin{pmatrix}
             x_1 \\
             x_2 \\
             x_3 \\
@@ -100,26 +152,20 @@ Convolution could be viewed as special matrix multiplication. For an input $X_{3
     \end{aligned}
 \end{equation}
 
-The motivation for convolution are:
-\begin{enumerate}
-    \item Sparse interaction. The matrix multiplication of neural network means all inputs will act in output generation. But in image processing, the feature may only interact with few pixels, such as edge. So convolution could use the 
-    \item Parameter sharing. In neural network, each element of $W$ is used only once for each input feature. In convolution, it is used multiple times
-    \item Equivariance. $f$ and $g$ is equivariant if $f \circ g(x) = g \circ f(x)$. If we apply some change, such as shift and color change, to a image, the output will have the same change
-    \item Space and time saving in calculation
-\end{enumerate}
+In transposed convolution, the matrix is just the $\transpose{Y}$. This is why it is called transposed.
+
+
+% padding
 
 \section{Padding}
 
-\begin{definition}[Zero-padding]
-    If we apply the convolution, the shape of the result may not be the same as input. For example, for a image with size $x_h \times x_w$ and kernel with size $f_h \times f_w$, the output size is
-    \begin{equation}
-        (x_h - f_h + 1) \times (x_w - f_w + 1)
-    \end{equation}
-    
-    So we need to add $0$s to the 4 borders of the input, which is called zero-padding.
-\end{definition}
+There are few ways to do the padding:
+\begin{itemize}
+    \item \cindex{zero-padding}: assume the input is $0$ outside the valid range
+    \item circular padding
+\end{itemize}
 
-\begin{definition}[Stride]
+\begin{definition}[\cindex{stride}]
     In convolution, neighboring output will be very similar because most of their input overlaps. We could reduce the redundancy by skipping every $s$ input both horizontally and vertically.
 \end{definition}
 
@@ -134,31 +180,126 @@ The motivation for convolution are:
 
 \section{Pooling}
 
-A typical layer of convolutional network consists of 3 stages:
+Convolution layer is equivariant. So if the image was applied with affine translation, the result will change as well. Pool is introduced to add invariance to small amount of translations. Some of it's features are
 \begin{itemize}
-    \item Convolution stage with convolution calculation
-    \item Detector stage with nonlinear activation
-    \item Pooling stage with pooling function
+    \item reduce result size
+    \item do not use convolution
+    \item no padding
+    \item only work on one channel
+    \item Introduce non-linearity
+\end{itemize}
+
+Pooling calculates a summary of the input region. Famous pooling includes:
+\begin{itemize}
+    \item \cindex{max pooling}
+    \item \cindex{average pooling}
+    \item no padding
+    \item reflect padding: do not reflect the border
+    \item symmetric padding: reflect the border
 \end{itemize}
 
 
-Pooling calculates invariants to a small translation of the input. For example the max pooling. It is also useful in changing the size of inputs. But we should not change the size when the images are from different kinds of observations.
-
-It calculates a summary of the input region. Famous pooling includes:
-\begin{enumerate}
-    \item Max pooling
-    \item Average pooling
-\end{enumerate}
-
+            
+            
+            
 Pooling is a convolution without padding, so the output size is
 \begin{equation}
     \left\lfloor \frac{x_h - f_h}{s_h} + 1 \right\rfloor \times \left\lfloor \frac{x_w - f_w}{s_w} + 1 \right\rfloor
 \end{equation}
 
-\begin{definition}[Global average pooling]
-    If the pooling is applied to the entire image, the result is a $1 \times 1 \times D$ tensor. It could be reshaped into a vector and passed to fully connected layers in the next step.
-\end{definition}
 
+% initialization
+
+\section{Initialization}
+
+The initialization is usually Xavier or He. Dropout is seldom used.
+
+
+% batch normalization
+
+\section{Batch Normalization}
+
+\cindex{batch normalization} ensures the distribution of the activation layer has zero mean and unit variance. It requires that batch size cannot be too small. 
+
+It is defined as:
+\begin{equation}
+    \text{BN}(x) = \gamma \odot \frac{x - \expectation{x}}{\variance{x} + \epsilon} + \beta
+\end{equation}
+
+Here $\epsilon$ is a small constant to avoid dividing by zero. $\gamma$ and $\beta$ are parameters to be learned. There are choices on where to put the batch normalization layer:
+\begin{itemize}
+    \item For fully connected layer, put it between affine transformation and activation layer
+    \item For convolution, put it between convolution and activation layer for each layer
+\end{itemize}
+
+At test time, there is no batch statistics. So we need to record them in training time. Here is what to do:
+\begin{enumerate}
+    \item After training is done, calculate the mean and value for all layers using all training data
+    \item Save the result as constant value in the model
+\end{enumerate}
+
+
+% applications
+\section{Other Applications}
+
+CNN is usually used for image classification, but it has other use cases.
+
+\subsection{Image Tagging}
+
+Instead of adding just one label, image tagging adds all labels.
+
+\subsection{Object Detection}
+
+In object detection, we return a set of bounding boxes representing the locations of objects and their class labels. A special one is face detection.
+
+The famous one is \cindex{YOLO} (you only look once). It draws a rectangle box around the detected object. 
+
+It calculate $5$ numbers:
+\begin{itemize}
+    \item the position of center box $(x,y)$
+    \item the width and length of the box
+    \item the confidence estimation
+\end{itemize}
+
+\subsection{Semantic Segmentation}
+
+it assigns a label to each pixel according to the object that it belongs to. It used encoder-decoder network. Since the bottleneck between the encoder and decoder loses information, we will add skip connections from input layers to output layers, which is also called U-net.
+
+
+% famous CNNs
+\section{Famous CNNs}
+
+\subsection{LeNet-5}
+
+Invented by LeCun in 1989. The first success story of CNN. It has 2 convolution layer and 3 fully connected layer. One convolution layer has convolution + sigmoid activation + average pooling. the size of feature map decreases, but the channel number increases. use $\tanh$ as the activation function
+
+
+
+
+
+
+\subsection{AlexNet}
+
+By Alex Krizhevsky. It ran on 2 GPU with 3GB memory. It use ImageNet images. change the activation function from $\tanh$ to ReLU. win 2012 ImageNet challenge. it is not the first one to use GPU.
+
+\subsection{VGG-11}
+
+By Visual Geometry Group of Oxford. AlexNet shows DNN works, but it does not give a working template. VGG defines block. It uses 8 convolutional block and 3 fully connected layer, so called VGG-11.
+
+
+\subsection{GoogLeNet}
+
+It uses multiple kernels with different size for an inception block. in 2014.
+
+\subsection{ResNet-18}
+
+winner of ImageNet in 2015. team in Microsoft. The key is to replace $x_{l+1} = F_l (x_l)$ with $x_{l+1} = \phi(x_l + F_l(x_l))$ which is called \cindex{residual block}. The model only need to train the delta of the change, so the task becomes easier. 
+
+To ensure the dimension of the output, we need to add padding. To change the channel number of output, we need to add $1\times 1$ convolution. 
+
+\subsection{DenseNet}
+
+In ResNet, the input is added to the output. In DenseNet, an input is added to all outputs after it. It outperform ResNet, but is computationally expensive.
 
 
 
