@@ -142,6 +142,8 @@
 
 \newcommand\theoref[1]{Theorem~\ref{#1} (p\pageref{#1})}
 \newcommand\defiref[1]{Definition~\ref{#1} (p\pageref{#1})}
+\newcommand\formularef[1]{(\ref{#1}, p\pageref{#1})}
+
 
 % DTMnow can show the current ISO time
 \usepackage{datetime2}
@@ -356,13 +358,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% probability %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\newcommand\probability[1]{\boldmathtext{P}\alignedbrackets{\displaystyle #1}}
+% P[x]
+\newcommand\probability[1]{\boldmathtext{P}\left[\displaystyle #1 \right]}
+\newcommand\probabilitywithsmallbottom[1]{\boldmathtext{P}\alignedbrackets{\displaystyle #1}}
+
 
 % E[x]
 \newcommand\expect[1]{\boldmathtext{E}\alignedbrackets{\displaystyle #1}}
 
 % Var[x]
-\newcommand\variance[1]{\boldmathtext{Var}\alignedbrackets{\displaystyle #1}}
+\newcommand\variance[1]{\boldmathtext{Var}\left[\displaystyle #1 \right]}
+\newcommand\variancewithsmallbottom[1]{\boldmathtext{Var}\alignedbrackets{\displaystyle #1}}
+
+
+% H[x]: entropy
+\newcommand\entropy[1]{\boldmathtext{H}\left[\displaystyle #1 \right]}
+
+% KL divergence
+\newcommand\kldivergence[2]{\boldmathtext{HL}\left(\displaystyle #1 \middle| \middle| \displaystyle #2 \right)}
+
 
 % Cov(a,b)
 \newcommand\covariance[2]{\boldmathtext{Cov}\displaystyle \left(#1,#2 \right)}
@@ -371,7 +385,9 @@
 \newcommand\exponential[1]{\boldmathtext{exp}~\set{#1}}
 
 % N(\mu, \sig^2)
-\newcommand\normaldistribution[2]{\mathcal{N}(#1,#2)}
+\newcommand\normaldistribution[2]{\mathcal{N}\left(#1,#2\right)}
+\newcommand\normaldistributionwithparameter[3]{\mathcal{N}\left(#1 \middle| #2,#3\right)}
+
 
 % Gamma(\alpha, \beta)
 \newcommand\gammadistribution[2]{\boldmathtext{Gamma}~(#1,#2)}
@@ -381,8 +397,6 @@
 
 % Chi-square (k)
 \newcommand\chisquaredistribution[1]{\chi^2_{#1}}
-
-
 
 
 
@@ -400,16 +414,28 @@
 \newcommand\argmax[1]{\mathop{\arg\max}\limits_{#1}}
 
 
-% select row
-\newcommand\selectrow[2]{{#1}^{(#2)}}
+% select one sample
+\newcommand\selectonesample[2]{{#1}^{(#2)}}
+
+% select one dimension from one sample
+\newcommand\selectonedimension[2]{{#1}_{#2}}
+
+
+% estimation of density
+\newcommand\estimation[1]{\hat{#1}}
+
 
 % select row and column
-\newcommand\selectrowandcolumn[3]{{#1}^{(#2)}_{#3}}
+\newcommand\selectonedimensionfromonesample[3]{{#1}^{(#2)}_{#3}}
 
 % expectation
-\newcommand\expectation[1]{\mathbb{E}[{#1}]}
+\newcommand\expectation[1]{\mathbb{E}\left[{#1}\right]}
 
+% expectation on a specific variable
+\newcommand\expectationonanvariable[2]{\mathbb{E}_{#1}\left[{#2}\right]}
 
+% bold x
+\newcommand\feature[1]{\mathbf{#1}}
 
 
 

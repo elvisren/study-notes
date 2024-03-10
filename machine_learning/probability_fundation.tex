@@ -1,0 +1,1072 @@
+\chapter{Probability Foundations}
+
+
+\section{Likelihood}
+
+\begin{definition}[\cindex{density estimation}]
+    The problem of estimating a distribution, given a finite set of observations, is called \cindex{density estimation}. It will assume that samples are drawn independently from the same distribution, which is called \cindex{independent and identically distributed}, which is abbreviated to \cindex{i.i.d}. 
+\end{definition}
+
+\begin{definition}[\cindex{likelihood funtion}]
+    For example, the following function is called the likelihood function if viewed as a function of $\mu$ and $\sigma^2$:
+    
+    \begin{equation}
+        \probability{x \middle| \mu, \sigma^2} = \prod_{n=1}^N \normaldistributionwithparameter{x_n}{\mu}{\sigma^2}
+    \end{equation}
+    
+    One common approach to determine the parameters in probability distribution is to find the parameter values that maximize the likelihood function, which is called \cindex{maximum likelihood}.
+\end{definition}
+
+\emph{Maximize likelihood is equivalent to minimize negative log-likelyhood}. The recipe for constructing loss function using netagive log-likelihood is:
+\begin{enumerate}
+    \item Choose a suitable probability function $\probability{y|\theta}$
+    \item Set machine learning model $\theta = f(x;\phi)$. So $\probability{y|\theta} = \probability{y|f(x;\phi)}$
+    \item Find a parameter $\hat\phi$ that minimize the negative log-likelihood loss function over all training dataset pairs $\set{\selectonesample{x}{i}, \selectonesample{y}{i}}$: \begin{equation}
+        \hat\phi = \argmin{\phi} L(\phi) = \argmin{\phi} \left( - \sum_{i=1}^n \ln \left(\probability{\selectonesample{y}{i} \middle| f\left(\selectonesample{x}{i};\phi \right)} \right)\right)
+    \end{equation}
+\end{enumerate}
+
+Note that the cost function is not the loss function. Cost function = loss function + regularization.
+
+
+In \cindex{homoscedastic regression}, the variance is a constant value. Assume $y$ follows normal distribution with $\mu = f(x;\phi)$ and $\sigma^2$ is a constant. We have 
+\begin{equation}\label{homoscedastic_regression}
+    \begin{aligned}
+        L(\phi) &= - \sum_{i=1}^N \ln \left( \frac{1}{\sqrt{2\pi \sigma^2}} \exponential{- \frac{\left(\selectonesample{y}{i} - f\left(\selectonesample{x}{i};\phi\right)\right)^2}{2 \sigma^2}} \right) \\
+        &= N \ln \sigma + \frac{1}{2 \sigma^2} \sum_{i=1}^N \left(\selectonesample{y}{i} - f\left(\selectonesample{x}{i};\phi\right)\right)^2 + N \ln \sqrt{2\pi}
+    \end{aligned}
+\end{equation}
+
+
+In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x;\phi)$ and $\sigma^2 = g(x;\phi)$, the loss function now becomes:
+\begin{equation}
+    L(\phi) = \frac{1}{2} \sum_{i=1}^N \left(\ln g\left(\selectonesample{x}{i};\phi\right) + \frac{\left(\selectonesample{y}{i} - f\left(\selectonesample{x}{i};\phi\right)\right)^2}{ g\left(\selectonesample{x}{i};\phi\right)} \right)
+\end{equation}
+
+
+\begin{definition}[\cindex{bias}]
+    If the distribution is normal distribution, the result of maximum likelihood calculation is:
+    \begin{equation}
+        \begin{aligned}
+            \mu_{\text{ML}} &= \frac{1}{N}\sum_{n=1}^N x_n \\
+            \sigma^2_{\text{ML}} &= \frac{1}{N} \sum_{n=1}^N (x_n - \mu_{\text{ML}})^2 \\
+            \expectation{\mu_{\text{ML}}} &= \mu \\
+            \expectation{\sigma^2_{\text{ML}}} &= \left( \frac{n-1}{n} \right) \sigma^2
+        \end{aligned}
+    \end{equation}
+    
+    So we will underestimate $\sigma^2$, which is called the bias. For this example, the bias appears because the variance is measured relative to the maximum likelihood estimation of the mean, which itself is turned to the data. If we have the true mean $\mu$, it is unbiased.
+    
+    It is not easy to adjust for the bias for complex model.
+\end{definition}
+
+\begin{theorem}[\cindex{mode}]
+    A function has a mode at $x$ if $x$ maximize the value of function. Optimization of likelihood function after change of parameters needs to be careful. For a usual change of variables $x = g(y)$, we have $\hat{f}(y) = f(g(y))$. Then
+    \begin{equation}
+         \argmax{x}f(x) = g\left(\argmax{y}f\left(g(y)\right)\right)
+    \end{equation}
+    
+    In probability case, we have
+    \begin{equation}
+        g(y) = f(g(y)) \absolutevalue{g'(y)}
+    \end{equation}
+    
+    So
+    \begin{equation}
+        g'(y) = f'(g(y)) g'(y) \absolutevalue{g'(y)} + f(g(y)) \absolutevalue{g''(y)}
+    \end{equation}
+    
+    Because of the existence of $\absolutevalue{g''(y)}$, the value of $y$ that $g'(y) = 0$ will not maximize $f_{x = g(y)}(x)$.
+\end{theorem}
+
+
+% entropy
+\section{Entropy}
+
+\begin{definition}
+    The amount of information is viewed as the degree of surprise. If unlikely happens, it carries more information. 
+    
+    The form of measurement $H$ has a property that if $x$ and $y$ are irrelevant, the information would be the sum of them. So
+    \begin{equation}
+        H(x,y) = H(x) + H(y)
+    \end{equation}
+    
+    In probability, if $x$ and $y$ are independent, then $p(xy)= p(x) p(y)$. So it is natural to take a $\log$ on joint probability. Therefore for a discrete probability distribution $p(x)$, the \emph{average amount of information}, which is called entropy, is
+    \begin{equation}
+        \entropy{x} = - \sum_i p(x_i) \log_2 p(x_i)
+    \end{equation}
+    
+    Because $\displaystyle \lim_{\epsilon \rightarrow 0} \epsilon \ln \epsilon = 0$, we define $0 \ln 0 = 0$.
+    
+    The entropy using $\log_2$ measures the information in bits. Usually we will use $\ln$ instead of $\log_2$ to define entropy.
+\end{definition}
+
+\begin{theorem}[maximum entropy of discrete distribution]
+    Let's calculate the maximum value of entropy in discrete case. Take derivative and using Lagrange multiplier with property that $\sum p(x_i) = 1$, we can calculate the maximum of entropy when all probabilities are equal. So
+    \begin{equation}
+        0 \leq \entropy{x} \leq \ln N
+    \end{equation}
+\end{theorem}
+
+
+
+\begin{definition}[\cindex{differential entropy}]
+    In continuous distribution, the entropy is called differential entropy which is defined as
+    \begin{equation}
+        \begin{aligned}
+            \entropy{x} &= - \int p(x) \ln p(x) \dif x \\
+            \entropy{x,y} &= - \iint p(x,y) \ln p(x,y) \dif x \dif y
+        \end{aligned}
+    \end{equation}
+\end{definition}
+
+
+\begin{theorem}[maximum entropy of continuous distribution]
+    In continuous case, we have three constraints:
+    \begin{equation}
+        \begin{aligned}
+            \int_{-\infty}^{\infty} p(x) \dif x &= 1 \\
+            \int_{-\infty}^{\infty} x p(x) \dif x &= \mu \\
+            \int_{-\infty}^{\infty} (x-\mu)^2 p(x) \dif x &= \sigma^2 \\
+        \end{aligned}
+    \end{equation}
+    
+    Take the derivative of the entropy and use the 3 constraints above using Lagrange multiplier,  we have
+    \begin{equation}
+        p(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exponential{- \frac{(x-\mu)^2}{2 \sigma^2}}
+    \end{equation}
+    
+    So normal distribution has the maximum entropy, which is 
+    \begin{equation}
+        \entropy{x} = \frac{1}{2} \left(1 + \ln (2\pi \sigma^2) \right)
+    \end{equation}
+    
+    So \emph{the entropy of continuous distribution could be negative}.
+\end{theorem}
+
+
+\begin{definition}[\cindex{KL divergence}]
+    If we have a distribution with unknown distribution function $p(x)$, and we model it using approximation $q(x)$, we need more bits to specify. The additional amount of information needed is called \cindex{relative entropy}, or \cindex{Kullback-Leibler divergence}, or KL divergence, which is
+    \begin{equation}
+        \begin{aligned}
+            \kldivergence{p}{q} &= - \int_{-\infty}^{\infty} p(x) \ln q(x) - \left(- \int_{-\infty}^{\infty}  p(x) \ln p(x) \right) \\
+            &= - \int_{-\infty}^{\infty} p(x) \ln \frac{q(x)}{p(x)} \dif x
+        \end{aligned}        
+    \end{equation}
+    
+    Note that 
+    \begin{itemize}
+        \item $\kldivergence{p}{q} \neq \kldivergence{q}{p}$, so it is not symmetric
+        \item $\kldivergence{p}{q} \geq 0$
+    \end{itemize}
+\end{definition}
+
+
+\begin{definition}[\cindex{conditional entropy}]
+    If we know $x$, the additional information to know $y$ is called conditional entropy which is defined as
+    \begin{equation}
+        \entropy{y | x} = - \iint p(x,y) \ln p(y | x) \dif y \dif x
+    \end{equation}
+    
+    It has a property that
+    \begin{equation}
+        \entropy{x, y} = \entropy{y|x} + \entropy{x}
+    \end{equation}
+    
+    So in order to describe $x$ and $y$, we need to describe $x$ and addition information of $y$ given $x$.
+\end{definition}
+
+\begin{definition}[\cindex{mutual information}]
+    For a joint distribution $p(x,y)$, we would like to measure how close to being independent, using KL entropy between $p(x,y)$ and $p(x)p(y)$, which is called the mutual information:
+    \begin{equation}
+        \begin{aligned}
+            I[x,y] &= \kldivergence{p(x,y)}{p(x)p(y)} \\
+            &= -\iint p(x,y) \ln \frac{p(x)p(y)}{p(x,y)} \dif y \dif x
+        \end{aligned}
+    \end{equation}
+    
+    $I[x,y] = 0$ when $x$ and $y$ are independent. We also have a property that
+    \begin{equation}
+        I[x,y] = \entropy{x} - \entropy{x|y} = \entropy{y} - \entropy{y|x}
+    \end{equation}
+    
+    So the mutual information measures the \emph{residual uncertainty} of $x$ given the new observation of $y$.
+\end{definition}
+
+
+
+% bayesian probability
+
+\section{Bayesian Probability}
+
+From Bayesian viewpoint, prior knowledge is natural. In machine learning, different choice of training data set will give different solution for maximum likelihood. It could be explained by Bayesian probability:
+\begin{equation}\label{bayesian_posterior}
+    p(w|D) = \frac{p(D|w)p(w)}{p(D)}
+\end{equation}
+
+Here is the name for these variables:
+\begin{itemize}
+    \item $p(w|D)$ is called posterior
+    \item $p(w)$ is called prior
+    \item $p(D|w)$ is called likelihood
+    \item $p(D)$ is a normalization constant, which makes the formula a probability distribution
+\end{itemize}
+
+So the expression could also be described as
+\begin{equation}
+    \text{posterior} \propto \text{likelihood} \times \text{prior}
+\end{equation}
+
+
+Instead of maximizing likelihood, we could maximize the posterior probability \formularef{bayesian_posterior}, which is called \cindex{maximum a posterior}, or \cindex{MAP} of \formularef{bayesian_posterior}. Take $\ln$ on both side, we have
+\begin{equation}
+    -\ln p(w|D) = -\ln p(D|w) - \ln p(w) + \ln p(D)
+\end{equation}
+
+Here $-\ln p(w)$ acts as a regularization. For example, assume the prior distribution $p(w)$ is a normal distribution. So
+\begin{equation}
+    p(w|s) = \prod_{n=1}^N \normaldistributionwithparameter{w_i}{0}{\sigma^2} = \prod_{i=1}^N \frac{1}{\sqrt{2\pi \sigma^2}} \exponential{- \frac{w_i^2}{2 \sigma^2}}
+\end{equation}
+
+We have
+\begin{equation}
+    -\ln p(w|D) = -\ln p(D|w) + \frac{1}{2\sigma^2}\sum_{i=1}^N w_i^2 + \text{constant}
+\end{equation}
+
+
+Compared with maximum likelihood, maximum likelihood tends to pick models with highest probability of the data, so it will favor complex model and tends to overfit. Bayesian will choose models of intermediate complexity.
+
+The problem with Bayesian framework is it has more parameters. So in practice, we could choose maximum likelihood with few manually added regularization.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

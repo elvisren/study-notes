@@ -1,4 +1,5 @@
-\section{Classic Models}
+
+\chapter{Classic Models}
 
 
 
@@ -35,62 +36,6 @@ The gradient vector of $J$ is calculated as:
 
 Linear regression model is convex, so it will be guaranteed to find global minimum using gradient descent.
 
-
-
-
-% logistic regression
-\subsection{Logistic Regression}
-
-
-\cindex{logistic regression} is a binary classifier. It uses the \cindex{sigmoid} function $\displaystyle \sigma(t) = \frac{1}{1 + \exp{(-t)}}$ and assigns probability to $\columnvector{X}$ that $\hat{p} = \sigma(\columnvector{X}^\top \columnvector{\theta} )$. The prediction is:
-\begin{equation}
-	\hat{y} = \begin{cases}
-		0 \text{, if } \hat{p} < 0.5 \\
-		1 \text{, if } \hat{p} \geq 0.5
-	\end{cases}
-\end{equation}
-
-So the prediction is $1$ if $\columnvector{X}^\top \columnvector{\theta} > 0$ and $0$ if it is negative.
-
-The \cindex{log loss} cost function is:
-\begin{equation}
-	J(\theta) = - \frac{1}{m} \sum_{i=1}^m \left\{ \subscription{Y}{i} \log \subscription{\hat{p}}{i} + \left(1- \subscription{Y}{i} \right) \log \left(1 - \subscription{\hat{p}}{i} \right) \right\}
-\end{equation}
-
-The derivative is:
-\begin{equation}
-	\dpd{J(\theta)}{\theta_j} = \frac{1}{m} \sum_{i=1}^m \left( \sigma \left(\columnvector{\theta}^\top \subscription{X}{i} \right) - \subscription{Y}{i} \right) \subscription{X}{i}_j
-\end{equation}
-
-
-
-
-\subsection{Softmax Regression}
-
-
-\cindex{Softmax Regression} is a multiclass version of \cindex{logistic regression}. Each class has its own parameter vector $\columnvector{\theta}_i$. The softmax score for class $k$ is $s_k (\columnvector{X} ) = \columnvector{X}^\top \columnvector{\theta}_k$ and its probability is:
-\begin{equation}
-    \hat{p}_k = \frac{\exp{{s_k (\columnvector{X})}}}{\displaystyle \sum_{i=1}^n \exp{s_i (\columnvector{X}) } }
-\end{equation}
-
-The prediction is:
-\begin{equation}
-	\hat{y} = \underset{k}{\text{argmax }} \columnvector{X}^\top \columnvector{\theta}_k
-\end{equation}
-
-The cost function is measures using \cindex{cross entropy} function:
-\begin{equation}
-	J(\theta)= -\frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \subscription{Y}{i}_k \log \subscription{\hat{p}}{i}_k
-\end{equation}
-
-
-The gradient vector is:
-\begin{equation}
-	\nabla_{\theta_k} J(\theta) = \frac{1}{m} \sum_{i=1}^m(\hat{p}_k^{(i)} - y_k^{(i)}) \mathbf{X}^i
-\end{equation}
-
-
-The cross entropy function is also called \cindex{Kullback-Leibler divergence}.
 
 
 \subsection{SVM}

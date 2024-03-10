@@ -7,8 +7,8 @@ Here are the list of keywords and their use cases in CNN:
         \item \cindex{input feature map}
         \item \cindex{kernel}: the dimension of kernel must be the same as input feature map
         \item \cindex{output feature map}
-        \item \cindex{padding}: keep the result shape
-        \item \cindex{same padding}. Also called \cindex{half padding}
+        \item \cindex{padding}: change the result shape
+        \item \cindex{same padding}: keep current shape. Also called \cindex{half padding}
         \item \cindex{full padding}: increase result size
         \item \cindex{stride}: reduce result size
         \item \cindex{pooling}: summary of neighbor information using non-convolution function
@@ -51,7 +51,7 @@ The requirement to image classification:
 
 The general definition of convolution is:
 \begin{equation}
-    s(t) = \int x(a) w(t-a) \dif a
+    s(t) = \int x(a) w({\color{red}t}-a) \dif a
 \end{equation}
 
 which has a short form
@@ -88,16 +88,16 @@ Because convolution flipped the calculation (one is $0 \rightarrow m$, and the o
 \begin{example}[\cindex{multiple channels}]
     Image is not always gray-scale. It may have multiple channels (RGB, or hyper-spetral bands for satellite images), we could define a kernel for each channel. The kernel is now a tensor. With $c$ convolution channels, the output is
 \begin{equation}
-    z_{i,j} = b + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c} \times x_{i+u,j+v,c}
+    z_{i,j} = b + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c} \times x_{i+u,j+v,{\color{red}c}}
 \end{equation}
     where $b$ is the bias.
 \end{example}
 
 
 \begin{example}[\cindex{multiple features}]
-    Each convolution calculation above calculate one feature. Sometimes we would like to detect multiple features from the same input. So we will change $W$ to a $4$d weighted matrix to detect $d$ features:
+    Each convolution calculation above calculate one feature. The generated feature of current layer becomes the channel for next layer. Sometimes we would like to detect multiple features from the same input. So we will change $W$ to a $4$d weighted matrix to detect $d$ features:
     \begin{equation}
-        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c,d} \times x_{i+u,j+v,c,d}
+        z_{i,j,d} = b_d + \sum_{u=0}^{H-1} \sum_{v=0}^{W-1} \sum_{c=0}^{C-1} w_{u,v,c,d} \times x_{i+u,j+v,c,{\color{red}d}}
     \end{equation}
     
     Note: one kernel has just one bias. So if the input feature map shape is $K \times K$ with $C_i$ channels, the kernel is a 3D tensor with shape $K \times K \times C_i$. If the output feature map has $C_o$ channels, the total weights are $K \times K \times C_i \times C_o$ and the total bias are $C_o$.
@@ -186,7 +186,7 @@ Convolution layer is equivariant. So if the image was applied with affine transl
     \item do not use convolution
     \item no padding
     \item only work on one channel
-    \item Introduce non-linearity
+    \item Non-linear
 \end{itemize}
 
 Pooling calculates a summary of the input region. Famous pooling includes:
@@ -228,8 +228,8 @@ It is defined as:
 
 Here $\epsilon$ is a small constant to avoid dividing by zero. $\gamma$ and $\beta$ are parameters to be learned. There are choices on where to put the batch normalization layer:
 \begin{itemize}
-    \item For fully connected layer, put it between affine transformation and activation layer
-    \item For convolution, put it between convolution and activation layer for each layer
+    \item For fully connected layer: affine transformation $\rightarrow$ batch normalization $\rightarrow$ activation layer
+    \item For convolution: convolution $\rightarrow$ batch normalization $\rightarrow$ activation layer
 \end{itemize}
 
 At test time, there is no batch statistics. So we need to record them in training time. Here is what to do:

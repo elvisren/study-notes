@@ -3,7 +3,7 @@
 
 \section{Definition}
 
-The idea behind RNN is that in sequence prediction, the output $\selectrow{x}{t+1}$ depends on all $\selectrow{x}{i \leq t}$. So we need to calculate $p(\selectrow{x}{t+1}|\selectrow{x}{t}, \cdots, \selectrow{x}{1})$. It is easier to simplify $p$ so the calculation could become $p(\selectrow{x}{t+1}|\selectrow{h}{t})$. Here $\selectrow{h}{t} = f(\selectrow{x}{t}, \cdots, \selectrow{x}{1})$. $f$ could be simplified further so it takes fixed number of parameters: $\selectrow{h}{t} = f(\selectrow{x}{t}, \cdots, \selectrow{x}{1}) = f(\selectrow{x}{t}, \selectrow{h}{t-1})$.
+The idea behind RNN is that in sequence prediction, the output $\selectonesample{x}{t+1}$ depends on all $\selectonesample{x}{i \leq t}$. So we need to calculate $p(\selectonesample{x}{t+1}|\selectonesample{x}{t}, \cdots, \selectonesample{x}{1})$. It is easier to simplify $p$ so the calculation could become $p(\selectonesample{x}{t+1}|\selectonesample{h}{t})$. Here $\selectonesample{h}{t} = f(\selectonesample{x}{t}, \cdots, \selectonesample{x}{1})$. $f$ could be simplified further so it takes fixed number of parameters: $\selectonesample{h}{t} = f(\selectonesample{x}{t}, \cdots, \selectonesample{x}{1}) = f(\selectonesample{x}{t}, \selectonesample{h}{t-1})$.
 
 In both CNN and RNN, the model parameters are shared across different parts of the input. The difference is that
 \begin{itemize}
@@ -13,12 +13,12 @@ In both CNN and RNN, the model parameters are shared across different parts of t
 
 
 \begin{example}[Fixed Size Output]
-    In this example, the output size is the same as input size. Here $\selectrow{h}{t}$ is the hidden state at time $t$ which is a fixed size vector. $\selectrow{o}{t}$ is the output at time $t$ which is generated from hidden state.
+    In this example, the output size is the same as input size. Here $\selectonesample{h}{t}$ is the hidden state at time $t$ which is a fixed size vector. $\selectonesample{o}{t}$ is the output at time $t$ which is generated from hidden state.
     
 \begin{equation}
     \begin{aligned}
-        \selectrow{h}{t} &= f\left(\selectrow{h}{t-1}, \selectrow{x}{t}; \theta\right) \\   
-        \selectrow{o}{t} &= g\left(\selectrow{h}{t}\right)
+        \selectonesample{h}{t} &= f\left(\selectonesample{h}{t-1}, \selectonesample{x}{t}; \theta\right) \\   
+        \selectonesample{o}{t} &= g\left(\selectonesample{h}{t}\right)
     \end{aligned}    
 \end{equation}
 
@@ -26,8 +26,8 @@ One concrete example is:
 
     \begin{equation}
         \begin{aligned}
-            \selectrow{h}{t} &= \tanh\left( W \selectrow{h}{t-1} + U \selectrow{x}{t} + b \right) \\
-            \selectrow{o}{t} &= \sigma \left(V \selectrow{h}{t} + c\right)
+            \selectonesample{h}{t} &= \tanh\left( W \selectonesample{h}{t-1} + U \selectonesample{x}{t} + b \right) \\
+            \selectonesample{o}{t} &= \sigma \left(V \selectonesample{h}{t} + c\right)
         \end{aligned}
     \end{equation}    
 \end{example}
@@ -35,7 +35,7 @@ One concrete example is:
 
 We could put hidden layers on top of each other. The hidden state on layer $l$ at time $t$ depends on previous state and previous layer:
 \begin{equation}
-    \selectrow{h_l}{t} = \varphi_l \left(W_{l-1} \selectrow{h_{l-1}}{t} + W_l \selectrow{h_l}{t-1} + b_l \right)
+    \selectonesample{h_l}{t} = \varphi_l \left(W_{l-1} \selectonesample{h_{l-1}}{t} + W_l \selectonesample{h_l}{t-1} + b_l \right)
 \end{equation}
 
 
@@ -59,7 +59,7 @@ It takes $O(t)$ to compute every backward step, so it requires $O(t^2)$ to finis
 \section{Models}
 
 \subsection{Vector to Vector Mapping}
-When we generate from RNN, we sample from $\selectrow{\tilde{y}}{t} \sim p(\selectrow{y}{t}|\selectrow{h}{t})$, and then determine the next hidden state $\selectrow{h}{t+1} = f(\selectrow{h}{t}, \selectrow{\tilde{y}}{t}, x)$    
+When we generate from RNN, we sample from $\selectonesample{\tilde{y}}{t} \sim p(\selectonesample{y}{t}|\selectonesample{h}{t})$, and then determine the next hidden state $\selectonesample{h}{t+1} = f(\selectonesample{h}{t}, \selectonesample{\tilde{y}}{t}, x)$    
 
 
 \subsection{Bidirectional RNN}
@@ -100,8 +100,8 @@ Bidirectional RNN cannot be used to do projection because it need data in $t+1$.
 
 RNN is very hard to train because the gradient could easily explode or vanish. So RRN is hard to remember long term memory. LSTM and GRU were proposed to solve the problem. Long Short-term memory (LSTM) is a RNN that tries to forget the past. By default RNN will remember the past. It has two data:
 \begin{enumerate}
-    \item $\selectrow{c}{t}$: cell state
-    \item $\selectrow{h}{t}$: hidden state
+    \item $\selectonesample{c}{t}$: cell state
+    \item $\selectonesample{h}{t}$: hidden state
 \end{enumerate}
 
 
@@ -116,10 +116,10 @@ The formula is:
 \begin{equation}
     \begin{aligned}
         \begin{pmatrix}
-            \selectrow{f}{t} \\
-            \selectrow{i}{t} \\
-            \selectrow{o}{t} \\
-            \selectrow{\tilde{c}}{t}
+            \selectonesample{f}{t} \\
+            \selectonesample{i}{t} \\
+            \selectonesample{o}{t} \\
+            \selectonesample{\tilde{c}}{t}
         \end{pmatrix} &= \begin{pmatrix}
             \sigma \\
             \sigma \\
@@ -131,16 +131,16 @@ The formula is:
             W_o & U_o \\
             W_c & U_c
         \end{pmatrix} \times \begin{pmatrix}
-            \selectrow{x}{t} \\
-            \selectrow{h}{t-1}
+            \selectonesample{x}{t} \\
+            \selectonesample{h}{t-1}
         \end{pmatrix} + \begin{pmatrix}
             b_f \\
             b_i \\
             b_o \\
             b_c
         \end{pmatrix} \right) \\
-        \selectrow{c}{t} &= \selectrow{f}{t} \odot \selectrow{c}{t-1} + \selectrow{i}{t} \odot \selectrow{\tilde{c}}{t} \\
-        \selectrow{h}{t} &= \selectrow{o}{t} \odot \tanh(\selectrow{c}{t})
+        \selectonesample{c}{t} &= \selectonesample{f}{t} \odot \selectonesample{c}{t-1} + \selectonesample{i}{t} \odot \selectonesample{\tilde{c}}{t} \\
+        \selectonesample{h}{t} &= \selectonesample{o}{t} \odot \tanh(\selectonesample{c}{t})
     \end{aligned}
 \end{equation}
 
@@ -153,22 +153,22 @@ The formula is:
 \end{definition}
 
 
-In default definition, $\selectrow{f}{t}$ controls how much $\selectrow{c}{t-1}$ to forget, and $\selectrow{i}{t}$ controls how much to add. So the LSTM could keep long term memory if $\selectrow{f}{t} = 1$ and $\selectrow{i}{t} = 0$.
+In default definition, $\selectonesample{f}{t}$ controls how much $\selectonesample{c}{t-1}$ to forget, and $\selectonesample{i}{t}$ controls how much to add. So the LSTM could keep long term memory if $\selectonesample{f}{t} = 1$ and $\selectonesample{i}{t} = 0$.
 
 The initialization of forget gate needs to be careful. $b_f$ needs to be bigger enough, or the performance will be poor.
 
 The shape of the variables are ($d$ is the input dimension and $h$ is the hidden unit dimension):
 \begin{itemize}
-    \item $\selectrow{x}{t} \in \realnumber^d$: the input vector to LSTM
-    \item $\selectrow{f}{t} \in (0,1)^h$: forget gate's activation vector
-    \item $\selectrow{i}{t} \in (0,1)^h$: input gate's activation vector
-    \item $\selectrow{o}{t} \in (0,1)^h$: output gate's activation vector
-    \item $\selectrow{h}{t} \in (-1,1)^h$: hidden state vector
-    \item $\selectrow{\tilde{c}}{t} \in (-1,1)^h$: cell input activation vector
-    \item $\selectrow{c}{t} \in \realnumber^h$: cell state vector
+    \item $\selectonesample{x}{t} \in \realnumber^d$: the input vector to LSTM
+    \item $\selectonesample{f}{t} \in (0,1)^h$: forget gate's activation vector
+    \item $\selectonesample{i}{t} \in (0,1)^h$: input gate's activation vector
+    \item $\selectonesample{o}{t} \in (0,1)^h$: output gate's activation vector
+    \item $\selectonesample{h}{t} \in (-1,1)^h$: hidden state vector
+    \item $\selectonesample{\tilde{c}}{t} \in (-1,1)^h$: cell input activation vector
+    \item $\selectonesample{c}{t} \in \realnumber^h$: cell state vector
 \end{itemize}
 
-LSTM is often initialized with $\selectrow{c}{0} = \selectrow{h}{0} = 0$.
+LSTM is often initialized with $\selectonesample{c}{0} = \selectonesample{h}{0} = 0$.
 
 
 
@@ -182,7 +182,7 @@ LSTM is often initialized with $\selectrow{c}{0} = \selectrow{h}{0} = 0$.
 \end{definition}
 
 \begin{definition}
-    In another variant, the forget gate and input gate are coupled. $\selectrow{f}{t}$ controls how much to forget and $1- \selectrow{f}{t}$ controls how much to input:
+    In another variant, the forget gate and input gate are coupled. $\selectonesample{f}{t}$ controls how much to forget and $1- \selectonesample{f}{t}$ controls how much to input:
     \begin{figure}[H]
 \includegraphics[width=0.8\textwidth]{machine_learning/pic/04/LSTM3-var-tied.png}
 \centering
@@ -208,12 +208,12 @@ it maps fixed-length input to a different length output.
 
 the encoder is a stack of recurrent unit. the output is a vector of hidden state
 \begin{equation}
-    \selectrow{h}{t} = \varphi \left(W \selectrow{h}{t-1} + U \selectrow{x}{t} \right)
+    \selectonesample{h}{t} = \varphi \left(W \selectonesample{h}{t-1} + U \selectonesample{x}{t} \right)
 \end{equation}
 
 the output of the encoder hidden state is the initial hidden state of decoder. Because decoder does not have $x$, it will generate output purely based on hidden state:
 \begin{equation}
-    \selectrow{h}{t} = f \left(W \selectrow{h}{t-1} \right)
+    \selectonesample{h}{t} = f \left(W \selectonesample{h}{t-1} \right)
 \end{equation}
 
 We need to specify special word as the beginning and end of the sequence.

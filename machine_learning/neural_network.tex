@@ -7,14 +7,14 @@
 
 \subsection{Scalar Input}
 
-In the simplest case, the shallow network is an affine transformation which has linear behavior:
+In the simplest case, the shallow network is an affine transformation (linear regression) which has linear behavior:
 \begin{equation}
     y = b + wx
 \end{equation}
 
 Here $b$ is called \cindex{bias}, and $w$ is called \cindex{weight}.
 
-ReLU function is usually used as the activation function that add non-linearity. So let $\phi = \text{ReLU}$, we have
+A non-linear activation function $\phi$ is added after the linear regression. ReLU is often the choice. So we have:
 \begin{equation}
     y = \phi (b + wx)
 \end{equation}
@@ -41,15 +41,15 @@ When the input is a vector, the hidden unit will first aggregate all value and t
 \centering
 \begin{tabular}[t]{lll}
 Name & Definition & Range \\ \hline
-Sigmoid & $\sigma(a) = \frac{1}{1 + e^{-a}}$ & $[0,1]$ \\
-Hyperbolic tangent & $\tanh(a) = 2\sigma(2a) -1$ & $[-1,1]$ \\
-Softplus & $\sigma_{+}(a) = \log(1 + e^a)$ & $[0,\infty]$ \\
-ReLU & $\text{ReLU}(a) = \max(a,0)$ & $[0,\infty]$ \\
-LRelu & $\max(a,0)+\alpha \min(a,0)$ & $[-\infty , \infty]$ \\
-ELU & $\max(a,0) + \min(\alpha(e^a - 1), 0)$ & $[-\infty, \infty]$ \\
-SELU & $\lambda \text{ELU}$ & $[-\infty, \infty]$ \\
-Swish & $a\sigma(a)$ & $[-\infty,\infty]$ \\
-GELU & $a \Phi(a)$ & $[-\infty,\infty]$\\
+Sigmoid & $\sigma(a) = \frac{1}{1 + e^{-a}}$ & $(0,1)$ \\
+Hyperbolic tangent & $\tanh(a) = 2\sigma(2a) -1$ & $(-1,1)$ \\
+Softplus & $\sigma_{+}(a) = \log(1 + e^a)$ & $(0,\infty)$ \\
+ReLU & $\text{ReLU}(a) = \max(a,0)$ & $(0,\infty)$ \\
+LRelu & $\max(a,0)+\alpha \min(a,0)$ & $(-\infty , \infty)$ \\
+ELU & $\max(a,0) + \min(\alpha(e^a - 1), 0)$ & $(-\infty , \infty)$ \\
+SELU & $\lambda \text{ELU}$ &$(-\infty , \infty)$ \\
+Swish & $a\sigma(a)$ &$(-\infty , \infty)$ \\
+GELU & $a \Phi(a)$ &$(-\infty , \infty)$ \\
 \end{tabular}
 \end{table}
 
@@ -109,10 +109,10 @@ The number of hidden layers is the \cindex{depth} of the network. The number of 
 
 \begin{table}[H]
 \centering
-\begin{tabular}[t]{p{5cm}ll}
-Network & Regions & Parameters \\ \hline
-shallow with $n$ hidden units & $n+1$ & $3n+1$\\
-deep with one input, one output, and $k$ layers of $n$ hidden units & $(n+1)^k$ & $3n+1+(k-1)n(n+1)$ \\
+\begin{tabular}[t]{p{5cm}ccc}
+Network & Hidden Units & Regions & Parameters \\ \hline
+shallow & $n$ & $n+1$ & $3n+1$\\
+deep with one input, one output, and $k$ layers of $n$ hidden units & $k n$ & $(n+1)^k$ & $3n+1+(k-1)n(n+1)$ \\
 \end{tabular}
 \end{table}
 
@@ -128,36 +128,6 @@ Efficiency of deep network:
 
 \section{Loss Function}
 
-Cost function = loss function + regularization.
-
-The recipe for constructing loss function:
-\begin{enumerate}
-    \item Choose a suitable probability function $\probability{y|\theta}$
-    \item Set machine learning model $\theta = f(x;\phi)$. So $\probability{y|\theta} = \probability{y|f(x;\phi)}$
-    \item Find a parameter $\hat\phi$ that minimize the negative log-likelihood loss function over all training dataset pairs $\set{x_i, y_i}$:\begin{equation}
-        \hat\phi = \argmin{\phi} L(\phi) = \argmin{\phi} \left( - \sum_{i=1}^n \ln \left(\probability{y|f(x;\phi)} \right)\right)
-    \end{equation}
-\end{enumerate}
-
-So the loss function is a least square loss function. 
-
-\subsection{Homoscedastic Regression}
-
-In \cindex{homoscedastic regression}, the variance is a constant value. Assume $y$ follows normal distribution with $\mu = f(x;\phi)$ and $\sigma^2$ is a constant. We have 
-\begin{equation}
-    \begin{aligned}
-        L(\phi) &= - \sum_{i=1}^n \ln \left( \frac{1}{\sqrt{2\pi \sigma^2}} \exponential{- \frac{\left(y_i - f(x_i;\phi)\right)^2}{2 \sigma^2}} \right) \\
-        &= \sum_{i=1}^n \left(y_i - f(x_i;\phi)\right)^2 + \text{constant}
-    \end{aligned}
-\end{equation}
-
-\subsection{Heteroscedastic Regression}
-
-In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x;\phi)$ and $\sigma^2 = g(x;\phi)$, the loss function now becomes:
-\begin{equation}
-    L(\phi) = \sum_{i=1}^n \frac{1}{2} \ln g(x_i;\phi) + \frac{\left(y_i - f(x_i;\phi)\right)^2}{2 g(x_i;\phi)}
-\end{equation}
-
 \subsection{Binary Classification}
 
 In binary classification, $y \in \set{0,1}$. The probability function is
@@ -165,7 +135,31 @@ In binary classification, $y \in \set{0,1}$. The probability function is
     \probability{y|p} = (1-p)^{1-y} \times p^y
 \end{equation}
 
-Because $P$ is a trained variable, it could exceed the range $[0, 1]$. So the sigmoid function is used instead $p = \sigma(x) = \frac{1}{1+e^{-x}}$.
+
+Often the \cindex{logistic regression} is used. Because $P$ is a trained variable, it could exceed the range $[0, 1]$. So it uses the \cindex{sigmoid} function $\sigma(t) = \frac{1}{1 + e^(-t)}$ and assigns probability to $\columnvector{X}$ that $\hat{p} = \sigma(\columnvector{X}^\top \columnvector{\theta} )$. The prediction is:
+\begin{equation}
+	\hat{y} = \begin{cases}
+		0 \text{, if } \hat{p} < 0.5 \\
+		1 \text{, if } \hat{p} \geq 0.5
+	\end{cases}
+\end{equation}
+
+So the prediction is $1$ if $\columnvector{X}^\top \columnvector{\theta} > 0$ and $0$ if it is negative.
+
+The \cindex{log loss} cost function is:
+\begin{equation}
+	J(\theta) = - \frac{1}{m} \sum_{i=1}^m \left\{ \subscription{Y}{i} \log \subscription{\hat{p}}{i} + \left(1- \subscription{Y}{i} \right) \log \left(1 - \subscription{\hat{p}}{i} \right) \right\}
+\end{equation}
+
+The derivative is:
+\begin{equation}
+	\dpd{J(\theta)}{\theta_j} = \frac{1}{m} \sum_{i=1}^m \left( \sigma \left(\columnvector{\theta}^\top \subscription{X}{i} \right) - \subscription{Y}{i} \right) \subscription{X}{i}_j
+\end{equation}
+
+
+
+
+
 
 \subsection{Multiclass classification}
 
@@ -191,16 +185,35 @@ In multiclass classification, the prediction is a conditional probability distri
     \end{equation}
 
 
+\cindex{Softmax Regression} is a multiclass version of \cindex{logistic regression}. Each class has its own parameter vector $\columnvector{\theta}_i$. The softmax score for class $k$ is $s_k (\columnvector{X} ) = \columnvector{X}^\top \columnvector{\theta}_k$ and its probability is:
+\begin{equation}
+    \hat{p}_k = \frac{\exp{{s_k (\columnvector{X})}}}{\displaystyle \sum_{i=1}^n \exp{s_i (\columnvector{X}) } }
+\end{equation}
+
+The prediction is:
+\begin{equation}
+	\hat{y} = \underset{k}{\text{argmax }} \columnvector{X}^\top \columnvector{\theta}_k
+\end{equation}
+
+The cost function is measures using \cindex{cross entropy} function:
+\begin{equation}
+	J(\theta)= -\frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \subscription{Y}{i}_k \log \subscription{\hat{p}}{i}_k
+\end{equation}
 
 
-% fitting model
-\section{Fitting Model}
+The gradient vector is:
+\begin{equation}
+	\nabla_{\theta_k} J(\theta) = \frac{1}{m} \sum_{i=1}^m(\hat{p}_k^{(i)} - y_k^{(i)}) \mathbf{X}^i
+\end{equation}
+
+
+The cross entropy function is also called \cindex{Kullback-Leibler divergence}.
 
 
 % backprop
 \section{Backpropagation}
 
-Backpropagation is also called \cindex{automatic differentiation} or \cindex{autodiff}. It will construct a computation graph and calculate the gradient of $x_i$ by summing up all child $k$:
+Backwardpropagation is used in optimizing smooth functions. It is also called \cindex{automatic differentiation} or \cindex{autodiff}. It will construct a computation graph and calculate the gradient of $x_i$ by summing up all child $k$:
 \begin{equation}
     \dpd{o}{x_i} = \sum_{k \in \text{children}(i)} \dpd{o}{x_k} \dpd{x_k}{x_i}
 \end{equation}
@@ -212,6 +225,72 @@ If the MLP is fully connected, each layer is a proper Jacobian matrix:
 
 The computation graph could be build ahead of time, which is called \cindex{static graph}. It could be computed just in time by tracing the execution of the function on an input, which is called \cindex{dynamic graph}.
 
+
+
+
+
+% fitting model
+\section{Fitting the Model}
+
+\subsection{Gradient Descent}
+The classic way is to use \cindex{gradient descent}:
+\begin{equation}
+    \phi \leftarrow \phi - \alpha \dpd{L}{\phi}
+\end{equation}
+
+$\alpha$ is called the \cindex{learning rate}. It works well for convex model, but not good for non-convex ones. 
+
+
+\subsection{Stochastic Gradient Descent}
+The second choice is to use \cindex{stochastic gradient descent}. It trains the model using subset of training data called \cindex{batch} or \cindex{minibatch} \cindex{without replacement}. A single pass through all training data is called \cindex{epoch}. It is usually accompanied with \cindex{learning rate schedule}. $\alpha$ will start high and decrease by a constant factor every few epochs.
+
+\subsection{Momentum}
+
+The next one is to use \cindex{momentum}. The momentum term tries to predict the next gradient:
+
+\begin{equation}
+    \begin{aligned}
+        m_{t+1} &\leftarrow \beta \cdot m_t + (1-\beta) \sum_{i \in B_t} \dpd{L_t(\phi_t)}{\phi} \\
+        \phi_{t+1} &\leftarrow \phi_t - {\color{red}\alpha} \cdot m_{t+1}
+    \end{aligned}
+\end{equation}
+
+It will move in two steps:
+\begin{enumerate}
+    \item move according to the current gradient $\displaystyle \sum_{i \in B_t} \dpd{L_t(\phi_t)}{\phi}$
+    \item move according to the previous gradient $m_t$
+\end{enumerate}
+
+
+\subsection{Nesterov Accelerated Momentum}
+
+In \cindex{Nesterov acclerated momentum}, it tries to predict the gradient at predicted point rather than at current point:
+\begin{equation}
+    \begin{aligned}
+        m_{t+1} &\leftarrow \beta \cdot m_t + (1-\beta)\sum_{i \in B_t} \dpd{L_t({\color{red} \phi_t - \alpha \beta m_t})}{\phi} \\
+        \phi_{t+1} &\leftarrow \phi_t - \alpha \cdot m_{t+1}
+    \end{aligned}
+\end{equation}
+
+It will move in two steps:
+\begin{enumerate}
+    \item move according to the previous gradient $m_t$
+    \item move according to current gradient $\displaystyle \sum_{i \in B_t} \dpd{L_t(\phi_t - \alpha \beta m_t)}{\phi}$
+\end{enumerate}
+
+
+\subsection{Adam}
+
+\cindex{adaptive moment estimation}(\cindex{Adam}) moves fixed size every time. For $\beta, \gamma \in [0,1)$, we have
+\begin{equation}
+    \begin{aligned}
+        m_{t+1} &\leftarrow \beta \cdot m_t + (1-\beta) \sum_{i \in B_t} \dpd{L_i (\phi_i)}{\phi} \\
+        v_{t+1} &\leftarrow \gamma \cdot v_t + (1-\gamma) \sum_{i \in B_t} \left({\dpd{L_i (\phi_i)}{\phi}}\right)^2 \\
+        \tilde{m}_{t+1} &\leftarrow \frac{m_{t+1}}{1- \beta^{t+1}} \\
+        \tilde{v}_{t+1} &\leftarrow \frac{v_{t+1}}{1- \gamma^{t+1}} \\
+        \phi_{t+1} &\leftarrow \phi_t - \alpha \cdot \frac{\tilde{m}_{t+1}}{\sqrt{\tilde{v}_{t+1}} + \epsilon}
+    \end{aligned}
+\end{equation}
 
 
 % Initialization

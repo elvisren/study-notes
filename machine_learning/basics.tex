@@ -131,33 +131,6 @@ There are 4 different output formats:
 
 \subsection{Gradient Descent}
 
-\subsubsection{Batch Gradient Descent}
-
-\cindex{Gradient descent} is used to minimize cost function. All features need to have a similar scale in order to increase converge speed.
-
-In GD learning, $\eta$ is the learning rate, $\theta$ is model's parameter vector, $f$ (such as MSE) is the cost function. Formula (\ref{gdlearning}) will try to minimize cost function recursively until $|\nabla_\theta f| < \varepsilon$ ($\varepsilon$ is called \cindex{tolerance})
-
-\begin{equation}\label{gdlearning}
-	\theta \gets \theta - \eta \nabla_\theta f
-\end{equation}
-
-Each iteration will use all input because the cost function is the sum of error over all inputs. So it is called \cindex{batch} and slow on very large data set. It takes $\displaystyle O\left(\frac{1}{\varepsilon}\right)$ iteration to reach the $\varepsilon$ tolerance.
-
-
-
-\subsubsection{Stochastic Gradient Descent}
-
-A random instance is choose at every step to compute the gradient. The SGD has the chance of finding global minimum. The learning rate needs to be reduced gradually in order to let the training converge, which is called \cindex{simulated annealing} process with \cindex{learning schedule}. Each round of learning schedule is called \cindex{epoch}.
-
-If instances are chosen randomly, there is chance that some instances are never chosen. One solution is to randomly sort the test set and iterate all samples, and then sort it again.
-
-
-
-\subsubsection{Mini-batch Gradient Decent}
-
-Mini-batch gradient descent is in the middle between SGD and GD. Each iteration it will take a small random set of instance from training set called \cindex{mini-batch}.
-
-
 \subsubsection{Early Stopping}
 
 It means stop training when the validation error reaches minimum. The validation error curve for gradient descent will decrease and then goes up which means the model starts to overfit the training data. One solution is to continue run for a while and roll back to previous minimum, which means the previous minimum needs to be saved. For mini-batch and stochastic GD, the curve is not smooth so the decision would be observe for sometime and then decide whether to rollback.
@@ -372,18 +345,6 @@ two different model tuning methods:
 
 \section{Definitions}
 
-\begin{definition}
-    In supervised learning, we have 
-    \begin{enumerate}
-        \item The task $T$ is to learn a mapping $f: X \rightarrow Y$
-        \item $X$ is called features
-        \item $Y$ is called labels
-        \item $X = \realnumber^D$ and $D$ is the dimension of feature vector
-        \item The experience $E$ is $\mathcal{D} = \set{\left(\selectrow{x}{i}, \selectrow{y}{i}\right)}_{i=1}^N$, which is called the training set
-        \item $N$ is the sample size
-        \item The input feature is a $N \times D$ matrix, which is called design matrix
-    \end{enumerate}
-\end{definition}
 
 
 
