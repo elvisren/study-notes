@@ -138,14 +138,14 @@ Other loss function could be used too, such as \cindex{Minkowski loss} $L(x,y) =
 The loss function defined in \formularef{square_loss} could be re-arranged as
 \begin{equation}
     \begin{aligned}
-        (f(x) - y)^2 &= (f(x) - \expectation{y|x} + \expectation{y|x} - y)^2 \\
-        &= (f(x) - \expectation{y|x})^2 + 2 (f(x) - \expectation{y|x})(\expectation{y|x} - y) + (\expectation{y|x} - y)^2
+        (f(x) - y)^2 &= \left(f(x) - \expectation{y|x} + \expectation{y|x} - y\right)^2 \\
+        &= \left(f(x) - \expectation{y|x}\right)^2 + 2 \left(f(x) - \expectation{y|x}\right)\left(\expectation{y|x} - y) + (\expectation{y|x} - y\right)^2
     \end{aligned}
 \end{equation}
 
 Take expectation on both side, and we have
 \begin{equation}
-    \expectation{L} = \underbrace{\int (f(x) - \expectation{y|x})^2 p(x) \dif x}_{\text{first part}} + \underbrace{\int \variance{y|x} p(x) \dif x}_{\text{second part: noise}}
+    \expectation{L} = \underbrace{\int \left(f(x) - \expectation{y|x}\right)^2 p(x) \dif x}_{\text{first part}} + \underbrace{\int \variance{y|x} p(x) \dif x}_{\text{second part: noise}}
 \end{equation}
 
 The second part is unrelated to the $f(x)$, and it is the intrinsic variability of the target data and can be regarded as noise. 
@@ -153,16 +153,16 @@ The second part is unrelated to the $f(x)$, and it is the intrinsic variability 
 In practice, $f(x)$ also depends on the training set $D$, so it is of the form $f(x;D)$ with $D$ being probabilistic. So we have the fomula
 \begin{equation}
     \begin{aligned}
-        (f(x;D) - \expectation{y|x})^2 &= (f(x;D) - \expectationonanvariable{D}{f(x;D)} + \expectationonanvariable{D}{f(x;D)} - \expectation{y|x})^2 \\
-        &= (f(x;D) - \expectationonanvariable{D}{f(x;D)})^2 \\
-        &+ (\expectationonanvariable{D}{f(x;D)} - \expectation{y|x})^2 \\
-        &+ 2 (f(x;D) - \expectationonanvariable{D}{f(x;D)})(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x})
+        (f(x;D) - \expectation{y|x})^2 &= \left(f(x;D) - \expectationonanvariable{D}{f(x;D)} + \expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)^2 \\
+        &= \left(f(x;D) - \expectationonanvariable{D}{f(x;D)}\right)^2 \\
+        &+ \left(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)^2 \\
+        &+ 2 \left(f(x;D) - \expectationonanvariable{D}{f(x;D)}\right)\left(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)
     \end{aligned}
 \end{equation}
 
 Take the expectation, and we have
 \begin{equation}
-    \underbrace{\int (f(x) - \expectation{y|x})^2 p(x) \dif x}_{\text{first part}} = \underbrace{(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x})^2}_{\text{bias}^2} + \underbrace{\expectationonanvariable{D}{(f(x;D) - \expectationonanvariable{D}{f(x;D)})^2}}_{\text{variance}}
+    \underbrace{\int (f(x) - \expectation{y|x})^2 p(x) \dif x}_{\text{first part}} = \underbrace{\left(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)^2}_{\text{bias}^2} + \underbrace{\expectationonanvariable{D}{\left(f(x;D) - \expectationonanvariable{D}{f(x;D)}\right)^2}}_{\text{variance}}
 \end{equation}
 
 So 

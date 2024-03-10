@@ -55,7 +55,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
         \end{aligned}
     \end{equation}
     
-    So we will underestimate $\sigma^2$, which is called the bias. For this example, the bias appears because the variance is measured relative to the maximum likelihood estimation of the mean, which itself is turned to the data. If we have the true mean $\mu$, it is unbiased.
+    So we will underestimate $\sigma^2$, which is called the bias. For this example, the bias appears because the variance is measured relative to the maximum likelihood estimation of the mean, which itself is turned to the data. \emph{If we have the true mean $\mu$, it is unbiased}.
     
     It is not easy to adjust for the bias for complex model.
 \end{definition}
@@ -91,7 +91,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
         H(x,y) = H(x) + H(y)
     \end{equation}
     
-    In probability, if $x$ and $y$ are independent, then $p(xy)= p(x) p(y)$. So it is natural to take a $\log$ on joint probability. Therefore for a discrete probability distribution $p(x)$, the \emph{average amount of information}, which is called entropy, is
+    In probability, if $x$ and $y$ are independent, then $p(xy)= p(x) p(y)$. So it is natural to take a $\log$ on joint probability. Therefore for a discrete probability distribution $p(x)$, the \emph{average amount of information}, which is called \cindex{entropy}, is
     \begin{equation}
         \entropy{x} = - \sum_i p(x_i) \log_2 p(x_i)
     \end{equation}
