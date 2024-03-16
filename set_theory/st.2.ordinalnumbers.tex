@@ -10,7 +10,7 @@
 \end{definition}
 
 \begin{definition}
-    A partial order $(P, <)$ is \cindex{linear ordering} if $\forall p \forall q \left( (p < q)   \vee (p = q) \vee (q < p) \right)$.
+    A partial order $(P, <)$ is \cindex{linear ordering} if $\forall p \forall q \mleft( (p < q)   \vee (p = q) \vee (q < p) \mright)$.
 \end{definition}
 
 
@@ -37,7 +37,7 @@
 \end{definition}
 
 \begin{theorem}\label{wellorderedsetisomorphismisbigger}
-    If $(W,<)$ is a well-ordered set and $f:W \rightarrow W$ is an increasing function, then $\forall x\in W \left( f(x) \geq x \right)$.
+    If $(W,<)$ is a well-ordered set and $f:W \rightarrow W$ is an increasing function, then $\forall x\in W \mleft( f(x) \geq x \mright)$.
 \end{theorem}
 \begin{proof}
     If the set $X = \set{x \in W: f(x) < x}$ is nonempty, let $z$ be its least element and $w = f(z)$. Then $f(w) = f \circ f(z) < f(z) = w $. So $f(w) < w \rightarrow w \in X \wedge w < z$, so $z$ is not the least element.
@@ -111,7 +111,7 @@
 \end{definition}
 
 \begin{definition}
-    For two sets $\alpha$ and $\beta$, define a relation $<$ as $\alpha < \beta \leftrightarrow \alpha \in \beta$.
+    For two sets $\alpha$ and $\beta$, define a relation $<$ as $\alpha < \beta \mleftrightarrow \alpha \in \beta$.
 \end{definition}
 
 \begin{theorem}
@@ -147,7 +147,7 @@
     \begin{enumerate}
         \item $\alpha = \set{\beta: \beta < \alpha}$
         \item If $C$ is a nonempty class of ordinals, then $\bigcap C$ and $\bigcup C$ are ordinals.
-        \item $\forall \alpha \in \allordinals \left(\alpha \cup \set{\alpha} \in \allordinals \right)$ and $\alpha \cup \set{\alpha} = \mathbf{inf} \set{\beta: \beta > \alpha}$.
+        \item $\forall \alpha \in \allordinals \mleft(\alpha \cup \set{\alpha} \in \allordinals \mright)$ and $\alpha \cup \set{\alpha} = \mathbf{inf} \set{\beta: \beta > \alpha}$.
     \end{enumerate}    
 \end{theorem}
 
@@ -202,7 +202,7 @@
     
     If $H$ is a function on the set of all transfinite sequences in $X$ of length $< \theta$, there exists a unique $\theta$-sequence on $X$ such that 
     \begin{equation}
-        a_\alpha = H\left(\transfinitesequence{a_\xi : \xi < \alpha} \right)
+        a_\alpha = H\mleft(\transfinitesequence{a_\xi : \xi < \alpha} \mright)
     \end{equation}
 \end{theorem}
 
@@ -297,12 +297,12 @@ so the natural numbers are:
     The trick is in define the transfinite induction. For example:
     \begin{enumerate}
         \item $A_\beta (0)= \beta$
-        \item $A_\beta (\alpha^{+})= \left(A_\beta (\alpha) \right)^{+}$
+        \item $A_\beta (\alpha^{+})= \mleft(A_\beta (\alpha) \mright)^{+}$
     \end{enumerate}
     $A_\beta(\alpha)$ defines $\alpha + \beta$.
     \begin{enumerate}
         \item $M_\beta (0)= \beta$
-        \item $M_\beta (\alpha^{+})= A_\beta \left(M_\beta (\alpha)\right)$
+        \item $M_\beta (\alpha^{+})= A_\beta \mleft(M_\beta (\alpha)\mright)$
     \end{enumerate}
     $M_\beta(\alpha)$ defines $\alpha \cdot \beta$.    
 \end{proof}

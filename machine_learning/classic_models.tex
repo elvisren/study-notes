@@ -13,7 +13,7 @@ The prediction is:
 
 The cost function is:
 \begin{equation}
-    J(\columnvector{\theta} ) = \text{MSE} = \frac{1}{m} \sum_{i=1}^m \left(\columnvector{\theta}^\top  \subscription{X}{i} - \subscription{Y}{i} \right)^2
+    J(\columnvector{\theta} ) = \text{MSE} = \frac{1}{m} \sum_{i=1}^m \mleft(\columnvector{\theta}^\top  \subscription{X}{i} - \subscription{Y}{i} \mright)^2
 \end{equation}
 
 The close solution is:
@@ -27,7 +27,7 @@ The $\hat{\theta}$ is usually calculates using pseudoinverse of $\columnvector{X
 The gradient vector of $J$ is calculated as:
 \begin{equation}
     \begin{aligned}
-    \dpd{J(\theta)}{\theta_j} &= \frac{2}{m} \sum_{i=1}^m \left( \columnvector{\theta}^\top \subscription{X}{i} - \subscription{Y}{i} \right) \subscription{X}{i}_j \\
+    \dpd{J(\theta)}{\theta_j} &= \frac{2}{m} \sum_{i=1}^m \mleft( \columnvector{\theta}^\top \subscription{X}{i} - \subscription{Y}{i} \mright) \subscription{X}{i}_j \\
     \nabla_\theta J(\theta) &= \frac{2}{m} \columnvector{X}^\top (\columnvector{X} \columnvector{\theta} - \columnvector{Y} )
     \end{aligned}
 \end{equation}
@@ -47,7 +47,7 @@ For each label $i$, $\subscription{Y}{i} =1$ or $\subscription{Y}{i} =-1$.The ha
 \begin{equation}
     \begin{aligned}
         \text{minimize: } & \frac{1}{2} \columnvector{W}^\top \columnvector{W} \\
-        \text{subject to: } & \subscription{Y}{i} \left( \columnvector{W}^\top \subscription{X}{i} + b \right) \geq 1
+        \text{subject to: } & \subscription{Y}{i} \mleft( \columnvector{W}^\top \subscription{X}{i} + b \mright) \geq 1
     \end{aligned}
 \end{equation}
 
@@ -55,7 +55,7 @@ Soft margin classification uses \cindex{slack variable} $\subscription{\zeta}{i}
 \begin{equation}
     \begin{aligned}
         \text{minimize: } & \frac{1}{2} \columnvector{W}^\top \columnvector{W} \\
-        \text{subject to: } & \subscription{Y}{i} \left( \columnvector{W}^\top \subscription{X}{i} + b \right) \geq 1 - \subscription{\zeta}{i} \\
+        \text{subject to: } & \subscription{Y}{i} \mleft( \columnvector{W}^\top \subscription{X}{i} + b \mright) \geq 1 - \subscription{\zeta}{i} \\
         & \subscription{\zeta}{i} \geq 0
     \end{aligned}
 \end{equation}

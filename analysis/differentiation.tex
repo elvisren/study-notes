@@ -44,12 +44,12 @@
 
 \begin{theorem}
     \begin{equation}
-        \left( \frac{f(x)}{g(x)} \right)' = \frac{f'(x)g(x) - f(x) g'(x)}{g(x)^2}
+        \mleft( \frac{f(x)}{g(x)} \mright)' = \frac{f'(x)g(x) - f(x) g'(x)}{g(x)^2}
     \end{equation}    
 \end{theorem}
 \begin{proof}
     \begin{equation}
-        \frac{\frac{f(x)}{g(x)} - \frac{f(a)}{g(a)}}{x - a} = \frac{1}{g(x) g(a)} \left( \frac{f(x) - f(a)}{x-a} g(x) - f(a) \frac{g(x) - g(a)}{x-a} \right)
+        \frac{\frac{f(x)}{g(x)} - \frac{f(a)}{g(a)}}{x - a} = \frac{1}{g(x) g(a)} \mleft( \frac{f(x) - f(a)}{x-a} g(x) - f(a) \frac{g(x) - g(a)}{x-a} \mright)
     \end{equation}
 \end{proof}
 
@@ -70,9 +70,9 @@
 \end{proof}
 
 \begin{theorem}
-    Let $f$ be injective and differentiable at $a$. Suppose $f^{-1}$ is continuous at $b=f(a)$. Then $f^{-1}$ is differentiable at $b$ if and only if $f^{-1}$ is not zero, and
+    Let $f$ be injective and differentiable at $a$. Suppose $f^{-1}$ is continuous at $b=f(a)$. Then $f^{-1}$ is differentiable at $b$ if and only if $f(a)$ is not zero, and
     \begin{equation}
-        (f^{-1})(b) = \frac{1}{f'(a)}
+        (f^{-1})'(b) = \frac{1}{f'(a)}
     \end{equation}
 \end{theorem}
 \begin{proof}
@@ -192,7 +192,7 @@
 \end{proof}
 
 \begin{theorem}
-    Suppose $I$ is a compact perfect interval, $E$ is a normed vector space, and $f \in C(I,E)$ is a continuous function that is also differentiable on $\interior{I}$ ($C(I,E)$ means continuous, not differentiable). Then
+    Suppose $I$ is a compact perfect interval, $E$ is a normed vector space, and $f \in C(I,E)$ is a continuous function that is also differentiable on $\interior{I}$ (Note: $C(I,E)$ means continuous, not differentiable). Then
     \begin{itemize}
         \item If $f'$ is bounded on $\interior{I}$, then $f$ is Lipschitz continuous\footnote{\defiref{lipschitz_continuity}}
         \item Any function in $C^1(I,E)$ is Lipschitz continuous
@@ -230,7 +230,7 @@
 \begin{definition}[\cindex{convex}]
     Let $C$ be a convex subset of vector space $V$. Then $f:V \rightarrow \realnumber$ is convex if for $x,y \in C$ and $t \in (0,1)$, we have
     \begin{equation}
-        f\left( (1-t)x + ty \right) \leq (1-t) f(x) + t f(y)
+        f\mleft( (1-t)x + ty \mright) \leq (1-t) f(x) + t f(y)
     \end{equation}
     
     $f$ is \cindex{strictly convex} if we change from $\leq$ to $<$. It is concave if $-f$ is convex.
@@ -249,7 +249,7 @@
     \end{itemize}
 \end{theorem}
 \begin{proof}
-    Let $t = \frac{x-a}{b-a}$, we have $f(x) \leq \left(1 - \frac{x-a}{b-a}\right)f(a) + \frac{x-a}{b-a}f(b) = f(a) + \frac{f(b) - f(a)}{b-a}(x-a) $
+    Let $t = \frac{x-a}{b-a}$, we have $f(x) \leq \mleft(1 - \frac{x-a}{b-a}\mright)f(a) + \frac{x-a}{b-a}f(b) = f(a) + \frac{f(b) - f(a)}{b-a}(x-a) $
 \end{proof}
 
 \begin{theorem}
@@ -330,7 +330,7 @@
 \begin{theorem}[\cindex{Schlomilch reminder formula}]
     Let $I$ be a perfect interval, $a \in I$, $p > 0$. Suppose $f \in C^n(I, \realnumber)$ and $f^{n+1}$ exists on $\interior{I}$.For all $x \in I - \set{a}$, there is $\xi_x$ such that
     \begin{equation}
-        R_n(f,a)(x) = \frac{f^{n+1}(\xi)}{p \times n!}\left( \frac{x-\xi}{x-a} \right)^{n-p+1} (x-a)^{n+1}
+        R_n(f,a)(x) = \frac{f^{n+1}(\xi)}{p \times n!}\mleft( \frac{x-\xi}{x-a} \mright)^{n-p+1} (x-a)^{n+1}
     \end{equation}
 \end{theorem}
 \begin{proof}
@@ -352,7 +352,7 @@
 \begin{theorem}[\cindex{Cauchy reminder}]
     Set $p=1$
     \begin{equation}
-        R_n (f,a)(x) = \frac{f^{n+1}(\xi)}{n!}\left( \frac{x-\xi}{x-a} \right)^n (x-a)^{n+1}
+        R_n (f,a)(x) = \frac{f^{n+1}(\xi)}{n!}\mleft( \frac{x-\xi}{x-a} \mright)^n (x-a)^{n+1}
     \end{equation}
 \end{theorem}
 

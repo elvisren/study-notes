@@ -153,8 +153,8 @@ The \cindex{zero transformation}  $T_0: V \rightarrow W$ is defined as $T_0 = 0$
 	For product $AB=\coordinate{UT}_\alpha^\gamma$, we have 
 	\begin{equation}
 		\begin{aligned}
-			(UT)(v_j) &= U(T(v_j)) = U \left( \sum_{k=1}^m B_{kj} w_k \right) = \sum_{k=1}^m B_{kj} U(w_k) \\
-			&= \sum_{k=1}^m B_{kj} \left( \sum_{i=1}^p A_{ik} z_i \right) = \sum_{k=1}^m  \left( \sum_{i=1}^p A_{ik} B_{kj} \right)  z_i \\
+			(UT)(v_j) &= U(T(v_j)) = U \mleft( \sum_{k=1}^m B_{kj} w_k \mright) = \sum_{k=1}^m B_{kj} U(w_k) \\
+			&= \sum_{k=1}^m B_{kj} \mleft( \sum_{i=1}^p A_{ik} z_i \mright) = \sum_{k=1}^m  \mleft( \sum_{i=1}^p A_{ik} B_{kj} \mright)  z_i \\
 			&= \sum_{i=1}^p C_{ij} z_i
 		\end{aligned}
 	\end{equation}
@@ -172,7 +172,7 @@ The \cindex{zero transformation}  $T_0: V \rightarrow W$ is defined as $T_0 = 0$
 \end{definition}
 
 \begin{definition}
-	The $n\times n$ \cindex{identity matrix} \cindex{$I_n$} is defined as $\left(I_n \right)_{ij} = \delta_{ij}$.
+	The $n\times n$ \cindex{identity matrix} \cindex{$I_n$} is defined as $\mleft(I_n \mright)_{ij} = \delta_{ij}$.
 \end{definition}
 
 \begin{theorem}
@@ -240,7 +240,7 @@ A linear transformation is different from matrix:
 \begin{theorem}
     if $T$ is invertible, 
 	\begin{equation*}
-		\coordinate{T^{-1}}_\gamma^\beta = \left(\coordinate{T}_\beta^\gamma \right)^{-1}
+		\coordinate{T^{-1}}_\gamma^\beta = \mleft(\coordinate{T}_\beta^\gamma \mright)^{-1}
 	\end{equation*}
 \end{theorem}
 \begin{proof}
@@ -393,7 +393,7 @@ If $T$ is a linear operator on finite dimension vector space $V$, and if $\beta$
 \begin{theorem}
     Define $\tilde{T}: V/\nullspace{T} \rightarrow W$ by:
     \begin{equation*}
-        \tilde{T}\left(v + \nullspace{T} \right) = Tv
+        \tilde{T}\mleft(v + \nullspace{T} \mright) = Tv
     \end{equation*}
     Then $\tilde{T}$ is an isomorphism between $V/\nullspace{T}$ and $T$.
 \end{theorem}
@@ -457,13 +457,13 @@ The dimension of dual space is $\dimension{V^*} = \dimension{\mathcal{L}(V,F)} =
 \begin{proof}
 	Let $g =\displaystyle \sum_{i=1}^n f(x_i) f_i$, we have
 	\begin{equation*}
-	g(x_j) = \left( \sum_{i=1}^n f(x_i) f_i \right) (x_j) = \sum_{i=1}^n f(x_i) f_i (x_j) = \sum_{i=1}^n f(x_i) \delta_{ij} =f(x_j)
+	g(x_j) = \mleft( \sum_{i=1}^n f(x_i) f_i \mright) (x_j) = \sum_{i=1}^n f(x_i) f_i (x_j) = \sum_{i=1}^n f(x_i) \delta_{ij} =f(x_j)
 	\end{equation*}
 \end{proof}
 
 
 \begin{theorem}
-	Let $V$ and $W$ be vector space over $F$ with ordered basis $\beta$ and $\gamma$. For any linear transformation $T:V \rightarrow W$, the mapping $T^t: W^* \rightarrow V^*$ defined as $T^\top (g) = gT, \forall g \in W^*$ is a linear transformation with property that $\left[T^\top \right]_{\gamma^*}^{\beta^*} = \left(\left[T \right]_\beta^\gamma \right)^\top$.
+	Let $V$ and $W$ be vector space over $F$ with ordered basis $\beta$ and $\gamma$. For any linear transformation $T:V \rightarrow W$, the mapping $T^t: W^* \rightarrow V^*$ defined as $T^\top (g) = gT, \forall g \in W^*$ is a linear transformation with property that $\mleft[T^\top \mright]_{\gamma^*}^{\beta^*} = \mleft(\mleft[T \mright]_\beta^\gamma \mright)^\top$.
 \end{theorem}
 \begin{proof}
 	Let $\beta = \{x_i\}$ and $\gamma=\{y_i\}$ with dual basis $\beta^*=\{f_i\}$ and $\gamma^*=\{g_i\}$, $A=\coordinate{T}_\beta^\gamma$. we have
@@ -473,10 +473,10 @@ The dimension of dual space is $\dimension{V^*} = \dimension{\mathcal{L}(V,F)} =
 	
 	So the row $i$, column $j$ entry of $[T^\top]_{\gamma^*}^{\beta^*}$ is
 	\begin{equation*}
-	(g_j T)(x_i) = g_j (T(x_i))= g_j \left( \sum_{k=1}^m A_{kj} y_k \right) = \sum_{k=1}^m A_{kj} g_j(y_k)= \sum_{k=1}^m A_{kj} \delta_{kj} = A_{ji}
+	(g_j T)(x_i) = g_j (T(x_i))= g_j \mleft( \sum_{k=1}^m A_{kj} y_k \mright) = \sum_{k=1}^m A_{kj} g_j(y_k)= \sum_{k=1}^m A_{kj} \delta_{kj} = A_{ji}
 	\end{equation*}
 	
-	Hence $\left[T^\top \right]_{\gamma^*}^{\beta^*} = A^\top $.
+	Hence $\mleft[T^\top \mright]_{\gamma^*}^{\beta^*} = A^\top $.
 \end{proof}
 
 \begin{definition}

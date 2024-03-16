@@ -23,7 +23,7 @@
   
   \cindex{exponential} & $\lambda e^{-\lambda x}$ & $\displaystyle \frac{\lambda}{\lambda - t}$ & $\displaystyle \frac{1}{\lambda}$ & $\displaystyle \frac{1}{\lambda^2}$ \\
 
-  \cindex{gamma} & $\displaystyle \frac{\beta e^{-\beta x} (\beta x)^{n - 1}}{\Gamma(\alpha)}$ & $\displaystyle \left(\frac{\beta }{\beta - t} \right)^\alpha$ & $\displaystyle \frac{\alpha}{\beta}$ & $\displaystyle \frac{\alpha}{\beta^2}$ \\
+  \cindex{gamma} & $\displaystyle \frac{\beta e^{-\beta x} (\beta x)^{n - 1}}{\Gamma(\alpha)}$ & $\displaystyle \mleft(\frac{\beta }{\beta - t} \mright)^\alpha$ & $\displaystyle \frac{\alpha}{\beta}$ & $\displaystyle \frac{\alpha}{\beta^2}$ \\
   
   
   \cindex{beta} & $\displaystyle \frac{\Gamma(\alpha + \beta)}{ \Gamma(\alpha) \Gamma(\beta) } x^{\alpha -1} (1-x)^{\beta - 1}$ & & $\displaystyle \frac{\alpha}{\alpha + \beta}$ & $\displaystyle \frac{\alpha\beta}{(\alpha+\beta)^2 (\alpha+\beta+1)}$ \\
@@ -42,7 +42,7 @@
 Poisson distribution is an approximate to binomial distribution. Set $\lambda = n p $ for large $n$ and small $p$, then:
 \begin{equation*}
     \begin{aligned}
-        \binom{n}{i}p^i (1-p)^{n-i} &= \frac{n!}{(n-i)! i!} \left(\frac{\lambda}{n} \right)^i \left(1-\frac{\lambda}{n} \right)^{n-i} \\
+        \binom{n}{i}p^i (1-p)^{n-i} &= \frac{n!}{(n-i)! i!} \mleft(\frac{\lambda}{n} \mright)^i \mleft(1-\frac{\lambda}{n} \mright)^{n-i} \\
         &= \frac{n (n-1) \cdots (n - i + 1)}{n^i} \frac{\lambda^i}{i!} \frac{(1- \frac{\lambda}{n})^n}{(1- \frac{\lambda}{n})^i} \\
         & \approx 1 \times \frac{\lambda^i}{i!} \times \frac{e^{- \lambda}}{1} = e^{- \lambda} \frac{\lambda^i}{ i !}
     \end{aligned}
@@ -78,7 +78,7 @@ Geometric distribution is memoryless, that is
 
     Gamma function has the following property:
     \begin{equation}
-        \Gamma \left(\frac{1}{2} \right) = \sqrt{\pi}
+        \Gamma \mleft(\frac{1}{2} \mright) = \sqrt{\pi}
     \end{equation}
     
     \begin{equation}

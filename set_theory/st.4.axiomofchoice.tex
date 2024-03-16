@@ -21,7 +21,7 @@ Axiom of Choice $\rightarrow$ Well-ordering Principle :  Let $S$ be a set and de
     \begin{equation}
         h(\alpha) = \begin{cases}
             f(S) \in S, & \alpha = 0 \\
-            f\left( \displaystyle S \backslash \bigcup_{\beta < \alpha} h(\beta) \right), & \alpha \neq 0
+            f\mleft( \displaystyle S \backslash \bigcup_{\beta < \alpha} h(\beta) \mright), & \alpha \neq 0
         \end{cases}
     \end{equation}
 \end{proof}    
@@ -41,7 +41,7 @@ what it did is that the minimal element under $f$ is $0$. And if $f(x) = 0$, for
 \begin{theorem}
     There is no function $m : \powerset{\real} \rightarrow \real^{\geq 0} \cup \set{\infty}$ that:
     \begin{enumerate}
-        \item $m \left([0,1) \right) = 1$
+        \item $m \mleft([0,1) \mright) = 1$
         \item $m(A + r) = m(A)$ where $A + r = \set{s + r: s \in A}$
         \item $m(\bigcup A_i) = \sum m(A_i)$ for all disjoint set $A_i$.
     \end{enumerate}

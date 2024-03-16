@@ -17,8 +17,8 @@ In both CNN and RNN, the model parameters are shared across different parts of t
     
 \begin{equation}
     \begin{aligned}
-        \selectonesample{h}{t} &= f\left(\selectonesample{h}{t-1}, \selectonesample{x}{t}; \theta\right) \\   
-        \selectonesample{o}{t} &= g\left(\selectonesample{h}{t}\right)
+        \selectonesample{h}{t} &= f\mleft(\selectonesample{h}{t-1}, \selectonesample{x}{t}; \theta\mright) \\   
+        \selectonesample{o}{t} &= g\mleft(\selectonesample{h}{t}\mright)
     \end{aligned}    
 \end{equation}
 
@@ -26,8 +26,8 @@ One concrete example is:
 
     \begin{equation}
         \begin{aligned}
-            \selectonesample{h}{t} &= \tanh\left( W \selectonesample{h}{t-1} + U \selectonesample{x}{t} + b \right) \\
-            \selectonesample{o}{t} &= \sigma \left(V \selectonesample{h}{t} + c\right)
+            \selectonesample{h}{t} &= \tanh\mleft( W \selectonesample{h}{t-1} + U \selectonesample{x}{t} + b \mright) \\
+            \selectonesample{o}{t} &= \sigma \mleft(V \selectonesample{h}{t} + c\mright)
         \end{aligned}
     \end{equation}    
 \end{example}
@@ -35,7 +35,7 @@ One concrete example is:
 
 We could put hidden layers on top of each other. The hidden state on layer $l$ at time $t$ depends on previous state and previous layer:
 \begin{equation}
-    \selectonesample{h_l}{t} = \varphi_l \left(W_{l-1} \selectonesample{h_{l-1}}{t} + W_l \selectonesample{h_l}{t-1} + b_l \right)
+    \selectonesample{h_l}{t} = \varphi_l \mleft(W_{l-1} \selectonesample{h_{l-1}}{t} + W_l \selectonesample{h_l}{t-1} + b_l \mright)
 \end{equation}
 
 
@@ -125,7 +125,7 @@ The formula is:
             \sigma \\
             \sigma \\
             \tanh
-        \end{pmatrix} \circ \left( \begin{pmatrix}
+        \end{pmatrix} \circ \mleft( \begin{pmatrix}
             W_f & U_f \\
             W_i & U_i \\
             W_o & U_o \\
@@ -138,7 +138,7 @@ The formula is:
             b_i \\
             b_o \\
             b_c
-        \end{pmatrix} \right) \\
+        \end{pmatrix} \mright) \\
         \selectonesample{c}{t} &= \selectonesample{f}{t} \odot \selectonesample{c}{t-1} + \selectonesample{i}{t} \odot \selectonesample{\tilde{c}}{t} \\
         \selectonesample{h}{t} &= \selectonesample{o}{t} \odot \tanh(\selectonesample{c}{t})
     \end{aligned}
@@ -208,12 +208,12 @@ it maps fixed-length input to a different length output.
 
 the encoder is a stack of recurrent unit. the output is a vector of hidden state
 \begin{equation}
-    \selectonesample{h}{t} = \varphi \left(W \selectonesample{h}{t-1} + U \selectonesample{x}{t} \right)
+    \selectonesample{h}{t} = \varphi \mleft(W \selectonesample{h}{t-1} + U \selectonesample{x}{t} \mright)
 \end{equation}
 
 the output of the encoder hidden state is the initial hidden state of decoder. Because decoder does not have $x$, it will generate output purely based on hidden state:
 \begin{equation}
-    \selectonesample{h}{t} = f \left(W \selectonesample{h}{t-1} \right)
+    \selectonesample{h}{t} = f \mleft(W \selectonesample{h}{t-1} \mright)
 \end{equation}
 
 We need to specify special word as the beginning and end of the sequence.
@@ -286,7 +286,7 @@ There are new names for variables:
 
 For a batch of query $Q$, the calculation could be expressed in vector form:
 \begin{equation}
-    \mathrm{attention}(Q, K, V) = \mathrm{softmax}\left( \frac{Q \transpose{K}}{\sqrt{d_k}} \right)
+    \mathrm{attention}(Q, K, V) = \mathrm{softmax}\mleft( \frac{Q \transpose{K}}{\sqrt{d_k}} \mright)
 \end{equation}
 \end{definition}
 
@@ -322,8 +322,8 @@ For a batch of query $Q$, the calculation could be expressed in vector form:
     \begin{equation}
         \begin{aligned}
             p_i (t) = \begin{cases}
-            \displaystyle \sin\left(\frac{1}{C^{\frac{2k}{d}}} \cdot t \right)  \textrm{, if }  i = 2k \\
-            \displaystyle \cos\left(\frac{1}{C^{\frac{2k}{d}}} \cdot t \right)  \textrm{, if }  i = 2k +1 \\
+            \displaystyle \sin\mleft(\frac{1}{C^{\frac{2k}{d}}} \cdot t \mright)  \textrm{, if }  i = 2k \\
+            \displaystyle \cos\mleft(\frac{1}{C^{\frac{2k}{d}}} \cdot t \mright)  \textrm{, if }  i = 2k +1 \\
             \end{cases}
         \end{aligned}        
     \end{equation}

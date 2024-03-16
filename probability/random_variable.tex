@@ -35,7 +35,7 @@ It is conventional to designate $E \cup F$ as $EF$.
         \item $P(S) = 1$
         \item If $\set{A_i}$ are pairwise disjoint, then        
             \begin{equation}
-                P \left(\bigcup_{n=1}^\infty E_n \right) = \sum_{n=1}^\infty P(E_n)
+                P \mleft(\bigcup_{n=1}^\infty E_n \mright) = \sum_{n=1}^\infty P(E_n)
             \end{equation}
     \end{enumerate}
     
@@ -48,7 +48,7 @@ If the experiment is repeated over and over again, with probability $1$ the prop
 \begin{theorem}[inclusion-exclusion identity]
     \begin{equation}
         \begin{aligned}
-            P\left(\bigcup_{i=1}^n E_i \right) &= \sum_i P(E_i) - \sum_{i < j}P(E_i E_j) + \sum_{i < j < k} P(E_i E_j E_k) + \cdots + (-1)^{n+1} P(E_1 E_2 \dots E_n)
+            P\mleft(\bigcup_{i=1}^n E_i \mright) &= \sum_i P(E_i) - \sum_{i < j}P(E_i E_j) + \sum_{i < j < k} P(E_i E_j E_k) + \cdots + (-1)^{n+1} P(E_1 E_2 \dots E_n)
         \end{aligned}
     \end{equation}
 \end{theorem}
@@ -242,7 +242,7 @@ Sometimes when calculating the probability $\probability{X=a}$, we can first cal
 $f(x,y)$ is called \cindex{joint probability density function} of $X$ and $Y$. The probability density function of $X$ can be obtained as
 \begin{equation}
     \begin{aligned}
-        \probability{X \in A} &= \int_A \left( \int_{-\infty}^\infty f(x,y) \dif{y} \right) \dif{x}  \\
+        \probability{X \in A} &= \int_A \mleft( \int_{-\infty}^\infty f(x,y) \dif{y} \mright) \dif{x}  \\
         &= \int_A f_X (x) \dif{x}
     \end{aligned}
 \end{equation}
@@ -289,9 +289,9 @@ So the process of calculating $f_{Y_i}$ are:
     \begin{equation}
         \begin{aligned}
             \probability{Y \leq y} &= \probability{F(X) \leq y} \\
-            &= \probability{ \inverse{F} \left(F(X)\right) \leq \inverse{F} (y) }\\
+            &= \probability{ \inverse{F} \mleft(F(X)\mright) \leq \inverse{F} (y) }\\
             &= \probability{X \leq \inverse{F} (y) } \\
-            &= F\left(\inverse{F} (y) \right) \\
+            &= F\mleft(\inverse{F} (y) \mright) \\
             &= y
         \end{aligned}
     \end{equation}
@@ -350,7 +350,7 @@ So the process of calculating $f_{Y_i}$ are:
             \covariance{X}{Y} &= \covariance{Y}{X} \\
             \covariance{cX}{Y} &= c \covariance{X}{Y} \\
             \covariance{X}{Y + Z} &= \covariance{X}{Y} + \covariance{X}{Z} \\
-            \mathhilight{Cov} \left(\sum_{i=1}^n X_i, \sum_{j=1}^m Y_j \right) &= \sum_{i=1}^n \sum_{j=1}^m \mathhilight{Cov}(X_i, Y_j) \\
+            \mathhilight{Cov} \mleft(\sum_{i=1}^n X_i, \sum_{j=1}^m Y_j \mright) &= \sum_{i=1}^n \sum_{j=1}^m \mathhilight{Cov}(X_i, Y_j) \\
         \end{aligned}
     \end{equation}    
 \end{theorem}
@@ -358,7 +358,7 @@ So the process of calculating $f_{Y_i}$ are:
 \begin{theorem}
     \begin{equation}
     \begin{aligned}
-        \mathhilight{Var} \left( \sum_{i=1}^n X_i \right) &= \mathhilight{Cov}\left( \sum_{i=1}^n X_i, \sum_{j=1}^n X_j \right) \\
+        \mathhilight{Var} \mleft( \sum_{i=1}^n X_i \mright) &= \mathhilight{Cov}\mleft( \sum_{i=1}^n X_i, \sum_{j=1}^n X_j \mright) \\
         &= \sum_{i=1}^n \variance{X_i} + 2 \sum_{i=1}^n \sum_{j < i} \covariance{X_i}{X_j} \\
         &= \sum_{i=1}^n \variance{X_i} \text{ (if } X_i \text{,} X_j \text{ are independent)}
     \end{aligned}
@@ -372,7 +372,7 @@ So the process of calculating $f_{Y_i}$ are:
         \begin{aligned}
             F_{X+Y}(a) &= \probability{X + Y \leq a} \\
             &= \iint_{x+y \leq a} f(x) g(y) \dif{x} \dif{y} \\
-            &= \int_{-\infty}^\infty \left( \int_{-\infty}^{a - y} f(x) \dif{x} \right) g(y) \dif{y} \\
+            &= \int_{-\infty}^\infty \mleft( \int_{-\infty}^{a - y} f(x) \dif{x} \mright) g(y) \dif{y} \\
             &= \int_{-\infty}^\infty F_X (a-y)g(y) \dif{y}
         \end{aligned}
     \end{equation}
@@ -474,9 +474,9 @@ If $X_i$ are independent and identically distributed normal random variable $\no
     
     Because 
     \begin{equation*}
-        \frac{(n-1)S^2}{\sigma^2} + \left(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}\right)^2 = \sum_{i=1}^n \frac{(X_i - \mu)^2}{\sigma^2}
+        \frac{(n-1)S^2}{\sigma^2} + \mleft(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}\mright)^2 = \sum_{i=1}^n \frac{(X_i - \mu)^2}{\sigma^2}
     \end{equation*}
-    generate the moment generating function of $\displaystyle \frac{(n-1)S^2}{\sigma^2}$ from above formula and we have $\expect{\exponential{t \frac{(n-1)S^2}{\sigma^2}}} = \left(1-2t \right)^{- \frac{n-1}{2}}$ which is an chi-squared distribution with freedom $n-1$.
+    generate the moment generating function of $\displaystyle \frac{(n-1)S^2}{\sigma^2}$ from above formula and we have $\expect{\exponential{t \frac{(n-1)S^2}{\sigma^2}}} = \mleft(1-2t \mright)^{- \frac{n-1}{2}}$ which is an chi-squared distribution with freedom $n-1$.
 \end{proof}
 
 

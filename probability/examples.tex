@@ -16,25 +16,25 @@
     \end{equation*}
     We have 
     \begin{equation*}
-        \expect{X_i} = 1 - \left(\frac{n - 1}{n} \right)^m
+        \expect{X_i} = 1 - \mleft(\frac{n - 1}{n} \mright)^m
     \end{equation*}
-    So $\expect{X} = \expect{X_1} + \dots + \expect{X_n} = \displaystyle n \left(1 - \left(\frac{n - 1}{n} \right)^m \right)$
+    So $\expect{X} = \expect{X_1} + \dots + \expect{X_n} = \displaystyle n \mleft(1 - \mleft(\frac{n - 1}{n} \mright)^m \mright)$
 \end{proof}
 
 \begin{example}
     Let $X_i$ be independent and identically distributed continuous random variable. Let $X_{(i)}$ denote the $i$th smallest of these random variables. Then $X_{(i)}$ is called \cindex{order statistics}. Note that $X_{(i)} \leq x$ if and only if at least $i$ of $X_j$ are not larger than $x$, so
     \begin{equation*}
-        \probability{X_{(i)} \leq x} = \sum_{k=i}^n \binom{n}{k} \left(F(x) \right)^k \left(1 - F(x) \right)^{n-k}
+        \probability{X_{(i)} \leq x} = \sum_{k=i}^n \binom{n}{k} \mleft(F(x) \mright)^k \mleft(1 - F(x) \mright)^{n-k}
     \end{equation*}
     
     So
     \begin{equation*}
         \begin{aligned}
             f_{X_{(i)}} (x) &= \dod{\probability{X_{(i)} \leq x}}{x} \\
-            &= \frac{n!}{(n-i)!(i-1)!} f(x) \left( F(x) \right)^{i-1} \left(1-F(x) \right)^{n-i}
+            &= \frac{n!}{(n-i)!(i-1)!} f(x) \mleft( F(x) \mright)^{i-1} \mleft(1-F(x) \mright)^{n-i}
         \end{aligned}
     \end{equation*}
-    The result could be read as there are $\left( F(x) \right)^{i-1}$ which are less than $x$, $\left(1-F(x) \right)^{n-i}$ which are larger than $x$, and $f(x)$ which equals $x$.
+    The result could be read as there are $\mleft( F(x) \mright)^{i-1}$ which are less than $x$, $\mleft(1-F(x) \mright)^{n-i}$ which are larger than $x$, and $f(x)$ which equals $x$.
 \end{example}
 
 \begin{example}
@@ -177,7 +177,7 @@ A particle moves along a circle of $m+1$ nodes. Each time it has equality of mov
             \sum_{j=1}^n (C_j + 1) & = S_n \\
             \expect{C_j} &= \expect{C_j + 1} -1 \\
             &= \dfrac{\expect{S_n}}{n}  -1\\
-            &= \left( 1 + \frac{n}{2} \right) - 1 \\
+            &= \mleft( 1 + \frac{n}{2} \mright) - 1 \\
             &= \frac{n}{2}
         \end{aligned}
     \end{equation*}
@@ -262,7 +262,7 @@ what is the number of necessary trial to get $k$ consecutive success? Each trial
     \begin{equation*}
         \begin{aligned}
             \variance{S} &= \expect{\variance{S|N}} + \variance{\expect{S|N}} \\
-            &= \expect{N} \variance{S} + \variance{N}\left(\expect{S}\right)^2
+            &= \expect{N} \variance{S} + \variance{N}\mleft(\expect{S}\mright)^2
         \end{aligned}
     \end{equation*}
 \end{proof}

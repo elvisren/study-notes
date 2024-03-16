@@ -127,7 +127,7 @@ If there is a row without any subscription after applying all $FD$, the decompos
 
 
 \begin{theorem}
-    A decomposition of $R$ into $\set{R_i}$ is \cindex{dependency preserving} if and only if $\left (\bigcup_i F_i \right)^{+} = F^{+}$
+    A decomposition of $R$ into $\set{R_i}$ is \cindex{dependency preserving} if and only if $\mleft (\bigcup_i F_i \mright)^{+} = F^{+}$
 \end{theorem}
 
 
@@ -151,7 +151,7 @@ If there is a row without any subscription after applying all $FD$, the decompos
 \begin{theorem}
     Some properties of multi-valued dependency \cite{Beeri1977}:
     \begin{itemize}
-        \item if $X \twoheadrightarrow Y$, then  $X \twoheadrightarrow \left(R - (X \cup Y) \right)$.
+        \item if $X \twoheadrightarrow Y$, then  $X \twoheadrightarrow \mleft(R - (X \cup Y) \mright)$.
         \item if $X \twoheadrightarrow Y$ and $Z \subseteq W$, then  $WX \twoheadrightarrow YZ$.
         \item if $X \twoheadrightarrow Y$ and  $Y \twoheadrightarrow Z$, then  $X \twoheadrightarrow (Z - Y)$.
         \item if $X \rightarrow Y$, then $X \twoheadrightarrow Y$.
@@ -161,7 +161,7 @@ If there is a row without any subscription after applying all $FD$, the decompos
 
 
 \begin{definition}[Join Dependency]
-    A relational schema is \cindex{join dependency} $JD(R_1, R_2, \dots, R_n)$ if for every legal relation $r(R)$, we have $\left(\pi_{R_1} (r), \pi_{R_2}(r), \dots, \pi_{R_n}(r) \right) = r$.
+    A relational schema is \cindex{join dependency} $JD(R_1, R_2, \dots, R_n)$ if for every legal relation $r(R)$, we have $\mleft(\pi_{R_1} (r), \pi_{R_2}(r), \dots, \pi_{R_n}(r) \mright) = r$.
 \end{definition}
 
 Multi-valued dependency is a special case of join dependency with $n=2$.

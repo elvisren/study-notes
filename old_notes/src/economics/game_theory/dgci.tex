@@ -26,7 +26,7 @@
         \item The next actions is function $A$ that $A(h) = \set{a: (h, a) \in H}$.
         \item For each player $i$ a preference relation $\succsim_i$ on $Z$.
     \end{enumerate}
-    The extensive game is denoted as $\Gamma = \left\langle N, H, P, \succsim_i \right\rangle$. It could be displayed as a tree called \cindex{game tree}.
+    The extensive game is denoted as $\Gamma = \mleft\langle N, H, P, \succsim_i \mright\rangle$. It could be displayed as a tree called \cindex{game tree}.
 \end{definition}
 
 \begin{definition}[\cindex{strategy}]
@@ -40,7 +40,7 @@
 The Nash equilibrium definition is the same for the extensive game.
 
 \begin{definition}
-    The strategic form $\left\langle N, S_i, \succsim_i^{'} \right\rangle$ of the extensive game with perfect information $\Gamma = \left\langle N, H, P, \succsim_i \right\rangle$ is that:
+    The strategic form $\mleft\langle N, S_i, \succsim_i^{'} \mright\rangle$ of the extensive game with perfect information $\Gamma = \mleft\langle N, H, P, \succsim_i \mright\rangle$ is that:
     \begin{enumerate}
         \item $S_i$ is the set of strategies of player $i$ in $\Gamma$.
         \item $\succsim_i^{'}$ is defined as $h_a \succsim_i^{'} h_b$ if and only if $O(h_a) \succsim_i O(h_b)$.
@@ -52,7 +52,7 @@ The Nash equilibrium definition is the same for the extensive game.
 \end{definition}
 
 \begin{definition}[\cindex{subgame}]
-    For the game $\Gamma = \left\langle N, H, P, \succsim_i \right\rangle$, the subgame that follows the history $h$ is the game $\Gamma(h) = \left\langle N, H|_h, P|_h, \succsim_i|_h \right\rangle$ that:
+    For the game $\Gamma = \mleft\langle N, H, P, \succsim_i \mright\rangle$, the subgame that follows the history $h$ is the game $\Gamma(h) = \mleft\langle N, H|_h, P|_h, \succsim_i|_h \mright\rangle$ that:
     \begin{enumerate}
         \item $H|_h = \set{h': (h, h') \in H}$.
         \item $P|_h(h') = P(h, h')$ for each $h' \in H|_h$.

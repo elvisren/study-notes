@@ -49,7 +49,7 @@
     
     We have
     \begin{equation}
-        \left(\sum_{j=1}^m x_j \right)^k = \sum_{\absolutevalue{\alpha = k}} \frac{k!}{\alpha !} x^\alpha
+        \mleft(\sum_{j=1}^m x_j \mright)^k = \sum_{\absolutevalue{\alpha = k}} \frac{k!}{\alpha !} x^\alpha
     \end{equation}
 \end{theorem}
 
@@ -120,7 +120,7 @@
 \end{equation*}
 
 \begin{equation*}
-    a \sin\alpha + b \cos\alpha = \sqrt{a^2 + b^2}\sin\left(\alpha + \arcsin\frac{b}{\sqrt{a^2 + b^2}}\right)
+    a \sin\alpha + b \cos\alpha = \sqrt{a^2 + b^2}\sin\mleft(\alpha + \arcsin\frac{b}{\sqrt{a^2 + b^2}}\mright)
 \end{equation*}
 
 
@@ -223,9 +223,9 @@ Define \cindex{$n!!$} as
 \begin{equation}
     I_{m,n} = \frac{n-1}{m+1} I_{m+2, n-2} = \int_{0}^{\frac{\pi}{2}} \sin^m x \cos^n x = \begin{aligned}
         \begin{cases}
-            \displaystyle \frac{(m-1)!! (n-1)!!}{(m+n)!!} & \text{ (} n \text{ is odd)}\\
+            \displaystyle \frac{(m-1)!! (n-1)!!}{(m+n)!!} & \text{(otherwise)}\\
             \\
-            \displaystyle \frac{(m-1)!! (n-1)!!}{(m+n)!!} \times \frac{\pi}{2} & \text{ (} n \text{ is even)}\\
+            \displaystyle \frac{(m-1)!! (n-1)!!}{(m+n)!!} \times \frac{\pi}{2} & \text{ (both } n \text{ and } m \text{ are even)}\\
         \end{cases}
     \end{aligned}
 \end{equation}

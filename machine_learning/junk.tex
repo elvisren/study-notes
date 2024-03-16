@@ -18,7 +18,7 @@ The steps to define a machine learning project:
 \begin{enumerate}
     \item hypothesis: $h_\theta ( \selectrow{x}{i} ) = \theta_0 + \theta_1 \selectrow{x}{i}$
     \item parameter: $\theta = \set{\theta_0, \theta_1}$
-    \item cost function: $\displaystyle J(\theta, x) = \frac{1}{2m} \sum_{i=1}^m \left( h_\theta  \left(\selectrow{x}{i}\right) - \selectrow{y}{i} \right)^2$
+    \item cost function: $\displaystyle J(\theta, x) = \frac{1}{2m} \sum_{i=1}^m \mleft( h_\theta  \mleft(\selectrow{x}{i}\mright) - \selectrow{y}{i} \mright)^2$
     \item goal: $\displaystyle \argmin{\theta}  J(\theta,x)$
 \end{enumerate}
 
@@ -48,12 +48,12 @@ Logistic regression is a classification, not regression. The result of logistic 
 
 The cost function of logistic regression is carefully engineered. It is derived from maximal likelihood calculation:
 \begin{equation}
-    J(\theta,x) = -y \log \left(h_\theta (x) \right) - (1-y) \log \left(1 - h_\theta (x)\right)
+    J(\theta,x) = -y \log \mleft(h_\theta (x) \mright) - (1-y) \log \mleft(1 - h_\theta (x)\mright)
 \end{equation}
 
 The gradient descent function is:
 \begin{equation}
-    \theta_{j+1} = \theta_j - \alpha  \cdot \sum_{i=1}^m \left( h_\theta (\selectrow{x}{i}) - \selectrow{y}{i} \right) \selectrowandcolumn{x}{i}{j}
+    \theta_{j+1} = \theta_j - \alpha  \cdot \sum_{i=1}^m \mleft( h_\theta (\selectrow{x}{i}) - \selectrow{y}{i} \mright) \selectrowandcolumn{x}{i}{j}
 \end{equation}
 
 The gradient function for linear regression and logistic regression are almost the same. the only difference is that:
@@ -89,10 +89,10 @@ Of which $\theta$ is a matrix with dimension ${(m+1) \times n}$.
 After the linear transformation of $x$, the neuron will then apply an activation function $g$ to $y$. So the result is an out put vector with dimension $n$ (exclude the bias unit):
 \begin{equation}
     \begin{pmatrix}
-        g\left(\selectrow{y}{1}\right) \\
-        g\left(\selectrow{y}{2}\right) \\
+        g\mleft(\selectrow{y}{1}\mright) \\
+        g\mleft(\selectrow{y}{2}\mright) \\
         \vdots \\
-        g\left(\selectrow{y}{n}\right)
+        g\mleft(\selectrow{y}{n}\mright)
     \end{pmatrix}_n
 \end{equation}
 
@@ -105,10 +105,10 @@ So the process of one forward propagation is:
         \vdots \\
         x_m
     \end{pmatrix}_{m+1} \xrightarrow{\theta_{(m+1) \times n}} y = \theta x \xrightarrow{g} \begin{pmatrix}
-        g\left(\selectrow{y}{1}\right) \\
-        g\left(\selectrow{y}{2}\right) \\
+        g\mleft(\selectrow{y}{1}\mright) \\
+        g\mleft(\selectrow{y}{2}\mright) \\
         \vdots \\
-        g\left(\selectrow{y}{n}\right)
+        g\mleft(\selectrow{y}{n}\mright)
     \end{pmatrix}_n
 \end{equation}
 
@@ -119,14 +119,14 @@ For multi-class classification, the $y$ need to use one-hot encoding.
 For one neural network, the cost function with regularization is:
 \begin{equation}
     \begin{aligned}
-        J(\theta) =& -\frac{1}{m} \left[\sum_{i=1}^m \sum_{k=1}^K \selectrowandcolumn{y}{i}{k} \log \left( h_\theta (\selectrow{x}{i}) \right)_k + (1-\selectrowandcolumn{y}{i}{k}) \log \left( 1- h_\theta (\selectrow{x}{i}) \right)_k \right] \\
-        &+ \frac{\lambda}{2m} \sum_{l=1}^{L-1} \sum_{i=1}^{S_l} \sum_{j=1}^{S_{l+1}} \left( \selectrowandcolumn{\theta}{l}{ij} \right)^2
+        J(\theta) =& -\frac{1}{m} \mleft[\sum_{i=1}^m \sum_{k=1}^K \selectrowandcolumn{y}{i}{k} \log \mleft( h_\theta (\selectrow{x}{i}) \mright)_k + (1-\selectrowandcolumn{y}{i}{k}) \log \mleft( 1- h_\theta (\selectrow{x}{i}) \mright)_k \mright] \\
+        &+ \frac{\lambda}{2m} \sum_{l=1}^{L-1} \sum_{i=1}^{S_l} \sum_{j=1}^{S_{l+1}} \mleft( \selectrowandcolumn{\theta}{l}{ij} \mright)^2
     \end{aligned}
 \end{equation}
 
 Of which:
 \begin{enumerate}
-    \item $\log \left( h_\theta (\selectrow{x}{i}) \right)_k$: the $k$th output
+    \item $\log \mleft( h_\theta (\selectrow{x}{i}) \mright)_k$: the $k$th output
     \item $L$: the number of total layer
     \item $S_l$: the dimension of layer $l$
     \item $K$: the dimension of last layer, the multi-class classification
@@ -234,7 +234,7 @@ It is feedforward so there is no backward to itself. It has 3 kinds of layers:
     \item Output layer
 \end{itemize}
 
-For input $x$, the output is $y \approx \phi (x) = \selectrow{f}{3}\left( \selectrow{f}{2} \left(\selectrow{f}{1} \right) \right) $. This $\phi$ is a nonlinear transformation. And there are in general 3 ways to choose $\phi$:
+For input $x$, the output is $y \approx \phi (x) = \selectrow{f}{3}\mleft( \selectrow{f}{2} \mleft(\selectrow{f}{1} \mright) \mright) $. This $\phi$ is a nonlinear transformation. And there are in general 3 ways to choose $\phi$:
 \begin{itemize}
     \item Define a very generic $\phi$, such as an infinite-dimensional one with RBF kernel. It cannot solve advanced problems
     \item Manually engineer $\phi$. It does not work
@@ -404,7 +404,7 @@ $\epsilon_t$ is usually $1\%$ of $\epsilon_0$. $\epsilon_0$ is hard to choose. o
 
 SGD may be slow, so momentum is designed to accelerate the process. it has a velocity $v$ that is set to an exponentially decaying average of the negative gradient. $\alpha$ is usually 0.5, 0.9, 0.99. it can be adapted, start small and later raised. if $\alpha$ is larger that $\epsilon$, previous gradient affect current directions more.
 \begin{equation}
-    v \leftarrow \alpha v - \epsilon \nabla_\theta \left(\frac{1}{m} \sum_i L\left(f(\selectrow{x}{i} ;\theta), \selectrow{y}{i}\right) \right) \\
+    v \leftarrow \alpha v - \epsilon \nabla_\theta \mleft(\frac{1}{m} \sum_i L\mleft(f(\selectrow{x}{i} ;\theta), \selectrow{y}{i}\mright) \mright) \\
     \theta \leftarrow \theta + v
 \end{equation}
 

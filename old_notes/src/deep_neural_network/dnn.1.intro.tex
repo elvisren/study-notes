@@ -207,7 +207,7 @@ $\alpha=0.9$ for most of the cases. The momentum term increases if gradients poi
 \begin{equation}
     \begin{aligned}
         \theta_{t+1} &= \theta_t - \frac{\alpha}{\sqrt{G_t + \epsilon}}  \nabla_{\theta_t} J(\theta_t) \\
-        G_t &= G_{t-1} + \left(\nabla_{\theta_t} J(\theta_t) \right)^2
+        G_t &= G_{t-1} + \mleft(\nabla_{\theta_t} J(\theta_t) \mright)^2
     \end{aligned}
 \end{equation}
 
@@ -221,7 +221,7 @@ $\epsilon$ is added to avoid division by zero. Usually $G_0 = 0$, $\alpha = 0.01
 \begin{equation}
     \begin{aligned}
         \theta_{t+1} &= \theta_t - \frac{\sqrt{D_{t-1} + \epsilon}}{\sqrt{G_t + \epsilon}}  \nabla_{\theta_t} J(\theta_t) \\
-        G_t &= \beta G_{t-1} + (1-\beta) \left(\nabla_{\theta_t} J(\theta_t) \right)^2 \\
+        G_t &= \beta G_{t-1} + (1-\beta) \mleft(\nabla_{\theta_t} J(\theta_t) \mright)^2 \\
         D_t &= \beta D_{t-1} + (1-\beta) (\theta_t - \theta_{t-1})^2
     \end{aligned}
 \end{equation}
@@ -234,7 +234,7 @@ Usually $G_0 = 0$, $D_0 = 0$, $\beta = 0.9$, $\epsilon = 10^{-6}$.
 \begin{equation}
     \begin{aligned}
         \theta_{t+1} &= \theta_t - \frac{\alpha}{\sqrt{G_t + \epsilon}}  \nabla_{\theta_t} J(\theta_t) \\
-        G_t &= \beta G_{t-1} + (1-\beta) \left(\nabla_{\theta_t} J(\theta_t) \right)^2 \\
+        G_t &= \beta G_{t-1} + (1-\beta) \mleft(\nabla_{\theta_t} J(\theta_t) \mright)^2 \\
     \end{aligned}
 \end{equation}
 
@@ -251,7 +251,7 @@ Usually $G_0 = 0$, $\alpha = 0.001$, $\beta = 0.9$, $\epsilon = 10^{-6}$.
     \begin{aligned}
         \theta_{t+1} &= \theta_t - \frac{\alpha}{\sqrt{\displaystyle \frac{G_t}{1-(\beta_2)^t}} + \epsilon} \frac{m_t}{1-(\beta_1)^t}  \\
         m_t &= \beta_1 m_{t-1} + (1-\beta_1) \nabla_{\theta_t} J(\theta_t) \\
-        G_t &= \beta_2 G_{t-1} + (1-\beta_2) \left(\nabla_{\theta_t} J(\theta_t) \right)^2
+        G_t &= \beta_2 G_{t-1} + (1-\beta_2) \mleft(\nabla_{\theta_t} J(\theta_t) \mright)^2
     \end{aligned}
 \end{equation}
 
@@ -266,7 +266,7 @@ Usually $G_0 = 0$, $\alpha = 0.001$, $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsil
 \begin{equation}
     \begin{aligned}
         G_t &= \beta_2^\infty G_{t-1} + (1-\beta_2^\infty ) \norm{\nabla_{\theta_t} J(\theta_t)}^\infty  \\
-        &= \max \left(\beta_2 G_{t-1}, \norm{\nabla_{\theta_t} J(\theta_t)} \right)
+        &= \max \mleft(\beta_2 G_{t-1}, \norm{\nabla_{\theta_t} J(\theta_t)} \mright)
     \end{aligned}
 \end{equation}
 
@@ -276,7 +276,7 @@ Because $G_t > 0$ in AdaMax, $\epsilon$ is no longer useful. So the equation cou
     \begin{aligned}
         \theta_{t+1} &= \theta_t - \frac{\alpha}{G_t}  m_t \\
         m_t &= \beta_1 m_{t-1} + (1-\beta_1) \nabla_{\theta_t} J(\theta_t) \\
-        G_t &= \max \left(\beta_2 G_{t-1}, \norm{\nabla_{\theta_t} J(\theta_t)} \right)
+        G_t &= \max \mleft(\beta_2 G_{t-1}, \norm{\nabla_{\theta_t} J(\theta_t)} \mright)
     \end{aligned}
 \end{equation}
 
@@ -287,15 +287,15 @@ Usually $G_0 = 0$, $\alpha = 0.001$, $\beta_1 = 0.9$, $\beta_2 = 0.999$.
 
 \cindex{Nadam}\cite{Dozat2016} combines Adam and NAG. Adam could be written as:
 \begin{equation}
-    \theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{\displaystyle \frac{G_t}{1-(\beta_2)^t}} + \epsilon} \left(\beta_1 \frac{m_{t-1}}{1-(\beta_1)^{t-1}} + \frac{1-\beta_1}{1-(\beta_1)^t} \nabla_{\theta_t} J(\theta_t) \right)
+    \theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{\displaystyle \frac{G_t}{1-(\beta_2)^t}} + \epsilon} \mleft(\beta_1 \frac{m_{t-1}}{1-(\beta_1)^{t-1}} + \frac{1-\beta_1}{1-(\beta_1)^t} \nabla_{\theta_t} J(\theta_t) \mright)
 \end{equation}
 
 Like NAG, Nadam changes Adam's $t-1$ version of $\displaystyle \frac{m_{t-1}}{1-(\beta_1)^{t-1}}$ to current $t$ version $\displaystyle \frac{m_t}{1-(\beta_1)^t}$:
 \begin{equation}
     \begin{aligned}
-            \theta_{t+1} &= \theta_t - \frac{\alpha}{\sqrt{\displaystyle \frac{G_t}{1-(\beta_2)^t}} + \epsilon} \left(\beta_1 \frac{m}{1-(\beta_1)^t} + \frac{1-\beta_1}{1-(\beta_1)^t} \nabla_{\theta_t} J(\theta_t) \right)  \\
+            \theta_{t+1} &= \theta_t - \frac{\alpha}{\sqrt{\displaystyle \frac{G_t}{1-(\beta_2)^t}} + \epsilon} \mleft(\beta_1 \frac{m}{1-(\beta_1)^t} + \frac{1-\beta_1}{1-(\beta_1)^t} \nabla_{\theta_t} J(\theta_t) \mright)  \\
         m_t &= \beta_1 m_{t-1} + (1-\beta_1) \nabla_{\theta_t} J(\theta_t) \\
-        G_t &= \beta_2 G_{t-1} + (1-\beta_2) \left(\nabla_{\theta_t} J(\theta_t) \right)^2    
+        G_t &= \beta_2 G_{t-1} + (1-\beta_2) \mleft(\nabla_{\theta_t} J(\theta_t) \mright)^2    
     \end{aligned}
 \end{equation}
 

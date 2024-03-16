@@ -231,8 +231,14 @@ Be noted that $\sequence{\underset{k \geq n}{\text{ sup }} x_k}$ is a decreasing
     \end{equation}
 
     
-    If limit superior S is a real number $s$, it means that for any $\epsilon>0$, there is a $N$ that $s + \epsilon$ is an upper bound for $x_{n > N}$. The reverse is true for limit inferior I.
-
+    If limit superior S is a real number $s$, then $\forall \epsilon > 0$:
+    \begin{itemize}
+        \item \emph{$\exists N$ that $s + \epsilon$ is an upper bound for $x_{n > N}$}
+        \item \emph{$(s, s+\epsilon)$ contains infinite numbers from $\sequence{a_n}$}
+    \end{itemize} 
+    
+    The reverse is true for limit inferior I.
+ 
     $[I,S]$ may not contain any number from $\sequence{x_n}$. \emph{But for any $\epsilon >0$, $[I - \epsilon, S + \epsilon]$ contains all but finite numbers from $\sequence{x_n}$, and this is the smallest closed interval with this property}.
 \end{theorem}
 
@@ -449,7 +455,7 @@ The test for absolute convergence is built on the test of geometric series.
 \begin{theorem}[\cindex{Raabe's test}]
     For a real series $\sum_{i=1}^\infty a_i$ with $a_i \neq 0$. Define a new sequence $\sequence{b_n}$ that
     \begin{equation}
-        b_n = n \left( \absolutevalue{\frac{a_n}{a_{n+1}}} - 1 \right)
+        b_n = n \mleft( \absolutevalue{\frac{a_n}{a_{n+1}}} - 1 \mright)
     \end{equation}
     
     Then:
@@ -494,25 +500,25 @@ Addition $+$ is not commutative when there are infinitely many summands.
         \item $\sequence{q_i}$ are all negative numbers
     \end{itemize}
     
-    According to \theoref{conditional_converge_requirement}, both $\sequence{p_i}$ and $\sequence{q_i}$ diverge. 
+    These two sequences are infinite because it is conditionally convergent. According to \theoref{conditional_converge_requirement}, both $\sequence{p_i}$ and $\sequence{q_i}$ diverge. 
     
     First find $j_1$ that
     \begin{equation*}
         \begin{aligned}
-            s &= p_1 + p_2 + \cdots + p_{j_1} \geq L \\
-            s - p_{j_1} &\leq L
+            s^1 &= p_1 + p_2 + \cdots + p_{j_1} \geq L \\
+            s^1 - p_{j_1} &\leq L
         \end{aligned}
     \end{equation*}
     
     It is always possible because $p_i$ diverges. Now find $i_i$ that
     \begin{equation*}
         \begin{aligned}
-            s_{k_1} &= s + q_1 + q_2 + \cdots + q_{i_1} \leq L \\
-            s - q_{i_1} &\geq L
+            s_1 &= s^1 + q_1 + q_2 + \cdots + q_{i_1} \leq L \\
+            s_1 - q_{i_1} &\geq L
         \end{aligned}
     \end{equation*}
     
-    Keep creating these $s_{k_n}$. We have $s_{k_n} \leq L$ and $\absolutevalue{L - s_{k_n}} < - q_{i_n} \rightarrow 0$ (according to \theoref{convergent_series_is_null_sequence}).
+    Keep creating these $\sequence{s^n}$ and $\sequence{s_n}$. We have $s_n \leq L$ and $\absolutevalue{L - s_n} < - q_{i_n} \rightarrow 0$ (according to \theoref{convergent_series_is_null_sequence}).
 \end{proof}
 
 
@@ -538,7 +544,7 @@ Addition $+$ is not commutative when there are infinitely many summands.
     
     So the power series $\sum a_k x^k$ will converge if
     \begin{equation}
-        x \in \left(- \frac{1}{\displaystyle \varlimsup_{k \rightarrow \infty} \sqrt[k]{\absolutevalue{a_k}} }, \frac{1}{\displaystyle \varlimsup_{k \rightarrow \infty} \sqrt[k]{\absolutevalue{a_k}} } \right)
+        x \in \mleft(- \frac{1}{\displaystyle \varlimsup_{k \rightarrow \infty} \sqrt[k]{\absolutevalue{a_k}} }, \frac{1}{\displaystyle \varlimsup_{k \rightarrow \infty} \sqrt[k]{\absolutevalue{a_k}} } \mright)
     \end{equation}
     
     It could also be calculated by 
@@ -549,7 +555,7 @@ Addition $+$ is not commutative when there are infinitely many summands.
     Note:
     \begin{itemize}
         \item $\rho$ could be $\infty$
-        \item There is no statement of convergence on boundary that $x = \pm \rho$. Counterexamples are $\sum x^k$, $\sum \frac{1}{k} x^k$, $\sum \frac{1}{k^2} x^k$. On boundary condition $x=1$, the first two diverge and the third one converges.
+        \item There is \emph{no statement of convergence on boundary $\pm \rho$}. Counterexamples are $\sum x^k$, $\sum \frac{1}{k} x^k$, $\sum \frac{1}{k^2} x^k$. On boundary condition $x=1$, the first two diverge and the third one converges.
     \end{itemize}
     
      

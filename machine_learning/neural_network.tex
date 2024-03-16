@@ -81,7 +81,7 @@ GELU & $a \Phi(a)$ &$(-\infty , \infty)$ \\
 \begin{example}[GELU]
     GELU (gaussian error linear unit) is defined as $a \Phi(a)$ where $\Phi$ is
     \begin{equation}
-        \Phi(a) = \mathcal{P}(\mathcal{N}(0,1) \leq a) = \frac{1}{2}\left(1+\text{erf}\left(\frac{a}{\sqrt{2}}\right)\right)
+        \Phi(a) = \mathcal{P}(\mathcal{N}(0,1) \leq a) = \frac{1}{2}\mleft(1+\text{erf}\mleft(\frac{a}{\sqrt{2}}\mright)\mright)
     \end{equation}
     
     $\text{GELU}(a) \approx a \sigma(1.702 a)$. 
@@ -148,12 +148,12 @@ So the prediction is $1$ if $\columnvector{X}^\top \columnvector{\theta} > 0$ an
 
 The \cindex{log loss} cost function is:
 \begin{equation}
-	J(\theta) = - \frac{1}{m} \sum_{i=1}^m \left\{ \subscription{Y}{i} \log \subscription{\hat{p}}{i} + \left(1- \subscription{Y}{i} \right) \log \left(1 - \subscription{\hat{p}}{i} \right) \right\}
+	J(\theta) = - \frac{1}{m} \sum_{i=1}^m \mleft\{ \subscription{Y}{i} \log \subscription{\hat{p}}{i} + \mleft(1- \subscription{Y}{i} \mright) \log \mleft(1 - \subscription{\hat{p}}{i} \mright) \mright\}
 \end{equation}
 
 The derivative is:
 \begin{equation}
-	\dpd{J(\theta)}{\theta_j} = \frac{1}{m} \sum_{i=1}^m \left( \sigma \left(\columnvector{\theta}^\top \subscription{X}{i} \right) - \subscription{Y}{i} \right) \subscription{X}{i}_j
+	\dpd{J(\theta)}{\theta_j} = \frac{1}{m} \sum_{i=1}^m \mleft( \sigma \mleft(\columnvector{\theta}^\top \subscription{X}{i} \mright) - \subscription{Y}{i} \mright) \subscription{X}{i}_j
 \end{equation}
 
 
@@ -176,7 +176,7 @@ In multiclass classification, the prediction is a conditional probability distri
     
     So the probability distribution could be simplified as
     \begin{equation}
-        p(y=c|x;\theta) = \mathcal{S}_c \left(f(x;\theta)\right)
+        p(y=c|x;\theta) = \mathcal{S}_c \mleft(f(x;\theta)\mright)
     \end{equation}
     
     The loss function in the probability case is 
@@ -285,7 +285,7 @@ It will move in two steps:
 \begin{equation}
     \begin{aligned}
         m_{t+1} &\leftarrow \beta \cdot m_t + (1-\beta) \sum_{i \in B_t} \dpd{L_i (\phi_i)}{\phi} \\
-        v_{t+1} &\leftarrow \gamma \cdot v_t + (1-\gamma) \sum_{i \in B_t} \left({\dpd{L_i (\phi_i)}{\phi}}\right)^2 \\
+        v_{t+1} &\leftarrow \gamma \cdot v_t + (1-\gamma) \sum_{i \in B_t} \mleft({\dpd{L_i (\phi_i)}{\phi}}\mright)^2 \\
         \tilde{m}_{t+1} &\leftarrow \frac{m_{t+1}}{1- \beta^{t+1}} \\
         \tilde{v}_{t+1} &\leftarrow \frac{v_{t+1}}{1- \gamma^{t+1}} \\
         \phi_{t+1} &\leftarrow \phi_t - \alpha \cdot \frac{\tilde{m}_{t+1}}{\sqrt{\tilde{v}_{t+1}} + \epsilon}
@@ -316,7 +316,7 @@ MLP could be used for regression. It will train two functions $f_\mu (x)$ for th
 
 So the result is a learned normal distribution
 \begin{equation}
-    p(y|x,\theta) = \mathcal{N}\left(y| \transpose{w_\mu} f(x;w_{\text{shared}}), \sigma_{+} \left( \transpose{w_\mu} f(x;w_{\text{shared}}) \right)  \right)
+    p(y|x,\theta) = \mathcal{N}\mleft(y| \transpose{w_\mu} f(x;w_{\text{shared}}), \sigma_{+} \mleft( \transpose{w_\mu} f(x;w_{\text{shared}}) \mright)  \mright)
 \end{equation}
 
 

@@ -9,7 +9,7 @@ The standard loss function is maximal likelihood and backprop algorithms is used
 
 Gradient explosion could be fixed by gradient clipping:
 \begin{equation}
-    g' = \min \left(1, \frac{c}{\norm{g}}\right)g
+    g' = \min \mleft(1, \frac{c}{\norm{g}}\mright)g
 \end{equation}
 
 The vanish gradient problem is hard to fix. There are 4 ideas:
@@ -38,20 +38,20 @@ $F_l$ compute the $\Delta(x)$. It has the same size as the model without residua
 \begin{definition}[Xavier Initialization]
     Also called Glorot initialization. Biases are initialized to $0$ and the weights at each layer is
     \begin{equation}
-        W_{ij} \sim \mathcal{N}\left(0, \frac{2}{n_{\text{in}} + n_{\text{out}}} \right)
+        W_{ij} \sim \mathcal{N}\mleft(0, \frac{2}{n_{\text{in}} + n_{\text{out}}} \mright)
     \end{equation}
     where $n_{\text{in}}$ is the number of incoming connections and $n_{\text{out}}$ is the number of outgoing connections.
 \end{definition}
 
 \begin{definition}[He Initialization]
     \begin{equation}
-        W_{ij} \sim \mathcal{N}\left(0, \frac{2}{n_{\text{in}}} \right)
+        W_{ij} \sim \mathcal{N}\mleft(0, \frac{2}{n_{\text{in}}} \mright)
     \end{equation}
 \end{definition}
 
 \begin{definition}[LeCun Initialization]
     \begin{equation}
-        W_{ij} \sim \mathcal{N}\left(0, \frac{1}{n_{\text{in}}} \right)
+        W_{ij} \sim \mathcal{N}\mleft(0, \frac{1}{n_{\text{in}}} \mright)
     \end{equation}
 \end{definition}
 

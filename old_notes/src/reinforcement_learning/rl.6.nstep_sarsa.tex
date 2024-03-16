@@ -268,7 +268,7 @@ Let random variable $\sigma_t \sim \text{Bern}(0,1)$ be the probability of sampl
 \begin{equation}
 	\begin{split}
 		G_{t:h} =& R_{t+1}+\gamma \sum_{a\neq A_{t+1}} \pi(a|S_{t+1}) Q_{h-1}(S_{t+1},a) + \gamma \pi(A_{t+1}|S_{t+1})G_{t+1:h} \\
-		=& R_{t+1} + \left (\gamma \sum_a \pi(a|S_{t+1})Q_{h-1}(S_{t+1},a) - \gamma \pi(A_{t+1}|S_{t+1})Q_{h-1}(S_{t+1},A_{t+1}) \right)\\
+		=& R_{t+1} + \mleft (\gamma \sum_a \pi(a|S_{t+1})Q_{h-1}(S_{t+1},a) - \gamma \pi(A_{t+1}|S_{t+1})Q_{h-1}(S_{t+1},A_{t+1}) \mright)\\
 		&+ \gamma \pi(A_{t+1}|S_{t+1})G_{t+1:h} \\
 		=& R_{t+1} + \gamma \sum_a \pi(a|S_{t+1})Q(S_{t+1},a) \\
 		&+ \gamma \pi(A_{t+1}|S_{t+1})\Big (G_{t+1:h} -Q_{h-1}(S_{t+1},A_{t+1})  \Big)

@@ -130,7 +130,7 @@
 \begin{theorem}
 Let $\varphi$ be a homomorphism and $N = \kernel{\varphi}$, then
 \begin{equation}
-    g \odot N = \varphi^{-1}\left(\varphi(g)\right)
+    g \odot N = \varphi^{-1}\mleft(\varphi(g)\mright)
 \end{equation}
 \end{theorem}
 
@@ -240,15 +240,26 @@ Real number $\realnumber$ is the order completion of rational number $\rational$
 
 
 \begin{theorem}\label{dedekind_real_order_complete}
-    The ordered field of Dedekind cut $\realnumber$ with $<$, $\oplus$ and $\otimes$  is order complete.    
+    The ordered field of Dedekind cut $\realnumber$ with $<$, $\oplus$ and $\otimes$  is \emph{order complete}.
 \end{theorem}
 \begin{proof}
-    For $D \subset \realnumber$ which is bounded above, define a subset $M \subset C$ which is the union of all $d \in D$:
+    For $D \subset \realnumber$ which is bounded above, define a subset $M$ which is the union of all $d \in D$:
     \begin{equation}
         M = \set{x: x \in d \text{ for some } d \in D} =\bigcup_{d \in D} d
     \end{equation}
     
-    So $M$ is also a Dedekind cut. Now prove $M$ is the least upper bound of $D$. Choose any upper bound $Y$ of $D$. for any $x \in X$, $\exists d \in D,  x \in d$. Since $Y$ is an upper bound of $D$, we have $d < Y$. So $X \subset Y$.
+    First $M$ is a Dedekind cut:
+    \begin{itemize}
+        \item $M$ is not empty.
+        \item $M$ is closed downwards. If $q \in M$  and $p < q$, then $q$ is in some cut $A$. Since $A$ is a Dedekind cut, $p \in A$.
+        \item $M$ has no greatest element. Suppose it has greatest element $q$. Since $q \in M$, $q$ is in some some cut $A$. Since $A$ has no greatest number, there is $r \in A$ that $q < r$.
+    \end{itemize}
+    
+    Now prove $M$ is the least upper bound of $D$:
+    \begin{itemize}
+        \item $M$ is an upper bound for $D$. If $A \in D$, then $A \subset M$.
+        \item $M$ is the least upper bound. If $B$ is any upper bound for $D$, then every element in $M$ is in $B$. So $M$ is a subset of $B$.
+    \end{itemize}
 \end{proof}
 
 \begin{definition}[\cindex{irrational number}]
@@ -292,12 +303,12 @@ Let $x \in \realnumber$. It could be expressed as the supremum of the set $x = \
 \begin{example}[decimal expression of rational number]
     For an rational number $r = \frac{p}{q}$, there is $a_0$ that $p = a_0 q + b_1$ where $b_1 < q-1$. This expression is equivalent to 
     \begin{equation}
-        \frac{p}{q} = a_0 + \frac{1}{10} \left(\frac{10 b_1}{q} \right)
+        \frac{p}{q} = a_0 + \frac{1}{10} \mleft(\frac{10 b_1}{q} \mright)
     \end{equation}
     
     because $0 < \frac{10 b_1}{q} < 10$, so there is $b_2$ that $\frac{10 b_1}{q} = a_1 + \frac{b_2}{q}$, which means
     \begin{equation}
-        \frac{p}{q} = a_0 + \frac{1}{10} \left( a_1 + \frac{b_2}{q} \right) = a_0 + \frac{a_1}{10} + \frac{1}{10^2} \left(\frac{10 b_2}{q} \right)
+        \frac{p}{q} = a_0 + \frac{1}{10} \mleft( a_1 + \frac{b_2}{q} \mright) = a_0 + \frac{a_1}{10} + \frac{1}{10^2} \mleft(\frac{10 b_2}{q} \mright)
     \end{equation}
     
     The problem with decimal expression is that a number could have more than one representation. For example, $1.4 = 1.3 \dot 9$. The conversion is to define $0.\dot 9 = 1.\dot 0$.
@@ -371,7 +382,7 @@ The complex number $\complexnumber$ is the smallest extension field of $\realnum
 \begin{theorem}
     For $a, b \in \complexnumber$, how to calculate $a^b$? Let $a = e^{\alpha + \beta i}$, $b = x + yi$. So
     \begin{equation}
-        a^b = e^{(\alpha + \beta i) (x + yi)} = e^{\alpha x - \beta y + (\alpha y + \beta x)i} = e^{\alpha x - \beta y} \left[\cos (\alpha y + \beta x) + i \sin (\alpha y + \beta x)\right ]
+        a^b = e^{(\alpha + \beta i) (x + yi)} = e^{\alpha x - \beta y + (\alpha y + \beta x)i} = e^{\alpha x - \beta y} \mleft[\cos (\alpha y + \beta x) + i \sin (\alpha y + \beta x)\mright ]
     \end{equation}
 \end{theorem}
 

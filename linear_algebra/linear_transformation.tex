@@ -15,33 +15,64 @@ The logic of this section:
 \end{enumerate}
 
 \section{Definition}
-A function $T:V \rightarrow W$ is a \cindex{linear transformation} if $T(cx + y) = cT(x) + T(y)$. There are few basic terms for linear transformation:
+
+\begin{definition}[\cindex{linear transformation}]
+    A function $T:V \rightarrow W$ is a linear transformation if 
+    \begin{equation}
+        T(cx + y) = cT(x) + T(y)
+    \end{equation}
+\end{definition}
+
+There are few basic terms for linear transformation:
 \begin{itemize}
     \item $I_V$: identity transformation that $I_V (x) = x$
     \item $I_0$: zero transformation that $I_0 (x) = 0$
 \end{itemize}
 
-$\nullspace{T}$ and $\rangespace{T}$ are all spaces. $\dimension{\rangespace{T}}$ is the \cindex{rank} of $T$. We have:
-\begin{equation}
-    \text{nullity}(T) + \rank{T} = \dimension{V}
-\end{equation}
+
+
+\begin{definition}[\cindex{linear operator}]
+    If $V = W$, $T$ is called linear operator. Linear operator is the focus of inner product.
+\end{definition}
+
+
+\begin{definition}[\cindex{rank}]\label{rank-of-linear-transformation}
+    $\nullspace{T}$ and $\rangespace{T}$ are all spaces. $\dimension{\rangespace{T}}$ is the rank\footnote{Here the rank of $T$ is the dimension of range space. In \theoref{rank-of-matrix} we define the rank of a matrix $A$ which is the linearly independent rows or columns of $A$. So when we define $A = \coordinate{T}_\beta$, both ranks are the same.} of $T$.
+\end{definition}
+
+
+
+\begin{theorem}
+    \begin{equation}
+        \text{nullity }(T) + \rank{T} = \dimension{V}
+    \end{equation}
+\end{theorem}
+
 
 If (and only if) $\nullspace{T} = \set{0}$, $T$ is a one-to-one mapping.
 
 
-\begin{theorem}
-    As the behavior of a vector space is completely defined by its basis, the behavior of linear transformation is also determined by its action on basis. If $\set{v_i}$ is a basis of $V$ with $n$ vectors, and we randomly pick $n$ vectors $\set{w_i}$ from $W$, there is a unique linear transformation $T$ that $T(v_i) = w_i$. Note that $v_i$ has to be linearly independent, but there is no such requirement for $w_i$.
+\begin{theorem}[\cindex{$\mathcal {L}(V,W)$}]
+    All linear transformation is denoted by $\mathcal {L}(V,W)$. It is a linear space.
+\end{theorem}
+
+
+As the behavior of a vector space is completely defined by its basis, and the behavior of linear transformation is also determined by its action on basis, as the following theorem shows:
+\begin{theorem}    
+    Let $\set{v_i}$ be $n$ basis of $V$ and $\set{w_j}$ be any $n$ vectors from $W$ ($\set{w_j}$ do not need to be independent). There is a unique $T \in \mathcal{L}(V,W)$ that
+    \begin{equation}
+        T v_k = w_k
+    \end{equation}
 \end{theorem}
 
 
 
-If $V = W$, $T$ is called linear operator. Linear operator is the focus of inner product.
 
-All linear transformation $\mathcal {L}(V,W)$ from $V$ to $W$ is a linear space.
+
 
 \section{Coordinates}
 
-We define the coordinate of a vector and a linear transformation. Let $\beta = \set{u_i}$ be an \cindex{ordered basis}. If $x = \sum_{i=1}^n a_i u_i$, we define the coordinate of $x$ relative to $\beta$ as :
+We define the coordinate of a vector and a linear transformation. Let $\beta = \set{u_i}$ be an \cindex{ordered basis}. If $\displaystyle x = \sum_{i=1}^n a_i u_i$, we define the coordinate of $x$ relative to $\beta$ as :
 \begin{equation}
     x = \sum_{i=1}^n a_i u_i \Longrightarrow \coordinate{x}_\beta = \begin{pmatrix}
         a_1 \\
@@ -61,27 +92,35 @@ For linear transformation $T$ from $\beta = \set{v_i} $ to $\gamma = \set{w_j}$,
     \end{pmatrix}
 \end{equation}
 
-
+Many important result in later chapters will be the choice of basis $\beta$ that makes $\coordinate{T}_\beta$ as simple as possible.
 
 % matrix multiplication
 \section{Matrix Multiplication}
 
-Linear transformation is linear in $+$ and $\times$ operations. So we could define the product of two linear transformations $UT$. It turns out to be the standard matrix multiplication. And we have
+\begin{theorem}
+    Linear transformation is linear in $+$ and $\times$ operations. So we could define the product of two linear transformations $UT$. It turns out to be the standard matrix multiplication. And we have
 
-\begin{equation}\label{matrix_coordinate}
-    \coordinate{UT}_{\alpha}^{\gamma} = \coordinate{U}_{\beta}^{\gamma} \coordinate{T}_{\alpha}^{\beta}
-\end{equation}
+    \begin{equation}\label{matrix_coordinate}
+        \coordinate{UT}_{\alpha}^{\gamma} = \coordinate{U}_{\beta}^{\gamma} \times \coordinate{T}_{\alpha}^{\beta}
+    \end{equation}
+\end{theorem}
 
-Let $u_j$ and $v_j$ be the $j$th column of $AB$ and $B$, we have
+\begin{theorem}
+    Let $\selectmatrixcolumn{A}{j}$ be the $j$-th column of $A$, we have
 \begin{enumerate}
-    \item $u_j = A v_j$
-    \item $v_j = B e_j$
+    \item $\selectmatrixcolumn{(AB)}{j} = A \times \selectmatrixcolumn{B}{j}$
+    \item $\selectmatrixcolumn{A}{j} = A \times \selectmatrixcolumn{I}{j} = A \times e_j$
 \end{enumerate}
+\end{theorem}
+
+
+
+
 
 \begin{theorem}
     For $T: V \rightarrow W$,
     \begin{equation}
-        \coordinate{T(u)}_\gamma = \coordinate{T}_{\beta}^{\gamma} \coordinate{u}_{\beta}
+        \coordinate{T(u)}_\gamma = \coordinate{T}_{\beta}^{\gamma} \times \coordinate{u}_{\beta}
     \end{equation}    
 \end{theorem}
 \begin{proof}
@@ -90,54 +129,38 @@ Let $u_j$ and $v_j$ be the $j$th column of $AB$ and $B$, we have
 
 From any matrix $A$, we could define a left multiplication transformation $L_A$.
 
-One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have
+
+\begin{example}
+    One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have
 \begin{equation}
     \trace{AB} = \trace{BA}
 \end{equation}
+\end{example}
 
 
-
-%
-%
-% Quotient space
-%
-%
-\section{Quotient Space}
-
-\begin{definition}[affine subset]
-    An \cindex{affine subset} of $V$ is a subset of the form $v + U$ for some $v\in V$ and $U \subseteq V$.
-    
-    The affine subset $v+U$ is said to be parallel to $U$.
-\end{definition}
-
-\begin{definition}[Quotient space]
-    Suppose $U$ is a subspace of $V$. Define \cindex{quotient space} $V/U$ to be the set of all affine sets of $V$ parallel to U:
+\begin{theorem}\label{column-row-factorization}
+    Suppose the column rank of $A_{m \times n}$ is $c \leq 0$. Then there exists $L_{m \times c}$ and $R_{c \times n}$ that
     \begin{equation}
-        V/U = \set{v + U: v \in V}
+        A_{m \times n} = L_{m \times c} \times R_{c \times n}
     \end{equation}
-\end{definition}
-
-\begin{definition}[quotient map]
-    The \cindex{quotient map} $\pi : V \rightarrow V/U$ is defined by 
-    \begin{equation}
-        \pi(v) = v + U
-    \end{equation}
-\end{definition}
-
-\begin{theorem}
-    \begin{equation}
-        \dimension{V/U} = \dimension{V} - \dimension{U}
-    \end{equation}    
 \end{theorem}
+\begin{proof}
+    Since the column rank of $A$ is $c$, all $A$'s columns $\selectmatrixcolumn{A}{i}$ could be reduced into a basis of $c$ vectors. Put them together to form $L$. Then for each of $\selectmatrixcolumn{A}{i}$, $\selectmatrixcolumn{D}{j} = \coordinate{\selectmatrixcolumn{A}{j}}_L$.
+\end{proof}
 
-\begin{theorem}
-    Define $\tilde{T}$ as 
-    \begin{equation}
-        \tilde{T}(v + \nullspace{T}) = T(v)
-    \end{equation}
-    
-    Then $\tilde{T}$ is an injective linear map.
+\begin{theorem}[\cindex{rank}]\label{rank-of-matrix}
+    Suppose $A \in F^{m,n}$. Then the column rank of $A$ is the same as the row rank of $A$. We will define it as the rank\footnote{In \defiref{rank-of-linear-transformation} we defined the rank of linear transformation. These two ranks are the same if $A=\coordinate{T}_\beta$.} of $A$.
 \end{theorem}
+\begin{proof}
+    Use \theoref{column-row-factorization} to decompose $A$ into $A = LR$. Since $\selectmatrixrow{A}{i}$ is a linear combination of rows of $R$, the row rank of $A$ is less than $c$, which is the column rank of $A$. So
+    \begin{equation*}
+        \text{row rank of } A \leq \text{column rank of } A
+    \end{equation*}
+    
+    Because $\text{column rank of } A = \text{row rank of } \transpose{A} \leq \text{column rank of } \transpose{A} = \text{row rank of } A$, we have $\text{row rank of } A = \text{column rank of } A$.
+\end{proof}
+
+
 
 %
 %
@@ -147,19 +170,24 @@ One property of trace is that for $A_{m \times n}$ and $B_{n \times m}$, we have
 
 
 \section{Inverse}
-The \cindex{inverse} $\inverse{T}$ of a linear transformation $T:V \rightarrow W$ requires that both $T \inverse{T} = I_W$ and $\inverse{T} T = I_V$. It requires that $\dimension{V} = \dimension{W}$. We have
+\begin{definition}[\cindex{inverse}]
+    The inverse $\inverse{T}$ of a linear transformation $T:V \rightarrow W$ requires that both $T \inverse{T} = I_W$ and $\inverse{T} T = I_V$. It requires that $\dimension{V} = \dimension{W}$. We have
 \begin{equation}
-    \coordinate{\inverse{T}}_{\gamma}^{\beta} = \inverse{\left( \coordinate{T}_{\beta}^{\gamma} \right)}
+    \coordinate{\inverse{T}}_{\gamma}^{\beta} = \inverse{\mleft( \coordinate{T}_{\beta}^{\gamma} \mright)}
 \end{equation}
 
+Non-invertible is also called \cindex{singular}.
+\end{definition}
 
-\begin{definition}
-	$V$ is \cindex{isomorphic} to $W$ if there exists a linear transformation $T:V\rightarrow W$ that is invertible. $T$ is called an \cindex{isomorphism}  from $V$ to $W$.
+
+
+\begin{definition}[\cindex{isomorphic}]
+	$V$ is isomorphic to $W$ if there exists a linear transformation $T:V\rightarrow W$ that is invertible. $T$ is called an \cindex{isomorphism}  from $V$ to $W$.
 \end{definition}
 
 
 \begin{theorem}
-	The function $\Phi: \mathcal{L}(V,M) \rightarrow M_{m \times n}(F)$ defined by $\Phi (T) = \coordinate{T}_\beta^\gamma$, is an isomorphism. The dimension has relation that 
+	The function $\Phi: \mathcal{L}(V,M) \rightarrow M_{m \times n}(F)$ defined by $\Phi (T) = \coordinate{T}_\beta^\gamma$, is an isomorphism. The dimensions have a relation that 
 	\begin{equation}
 		\dimension{\mathcal{L}(V,M)} = \dimension{V} \times \dimension{W}
 	\end{equation}
@@ -175,19 +203,23 @@ The \cindex{inverse} $\inverse{T}$ of a linear transformation $T:V \rightarrow W
 
 If we change the basis of a vector space, we may change the coordinate of vector and linear operatos.
 
-We now examine the coordinate relations given two basis. First we see how it impacts vector representation. Let $\beta$ and $\beta^{\prime}$ be two basis of $V$, and $Q=\coordinate{I_V}_{\beta^\prime}^\beta$ , we have 
+We now examine the coordinate relations given two basis. First we see how it impacts vector representation. 
+\begin{theorem}[\cindex{change of coordinate}]
+    Let $\beta$ and $\beta^{\prime}$ be two basis of $V$, and $Q=\coordinate{I_V}_{\beta^\prime}^\beta$ , we have 
 \begin{equation}
     \coordinate{v}_\beta = Q \coordinate{v}_{\beta^\prime}
-\end{equation}
+\end{equation}    
 
-Where $Q$ is the \cindex{change of coordinate} matrix that change from $\beta^\prime$ coordinates into $\beta$ coordinates. $Q$ is invertible and $\inverse{Q}$ will change from $\beta$ coordinates into $\beta^\prime$ coordinates. 
+Here $Q$ is the change of coordinate matrix that change from $\beta^\prime$ coordinates into $\beta$ coordinates. $Q$ is invertible and $\inverse{Q}$ will change from $\beta$ coordinates into $\beta^\prime$ coordinates. 
 
 Then we see how it will impact the matrix representation of linear operators:
 \begin{equation}\label{change_of_coordinate_formula}
     \coordinate{T}_{\beta^\prime} = \inverse{Q} \coordinate{T}_{\beta} Q = \coordinate{I_V}_\beta^{\beta^\prime} \coordinate{T}_\beta \coordinate{I_V}_{\beta^\prime}^\beta
 \end{equation}
+\end{theorem}
 
 
+We also have change of coordinate matrix that represent a general linear transformation, rather than linear operator:
 
 \begin{theorem} \label{specialchangeofcoordinates}
 	Let $T:V\rightarrow W$, $\beta$ and $\beta^\prime$ are ordered basis of $V$, $\gamma$ and $\gamma^\prime$ are ordered basis of $W$. Then
@@ -198,14 +230,21 @@ Then we see how it will impact the matrix representation of linear operators:
 
 
 \begin{example}
-    A simpler version happens with $L_A$ and standard basis over $F^n$. For any non-standard basis $\gamma$, the $j$th column of $Q$ is the $j$th vector of $\gamma$, and we denote it as $[\gamma]$. It is now easy to calculate the linear transformation of $L_A$ under the new basis $\gamma$ which is $[L_A]_\gamma = \inverse{[\gamma]} A [\gamma]$.
+    For a linear operator $L_A$ on $F^n$, let's see what is the result if we change from stand basis of $F^n$ to non-stand basis $\gamma = \set{v_i}$. The $Q$ now becomes
+    \begin{equation*}
+        \selectmatrixcolumn{Q}{j} = v_j = [\gamma]
+    \end{equation*}
+    So $Q = [v_1, v_2, \cdots, v_n]$. Therefore
+    \begin{equation}
+        [L_A]_\gamma = \inverse{[\gamma]} A [\gamma]
+    \end{equation}
 \end{example}
 
 
 
 
-\begin{definition}[similar]
-    Matrix $A$ and $B$ are \cindex{similar} if there is a $Q$ that $A = \inverse{Q} B Q$.    
+\begin{definition}[\cindex{similar}]
+    Matrix $A$ and $B$ are similar if there is a $Q$ that $A = \inverse{Q} B Q$.    
 \end{definition}
 
 
@@ -217,10 +256,6 @@ Then we see how it will impact the matrix representation of linear operators:
 
 \section{Linear Transformation Example}
 
-
-\begin{definition}
-	\cindex{$\mathcal{L}(V,W)$} contains all linear transformation from $V$ to $W$.
-\end{definition}
 
 \begin{example}
     The formula of the reflection about the line $y=tx$. It is a linear transformation $T$ with coordinates under standard basis $\beta$:
@@ -255,6 +290,52 @@ Then we see how it will impact the matrix representation of linear operators:
     \end{equation*}
 \end{example}
 
+
+%
+%
+% Quotient space
+%
+%
+\section{Quotient Space}
+
+\begin{definition}[\cindex{affine subset}]
+    An affine subset of $V$ is a subset of the form $v + U$ for some $v\in V$ and $U \subseteq V$.
+    
+    The affine subset $v+U$ is said to be parallel to $U$.
+\end{definition}
+
+\begin{definition}[\cindex{quotient space}]
+    Suppose $U$ is a subspace of $V$. Define quotient space $V/U$ to be the set of all affine sets of $V$ parallel to U:
+    \begin{equation}
+        V/U = \set{v + U: v \in V}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[\cindex{quotient map}]
+    The quotient map $\pi : V \rightarrow V/U$ is defined by 
+    \begin{equation}
+        \pi(v) = v + U
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    \begin{equation}
+        \dimension{V/U} = \dimension{V} - \dimension{U}
+    \end{equation}    
+\end{theorem}
+
+\begin{theorem}
+    Define $\tilde{T}$ as 
+    \begin{equation}
+        \tilde{T}\mleft(v + \nullspace{T}\mright) = T(v)
+    \end{equation}
+    
+    Then $\tilde{T}$ is an injective linear map.
+\end{theorem}
+
+
+
+
 %
 %
 % dual space
@@ -263,9 +344,18 @@ Then we see how it will impact the matrix representation of linear operators:
 
 \section{Dual Space}
 
-\begin{definition}
-	A \cindex{linear functional} is a linear transformation that map from $V$ into $F$.
+\begin{definition}[\cindex{linear functional}]
+	A linear functional is a linear transformation that map from $V$ into $F$. So it is an element of $\mathcal{L}(V, F)$.
 \end{definition}
+
+
+\begin{definition}[\cindex{dual space}]
+	The dual space\label{dualspacedefinition} of $V$ is the vector space $V^* = \mathcal{L}(V,F)$. The \cindex{double dual space} $V^{**}$ is the dual space of $V^*$.
+\end{definition}
+
+
+The dimension of dual space is $\dimension{V^*} = \dimension{\mathcal{L}(V,F)} = \dimension{V} \times \dimension{F} = \dimension{V}$.
+
 
 \begin{definition}
 	An $i$-th coordinate function $f_i$ with respect to basis $\beta$ is defined as $f_i(x) = a_i$ where
@@ -286,40 +376,30 @@ Then we see how it will impact the matrix representation of linear operators:
 
 
 
-\begin{definition}
-	The \cindex{dual space}\label{dualspacedefinition} of $V$ is the vector space $V^* = \mathcal{L}(V,F)$. The \cindex{double dual space} $V^{**}$ is the dual space of $V^*$.
-\end{definition}
 
-
-The dimension of dual space is $\dimension{V^*} = \dimension{\mathcal{L}(V,F)} = \dimension{V} \times \dimension{F} = \dimension{V}$.
-
-\begin{definition}
-	Let $\beta = \set{x_i}$ be an ordered basis for finite dimensional vector space $V$. Define $f_i (x) = a_i$ where
-	\begin{equation*}
-	    \coordinate{x}_\beta = \begin{bmatrix}
-	        a_1 \\
-	        a_2 \\
-	        \vdots \\
-	        a_n
-	    \end{bmatrix}
-	\end{equation*}
-	
-	$f_i$ is the $i$-th coordinate function with respect to basis $\beta$. let $\beta^*=\set{f_i}$. Then $\beta^*$ is an ordered basis for $V^*$, and $\forall f \in V^*$, we have
+\begin{definition}[\cindex{dual basis}]
+	Let $\beta = \set{x_i}$ be an ordered basis for finite dimensional vector space $V$. Let $f_i$ be the $i$-th coordinate function with respect to basis $\beta$. let $\beta^*=\set{f_i}$. Then $\beta^*$ is an ordered basis for $V^*$, and $\forall f \in V^*$, we have
 	\begin{equation}
 		f = \sum_{i=1}^n f(x_i) f_i
 	\end{equation}
-	$\beta^*$ is called the \cindex{dual basis} of $\beta$.
+	$\beta^*$ is called the dual basis of $\beta$.
 \end{definition}
 \begin{proof}
 	Let $g =\displaystyle \sum_{i=1}^n f(x_i) f_i$, we have
 	\begin{equation*}
-	g(x_j) = \left( \sum_{i=1}^n f(x_i) f_i \right) (x_j) = \sum_{i=1}^n f(x_i) f_i (x_j) = \sum_{i=1}^n f(x_i) \delta_{ij} =f(x_j)
+	g(x_j) = \mleft( \sum_{i=1}^n f(x_i) f_i \mright) (x_j) = \sum_{i=1}^n f(x_i) f_i (x_j) = \sum_{i=1}^n f(x_i) \delta_{ij} =f(x_j)
 	\end{equation*}
 \end{proof}
 
 
-\begin{theorem}
-	Let $V$ and $W$ be vector space over $F$ with ordered basis $\beta$ and $\gamma$. For any linear transformation $T:V \rightarrow W$, the mapping $T^t: W^* \rightarrow V^*$ defined as $T^\top (g) = gT, \forall g \in W^*$ is a linear transformation with property that $\left[T^\top \right]_{\gamma^*}^{\beta^*} = \left(\left[T \right]_\beta^\gamma \right)^\top$.
+\begin{theorem}[\cindex{dual map}]
+	Let $V$ and $W$ be vector space over $F$ with ordered basis $\beta$ and $\gamma$. For any linear transformation $T:V \rightarrow W$, the mapping $T^t: W^* \rightarrow V^*$ defined as 
+	
+	\begin{equation}
+	    T^\top (g) = g \circ T
+	\end{equation}
+	
+	$T^t$ is called dual map and it	is a linear transformation.	
 \end{theorem}
 \begin{proof}
 	Let $\beta = \{x_i\}$ and $\gamma=\{y_i\}$ with dual basis $\beta^*=\{f_i\}$ and $\gamma^*=\{g_i\}$, $A=\coordinate{T}_\beta^\gamma$. we have
@@ -329,18 +409,18 @@ The dimension of dual space is $\dimension{V^*} = \dimension{\mathcal{L}(V,F)} =
 	
 	So the row $i$, column $j$ entry of $[T^\top]_{\gamma^*}^{\beta^*}$ is
 	\begin{equation*}
-	(g_j T)(x_i) = g_j (T(x_i))= g_j \left( \sum_{k=1}^m A_{kj} y_k \right) = \sum_{k=1}^m A_{kj} g_j(y_k)= \sum_{k=1}^m A_{kj} \delta_{kj} = A_{ji}
+	(g_j T)(x_i) = g_j (T(x_i))= g_j \mleft( \sum_{k=1}^m A_{kj} y_k \mright) = \sum_{k=1}^m A_{kj} g_j(y_k)= \sum_{k=1}^m A_{kj} \delta_{kj} = A_{ji}
 	\end{equation*}
 	
-	Hence $\left[T^\top \right]_{\gamma^*}^{\beta^*} = A^\top $.
+	Hence $\mleft[T^\top \mright]_{\gamma^*}^{\beta^*} = A^\top $.
 \end{proof}
 
 \begin{definition}
     For $U \subset V$, the \cindex{annihilator} of $U$, denoted as $U^0_V$, is defined as
     \begin{equation*}
-        U^0_V = \{ \phi \in V^*: \phi(u) = 0, \forall u \in U \}
+        U^0_V = \set{\phi \in V^*: \phi(u) = 0, \forall u \in U}
     \end{equation*}
-    So the annihilator map $U$ to $0$. For vectors in $V - U$, the mapping could be any result. The annihilator is a subspace.
+    So the annihilator map $U$ to $0$. For vectors in $V - U$, the mapping could be any result. \emph{The annihilator is a subspace}.
 \end{definition}
 
 \begin{theorem}
@@ -393,29 +473,13 @@ The dimension of dual space is $\dimension{V^*} = \dimension{\mathcal{L}(V,F)} =
     \end{equation*}
 \end{proof}
 
-
-\begin{definition}
-    For vector $x \in V$, define $\hat{x}: V^* \rightarrow F $ by $\hat{x}(f) = f(x)$. $\hat{x}$ is a linear functional on $V^*$, so $\hat{x} \in V^{**}$.
-\end{definition}
-
-
 \begin{theorem}
-    Define $\psi : V \rightarrow V^{**}$ by $\psi (x) = \hat{X}$.  Then $\psi$ is an isomorphism.
+    Let $V$ and $W$ be two finite-dimentional vector space, and $T \in \mathcal{L}(V,W)$. Then
+    \begin{equation}
+	    \mleft[T^\top \mright]_{\gamma^*}^{\beta^*} = \mleft(\mleft[T \mright]_\beta^\gamma \mright)^\top
+	\end{equation}
 \end{theorem}
 
-\begin{theorem}
-    Let $V$ be a finite dimension vector space with dual space $V^*$. Every ordered basis for $V^*$ is the dual basis for some basis for $V$.
-\end{theorem}
-
-\begin{center}
-    \begin{tikzcd}
-V \arrow[rrddd, "V^*"{name=U}] \arrow[rrrr, "T"] && & & W \arrow[llddd, "W^*"'{name=W}] \\
-\\
-\\
-&& F
-\arrow[rightarrow, from=W, to=U, "T^\top"]
-\end{tikzcd}
-\end{center}
 
 
 

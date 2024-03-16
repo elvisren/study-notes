@@ -10,7 +10,7 @@ DP are effective for medium size problems (million of states).
 If $P$ and $\pi$ are known, Bellman equation (\ref{bellman:v}) could be converted to iterative solution. All $V$ are randomly initialized and updated using \cindex{iterative policy evaluation}:
 
 \begin{equation}
-	V_{k+1} (s) = \sum_a \pi (a | s) \left ( \sum_{s',r} p(s',r | s,a) \Big ( r + \gamma V_{k}(s') \Big ) \right )
+	V_{k+1} (s) = \sum_a \pi (a | s) \mleft ( \sum_{s',r} p(s',r | s,a) \Big ( r + \gamma V_{k}(s') \Big ) \mright )
 \end{equation}
 
 Here $V_{t+1}(s)$ means the value of $V(s)$ in $(t+1)$ round.
@@ -38,7 +38,7 @@ See Algorithm (\ref{algo:itepole}) for detail.
 				\For{$s \in S$}
 					\State $v \gets V(s)$
 					\State \Comment{in-place update}
-					\State $V(s) \gets \sum\limits_a \pi (a | s) \left ( \sum\limits_{s',r} p(s',r | s,a) \big(r + \gamma V(s') \big ) \right )$ 
+					\State $V(s) \gets \sum\limits_a \pi (a | s) \mleft ( \sum\limits_{s',r} p(s',r | s,a) \big(r + \gamma V(s') \big ) \mright )$ 
 					\State $\Delta \gets \max{}(v, |v - V(s)|)$
 				\EndFor
 			\Until{$\Delta < \theta$}
@@ -165,8 +165,8 @@ The time complexity for $v$ is $O(mn^2)$ and for $q$ is $O(m^2 n^2)$, where $m$ 
 
 backup the state with the maximum \cindex{Bellman error}:
 \begin{equation}
-	\left| \max_{ a \in \mathcal{A}} \left( \mathcal{R}
-	+ \gamma \sum_{s' \in S} \mathcal{P}_{ss'}^a v(s') \right) - v(s) \right|
+	\mleft| \max_{ a \in \mathcal{A}} \mleft( \mathcal{R}
+	+ \gamma \sum_{s' \in S} \mathcal{P}_{ss'}^a v(s') \mright) - v(s) \mright|
 \end{equation}
 
 \subsubsection{Realtime Dynamic Programming}

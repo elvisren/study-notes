@@ -38,7 +38,7 @@ The assumptions we will have are:
         \item A set of payoff functions $\set{v_1, v_2, ..., v_n}$, each assigning a payoff value to each combination of chosen strategies, that is, $\displaystyle v_i : S \rightarrow \real $.
     \end{enumerate}
     
-    A normal-form game is a tuple $\Gamma = \left\langle N, \set{S_i}_{i \in N}, \set{v_i}_{i \in N} \right\rangle$. Sometimes we use actions $A$ to stand for strategies $S$ and $\succsim$ for $v_i$. So the tuple becomes $\Gamma = \left\langle N, A_i, \succsim_i \right\rangle$.
+    A normal-form game is a tuple $\Gamma = \mleft\langle N, \set{S_i}_{i \in N}, \set{v_i}_{i \in N} \mright\rangle$. Sometimes we use actions $A$ to stand for strategies $S$ and $\succsim$ for $v_i$. So the tuple becomes $\Gamma = \mleft\langle N, A_i, \succsim_i \mright\rangle$.
 \end{definition}
 
 \subsection{Dominance}
@@ -177,7 +177,7 @@ Nash equilibrium is a steady-state so no player wants to change its choice.
     \begin{equation*}
     \begin{aligned}
         v_i(\sigma_i, \sigma_{-i}) &= \sum_{s_i \in S_i} \sigma_i (s_i) \times v_i(s_i, \sigma_{-i}) \\
-        &= \sum_{s_i \in S_i} \sigma_i (s_i)  \times \left(\sum_{s_{-i} \in S_{-i}} \sigma_{-i} (s_{-i}) \times v_i (s_i, s_{-i}) \right) \\
+        &= \sum_{s_i \in S_i} \sigma_i (s_i)  \times \mleft(\sum_{s_{-i} \in S_{-i}} \sigma_{-i} (s_{-i}) \times v_i (s_i, s_{-i}) \mright) \\
         &= \sum_{s \in S} v_i(s) \times \prod_{i \in N} \sigma_i (s_i)
     \end{aligned}
             \end{equation*}
@@ -239,7 +239,7 @@ Nash equilibrium is a steady-state so no player wants to change its choice.
 \end{theorem}
 
 \begin{definition}[\cindex{collection of best-response correspondences}]
-    The collection of best-response correpsondences is a function $BR: \bigtriangleup S \rightarrow \bigtriangleup S$ that for every element $\sigma \in \bigtriangleup S$, $\left(BR(\sigma)\right)_i$ is the best response to $\sigma_{-i}$.
+    The collection of best-response correpsondences is a function $BR: \bigtriangleup S \rightarrow \bigtriangleup S$ that for every element $\sigma \in \bigtriangleup S$, $\mleft(BR(\sigma)\mright)_i$ is the best response to $\sigma_{-i}$.
 \end{definition}
 
 \begin{theorem}

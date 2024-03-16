@@ -8,6 +8,17 @@
 \usepackage{latexsym}
 
 
+
+% make the alignment of text much better
+\usepackage[tracking=true]{microtype}
+
+
+
+% draw complex cover page
+\usepackage{tikz}
+\usetikzlibrary{matrix, positioning, arrows.meta}
+
+
 % set section level depth and re-number it from 1
 %\renewcommand{\thesection}{\arabic{section}}
 %\setcounter{secnumdepth}{3}
@@ -15,25 +26,91 @@
 
 % math theorem, lemma, proof
 \usepackage{amsthm}
-%\theoremstyle{definition}
-%\newtheorem{definition}{Definition}
-%\newtheorem{theorem}{Theorem}
-
 \usepackage{thmtools}
+\usepackage{mdframed}
 
-% Redefine theorem environment to add \qed at the end
+% specify color background for theorem, definition
+\definecolor{lightblue}{rgb}{0.8, 0.9, 1.0}
+\definecolor{lightyellow}{rgb}{1.0, 1.0, 0.8}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{titlecolor}{rgb}{0.2, 0.2, 0.7}
+
 \declaretheoremstyle[
-    spaceabove=\topsep, spacebelow=\topsep,
-    headfont=\normalfont\bfseries,
-    notefont=\normalfont\bfseries, notebraces={(}{)},
+    spaceabove=2pt,
+    spacebelow=2pt,
+    headfont=\normalfont\bfseries\color{titlecolor},
+    notefont=\normalfont\bfseries,
+    notebraces={(}{)},
     bodyfont=\normalfont,
     postheadspace=0.5em,
-    qed=\qedsymbol
-]{mystyle}
-\declaretheorem[style=mystyle]{theorem}
-\declaretheorem[style=mystyle]{definition}
-\declaretheorem[style=mystyle]{example}
-\declaretheorem[style=mystyle]{axiom}
+    mdframed={
+        backgroundcolor=lightblue,
+        linecolor=lightblue,
+        outerlinewidth=2pt,
+        topline=false,
+        bottomline=false,
+        rightline=false,
+        innerleftmargin=3pt,
+        innerrightmargin=3pt,
+        innertopmargin=3pt,
+        innerbottommargin=3pt,
+        roundcorner=5pt
+    }
+]{theoremstyle}
+
+\declaretheoremstyle[
+    spaceabove=2pt,
+    spacebelow=2pt,
+    headfont=\normalfont\bfseries\color{titlecolor},
+    notefont=\normalfont\bfseries,
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=0.5em,
+    mdframed={
+        backgroundcolor=lightyellow,
+        linecolor=lightblue,
+        outerlinewidth=2pt,
+        topline=false,
+        bottomline=false,
+        rightline=false,
+        innerleftmargin=3pt,
+        innerrightmargin=3pt,
+        innertopmargin=3pt,
+        innerbottommargin=3pt,
+        roundcorner=5pt
+    }
+]{definitionstyle}
+
+
+\declaretheoremstyle[
+    spaceabove=2pt,
+    spacebelow=2pt,
+    headfont=\normalfont\bfseries\color{titlecolor},
+    notefont=\normalfont\bfseries,
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=0.5em,
+    mdframed={
+        backgroundcolor=lightgray,
+        linecolor=lightblue,
+        outerlinewidth=2pt,
+        topline=false,
+        bottomline=false,
+        rightline=false,
+        innerleftmargin=3pt,
+        innerrightmargin=3pt,
+        innertopmargin=3pt,
+        innerbottommargin=3pt,
+        roundcorner=5pt
+    }
+]{examplestyle}
+
+\declaretheorem[style=theoremstyle]{theorem}
+\declaretheorem[style=definitionstyle]{definition}
+\declaretheorem[style=examplestyle]{example}
+\declaretheorem[style=theoremstyle]{axiom}
+
+
 
 % for mathematical integratoin
 \usepackage{commath}
@@ -44,6 +121,10 @@
 \usepackage{makeidx}
 \makeindex
 
+
+% make the "[" and "]" just as high as the content inside it
+\usepackage{mleftright}
+\mleftright % make \left work like \mleft
 
 
 \usepackage{listings}
@@ -72,7 +153,7 @@
 % set page size
 \usepackage{geometry}
 %\geometry{a4paper}
-\geometry{a4paper,top=2cm,bottom=2cm,left=3cm,right=2cm}
+\geometry{a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=2cm}
 
 
 
@@ -150,11 +231,13 @@
 
 % align the content top and bottom with "[" and "]"
 \usepackage{adjustbox}
-\NewDocumentCommand{\alignedbrackets}{m}{
-    \left[
-        \adjustbox{valign=c}{\ensuremath{\begin{aligned}#1\end{aligned}}}
-    \right]
-}
+\newcommand\alignedbrackets[1]{\mleft[#1\mright]}
+
+%\NewDocumentCommand{\alignedbrackets}{m}{
+%    \mleft[
+%        \adjustbox{valign=c}{\ensuremath{\begin{aligned}#1\end{aligned}}}
+%    \mright]
+%}
 
 % set and read the build number
 \usepackage{ifthen}
@@ -205,7 +288,7 @@
 \newcommand\complexnumber[0]{\mathbb{C}}
 
 % the power set P(X)
-\newcommand\powerset[1]{\mathcal{P}\left( #1 \right)}
+\newcommand\powerset[1]{\mathcal{P}\mleft( #1 \mright)}
 
 % open ball, B(x, r)
 \newcommand\openball[2]{\mathbb{B}(#1, #2)}
@@ -225,7 +308,7 @@
 
 \newcommand\allordinals[0]{\mathbf{Ord}}
 
-\newcommand\transfinitesequence[1]{\left< #1 \right>}
+\newcommand\transfinitesequence[1]{\mleft< #1 \mright>}
 
 % sup {x}
 \newcommand\supremum[1]{\mathbf{sup} \set{#1}}
@@ -265,10 +348,10 @@
 
 
 % null space, the N(x)
-\newcommand\nullspace[1]{\mathcal{N}(#1)}
+\newcommand\nullspace[1]{\mathcal{N}\mleft(#1\mright)}
 
 % range space, the R(x)
-\newcommand\rangespace[1]{\mathcal{R}(#1)}
+\newcommand\rangespace[1]{\mathcal{R}\mleft(#1\mright)}
 
 % absolute value, the |x|
 \newcommand\absolutevalue[1]{\abs{#1}}
@@ -291,7 +374,7 @@
 \newcommand\projection[2]{\boldmathtext{proj}_{#2} #1}
 
 
-\newcommand\rowvector[1]{\left[ \displaystyle #1 \right]}
+\newcommand\rowvector[1]{\mleft[ \displaystyle #1 \mright]}
 
 \newcommand\vectorsymbol[1]{\overrightarrow{#1}}
 
@@ -299,22 +382,22 @@
 \newcommand\inverse[1]{ {#1}^{-1} }
 
 % dimension text, the "dim x"
-\newcommand\dimension[1]{\displaystyle \boldmathtext{dim}~\left( #1 \right)}
+\newcommand\dimension[1]{\displaystyle \boldmathtext{dim}~\mleft( #1 \mright)}
 
 % rank text, the "rank x"
-\newcommand\rank[1]{\displaystyle \boldmathtext{rank}~\left( #1 \right)}
+\newcommand\rank[1]{\displaystyle \boldmathtext{rank}~\mleft( #1 \mright)}
 
 % adjugate matrix, the "adj x"
-\newcommand\adjugate[1]{\displaystyle \boldmathtext{adj}~\left( #1 \right)}
+\newcommand\adjugate[1]{\displaystyle \boldmathtext{adj}~\mleft( #1 \mright)}
 
 % inner product, the <x,y>
-\newcommand\innerproduct[2]{\left\langle \displaystyle #1, #2 \right\rangle}
+\newcommand\innerproduct[2]{\mleft\langle \displaystyle #1, #2 \mright\rangle}
 
 % trace, the "tr x"
 \newcommand\trace[1]{\displaystyle \boldmathtext{tr}~( #1 )}
 
 % span, the "span x"
-\newcommand\spanset[1]{\displaystyle \boldmathtext{span}~\left( #1 \right)}
+\newcommand\spanset[1]{\displaystyle \boldmathtext{span}~\mleft( #1 \mright)}
 
 % pseudoinverse, the dagger
 \newcommand\pseudoinverse[1]{ {#1}^\dagger }
@@ -333,11 +416,17 @@
 \newcommand\columnvector[1]{\boldsymbol{#1}}
 
 % norm
-\newcommand\vectornorm[1]{\displaystyle \left\lVert #1 \right\rVert}
+\newcommand\vectornorm[1]{\displaystyle \mleft\lVert #1 \mright\rVert}
 
+% conjugate, put a line above x
 \newcommand\conjugate[1]{\overline{#1}}
 
+% select a row from matrix
+\newcommand\selectmatrixrow[2]{{#1}_{{#2},\cdot}}
 
+
+% select a column from matrix
+\newcommand\selectmatrixcolumn[2]{{#1}_{\cdot, {#2}}}
 
 
 
@@ -359,7 +448,7 @@
 %
 
 % P[x]
-\newcommand\probability[1]{\boldmathtext{P}\left[\displaystyle #1 \right]}
+\newcommand\probability[1]{\boldmathtext{P}\mleft[\displaystyle #1 \mright]}
 \newcommand\probabilitywithsmallbottom[1]{\boldmathtext{P}\alignedbrackets{\displaystyle #1}}
 
 
@@ -367,26 +456,26 @@
 \newcommand\expect[1]{\boldmathtext{E}\alignedbrackets{\displaystyle #1}}
 
 % Var[x]
-\newcommand\variance[1]{\boldmathtext{Var}\left[\displaystyle #1 \right]}
+\newcommand\variance[1]{\boldmathtext{Var}\mleft[\displaystyle #1 \mright]}
 \newcommand\variancewithsmallbottom[1]{\boldmathtext{Var}\alignedbrackets{\displaystyle #1}}
 
 
 % H[x]: entropy
-\newcommand\entropy[1]{\boldmathtext{H}\left[\displaystyle #1 \right]}
+\newcommand\entropy[1]{\boldmathtext{H}\mleft[\displaystyle #1 \mright]}
 
 % KL divergence
-\newcommand\kldivergence[2]{\boldmathtext{HL}\left(\displaystyle #1 \middle| \middle| \displaystyle #2 \right)}
+\newcommand\kldivergence[2]{\boldmathtext{HL}\mleft(\displaystyle #1 \middle| \middle| \displaystyle #2 \mright)}
 
 
 % Cov(a,b)
-\newcommand\covariance[2]{\boldmathtext{Cov}\displaystyle \left(#1,#2 \right)}
+\newcommand\covariance[2]{\boldmathtext{Cov}\displaystyle \mleft(#1,#2 \mright)}
 
 % exp { xxx }
 \newcommand\exponential[1]{\boldmathtext{exp}~\set{#1}}
 
 % N(\mu, \sig^2)
-\newcommand\normaldistribution[2]{\mathcal{N}\left(#1,#2\right)}
-\newcommand\normaldistributionwithparameter[3]{\mathcal{N}\left(#1 \middle| #2,#3\right)}
+\newcommand\normaldistribution[2]{\mathcal{N}\mleft(#1,#2\mright)}
+\newcommand\normaldistributionwithparameter[3]{\mathcal{N}\mleft(#1 \middle| #2,#3\mright)}
 
 
 % Gamma(\alpha, \beta)
@@ -429,10 +518,10 @@
 \newcommand\selectonedimensionfromonesample[3]{{#1}^{(#2)}_{#3}}
 
 % expectation
-\newcommand\expectation[1]{\mathbb{E}\left[{#1}\right]}
+\newcommand\expectation[1]{\mathbb{E}\mleft[{#1}\mright]}
 
 % expectation on a specific variable
-\newcommand\expectationonanvariable[2]{\mathbb{E}_{#1}\left[{#2}\right]}
+\newcommand\expectationonanvariable[2]{\mathbb{E}_{#1}\mleft[{#2}\mright]}
 
 % bold x
 \newcommand\feature[1]{\mathbf{#1}}

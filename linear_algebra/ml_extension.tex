@@ -27,7 +27,7 @@ A tensor is a $n$-dimension array. The $n$ is called order or rank.
 \begin{definition}
     The norms of a vector $x$ are:
 \begin{itemize}
-    \item p-norm: $\displaystyle \norm{x}_p = \left(\sum_{i=1}^n \absolutevalue{x_i}^p \right)^{\frac{1}{p}}$
+    \item p-norm: $\displaystyle \norm{x}_p = \mleft(\sum_{i=1}^n \absolutevalue{x_i}^p \mright)^{\frac{1}{p}}$
     \item 0-norm: $\displaystyle \norm{x}_0 = \sum_{i=1}^n x^0$, if we define $0^0 = 0$.
     \item 1-norm: $\displaystyle \norm{x}_1 = \sum_{i=1}^n \absolutevalue{x_i}$
     \item 2-norm: $\displaystyle \norm{x}_{p=2} = \transpose{x} x$
@@ -211,17 +211,17 @@ $\bigcirc$ could be $+,-,\times\footnote{called \cindex{hadamard product}}, \div
 
 \begin{equation}
 	\nabla{}_{\mathbf{x}} \mathbf{y} = 
-	\left [ \begin{matrix}
+	\mleft [ \begin{matrix}
 		y_1 \\
 		y_2 \\
 		\vdots \\
 		y_n
-	\end{matrix} \right ] = \left [ \begin{matrix}
+	\end{matrix} \mright ] = \mleft [ \begin{matrix}
 	f_1 (\mathbf{w}) \bigcirc g_1 (\mathbf{x}) \\
 	f_2 (\mathbf{w}) \bigcirc g_2 (\mathbf{x}) \\
 	\vdots \\
 	f_n (\mathbf{w}) \bigcirc g_n (\mathbf{x})
-\end{matrix} \right ]
+\end{matrix} \mright ]
 \end{equation}
 
 The expanded matrix could be differentiated using Jacobian matrix.
@@ -244,19 +244,19 @@ The full expression of $\mathbf{y}=\mathbf{f}(\mathbf{g}(\mathbf{x}))$ is:
 \begin{aligned}
 	\nabla{}_{\mathbf{x}} f &=  \pd{\mathbf{f}(\mathbf{g}(\mathbf{x}))}{\mathbf{x}} \\
 	&= \pd{\mathbf{f}}{\mathbf{g}} \times \pd{\mathbf{g}}{\mathbf{x}} \\
-	&= \left [ \begin{matrix}
+	&= \mleft [ \begin{matrix}
 \frac{\partial f_1({\mathbf{x}})}{g_1} & \frac{\partial f_1({\mathbf{x}})}{g_2} & \dots & \frac{\partial f_1({\mathbf{x}})}{g_n} \\
 \frac{\partial f_2({\mathbf{x}})}{g_1} & \frac{\partial f_2({\mathbf{x}})}{g_2} & \dots & \frac{\partial f_2({\mathbf{x}})}{g_n} \\
 \vdots & \vdots & \ddots & \vdots  \\
 \frac{\partial f_m({\mathbf{x}})}{g_1} & \frac{\partial f_m({\mathbf{x}})}{g_2} & \dots & \frac{\partial f_m({\mathbf{x}})}{g_n}
-\end{matrix} \right ]_{m \times n}
+\end{matrix} \mright ]_{m \times n}
 \times % multiple another one
-\left [ \begin{matrix}
+\mleft [ \begin{matrix}
 \frac{\partial g_1({\mathbf{x}})}{x_1} & \frac{\partial g_1({\mathbf{x}})}{x_2} & \dots & \frac{\partial g_1({\mathbf{x}})}{x_r} \\
 \frac{\partial g_2({\mathbf{x}})}{x_1} & \frac{\partial g_2({\mathbf{x}})}{x_2} & \dots & \frac{\partial g_2({\mathbf{x}})}{x_r} \\
 \vdots & \vdots & \ddots & \vdots  \\
 \frac{\partial g_n({\mathbf{x}})}{x_1} & \frac{\partial g_n({\mathbf{x}})}{x_2} & \dots & \frac{\partial g_n({\mathbf{x}})}{x_r}
-\end{matrix} \right ]_{n \times r}
+\end{matrix} \mright ]_{n \times r}
 \end{aligned}
 \end{equation}
 \end{definition}

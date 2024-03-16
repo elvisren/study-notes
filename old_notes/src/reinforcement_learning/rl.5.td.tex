@@ -100,7 +100,7 @@ Algorithm (\ref{algo:sarsa}) contains detail.
 \cindex{expected Sarsa} use expectation, rather than $\varepsilon$-greedy, to learn next $q$. It reduces variance by removing the random selection of $A_{t+1}$ during $\varepsilon$-soft policy :
 
 \begin{equation}
-	Q(S_t,A_t) \gets Q(S_t,A_t) + \alpha \left ( R_{t+1} + \gamma \sum_a \pi(a|S_{t+1}) Q(S_{t+1},a) - Q(S_t,A_t) \right )
+	Q(S_t,A_t) \gets Q(S_t,A_t) + \alpha \mleft ( R_{t+1} + \gamma \sum_a \pi(a|S_{t+1}) Q(S_{t+1},a) - Q(S_t,A_t) \mright )
 \end{equation}
 
 

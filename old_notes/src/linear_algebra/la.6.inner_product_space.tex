@@ -96,7 +96,7 @@
 
 \begin{theorem}
     \begin{equation}
-        \norm{u+v}^2 + \norm{u-v}^2 = 2 \left(\norm{u}^2 + \norm{v}^2 \right)
+        \norm{u+v}^2 + \norm{u-v}^2 = 2 \mleft(\norm{u}^2 + \norm{v}^2 \mright)
     \end{equation}    
 \end{theorem}
 
@@ -164,7 +164,7 @@
 	\end{equation}
 	Define the projection of vector $a$ onto vector $u$ as $\projection{a}{u} = \dfrac{\innerproduct{a}{u}}{\norm{u}^2}$. So 
 	\begin{equation}
-	    y = \sum_{i=1}^k \left(\projection{y}{v_i}\right) v_i
+	    y = \sum_{i=1}^k \mleft(\projection{y}{v_i}\mright) v_i
 	\end{equation}
 	If $S$ is orthonormal, then
 	\begin{equation}
@@ -266,7 +266,7 @@
 
 
 \begin{theorem}
-    Let $y$,$u$,$z$ as defined in \thmref{orthogonalprojection}. $u$ is the closest vector in $W$ to $y$ that is $\forall x \in W \left(\norm{y-x} \geq \norm{y - u} \right)$.
+    Let $y$,$u$,$z$ as defined in \thmref{orthogonalprojection}. $u$ is the closest vector in $W$ to $y$ that is $\forall x \in W \mleft(\norm{y-x} \geq \norm{y - u} \mright)$.
 \end{theorem}
 \begin{proof}
     \begin{equation*}
@@ -325,11 +325,11 @@
 \begin{theorem}
     Let $\beta$ be a orthonormal basis for $V$. If $T$ is a linear operation on $V$ then
     \begin{equation}
-        [T^*]_\beta = \left([T]_\beta \right)^*
+        [T^*]_\beta = \mleft([T]_\beta \mright)^*
     \end{equation}
     Let $A$ be an $n \times n$ matrix. Then
     \begin{equation}
-        L_{A^*} = \left(L_A \right)^*
+        L_{A^*} = \mleft(L_A \mright)^*
     \end{equation}
 \end{theorem}
 \begin{proof}
@@ -356,7 +356,7 @@
 \begin{theorem}
     Let $T^*$ be an adjoint of $T: V \rightarrow W$. If $\beta$ and $\gamma$ are orthonormal basis for $V$ and $W$, then
     \begin{equation}
-        [T^*]_\beta^\alpha = \left([T]_\beta^\alpha\right)^*
+        [T^*]_\beta^\alpha = \mleft([T]_\beta^\alpha\mright)^*
     \end{equation}
 \end{theorem}
 

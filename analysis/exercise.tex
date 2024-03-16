@@ -19,7 +19,7 @@
 \begin{example}
     When $a \rightarrow 1$ and $b \rightarrow \infty$, the limit of $a^b$ could be calculated as
     \begin{equation}
-        a^b = (1 + (a-1))^b = \left(\left(1 + (a-1)\right)^{\frac{1}{a-1}}\right)^{(a-1)b} \rightarrow e^{(a-1)b}
+        a^b = (1 + (a-1))^b = \mleft(\mleft(1 + (a-1)\mright)^{\frac{1}{a-1}}\mright)^{(a-1)b} \rightarrow e^{(a-1)b}
     \end{equation}
     
     So the problem now becomes how to calculate $\lim (a-1)b$.
@@ -29,37 +29,37 @@
 \begin{theorem}
     $f(x) \sim x$ when $x \rightarrow 0$. Prove that for $a > 0$, we have
     \begin{equation}
-        \lim_{n \rightarrow \infty} \sum_{i=1}^n f\left ( \frac{2i-1}{n^2} a \right ) = a
+        \lim_{n \rightarrow \infty} \sum_{i=1}^n f\mleft ( \frac{2i-1}{n^2} a \mright ) = a
     \end{equation}
     
     Here $f$ could be $\sin x$, $\tan x$, $\arcsin x$, $e^x -1$, $\ln (1+x)$. For example, prove that
     \begin{equation}
-        \lim_{n \rightarrow \infty} \prod_{i=1}^n \left( 1 + \frac{2i-1}{n^2} a^2 \right) = e^{a^2}
+        \lim_{n \rightarrow \infty} \prod_{i=1}^n \mleft( 1 + \frac{2i-1}{n^2} a^2 \mright) = e^{a^2}
     \end{equation}
 \end{theorem}
 \begin{proof}
-    $a = \sum_{i=1}^n \frac{2i-1}{n^2} a$. Let $x_n = \sum_{i=1}^n f\left( \frac{2i-1}{n^2} a \right)$. We have
+    $a = \sum_{i=1}^n \frac{2i-1}{n^2} a$. Let $x_n = \sum_{i=1}^n f\mleft( \frac{2i-1}{n^2} a \mright)$. We have
     \begin{equation*}
-        \absolutevalue{x_n - a} = \absolutevalue{ \sum_{i=1}^n f\left( \frac{2i-1}{n^2} a \right) - \sum_{i=1}^n \frac{2i-1}{n^2} a} \leq \sum_{i=1}^n \absolutevalue{ f\left( \frac{2i-1}{n^2} a \right) - \frac{2i-1}{n^2} a}
+        \absolutevalue{x_n - a} = \absolutevalue{ \sum_{i=1}^n f\mleft( \frac{2i-1}{n^2} a \mright) - \sum_{i=1}^n \frac{2i-1}{n^2} a} \leq \sum_{i=1}^n \absolutevalue{ f\mleft( \frac{2i-1}{n^2} a \mright) - \frac{2i-1}{n^2} a}
     \end{equation*}
     
-    The next step is to prove that $\forall \epsilon > 0$, there is $m$ that $\absolutevalue{ f\left( \frac{2i-1}{m^2} a \right) - \frac{2i-1}{m^2} a} < \frac{2i-1}{m^2} \epsilon$, so the total sum is less that $\epsilon$.
+    The next step is to prove that $\forall \epsilon > 0$, there is $m$ that $\absolutevalue{ f\mleft( \frac{2i-1}{m^2} a \mright) - \frac{2i-1}{m^2} a} < \frac{2i-1}{m^2} \epsilon$, so the total sum is less that $\epsilon$.
 \end{proof}
 
 \begin{example}
-    The limit of $\displaystyle \sum_{i=1}^n \frac{1}{n}f\left(\frac{i}{n}\right)$ could be changed to integration $\displaystyle \int_{0}^1 f(x)$. For example:
+    The limit of $\displaystyle \sum_{i=1}^n \frac{1}{n}f\mleft(\frac{i}{n}\mright)$ could be changed to integration $\displaystyle \int_{0}^1 f(x)$. For example:
     \begin{equation}
-        \lim_{n \rightarrow \infty} \left( \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{n+n} \right) = \lim_{n \rightarrow \infty} \sum_{i=1}^n \frac{1}{\displaystyle 1+\frac{i}{n}} \times \frac{1}{n} = \int_0^1 \frac{1}{1+x} \dif x = \ln 2
+        \lim_{n \rightarrow \infty} \mleft( \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{n+n} \mright) = \lim_{n \rightarrow \infty} \sum_{i=1}^n \frac{1}{\displaystyle 1+\frac{i}{n}} \times \frac{1}{n} = \int_0^1 \frac{1}{1+x} \dif x = \ln 2
     \end{equation}
     
-    Tricks: we could choose any $\epsilon \in \left[\frac{i}{n}, \frac{i+1}{n}\right]$ in $\displaystyle \sum_{i=1}^n \frac{1}{n}f(\epsilon)$.
+    Tricks: we could choose any $\epsilon \in \mleft[\frac{i}{n}, \frac{i+1}{n}\mright]$ in $\displaystyle \sum_{i=1}^n \frac{1}{n}f(\epsilon)$.
 \end{example}
 
 
 \begin{example}
     Famous inequalities:
     \begin{equation}
-        \frac{1}{1+n} < \ln \left(1+\frac{1}{n} \right) < \frac{1}{n}
+        \frac{1}{1+n} < \ln \mleft(1+\frac{1}{n} \mright) < \frac{1}{n}
     \end{equation}
     \begin{equation}
         2(\sqrt{n+1} - \sqrt{n}) = \frac{2}{\sqrt{n} + \sqrt{n+1}} < \frac{1}{\sqrt{n}} < \frac{2}{\sqrt{n} + \sqrt{n-1}} = 2(\sqrt{n} - \sqrt{n-1} )
@@ -76,7 +76,7 @@
 \begin{theorem}[\cindex{Euler constant}]
     The Euler constant is defined as
     \begin{equation}
-        \gamma = \lim_{n \rightarrow \infty} \left(1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} - \ln n \right) \approx 0.577215664
+        \gamma = \lim_{n \rightarrow \infty} \mleft(1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} - \ln n \mright) \approx 0.577215664
     \end{equation}
     
     Note: do not confuse with $\ln 2 = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots$.
@@ -134,7 +134,7 @@
         n^2 < n^2 + k < n^2 + n < n^2 + 2n + 1
     \end{equation} 
     
-    Sometimes we could change the $n$, such as $k^2 + k < n^2 + k$. For example, when calculating $S = \lim \sum \frac{1}{n + \sqrt{k}}$, we have $S < \lim \sum \frac{1}{k + \sqrt{k}} = \lim \sum \left( \frac{1}{\sqrt{k}} - \frac{1}{\sqrt{k} + 1} \right)$
+    Sometimes we could change the $n$, such as $k^2 + k < n^2 + k$. For example, when calculating $S = \lim \sum \frac{1}{n + \sqrt{k}}$, we have $S < \lim \sum \frac{1}{k + \sqrt{k}} = \lim \sum \mleft( \frac{1}{\sqrt{k}} - \frac{1}{\sqrt{k} + 1} \mright)$
 \end{example}
 
 

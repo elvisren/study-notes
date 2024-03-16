@@ -10,7 +10,7 @@
         \item $X$ is called \cindex{feature}.
         \item $Y$ is called \cindex{labels}.
         \item $X = \realnumber^D$ and $D$ is the dimension of \cindex{feature vector}.
-        \item The experience $E$ is $\mathcal{D} = \set{\left(\selectonesample{x}{i}, \selectonesample{y}{i}\right)}_{i=1}^N$, which is called the \cindex{training set}.
+        \item The experience $E$ is $\mathcal{D} = \set{\mleft(\selectonesample{x}{i}, \selectonesample{y}{i}\mright)}_{i=1}^N$, which is called the \cindex{training set}.
         \item $N$ is the \cindex{sample size}.
         \item The input feature is a $N \times D$ matrix, which is called \cindex{design matrix}. In practice the design matrix is usually transposed with dimension $D \times N$.
     \end{enumerate}
@@ -53,26 +53,26 @@ Now we assume the target variable $y$ is the sum of deterministic function $f(\f
 
 For $N$ input sample $\set{\selectonesample{x}{i}}$ and $N$ target $\set{\selectonesample{y}{i}}$, the likelihood function is
 \begin{equation}
-    p(y|\feature{x}, \feature{w}, \sigma^2) = \prod_{i=1}^N \normaldistributionwithparameter{\selectonesample{y}{i}}{\transpose{\feature{w}} \phi\left(\selectonesample{x}{i}\right)}{\sigma^2}
+    p(y|\feature{x}, \feature{w}, \sigma^2) = \prod_{i=1}^N \normaldistributionwithparameter{\selectonesample{y}{i}}{\transpose{\feature{w}} \phi\mleft(\selectonesample{x}{i}\mright)}{\sigma^2}
 \end{equation}
 
 Use homoscedastic regression formula in \formularef{homoscedastic_regression}, we have 
 \begin{equation}\label{loss_function_of_linear_regression}
-    L(\feature{w}) = N \ln \sigma + \frac{1}{2\sigma^2} \sum_{i=1}^N \left( \selectonesample{y}{i} - \transpose{\feature{w}} \phi\left(\selectonesample{x}{i}\right) \right)^2
+    L(\feature{w}) = N \ln \sigma + \frac{1}{2\sigma^2} \sum_{i=1}^N \mleft( \selectonesample{y}{i} - \transpose{\feature{w}} \phi\mleft(\selectonesample{x}{i}\mright) \mright)^2
 \end{equation}
 
-To find the closed solution, we define $\Psi_{N \times M}$ as $\Psi_{ij} = \phi_j \left(\selectonesample{x}{i}\right)$. So each row of $\Psi$ is the result of $\selectonesample{x}{i}$ and apply all $\phi$. Then we define the pseudo inverse of $\Psi$ as $\pseudoinverse{\Psi} = \inverse{\left(\transpose{\Psi} \Psi\right)} \transpose{\Psi}$. The closed form solution is
+To find the closed solution, we define $\Psi_{N \times M}$ as $\Psi_{ij} = \phi_j \mleft(\selectonesample{x}{i}\mright)$. So each row of $\Psi$ is the result of $\selectonesample{x}{i}$ and apply all $\phi$. Then we define the pseudo inverse of $\Psi$ as $\pseudoinverse{\Psi} = \inverse{\mleft(\transpose{\Psi} \Psi\mright)} \transpose{\Psi}$. The closed form solution is
 \begin{equation}\label{closed_simple_linear_regression_solution}
     \begin{aligned}
-        \Psi_{ij} &= \phi_j \left(\selectonesample{x}{i}\right) \\
-        \pseudoinverse{\Psi} &= \inverse{\left(\transpose{\Psi} \Psi\right)} \transpose{\Psi} \\
+        \Psi_{ij} &= \phi_j \mleft(\selectonesample{x}{i}\mright) \\
+        \pseudoinverse{\Psi} &= \inverse{\mleft(\transpose{\Psi} \Psi\mright)} \transpose{\Psi} \\
         \estimation{\feature{w}} &= \pseudoinverse{\Psi} Y \\
-        \estimation{\sigma^2} &= \frac{1}{N} \sum_{i=1}^N \left( \selectonesample{y}{i} - \transpose{\estimation{\feature{w}}} \phi\left( \selectonesample{x}{i} \right) \right)^2
+        \estimation{\sigma^2} &= \frac{1}{N} \sum_{i=1}^N \mleft( \selectonesample{y}{i} - \transpose{\estimation{\feature{w}}} \phi\mleft( \selectonesample{x}{i} \mright) \mright)^2
     \end{aligned}
 \end{equation}
 
 
-In practice, it will have numeric difficulty in calculating $\inverse{\left(\transpose{\Psi} \Psi\right)}$ when the result is close to singular. In this case, SVD is used instead.
+In practice, it will have numeric difficulty in calculating $\inverse{\mleft(\transpose{\Psi} \Psi\mright)}$ when the result is close to singular. In this case, SVD is used instead.
 
 
 % online algorithm
@@ -82,12 +82,12 @@ In practice, it will have numeric difficulty in calculating $\inverse{\left(\tra
 
 Stochastic gradient descent is used here. The gradient of $L(w)$ is
 \begin{equation}
-    \nabla L(w) = - \left( \selectonesample{y}{i} - \transpose{\feature{w}} \phi\left(\selectonesample{x}{i}\right) \right) \phi\left(\selectonesample{x}{i}\right)
+    \nabla L(w) = - \mleft( \selectonesample{y}{i} - \transpose{\feature{w}} \phi\mleft(\selectonesample{x}{i}\mright) \mright) \phi\mleft(\selectonesample{x}{i}\mright)
 \end{equation}
 
 So the gradient descent result is
 \begin{equation}
-    \feature{w}_{t+1} = \feature{w}_t + \alpha \left( \selectonesample{y}{t} - \transpose{\feature{w_t}} \phi\left(\selectonesample{x}{t}\right) \right) \phi\left(\selectonesample{x}{t}\right)
+    \feature{w}_{t+1} = \feature{w}_t + \alpha \mleft( \selectonesample{y}{t} - \transpose{\feature{w_t}} \phi\mleft(\selectonesample{x}{t}\mright) \mright) \phi\mleft(\selectonesample{x}{t}\mright)
 \end{equation}
 
 
@@ -96,12 +96,12 @@ So the gradient descent result is
 
 One way of controlling over-fitting is to add regularization. The simplest one is to add $\frac{1}{2} \transpose{\feature{w}}\feature{w}$. So the optimization target is now
 \begin{equation}
-    \argmin{\feature{w}} \frac{1}{2} \sum_{i=1}^N \left( \selectonesample{y}{i} - \transpose{\feature{w}} \phi\left(\selectonesample{x}{i}\right) \right)^2 + \frac{\lambda}{2} \transpose{\feature{w}}\feature{w}
+    \argmin{\feature{w}} \frac{1}{2} \sum_{i=1}^N \mleft( \selectonesample{y}{i} - \transpose{\feature{w}} \phi\mleft(\selectonesample{x}{i}\mright) \mright)^2 + \frac{\lambda}{2} \transpose{\feature{w}}\feature{w}
 \end{equation}
 
 It has a closed solution
 \begin{equation}
-    \estimation{\feature{w}} = \inverse{\left(\lambda I + \transpose{\Psi} \Psi\right)} \transpose{\Psi} 
+    \estimation{\feature{w}} = \inverse{\mleft(\lambda I + \transpose{\Psi} \Psi\mright)} \transpose{\Psi} 
 \end{equation}
 
 
@@ -111,7 +111,7 @@ It has a closed solution
 
 Suppose we have two random variable $x$ and $y$, and we use $f(x)$ to predict $y$. There is also a loss function $L(y, f(x))$ that measure the cost. The average loss is calculated as
 \begin{equation}
-    \expectation{L} = \iint L\left(y, f(x)\right) p(x,y) \dif x \dif y
+    \expectation{L} = \iint L\mleft(y, f(x)\mright) p(x,y) \dif x \dif y
 \end{equation}
 
 If we choose the loss as
@@ -121,12 +121,12 @@ If we choose the loss as
 
 The average loss is now
 \begin{equation}
-    \expectation{L} = \iint \left(y - f(x)\right)^2 p(x,y) \dif x \dif y
+    \expectation{L} = \iint \mleft(y - f(x)\mright)^2 p(x,y) \dif x \dif y
 \end{equation}
 
 Take the derivative and the closed form solution is
 \begin{equation}
-    2 \int \left( f(x) -y \right) p(x,y) \dif y = 0 \Rightarrow f(x) = \frac{\int y p(x,y) \dif y}{p(x)} = \expectation{y|x}
+    2 \int \mleft( f(x) -y \mright) p(x,y) \dif y = 0 \Rightarrow f(x) = \frac{\int y p(x,y) \dif y}{p(x)} = \expectation{y|x}
 \end{equation}
 
 Other loss function could be used too, such as \cindex{Minkowski loss} $L(x,y) = (x - y)^p$.
@@ -138,14 +138,14 @@ Other loss function could be used too, such as \cindex{Minkowski loss} $L(x,y) =
 The loss function defined in \formularef{square_loss} could be re-arranged as
 \begin{equation}
     \begin{aligned}
-        (f(x) - y)^2 &= \left(f(x) - \expectation{y|x} + \expectation{y|x} - y\right)^2 \\
-        &= \left(f(x) - \expectation{y|x}\right)^2 + 2 \left(f(x) - \expectation{y|x}\right)\left(\expectation{y|x} - y) + (\expectation{y|x} - y\right)^2
+        (f(x) - y)^2 &= \mleft(f(x) - \expectation{y|x} + \expectation{y|x} - y\mright)^2 \\
+        &= \mleft(f(x) - \expectation{y|x}\mright)^2 + 2 \mleft(f(x) - \expectation{y|x}\mright)\mleft(\expectation{y|x} - y) + (\expectation{y|x} - y\mright)^2
     \end{aligned}
 \end{equation}
 
 Take expectation on both side, and we have
 \begin{equation}
-    \expectation{L} = \underbrace{\int \left(f(x) - \expectation{y|x}\right)^2 p(x) \dif x}_{\text{first part}} + \underbrace{\int \variance{y|x} p(x) \dif x}_{\text{second part: noise}}
+    \expectation{L} = \underbrace{\int \mleft(f(x) - \expectation{y|x}\mright)^2 p(x) \dif x}_{\text{first part}} + \underbrace{\int \variance{y|x} p(x) \dif x}_{\text{second part: noise}}
 \end{equation}
 
 The second part is unrelated to the $f(x)$, and it is the intrinsic variability of the target data and can be regarded as noise. 
@@ -153,16 +153,16 @@ The second part is unrelated to the $f(x)$, and it is the intrinsic variability 
 In practice, $f(x)$ also depends on the training set $D$, so it is of the form $f(x;D)$ with $D$ being probabilistic. So we have the fomula
 \begin{equation}
     \begin{aligned}
-        (f(x;D) - \expectation{y|x})^2 &= \left(f(x;D) - \expectationonanvariable{D}{f(x;D)} + \expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)^2 \\
-        &= \left(f(x;D) - \expectationonanvariable{D}{f(x;D)}\right)^2 \\
-        &+ \left(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)^2 \\
-        &+ 2 \left(f(x;D) - \expectationonanvariable{D}{f(x;D)}\right)\left(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)
+        (f(x;D) - \expectation{y|x})^2 &= \mleft(f(x;D) - \expectationonanvariable{D}{f(x;D)} + \expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\mright)^2 \\
+        &= \mleft(f(x;D) - \expectationonanvariable{D}{f(x;D)}\mright)^2 \\
+        &+ \mleft(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\mright)^2 \\
+        &+ 2 \mleft(f(x;D) - \expectationonanvariable{D}{f(x;D)}\mright)\mleft(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\mright)
     \end{aligned}
 \end{equation}
 
 Take the expectation, and we have
 \begin{equation}
-    \underbrace{\int (f(x) - \expectation{y|x})^2 p(x) \dif x}_{\text{first part}} = \underbrace{\left(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)^2}_{\text{bias}^2} + \underbrace{\expectationonanvariable{D}{\left(f(x;D) - \expectationonanvariable{D}{f(x;D)}\right)^2}}_{\text{variance}}
+    \underbrace{\int (f(x) - \expectation{y|x})^2 p(x) \dif x}_{\text{first part}} = \underbrace{\mleft(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\mright)^2}_{\text{bias}^2} + \underbrace{\expectationonanvariable{D}{\mleft(f(x;D) - \expectationonanvariable{D}{f(x;D)}\mright)^2}}_{\text{variance}}
 \end{equation}
 
 So 
@@ -172,8 +172,8 @@ So
 where
 \begin{equation}
     \begin{aligned}
-        \text{bias}^2 &= \left(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\right)^2 \\
-        \text{variance} &= \expectationonanvariable{D}{\left(f(x;D) - \expectationonanvariable{D}{f(x;D)}\right)^2} \\
+        \text{bias}^2 &= \mleft(\expectationonanvariable{D}{f(x;D)} - \expectation{y|x}\mright)^2 \\
+        \text{variance} &= \expectationonanvariable{D}{\mleft(f(x;D) - \expectationonanvariable{D}{f(x;D)}\mright)^2} \\
         \text{noise} &= \int \variance{y|x} p(x) \dif x
     \end{aligned}
 \end{equation}

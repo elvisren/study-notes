@@ -22,7 +22,7 @@
     \item Choose a suitable probability function $\probability{y|\theta}$
     \item Set machine learning model $\theta = f(x;\phi)$. So $\probability{y|\theta} = \probability{y|f(x;\phi)}$
     \item Find a parameter $\hat\phi$ that minimize the negative log-likelihood loss function over all training dataset pairs $\set{\selectonesample{x}{i}, \selectonesample{y}{i}}$: \begin{equation}
-        \hat\phi = \argmin{\phi} L(\phi) = \argmin{\phi} \left( - \sum_{i=1}^n \ln \left(\probability{\selectonesample{y}{i} \middle| f\left(\selectonesample{x}{i};\phi \right)} \right)\right)
+        \hat\phi = \argmin{\phi} L(\phi) = \argmin{\phi} \mleft( - \sum_{i=1}^n \ln \mleft(\probability{\selectonesample{y}{i} \middle| f\mleft(\selectonesample{x}{i};\phi \mright)} \mright)\mright)
     \end{equation}
 \end{enumerate}
 
@@ -32,15 +32,15 @@ Note that the cost function is not the loss function. Cost function = loss funct
 In \cindex{homoscedastic regression}, the variance is a constant value. Assume $y$ follows normal distribution with $\mu = f(x;\phi)$ and $\sigma^2$ is a constant. We have 
 \begin{equation}\label{homoscedastic_regression}
     \begin{aligned}
-        L(\phi) &= - \sum_{i=1}^N \ln \left( \frac{1}{\sqrt{2\pi \sigma^2}} \exponential{- \frac{\left(\selectonesample{y}{i} - f\left(\selectonesample{x}{i};\phi\right)\right)^2}{2 \sigma^2}} \right) \\
-        &= N \ln \sigma + \frac{1}{2 \sigma^2} \sum_{i=1}^N \left(\selectonesample{y}{i} - f\left(\selectonesample{x}{i};\phi\right)\right)^2 + N \ln \sqrt{2\pi}
+        L(\phi) &= - \sum_{i=1}^N \ln \mleft( \frac{1}{\sqrt{2\pi \sigma^2}} \exponential{- \frac{\mleft(\selectonesample{y}{i} - f\mleft(\selectonesample{x}{i};\phi\mright)\mright)^2}{2 \sigma^2}} \mright) \\
+        &= N \ln \sigma + \frac{1}{2 \sigma^2} \sum_{i=1}^N \mleft(\selectonesample{y}{i} - f\mleft(\selectonesample{x}{i};\phi\mright)\mright)^2 + N \ln \sqrt{2\pi}
     \end{aligned}
 \end{equation}
 
 
 In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x;\phi)$ and $\sigma^2 = g(x;\phi)$, the loss function now becomes:
 \begin{equation}
-    L(\phi) = \frac{1}{2} \sum_{i=1}^N \left(\ln g\left(\selectonesample{x}{i};\phi\right) + \frac{\left(\selectonesample{y}{i} - f\left(\selectonesample{x}{i};\phi\right)\right)^2}{ g\left(\selectonesample{x}{i};\phi\right)} \right)
+    L(\phi) = \frac{1}{2} \sum_{i=1}^N \mleft(\ln g\mleft(\selectonesample{x}{i};\phi\mright) + \frac{\mleft(\selectonesample{y}{i} - f\mleft(\selectonesample{x}{i};\phi\mright)\mright)^2}{ g\mleft(\selectonesample{x}{i};\phi\mright)} \mright)
 \end{equation}
 
 
@@ -51,7 +51,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
             \mu_{\text{ML}} &= \frac{1}{N}\sum_{n=1}^N x_n \\
             \sigma^2_{\text{ML}} &= \frac{1}{N} \sum_{n=1}^N (x_n - \mu_{\text{ML}})^2 \\
             \expectation{\mu_{\text{ML}}} &= \mu \\
-            \expectation{\sigma^2_{\text{ML}}} &= \left( \frac{n-1}{n} \right) \sigma^2
+            \expectation{\sigma^2_{\text{ML}}} &= \mleft( \frac{n-1}{n} \mright) \sigma^2
         \end{aligned}
     \end{equation}
     
@@ -63,7 +63,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
 \begin{theorem}[\cindex{mode}]
     A function has a mode at $x$ if $x$ maximize the value of function. Optimization of likelihood function after change of parameters needs to be careful. For a usual change of variables $x = g(y)$, we have $\hat{f}(y) = f(g(y))$. Then
     \begin{equation}
-         \argmax{x}f(x) = g\left(\argmax{y}f\left(g(y)\right)\right)
+         \argmax{x}f(x) = g\mleft(\argmax{y}f\mleft(g(y)\mright)\mright)
     \end{equation}
     
     In probability case, we have
@@ -138,7 +138,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
     
     So normal distribution has the maximum entropy, which is 
     \begin{equation}
-        \entropy{x} = \frac{1}{2} \left(1 + \ln (2\pi \sigma^2) \right)
+        \entropy{x} = \frac{1}{2} \mleft(1 + \ln (2\pi \sigma^2) \mright)
     \end{equation}
     
     So \emph{the entropy of continuous distribution could be negative}.
@@ -149,7 +149,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
     If we have a distribution with unknown distribution function $p(x)$, and we model it using approximation $q(x)$, we need more bits to specify. The additional amount of information needed is called \cindex{relative entropy}, or \cindex{Kullback-Leibler divergence}, or KL divergence, which is
     \begin{equation}
         \begin{aligned}
-            \kldivergence{p}{q} &= - \int_{-\infty}^{\infty} p(x) \ln q(x) - \left(- \int_{-\infty}^{\infty}  p(x) \ln p(x) \right) \\
+            \kldivergence{p}{q} &= - \int_{-\infty}^{\infty} p(x) \ln q(x) - \mleft(- \int_{-\infty}^{\infty}  p(x) \ln p(x) \mright) \\
             &= - \int_{-\infty}^{\infty} p(x) \ln \frac{q(x)}{p(x)} \dif x
         \end{aligned}        
     \end{equation}

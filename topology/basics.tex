@@ -72,7 +72,7 @@ For different metrics:
 \begin{definition}[\cindex{topologist's sine curve}]\label{topologist_sine_curve}
     The topologist's sine curve is
     \begin{equation}
-        \closure{S} = \closure{\set{x \times \sin \left(\frac{1}{x} \right) | 0 < x \leq 1}}
+        \closure{S} = \closure{\set{x \times \sin \mleft(\frac{1}{x} \mright) | 0 < x \leq 1}}
     \end{equation}
     
     It is connected, but with two parts: one vertical line and one sine curve.
@@ -381,7 +381,7 @@ If the condition (4) holds for a point $x$ of $X$, then $f$ is continuous at the
 \begin{proof}
     For (1) $\rightarrow$ (2), $\forall y \in f(\closure{A}), \exists x \in \closure{A}, y = f(x)$. Take $U$ that $y \in U$, there is $V = f^{-1}(U)$ that is open and $x \in V$. Since $x \in \closure{A}$, $\exists t \in V \cap A$. So $f(t) \in U \cap f(A) \neq \emptyset$.
     
-    For (2) $\rightarrow$ (3), $f(\closure{A}) \subset \closure{f(A)} = B$, so $f^{-1} \left(f(\closure{A}) \right) \subset f^{-1}(B) = A$. So $\closure{A} \subset f^{-1} \left(f(\closure{A}) \right) = A$.
+    For (2) $\rightarrow$ (3), $f(\closure{A}) \subset \closure{f(A)} = B$, so $f^{-1} \mleft(f(\closure{A}) \mright) \subset f^{-1}(B) = A$. So $\closure{A} \subset f^{-1} \mleft(f(\closure{A}) \mright) = A$.
 \end{proof}
 
 
@@ -395,7 +395,7 @@ If the condition (4) holds for a point $x$ of $X$, then $f$ is continuous at the
 \end{theorem}
 
 \begin{theorem}[\cindex{coordinate functions}]
-Let $f: A \rightarrow X \times Y$ defined as $f(a) = \left(f_1(a), f_2(a) \right)$. Then $f$ is continuous if and only if $f_1$ and $f_2$ are continuous. The map $f_1$ and $f_2$ are called the coordinate functions of $f$.
+Let $f: A \rightarrow X \times Y$ defined as $f(a) = \mleft(f_1(a), f_2(a) \mright)$. Then $f$ is continuous if and only if $f_1$ and $f_2$ are continuous. The map $f_1$ and $f_2$ are called the coordinate functions of $f$.
 \end{theorem}
 
 
@@ -417,7 +417,7 @@ Box topology generate the topology using basis. Product topology is using subbas
 \end{definition}
 
 \begin{definition}[\cindex{projection mapping}]
-    A projection mapping $\pi_\beta$ is defined as $\pi_\beta \left( (x_{\alpha})_{\alpha \in J} \right) = x_\beta$.
+    A projection mapping $\pi_\beta$ is defined as $\pi_\beta \mleft( (x_{\alpha})_{\alpha \in J} \mright) = x_\beta$.
 \end{definition}
 
 \begin{definition}[\cindex{product topology}]
@@ -432,7 +432,7 @@ Let $A_{\alpha} \subset X_{\alpha}$. $\displaystyle \prod \closure{A_{\alpha}} =
 
 
 \begin{theorem}
-Let $\displaystyle f : A \rightarrow \prod_{\alpha} X_{\alpha}$ be given by $f(a) = \left( f_{\alpha}(a) \right)$ where $f_{\alpha} : A \rightarrow X_{\alpha}$. In product topology $f$ is continuous if and only if $f_{\alpha}$ is continuous.
+Let $\displaystyle f : A \rightarrow \prod_{\alpha} X_{\alpha}$ be given by $f(a) = \mleft( f_{\alpha}(a) \mright)$ where $f_{\alpha} : A \rightarrow X_{\alpha}$. In product topology $f$ is continuous if and only if $f_{\alpha}$ is continuous.
 
 This is the reason why product topology is preferred over box topology.
 \end{theorem}
@@ -540,14 +540,14 @@ A metric is to measure how close two points are.
 \end{definition}
 
 \begin{theorem}
-Let $f: X \rightarrow Y$. Let $X$ and $Y$ be metrizable with $d_X$ and $d_Y$. $f$ is continuous is equivalent to the requirement that $\forall x \in X, \forall \epsilon > 0, \exists \delta > 0, d_X (x,y) < \delta \Rightarrow d_Y \left(f(x), f(y) \right) < \epsilon $.
+Let $f: X \rightarrow Y$. Let $X$ and $Y$ be metrizable with $d_X$ and $d_Y$. $f$ is continuous is equivalent to the requirement that $\forall x \in X, \forall \epsilon > 0, \exists \delta > 0, d_X (x,y) < \delta \Rightarrow d_Y \mleft(f(x), f(y) \mright) < \epsilon $.
 \end{theorem}
 
 
 
 
 \begin{definition}[\cindex{converge uniformly}]\label{converge_uniformly}
-    A sequence $f_n$ converge uniformly to $f$ if $\forall \epsilon > 0,\forall x \in X, \exists N \in \mathbb{Z}_{+}, \forall n > N, d \left( f_n (x) , f(x) \right) < \epsilon$.
+    A sequence $f_n$ converge uniformly to $f$ if $\forall \epsilon > 0,\forall x \in X, \exists N \in \mathbb{Z}_{+}, \forall n > N, d \mleft( f_n (x) , f(x) \mright) < \epsilon$.
 \end{definition}
 
 \begin{theorem}

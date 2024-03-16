@@ -161,7 +161,7 @@ Increasing the model complexity will typically increase the variance and reduce 
 There are various distance measure available:
 \begin{enumerate}
     \item \cindex{$l_1$ norm}: $\displaystyle \frac{1}{m} \sum_{i=1}^m \absolutevalue{h(X^{(i)}) - y^{(i)}}$. Also called \cindex{Manhattan norm}, or \cindex{mean absolute error}, or \cindex{MSE}.
-    \item \cindex{$l_2$ norm}: $\displaystyle \sqrt{\frac{1}{m} \sum_{i=1}^m \left(h(X^{(i)}) - y^{(i)} \right)^2}$. Also called \cindex{root mean square error}, or \cindex{RMSE}.
+    \item \cindex{$l_2$ norm}: $\displaystyle \sqrt{\frac{1}{m} \sum_{i=1}^m \mleft(h(X^{(i)}) - y^{(i)} \mright)^2}$. Also called \cindex{root mean square error}, or \cindex{RMSE}.
     \item In general, the \cindex{$l_k$ norm} is $\norm{X - y}_k$.
 \end{enumerate}
 
@@ -357,7 +357,7 @@ In classification, $Y = \set{1, 2, ... , C}$.
 \begin{definition}[Empirical Risk]\label{empirical_risk}
     The empirical risk is the average loss of the predicator on the training set
     \begin{equation}
-        \mathcal{L}(\theta) = \frac{1}{N} \sum_{i=1}^N \mathcal{l}\left( y_n, f(x_n; \theta) \right)
+        \mathcal{L}(\theta) = \frac{1}{N} \sum_{i=1}^N \mathcal{l}\mleft( y_n, f(x_n; \theta) \mright)
     \end{equation}
     
     Here $\mathcal{l}(y, \hat{y})$ is called the loss function.
@@ -366,7 +366,7 @@ In classification, $Y = \set{1, 2, ... , C}$.
 \begin{definition}[Training]
     Training is to find parameters that minimize the empirical risk on the training set:
     \begin{equation}
-        \hat{\theta} = \argmin{\theta}\mathcal{L}(\theta) = \argmin{\theta} \frac{1}{N} \sum_{i=1}^N \mathcal{l}\left( y_n, f(x_n; \theta) \right)
+        \hat{\theta} = \argmin{\theta}\mathcal{L}(\theta) = \argmin{\theta} \frac{1}{N} \sum_{i=1}^N \mathcal{l}\mleft( y_n, f(x_n; \theta) \mright)
     \end{equation}
 \end{definition}
 
@@ -377,7 +377,7 @@ In regression, $y \in \realnumber$. The loss function is no longer the entropy. 
 \begin{theorem}
     One reason is that we will assume the output distribution follows normal distribution $\mathcal{N}(y|\mu,\sigma^2)$. We also assume the variance $\sigma^2$ is a fixed and we will learn $\mu$ as $\mu = f(x;\theta)$. So the total loss is
 \begin{equation}
-    \mathcal{L}(\theta) = - \sum_{i=1}^N \log \left( \left(\frac{1}{2\pi \sigma^2}\right)^{\frac{1}{2}} \exp\left(- \frac{1}{2 \sigma^2} \left( y_i - f(x_i ; \theta) \right)^2 \right) \right) = \frac{N}{2\sigma^2} \mathrm{MSE}(\theta) + \mathrm{const}
+    \mathcal{L}(\theta) = - \sum_{i=1}^N \log \mleft( \mleft(\frac{1}{2\pi \sigma^2}\mright)^{\frac{1}{2}} \exp\mleft(- \frac{1}{2 \sigma^2} \mleft( y_i - f(x_i ; \theta) \mright)^2 \mright) \mright) = \frac{N}{2\sigma^2} \mathrm{MSE}(\theta) + \mathrm{const}
 \end{equation}
 \end{theorem}
 
@@ -407,21 +407,21 @@ Affine transformation could be used in regression, which is called linear regres
 \begin{definition}[Population Risk]
     Assume we know the true distribution of $p^*(x,y)$. The population risk is
     \begin{equation}
-        \mathcal{L}(\theta;p^*) = \mathbb{E}_{p^*(x,y)}\left[\mathcal{l}\left(y; f(x;\theta) \right)\right]
+        \mathcal{L}(\theta;p^*) = \mathbb{E}_{p^*(x,y)}\mleft[\mathcal{l}\mleft(y; f(x;\theta) \mright)\mright]
     \end{equation}
 \end{definition}
 
 \begin{definition}[Generalization Gap]
     Because the empirical risk is 
     \begin{equation}
-        \mathcal{L}(\theta;\mathcal{D}_{\text{train}}) = \frac{1}{\absolutevalue{\mathcal{D}_{\text{train}}}} \sum_{i=1}^{\absolutevalue{\mathcal{D}_{\text{train}}}} \mathcal{l}\left( y_n, f(x_n; \theta) \right)
+        \mathcal{L}(\theta;\mathcal{D}_{\text{train}}) = \frac{1}{\absolutevalue{\mathcal{D}_{\text{train}}}} \sum_{i=1}^{\absolutevalue{\mathcal{D}_{\text{train}}}} \mathcal{l}\mleft( y_n, f(x_n; \theta) \mright)
     \end{equation}
     
     The difference $\mathcal{L}(\theta;p^*) - \mathcal{L}(\theta;\mathcal{D}_{\text{train}})$ is called the generalization gap. Generalization gap is usually a U-shaped curve that goes from underfitting to overfitting.
     
     Because we do not know $p^*(x,y)$, we have to use test risk as a proxy to population risk using test set:
     \begin{equation}
-        \mathcal{L}(\theta;\mathcal{D}_{\text{test}}) = \frac{1}{\absolutevalue{\mathcal{D}_{\text{test}}}} \sum_{i=1}^{\absolutevalue{\mathcal{D}_{\text{test}}}} \mathcal{l}\left( y_n, f(x_n; \theta) \right)
+        \mathcal{L}(\theta;\mathcal{D}_{\text{test}}) = \frac{1}{\absolutevalue{\mathcal{D}_{\text{test}}}} \sum_{i=1}^{\absolutevalue{\mathcal{D}_{\text{test}}}} \mathcal{l}\mleft( y_n, f(x_n; \theta) \mright)
     \end{equation}
 \end{definition}
 

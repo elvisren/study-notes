@@ -3,7 +3,7 @@
 
 \section{Definition}
 
-\begin{definition}[determinate]
+\begin{definition}[\cindex{determinate}]
     Define the \cindex{cofactor} of the entry of $A$ in row $i$ and column $j$ as
     \begin{equation}
         \cofactor{A} = (-1)^{i+j}\determinate{\tilde{A}_{ij}}
@@ -69,8 +69,8 @@
     We have $A X_k = M_k$, so $\determinate{A X_k} = \determinate{A} \times \determinate{X_k} = \determinate{A} \times x_k = \determinate{M_k}$
 \end{proof}
 
-\begin{theorem}
-    If $A$ is invertible, then let \cindex{adjugate matrix} be
+\begin{theorem}[\cindex{adjugate matrix}]
+    If $A$ is invertible, then let adjugate matrix be
     \begin{equation}
         \adjugate{A} = (\cofactor{A})^t
     \end{equation}
@@ -117,7 +117,7 @@
 
 The determinant could be viewed as the only result of special property. First we have to define two things.
 
-\begin{definition}[n-linear function]
+\begin{definition}[\cindex{n-linear function}]
     $\delta$ is a n-linear function over $A$ if:
     \begin{equation}
         \delta \begin{pmatrix}
@@ -137,8 +137,8 @@ The determinant could be viewed as the only result of special property. First we
 \end{definition}
 
 
-\begin{definition}[alternating]
-    A \cindex{n-linear function} is alternating if $\delta (A) = 0$ when two adjacent rows of $A$ are identical.
+\begin{definition}[\cindex{alternating}]
+    A n-linear function is alternating if $\delta (A) = 0$ when two adjacent rows of $A$ are identical.
 \end{definition}
 
 Then the determinant is the only function $\gamma$ that :
@@ -168,7 +168,7 @@ Then the determinant is the only function $\gamma$ that :
     \item If both $A$ and $D$ are invertible, \begin{equation}
         \determinate{D - C \inverse{A} B} = \frac{\determinate{A}}{\determinate{D}} \times \determinate{A - B \inverse{D} C}
         \end{equation}
-    \item $\determinate{\lambda I_m - BC} =\lambda^{m-n} \determinate{\lambda I_n - CB}$ (for $B_{m \times n}$, $m \geq n$)
+    \item $\determinate{\lambda I_m - BC} =\lambda^{m-n} \determinate{\lambda I_n - CB}$ (for $B_{m \times n}$, $C_{n \times m}$, $m \geq n$)
     \end{itemize}
 \end{theorem}
 

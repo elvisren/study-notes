@@ -172,7 +172,7 @@ There are few ways to do the padding:
 \begin{theorem}
     For a image with size $x_h \times x_w$ and kernel with size $f_h \times f_w$, we use zero-padding with size $p_h$ and $p_w$ and stride of $s_h$ and $s_w$, the output size is:
     \begin{equation}
-        \left\lfloor \frac{x_h - f_h + 2p_h}{s_h} + 1 \right\rfloor \times \left\lfloor \frac{x_w - f_w + 2p_w}{s_w} + 1 \right\rfloor
+        \mleft\lfloor \frac{x_h - f_h + 2p_h}{s_h} + 1 \mright\rfloor \times \mleft\lfloor \frac{x_w - f_w + 2p_w}{s_w} + 1 \mright\rfloor
     \end{equation}
 \end{theorem}
 
@@ -204,7 +204,7 @@ Pooling calculates a summary of the input region. Famous pooling includes:
             
 Pooling is a convolution without padding, so the output size is
 \begin{equation}
-    \left\lfloor \frac{x_h - f_h}{s_h} + 1 \right\rfloor \times \left\lfloor \frac{x_w - f_w}{s_w} + 1 \right\rfloor
+    \mleft\lfloor \frac{x_h - f_h}{s_h} + 1 \mright\rfloor \times \mleft\lfloor \frac{x_w - f_w}{s_w} + 1 \mright\rfloor
 \end{equation}
 
 

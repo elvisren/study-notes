@@ -28,7 +28,7 @@
 \end{proof}
 
 \begin{theorem}
-    If $\beta$ is an orthonormal basis and $\coordinate{T}_\beta$ is a diagonal matrix, $\coordinate{T^*}_\beta = \left(\coordinate{T}_\beta\right)^*$ is also a diagonal matrix.
+    If $\beta$ is an orthonormal basis and $\coordinate{T}_\beta$ is a diagonal matrix, $\coordinate{T^*}_\beta = \mleft(\coordinate{T}_\beta\mright)^*$ is also a diagonal matrix.
 \end{theorem}
 
 \begin{theorem}
@@ -299,7 +299,7 @@
 \begin{definition}
     Let $V$ be real inner product space. $g: V \rightarrow V$ is a \cindex{translation} by $v_0 \in V$ if
     \begin{equation}
-        \exists v_0 \forall x \in V \left( g(x) = x + v_0 \right)
+        \exists v_0 \forall x \in V \mleft( g(x) = x + v_0 \mright)
     \end{equation}
 \end{definition}
 
@@ -373,7 +373,7 @@
 \end{theorem}
 
 \begin{definition}
-    $T$ is an \cindex{orthogonal projection} if $\rangespace{T}^\bot = \nullspace{T}$ and $\rangespace{T}= \nullspace{T}^\bot$\footnote{In finite dimensional space $V$, $\rangespace{T}^\bot = \nullspace{T} \leftrightarrow \rangespace{T}= \nullspace{T}^\bot$}. 
+    $T$ is an \cindex{orthogonal projection} if $\rangespace{T}^\bot = \nullspace{T}$ and $\rangespace{T}= \nullspace{T}^\bot$\footnote{In finite dimensional space $V$, $\rangespace{T}^\bot = \nullspace{T} \mleftrightarrow \rangespace{T}= \nullspace{T}^\bot$}. 
 \end{definition}
 
 
@@ -407,7 +407,7 @@
 \begin{proof}
     Let $\displaystyle x= \sum_{i=1}^k x_i$ where $x_i \in W_i$. Then
     \begin{equation*}
-        T(x) = \sum_{i=1}^k T(x_i) = \sum_{i=1}^k \lambda_i x_i= \sum_{i=1}^k \lambda_i T_i (x_i) = \sum_{i=1}^k \lambda_i T_i (x) = \left(\sum_{i=1}^k \lambda_i T_i \right) x
+        T(x) = \sum_{i=1}^k T(x_i) = \sum_{i=1}^k \lambda_i x_i= \sum_{i=1}^k \lambda_i T_i (x_i) = \sum_{i=1}^k \lambda_i T_i (x) = \mleft(\sum_{i=1}^k \lambda_i T_i \mright) x
     \end{equation*}
 \end{proof}
 
@@ -428,7 +428,7 @@
 \begin{proof}
     Let $\displaystyle T = \sum_{i=1}^k \lambda_i T_i$ be the spectral decomposition of $T$. We have
     \begin{equation*}
-    TT^* = \left( \sum_{i=1}^k \lambda_i T_i  \right) \times \left( \sum_{i=1}^k \overline{\lambda_i} T_i \right) = \sum_{i=1}^k \absolutevalue{\lambda_i}^2 T_i^2 = \sum_{i=1}^k \absolutevalue{\lambda_i}^2 T_i = \sum_{i=1}^k T_i  = I    
+    TT^* = \mleft( \sum_{i=1}^k \lambda_i T_i  \mright) \times \mleft( \sum_{i=1}^k \overline{\lambda_i} T_i \mright) = \sum_{i=1}^k \absolutevalue{\lambda_i}^2 T_i^2 = \sum_{i=1}^k \absolutevalue{\lambda_i}^2 T_i = \sum_{i=1}^k T_i  = I    
     \end{equation*}
 \end{proof}
 
@@ -530,7 +530,7 @@
             0
         \end{cases}
     \end{equation*}
-    So although not all $T$ has inverse, the restriction $\left. T \right|_{\nullspace{T}^\bot}$ could have proper inverse.
+    So although not all $T$ has inverse, the restriction $\mleft. T \mright|_{\nullspace{T}^\bot}$ could have proper inverse.
 \end{definition}
 
 \begin{theorem}

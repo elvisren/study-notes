@@ -1,16 +1,112 @@
 \input{preamble}
 
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{libertine}
+
+% Custom title formatting
+\titleformat{\chapter}[display]
+  {\normalfont\Huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+
+% Fancy header and footer
+\fancyhf{} % clear all fields
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
 
 % start of the document  
 \begin{document}
 
-\title{Linear Algebra}
-\author{Elvis Ren}
-\date{\today}
+% Custom title page with TikZ diagram
+\begin{titlepage}
+    \centering
+    \vspace*{1cm} % Add some space at the top of the page
+    
+    \begin{tikzpicture}[
+    % Styling for matrix entries
+    matrixstyle/.style={
+        matrix of math nodes,
+        left delimiter={[},
+        right delimiter={]},
+        nodes={minimum width=5ex},
+    },
+    % Styling for multiplication arrows
+    mularrow/.style={
+        -latex,
+        thick,
+        red,
+        shorten >= 4pt,
+        shorten <= 4pt,
+    },
+    % Styling for result arrows
+    resultarrow/.style={
+        -latex,
+        thick,
+        blue,
+        shorten >= 4pt,
+        bend left=50,
+    },
+    % Highlight styles for matrix entries
+    highlight/.style={rectangle,rounded corners,fill=yellow!50,minimum size=1.5em},
+]
 
-\maketitle
+    % First matrix
+    \matrix (A) [matrixstyle]
+    {
+        a_{11} & a_{12} \\
+        a_{21} & a_{22} \\
+    };
+
+    % Second matrix
+    \matrix (B) [matrixstyle, right=of A]
+    {
+        b_{11} & b_{12} \\
+        b_{21} & b_{22} \\
+    };
+
+    % Result matrix
+    \matrix (C) [matrixstyle, right=of B]
+    {
+        c_{11} & c_{12} \\
+        c_{21} & c_{22} \\
+    };
+
+    % Draw highlight for elements involved in c_{11}
+    \node[highlight] at (A-1-1) {};
+    \node[highlight] at (A-1-2) {};
+    \node[highlight] at (B-1-1) {};
+    \node[highlight] at (B-2-1) {};
+
+    % Communication arrows
+    \draw[mularrow] (A-1-1.east) -- (B-1-1.west);
+    \draw[mularrow] (A-1-2.east) -- (B-2-1.west);
+
+    % Result arrow
+    \draw[resultarrow] (B-1-1.east) to node[above, yshift=2ex] {$c_{11}=a_{11}b_{11} + a_{12}b_{21}$} (C-1-1.west);
+
+\end{tikzpicture}
+
+    
+    
+    \vspace*{1.5cm} % Space between the TikZ diagram and the text
+    
+    % Title
+    {\Huge\bfseries Linear Algebra \\[1em] 
+    \rule{\textwidth}{2pt}\\[0.5em]}
+    
+    \vspace{2cm} % Space between title and author
+    {\Large\textit{Elvis Ren}} % Author
+    
+    \vfill % Fill the rest of the page with whitespace
+    
+    % Date
+    {\large\today}
+\end{titlepage}
+
 \tableofcontents
 
 \input{linear_algebra/linear_algebra_chapters.tex}
 
 \input{postamble}
+\end{document}

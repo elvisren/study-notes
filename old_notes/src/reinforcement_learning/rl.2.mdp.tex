@@ -142,14 +142,14 @@ Bellman equation (\cindex{backup} process) is an expansion of value function:
 \begin{equation}\label{bellman:v}
 	\begin{aligned}
 		V_{\pi}(s) &= \sum_{a \in \mathcal{A}(s)} \pi(a|s) q_{\pi}(s,a) \\
-		&= \sum_{a \in \mathcal{A}(s)} \pi(a|s) \left( \mathcal{R}_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{s,s'}^a V(S') \right)
+		&= \sum_{a \in \mathcal{A}(s)} \pi(a|s) \mleft( \mathcal{R}_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{s,s'}^a V(S') \mright)
 	\end{aligned}
 \end{equation}
 
 \begin{equation}
 	\begin{aligned}
 		q_{\pi}(s,a) &= R_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{s,s'}^a V_{\pi}(s') \\
-		&= R_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{s,s'}^a \left( \sum_{a', s'} \pi(a'|s') q_{\pi}(s',a') \right )
+		&= R_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{s,s'}^a \mleft( \sum_{a', s'} \pi(a'|s') q_{\pi}(s',a') \mright )
 	\end{aligned}
 \end{equation}
 
@@ -159,11 +159,11 @@ Bellman equation (\cindex{backup} process) is an expansion of value function:
 
 Formula (\ref{bellman:v}) is for a single state. Let 
 \begin{equation}
-	V_{\pi} = \left [\begin{matrix}
+	V_{\pi} = \mleft [\begin{matrix}
  	V_{\pi}(s_1) \\
  	\vdots \\
  	V_{\pi}(s_n)
- \end{matrix} \right ]
+ \end{matrix} \mright ]
 \end{equation}
 
 Formula (\ref{bellman:v}) now becomes:
@@ -199,7 +199,7 @@ The optimal state-value function $V_*$ is defined as:
 	\begin{aligned}
 		V_*(s) &= \underset{\pi}{\max} \ V_{\pi}(s) \\
 		&= \underset{a}{\max}\ q_* (s, a) \\
-		&= \underset{a}{\max}\ \left( \mathcal{R}_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{s,s'}^a V_*(s') \right )
+		&= \underset{a}{\max}\ \mleft( \mathcal{R}_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{s,s'}^a V_*(s') \mright )
 	\end{aligned}
 \end{equation}
 
