@@ -5,34 +5,44 @@
 
 The reason we do research on diagonalization is to simplify calculation. If a square matrix is diagonalizable, the result is a diagonal matrix, which is each to multiply.
 
-Diagonalization process will find eigenvectors. These special vectors have a special property that after the result of linear transformation are still themselves with different length, so it is an invariant subspace. Because these eigenvectors are the basis of vector space, we could try to understand the behavior of the linear transformation through these eigenvectors.
+Diagonalization process will find basis with eigenvectors. These eigenvectors are invariant subspace. So we could use simple logic to analyze the behavior of linear transformation.
 
 \emph{Linear operator has rich property because it is closely linked to polynomial}. See Section \ref{minimal_polynomial}.
 
 \section{Definition}
 
-
-A linear operator $T$ is \cindex{diagonalizable} if there is a basis $\beta$ of $V$ that $\coordinate{T}_\beta$ is a diagonal matrix. A square matrix $A$ is diagonalizable if $L_A$ is diagonalizable.
-
-If a linear operator $T$ is diagonalizable, it means $T(v_i) = \lambda_i v_i$, for each $v_i \in \beta$. $v_i$ is called \cindex{eigenvector} and $\lambda$ is called \cindex{eigenvalue}. Here $v_i \neq 0$.
-
-Eigenvector is also called \cindex{characteristic vector}. Eigenvalue is also called \cindex{characteristic value}.
-
-A eigenvalue could be $0$, but eigenvector could not be $\vec{0}$. An eigenvector is an invariant subspace of dimension $1$.
-
-
-If a square matrix is diagonalizable, it is similar to a diagonal matrix. So $D = \inverse{Q} A Q$ where each column of $Q$ is a eigenvector ($Q = \coordinate{I_V}_v^e$). ($A$ is the coordinate of $L_A$ under the standard basis of $\realnumber^n$. Now the basis was changed to $Q$, so use \theoref{change_of_coordinate_formula} to find the diagonal matrix $D$).
+\begin{definition}[\cindex{diagonalizable}]
+    A linear operator $T$ is diagonalizable if there is a basis $\beta$ of $V$ that $\coordinate{T}_\beta$ is a diagonal matrix. 
+    
+    If a linear operator $T$ is diagonalizable, it means for each $v_i \in \beta$, $T(v_i) = \lambda_i v_i$, . $v_i$ is called \cindex{eigenvector}\footnote{Eigenvector is also called \cindex{characteristic vector}.} and $\lambda$ is called \cindex{eigenvalue}\footnote{Eigenvalue is also called \cindex{characteristic value}.}. Here $v_i \neq 0$ because it is a basis\footnote{A eigenvalue could be $0$, but eigenvector could not be $\vec{0}$.}.
+    
+    An eigenvector is an invariant subspace of dimension $1$
+    
+    A square matrix $A$ is diagonalizable if $L_A$ is diagonalizable.
+\end{definition} 
 
 
 
+According to the definition, if a square matrix $A$ is diagonalizable, it is similar to a diagonal matrix. Let $Q$ be the matrix that contains this special basis $\beta$ (i.e., $\selectmatrixcolumn{Q}{j} = v_j$), and $\Lambda$ be the diagnoal matrix contains the corresponding eigenvalues (i.e., $\Lambda_{ii} = \lambda_i$). We have:
+\begin{equation}
+    A = \inverse{Q} \Lambda Q
+\end{equation}
+
+
+
+
+% calculation
 \section{Calculation}
 
-It is easier to calculate eigenvalue using matrix representation. If (and only if) $\lambda$ is an eigenvalue of $A$, then 
+\begin{definition}\cindex{characteristic polynomial}
+    It is easier to calculate eigenvalue using matrix representation. If (and only if) $\lambda$ is an eigenvalue of $A$, then 
 \begin{equation}
     \determinate{A - \lambda I_n} = 0
 \end{equation}
 
-The function $f(t) = \determinate{A - t I_n}$ is called the \cindex{characteristic polynomial} of $A$. So our job is to find all zeros of $f(t)$.
+The function $f(t) = \determinate{A - t I_n}$ is called the characteristic polynomial of $A$. So our job is to find all zeros of $f(t)$.
+\end{definition}
+
 
 
 \begin{theorem}
@@ -114,7 +124,7 @@ The test for diagonalizability now requires $\dimension{E_\lambda} = m$ for each
 \end{enumerate}
 
 \begin{definition}[\cindex{direct sum}]
-    Let $\set{W_i}$ be subspace of $V$. If $W_i \cap \sum_{j \neq i} W_j = \emptyset$ for all $i$, we define direct sum
+    Let $\set{W_i}$ be subspace of $V$. If $\displaystyle W_i \cap \sum_{j \neq i} W_j = \emptyset$ for all $i$, we define direct sum
     \begin{equation}
         W = \bigoplus_{j} W_j
     \end{equation}
@@ -127,9 +137,7 @@ The test for diagonalizability now requires $\dimension{E_\lambda} = m$ for each
 
 
 \begin{theorem}\label{split_means_upper_trangular}
-    \emph{If the characteristic polynomial splits, $A$ is similar to an upper diagonal matrix}.
-    
-    (This theorem is used many times in inner product)
+    \emph{If the characteristic polynomial splits, $A$ is similar to an upper diagonal matrix}\footnote{This theorem is used many times in inner product.}.    
 \end{theorem}
 \begin{proof}
     If it splits, there must be an eigenvector $v_1$ for eigenvalue $\lambda_1$. Expand $v_1$ to a basis of $V$. Create a matrix $P$ whose columns are these basis ($v_1$ is the first column). Then:
@@ -179,17 +187,8 @@ The test for diagonalizability now requires $\dimension{E_\lambda} = m$ for each
 \end{proof}
 
 \begin{theorem}
-    For any $x_i$ in eigenspace $W_i$ with eigenvalue $\lambda_i$, we have $T(x_i) = \lambda_i x_i$.
+    For any $x_i$ in eigenspace $W_i$ with eigenvalue $\lambda_i$, we have $T(x_i) = \lambda_i x_i$. So each $W_i$ is an invariant subspace of $V$.
 \end{theorem}
-
-\begin{theorem}
-    The rank of $A$ is the number of nonzero $\lambda_i$ (includes multiplicity). So $A$ is invertible if and only if $0$ is not an eigenvalue.    
-\end{theorem}
-
-\begin{theorem}
-    The eigenvalues of $\inverse{T}$ are $\displaystyle \set{\frac{1}{\lambda_i}}$.
-\end{theorem}
-
 
 \begin{theorem}
     Let $\lambda_i$ be the eigenvalue of $A$ (with duplication), we have:
@@ -205,6 +204,16 @@ The test for diagonalizability now requires $\dimension{E_\lambda} = m$ for each
 \end{proof}
 
 
+\begin{theorem}
+    The rank of $A$ is the number of nonzero $\lambda_i$ (includes multiplicity). So $A$ is invertible if and only if $0$ is not an eigenvalue.    
+\end{theorem}
+
+
+\begin{theorem}
+    The eigenvalues of $\inverse{T}$ are $\displaystyle \set{\frac{1}{\lambda_i}}$.
+\end{theorem}
+
+
 
 % invariant subspace
 \section{Invariant Subspace}
@@ -215,22 +224,30 @@ Invariant subspace is very useful because it could split the big matrix represen
     A subspace $W$ of $V$ is $T$-invariant subspace if $T(W) \subseteq W$.
 \end{definition}
 
-\begin{theorem}
+\begin{example}
     Let $p \in P_m(F)$ be a polynomial and $T \in \mathcal{L}(V)$. Then $\nullspace{p(T)}$ and $\rangespace{p(T)}$ are invariant under $T$.
-\end{theorem}
+\end{example}
 \begin{proof}
     Suppose $u \in \nullspace{p(T)}$. Then $p(T)u = 0$. So $p(T) \circ (Tu) = T \circ p(T) \circ u = 0$.
+    
+    Suppose $u \in \rangespace{p(T)}$. Then $u = p(T)v$. So $Tu = Tp(T)v = p(T) Tv \in \rangespace{p(T)}$.
 \end{proof}
+
+\begin{example}
+    Let $\beta = \set{v_i}$ be a basis of $V$. If $\coordinate{T}_\beta$ is a diagonal matrix, then $\spanset{v_1, \cdots, v_k}$ is invariant under $T$ for $1 \leq k \leq n$.
+\end{example}
+
 
 
 \begin{definition}[\cindex{$T$-cyclic subspace}]
     $W = \set{ x, T(x), T^2(x), \cdots}$ is the $T$-cyclic subspace of $V$ generated by $x$. It is the smallest $T$-invariant subspace that contains $x$.
+    
+    For $T$-cyclic subspace of a $n$ dimension space, there are at most $n$ elements in it. 
 \end{definition}
 
-For $T$-cyclic subspace of a $n$ dimension space, there are at most $n$ elements in it. 
 
 \begin{theorem}\label{split_of_invariant_subspace}
-    Let $W$ be $T$-invariant subspace of $V$. Then the characteristic polynomial of $T_W$ divides that of $T$.    
+    Let $W$ be $T$-invariant subspace of $V$. Then the characteristic polynomial of $\functionrestriction{T}{W}$ divides that of $T$.    
 \end{theorem}
 \begin{proof}
     Find a basis $\gamma$ of $T_W$ and expand it to basis $\beta$ of $V$. We have 
@@ -255,7 +272,7 @@ For $T$-cyclic subspace of a $n$ dimension space, there are at most $n$ elements
 \begin{theorem}\label{char_poly_of_invariant_subspace}
     Let $W$ be a $T$-cyclic subspace of $V$ generated by $v$, and let $k = \dimension{W}$. We have
     \begin{enumerate}
-        \item $\set{v, T(v), T^2(v), ..., T^{k-1}(v)}$ is a basis of $W$\label{cyclic_first_conclusion}
+        \item $\set{v, T(v), T^2(v), ..., T^{k-1}(v)}$ is a basis of $W$\label{cyclic_first_conclusion}.
         \item If $a_0 v + a_1 T(v) + a_2 T^2(v) + ... + a_{k-1} T^{k-1} (v) + T^k (v) = 0$ (there must be one because they are not linearly independent), then the characteristic polynomial of $T_W$ is $f(t) = (-1)^k (a_0 + a_1 t + a_2 t^2 + a_{k-1} t^{k-1} + t^k)$
     \end{enumerate}
 \end{theorem}
@@ -297,6 +314,17 @@ For $T$-cyclic subspace of a $n$ dimension space, there are at most $n$ elements
 % minimal polynomial
 \section{Minimal Polynomial}\label{minimal_polynomial}
 
+It is very hard to calculate the minimal polynomial of a linear transformation $T$. So it is mainly used as a proof.
+
+\begin{theorem}[\cindex{factorization}]
+    Suppose $p \in P_m(R)$ is a non-constant polynomial. Then $p$ has a unique factorization of the form
+    \begin{equation}
+        p(x) = c \mleft( \prod_{i=1}^m \mleft(x - \lambda_i\mright) \mright) \mleft( \prod_{j=1}^n \mleft(x^2 + b_j x + c_j\mright) \mright)
+    \end{equation}
+    Where $\lambda_i, b_j, c_j, c \in \realnumber$, and $b_j^2 < 4 c_j$ for all $j$.
+\end{theorem}
+
+
 \begin{theorem}
     Every operator $T$ on a finite-dimensional\footnote{finite-dimension is required} nonzero complex\footnote{complex space is required} vector space $V$ has an eigenvalue.
 \end{theorem}
@@ -315,19 +343,65 @@ For $T$-cyclic subspace of a $n$ dimension space, there are at most $n$ elements
     Suppose $V$ is finite dimensional and $T \in \mathcal{L}(V)$. Then these exists a unique monic polynomial $p\in P(F)$ of smallest degree that $p(T) = 0$. And $\text{degree }p \leq \dimension{V}$. $p$ is called the minimal polynomial of $T$. 
 \end{theorem}
 \begin{proof}
-    Deduct on the dimension of $V$. Assume $\dimension{V} = n$. For any $v \in V$ such that $v \neq 0$, the set $\set{v, Tv, T^2v, \cdots, T^n v}$ is linearly dependent. So there is smallest $m \leq n$ that $T^m v$ is a linear combination of $\set{v, Tv, T^2v, \cdots, T^{m-1} v}$. So there are $\set{c_i}$ that
+    Deduct on the dimension of $V$. Assume $\dimension{V} = n$. For any $v \in V$ such that $v \neq 0$, the set $\set{v, Tv, T^2v, \cdots, T^n v}$ with $n+1$ element is linearly dependent. So there is smallest $m \leq n$ that $T^m v$ is a linear combination of $\set{v, Tv, T^2v, \cdots, T^{m-1} v}$. So there is polynomial $q$ with $\set{c_i}$ that
     \begin{equation*}
-        c_0 v + c_1 Tv + c_2 T^2 v + \cdots + c_{m-1} T^{m-1} v + T^m v = 0
+        q(T) v = c_0 v + c_1 Tv + c_2 T^2 v + \cdots + c_{m-1} T^{m-1} v + T^m v = 0
     \end{equation*}
+    
+    Since $q(T)T^k v = T^k q(T) v = 0$ for $0 \leq k \leq m-1$, $\dimension{\nullspace{q(T)}} \geq m$, so $\dimension{\rangespace{q(T)}} \leq n - m$. Use deduction, there is $s$ with the above property and degree $\leq n - m$ for $\functionrestriction{T}{\rangespace{q(T)}}$. So $sq \circ Tv = s(T) \circ q(T) v = 0$.
+    
+    Key idea: choose a random $v$ to find a polynomial $q$. Since the range dimension of $q$ is small, use deduction assumption to find a $s$ that $s \circ q(T)v =0$ for all $v$.
 \end{proof}
 
 
+\begin{theorem}
+    Suppose $V$ is finite dimensional and $T \in \mathcal{L}(V)$. Then
+    \begin{itemize}
+        \item The zeros of the minimal polynomial of $T$ are the eigenvalues of $T$.
+        \item If $V$ is a complex vector space, then the minimal polynomial of $T$ has the form $\displaystyle \prod_i \mleft(z-\lambda_i\mright)$ where $\set{\lambda_i}$ are the eigenvalues\footnote{With repetitions} of $T$.
+        \item Every monic polynomial is the minimal polynomial of some operator.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    If $\lambda \in F$ is a zero of $p$, we have $p(T)v = (T - \lambda I)q(T) v = 0$. Since $q$ is not the minimal polynomial, there is a $v$ that $u = q(T)v != 0$. So $(T - \lambda I) u = 0$.
+    
+    For any eigenvalue $\lambda$ of $T$, there is $v$ that $Tv = \lambda v$, and $T^k v = \lambda^k v$. So $p(T)v = p(\lambda)v = 0$. So $\lambda$ is a zero of $p$.
+\end{proof}
 
 
+\begin{theorem}\label{polynomial_multiply_of_minimal_polynomial}
+    $q(T) = 0$ $\Leftrightarrow$ $q$ is a polynomial multiply of minimal polynomial of $T$.
+\end{theorem}
+\begin{proof}
+    Assume $p$ is the minimal polynomial of $T$. So $q = ps + r$. So $0 = q(T) = p(T) s(T) + r(T) = r(T) \Rightarrow r = 0$.
+\end{proof}
 
 
+\begin{theorem}
+    Let $U \subset V$ that is invariant under $T$. Then the minimal polynomial $q$ of $T$ in $V$ is a polynomial multiply of the minimal polynomial $p$ of $\functionrestriction{T}{U}$.
+\end{theorem}
+\begin{proof}
+    Since $p(T)u=0$ for $u \in U$, so $p(\functionrestriction{T}{u}) = 0$. Since $q(\functionrestriction{T}{u}) = 0$, \theoref{polynomial_multiply_of_minimal_polynomial} means $q/p$.
+\end{proof}
+
+\begin{theorem}
+    $T$ is not invertible if and only the constant term of minimal polynomial $p$ of $T$ is $0$.
+\end{theorem}
+\begin{proof}
+    $T$ is not invertible $\Leftrightarrow$ $0$ is an eigenvalue of $T$ $\Leftrightarrow$ $0$ is a zero of $p$ $\Leftrightarrow$ the constant term of $p$ is $0$.
+\end{proof}
 
 
+\begin{theorem}
+    Here is the relationship between minimal polynomial $m_T$ and characteristic polynomial $c_T$:
+    \begin{itemize}
+        \item $m_T$ divides $c_T$
+        \item The degree of $c_T$ is $n$
+        \item The degree of $m_T$ is no larger than $n$
+        \item The root of $m_T$ are eigenvalues of $T$
+        \item The multiplicity of any root of $m_T$ is no larger than that in $c_T$
+    \end{itemize}
+\end{theorem}
 
 
 

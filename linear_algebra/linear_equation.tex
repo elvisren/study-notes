@@ -2,30 +2,37 @@
 
 \section{Elementary Operations}
 
-There are 3 \cindex{elementary row operations} on a $m \times n$ matrix $A$:
+\begin{definition}[\cindex{elementary row operations}]
+    There are 3 elementary row operations on a $m \times n$ matrix $A$:
 \begin{enumerate}
     \item interchange any two rows
     \item multiply any row by a nonzero scalar
     \item add any scalar multiple of a row to another row
 \end{enumerate}
+\end{definition}
 
-Each operation has an elementary operation $E$ associated with it.
 
-
-The \cindex{rank} of a matrix $A$ is the rank of $L_A$. So we are defining the rank of a matrix using the rank of a linear transformation. This is sometimes useful because we could use matrix to calculate the rank of a linear transformation.
-
-By applying a series of elementary row and column operations on $A_{m \times n}$, we could find invertible matrix $B_{m \times m}$ (multiplication of row operations) and $C_{n \times n}$ (multiplication of column operations) that
+\begin{theorem}
+    By applying a series of elementary row and column operations on $A_{m \times n}$, we could find invertible matrix $B_{m \times m}$ (multiplication of row operations) and $C_{n \times n}$ (multiplication of column operations) that
 \begin{equation*}
     D = B A C = \begin{pmatrix}
         I_r & 0 \\
         0 & 0
     \end{pmatrix}
 \end{equation*}
+\end{theorem}
 
-We could find the inverse of a matrix using elementary operations. Define an augmented matrix $(A|I_n)$. If we could apply a series of row operation on $A$ and convert it to $I$, then the same operations could convert from $I$ to $\inverse{A}$. So the logic is:
+\begin{theorem}
+    We could find the inverse of a matrix using elementary operations. Define an augmented matrix $(A|I_n)$. If we could apply a series of row operation on $A$ and convert it to $I$, then the same operations could convert from $I$ to $\inverse{A}$. So the logic is:
 \begin{equation}
     E_p E_{p-1} \hdots E_2 E_1 (A|I_n) = (I_n | \inverse{A} )
 \end{equation}
+\end{theorem}
+
+
+
+
+
 
 
 \section{Systems of Linear Equations}

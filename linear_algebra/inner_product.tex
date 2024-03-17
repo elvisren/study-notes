@@ -51,7 +51,11 @@ The relations between $T$ and $T^*$ are:
     \item $\innerproduct{x}{0} = \innerproduct{0}{x} = 0$
     \item If $\innerproduct{x}{y} = \innerproduct{x}{z}$ for all $x$, then $y = z$
 \end{itemize}
+
+A \cindex{inner product space} is a vector space with inner product.
 \end{definition}
+
+
 
 From the definition, we can find that
 \begin{itemize}
@@ -59,7 +63,7 @@ From the definition, we can find that
     \item Inner product is \cindex{conjugate linear} in the second component
 \end{itemize}
 
-Be careful that inner product could be negative. So it is different from metric which has to be non-negative.
+Be careful that \emph{inner product could be negative}. So it is different from metric which has to be non-negative.
 
 
 \begin{definition}[\cindex{conjugate transpose}]
@@ -74,13 +78,16 @@ Be careful that inner product could be negative. So it is different from metric 
 \begin{itemize}
     \item For $x,y \in F^n$, $\displaystyle \innerproduct{x}{y} = \sum_{i=1}^n x_i \conjugate{y_i}$ (standard inner product)
     \item For $A,B \in M_{n \times n}$, $\innerproduct{A}{B} = \trace{B^* A}$ (\cindex{Forbenius Inner Product})
-    \item For $f,g \in C([0,2 \pi])$, $\displaystyle \innerproduct{f}{g} = \frac{1}{2 \pi} \int_{0}^{2\pi} f(x) \conjugate{g(x)} \dif x$ (inner product space $H$)
+    \item For $f,g \in C([0,2 \pi])$, $\displaystyle \innerproduct{f}{g} = \frac{1}{2 \pi} \int_{0}^{2\pi} f(x) \conjugate{g(x)} \dif x$ (\cindex{inner product space $H$})\label{inner_product_space_h}
 \end{itemize}
 \end{example}
 
 
-\begin{definition}[Norm]
-    The \cindex{norm} or \cindex{length} is defined as $\norm{x} = \sqrt{\innerproduct{x}{x}}$    
+\begin{definition}[\cindex{norm}]
+    The norm or \cindex{length} is defined as
+    \begin{equation}
+        \norm{x} = \sqrt{\innerproduct{x}{x}}
+    \end{equation}
 \end{definition}
 
 
@@ -89,7 +96,7 @@ Be careful that inner product could be negative. So it is different from metric 
     \begin{itemize}
     \item $\norm{cx} = \absolutevalue{c} \norm{x}$
     \item $\norm{x} \geq 0$
-    \item $\absolutevalue{\innerproduct{x}{y}} \leq \norm{x} \cdot \norm{y}$ (area of rectangle, \cindex{Cauchy-Schwarz Inequality})
+    \item $\absolutevalue{\innerproduct{x}{y}} \leq \norm{x} \times \norm{y}$ (area of rectangle, \cindex{Cauchy-Schwarz Inequality})
     \item $\norm{x+y} \leq \norm{x} + \norm{y}$ (diagonal and edges)
     \end{itemize}
 \end{theorem}
@@ -118,29 +125,22 @@ Be careful that inner product could be negative. So it is different from metric 
     \end{enumerate}
 \end{definition}
 
-A orthogonal set is linearly independent.
-
-The orthonormal basis of inner product space $H$ are $f_n(t) = e^{int}$ for $n \in R^+$ because $\innerproduct{f_m}{f_n} = \delta_{mn} $.
-
-If the basis matrix $Q$ is orthonormal, then $\inverse{Q} = Q^*$, which is called unitary or orthogonal in \defiref{unitary}.
-
-
-
 % orthogonal
 \section{Orthogonal}
 
 \begin{definition}[\cindex{orthogonal}]
     $x$ and $y$ are orthogonal if $\innerproduct{x}{y} = 0$. A subset $S$ of $V$ is orthogonal if any two vectors in $S$ are orthogonal. 
     
-    A subset $S$ of $V$ is \cindex{orthonormal} if $S$ is orthogonal and consists entirely of unit vectors.
+    A subset $S$ of $V$ is \cindex{orthonormal} if $S$ is orthogonal and consists entirely of unit vectors. So $S = \set{e_j}$ is orthonormal if and only if $\innerproduct{e_i}{e_j} = \delta_{ij}$\footnote{$\delta_{ij}$ is the Kronecker delta defined in \defiref{kronecker_delta}.} .
     
     A \cindex{orthonormal basis} for $V$ is an ordered basis that is orthonormal.
 \end{definition}
 
 
 \begin{definition}
+    The $\cos\theta$ between two non-zero vector $x,y$ is defined as:
     \begin{equation}
-        \innerproduct{x}{y} = \norm{x} \cdot \norm{y} \text{cos}(\theta)
+        \innerproduct{x}{y} = \norm{x} \norm{y} \cos\theta
     \end{equation}    
 \end{definition}
 
@@ -148,6 +148,10 @@ If the basis matrix $Q$ is orthonormal, then $\inverse{Q} = Q^*$, which is calle
 \begin{definition}[\cindex{unit vector}]
 	A vector is unit vector if $\norm{x} = 1$. A \cindex{normalizing} to non-zero $x$ is $\dfrac{1}{\norm{x}} x$.
 \end{definition}
+
+\begin{theorem}
+    A orthogonal set is linearly independent.
+\end{theorem}
 
 
 \begin{theorem}
@@ -164,58 +168,87 @@ If the basis matrix $Q$ is orthonormal, then $\inverse{Q} = Q^*$, which is calle
     \end{equation}
 \end{proof}
 
-\begin{definition}[\cindex{orthogonal complement}]
-    For a subset $S$ of $V$, the orthogonal complement $S^\perp$ is defined as $S^\perp=\set{x \in V: \forall y \in S, \innerproduct{x}{y} = 0}$.
-\end{definition}
-
-Here $S$ does not have to be a vector space, but $S^\perp$ is a vector space. It could be any set and $(S^\perp)^\perp$ is usually not the same as $S$. 
-
-
 
 \begin{theorem}
     If $x \perp y$, we have $\norm{x+y}^2 = \norm{x}^2 + \norm{y}^2$    
 \end{theorem}
 
-\begin{theorem}[\cindex{projection}]
-    For an orthogonal subset $S=\set{v_1, v_2, ..., v_k}$ of $V$. Define the projection of $y$ on $v$ as
+
+
+
+% projection
+\section{Orthogonal Projection}
+
+
+
+\begin{definition}[\cindex{orthogonal complement}]
+    For a subset $S$ of $V$, the orthogonal complement $S^\perp$ is defined as $S^\perp=\set{x \in V: \forall y \in S, \innerproduct{x}{y} = 0}$.
+\end{definition}
+
+Here \emph{$S$ does not have to be a vector space, but $S^\perp$ is a vector space}. It could be any set and $(S^\perp)^\perp$ is usually not the same as $S$. 
+
+If $S$ is a subspace, then we have
+\begin{equation}
+    V = S \oplus S^\perp
+\end{equation}
+
+\begin{definition}[\cindex{projection}]
+    Let $V = W_1 \oplus W_2$. $\forall x = a + b$ where $a \in W_1$ and $b \in W_2$, if $T(x) = a$, then $T$ is a projection on $W_2$ along $W_1$.
+\end{definition}
+
+
+\begin{definition}[\cindex{orthogonal projection}]
+    Orthogonal projection put extra requirement on projection that $W_1 \bot W_2$. 
+    
+    
+    So if $T$ is an orthogonal projection on $U$, for any $v \in V$, write $v = u + w$ where $u \in U$ and $w \in U^\perp$, we have $T(v) = u$. Define it as:
+    \begin{equation}
+        T(v) = \projection{v}{U} = u
+    \end{equation}
+    
+    Note that $u$ and $w$ are unique.
+\end{definition}
+
+Be careful that orthogonal projection operator is not an orthogonal operator.
+
+\begin{definition}[\cindex{projection on vector}]
+    For an orthogonal subset $S=\set{v_1, v_2, ..., v_k}$ of $V$. Define the \emph{projection of $y$ on $v$} as
     \begin{equation}
         \projection{y}{v} = \frac{\innerproduct{y}{v}}{\innerproduct{v}{v}} v
     \end{equation}
-    
-    Then the projection of $y$ on subset $S$ is
+\end{definition}
+
+\begin{definition}[\cindex{projection on subspace}]
+    If $U$ is a subspace of $V$ with orthogonal basis $\set{v_1, \cdots, v_m}$, the \emph{projection of $y$ on $U$} is
     \begin{equation}
-        \sum_{i=1}^{k} \projection{y}{v_i}
+        \projection{y}{U} = \sum_{i=1}^{m} \projection{y}{v_i}
     \end{equation}
     
-    If $y \in \spanset{S}$, then
+    If the \emph{basis $\set{e_i}$ is orthonormal}, the projection of $y$ on $U$ is
     \begin{equation}
-        y \in \spanset{S} \Rightarrow y = \sum_{i=1}^{k} \projection{y}{v_i}
+        \projection{y}{U} = \sum_{i=1}^{m} \innerproduct{y}{e_i} e_i
     \end{equation}
     
-    If $S$ is orthonormal, then
-    \begin{equation}
-        y = \sum_{i=1}^k \innerproduct{y}{v_i} v_i
-    \end{equation}
-\end{theorem}
-
-
-
+    If $y \in U$, then $\projection{y}{U} = y$.
+\end{definition}
 
 \begin{theorem}
-Let $W$ be a subspace of inner product space $V$. For any $y \in V$, there exist unique $u \in W$ and $z \in W^\perp$ that $y = u + z$. Here $u$ is the projection of $y$ on $W$.    
+    All projections have a property that
+    \begin{equation}
+        \mleft(v - \projection{v}{U}\mright) \bot \mleft(\projection{v}{U}\mright)
+    \end{equation}
 \end{theorem}
-
-\begin{theorem}
-    The projection $u$ is the closest vector to $y$. So if there is any other $x \in W$, $\norm{y - x} \geq \norm{y - u}$. Another property is $y - u \perp W$.
-\end{theorem}
+\begin{proof}
+    $\innerproduct{y - \frac{\innerproduct{y}{v}}{\innerproduct{v}{v}} v}{v} = \innerproduct{y}{v} - \frac{\innerproduct{y}{v}}{\innerproduct{v}{v}} \innerproduct{v}{v} = 0$.
+\end{proof}
 
 
 \begin{theorem}[\cindex{Gram-Schmidt process}]\label{gram_schmidt_process}
-    The steps of converting a linearly independent subset $S=\set{w_1, w_2, ..., w_k}$ into orthogonal set $S^\prime=\set{v_1, v_2, ..., v_k}$. The idea is to 
+    The steps of converting a linearly independent subset $S=\set{w_1, w_2, ..., w_k}$ into orthonormal set $S^\prime=\set{v_1, v_2, ..., v_k}$. The idea is to 
     \begin{enumerate}
-        \item Project $v_{j}$ onto $\set{v_1, v_2, ..., v_{j-1}}$
-        \item Remove the projection from $v_j$
-        \item (Optional) normalize $S^\prime$ by dividing $v_i$ with its norm: $\displaystyle \frac{v_i}{\norm{v_i}}$
+        \item Project $w_{j}$ onto $\set{v_1, v_2, ..., v_{j-1}}$.
+        \item Remove the projection from $w_j$, and we have unnormalized $v_j$.
+        \item Normalize $v_i$: $v_i \rightarrow \displaystyle \frac{v_i}{\norm{v_i}}$.
     \end{enumerate}
     
     The first two steps can be summarized as:
@@ -224,27 +257,11 @@ Let $W$ be a subspace of inner product space $V$. For any $y \in V$, there exist
     \end{equation}
 \end{theorem}
 
-
-\begin{example}
-    We want to find which $g \in U$ could minimize the expression
-    \begin{equation}
-        \argmin{g} \frac{1}{2\pi}\int_{0}^{2\pi} \absolutevalue{f(x) - g(x)}^2 \dif x
-    \end{equation}
-    
-     This is an expression of $\norm{f - g}^2$ on inner product space $H$, so we would like to find a $g$ that $g \perp f$. We could project $f$ on $U$, which is to project $f$ on basis of $U$ and add up the projections.
-     
-     For example, $f(x) = \sin{x}$ and $g \in \mathcal{P}_5$. We could find the minimal $g$ by:
-     \begin{enumerate}
-         \item Convert basis $1, x, x^2, x^3, x^4, x^5$ to orthonormal basis $e_1, e_2, e_3, e_4, e_5$ in $H$
-         \item Project $\sin{x}$ to basis $e_i$ as $\displaystyle g(x) = \sum_{i=1}^5 \innerproduct{\sin{x}}{e_i}e_i$
-     \end{enumerate}
-\end{example}
-
 Once we have orthonormal basis $\beta = \set{v_1, v_2, ..., v_n}$,  we could directly represent vectors and linear operators using orthonormal basis:
 \begin{itemize}
-    \item $\displaystyle x = \sum_{i=1}^n \innerproduct{x}{v_i} v_i$ ($\innerproduct{x}{v_i}$ are the \cindex{Fourier coefficients})
-    \item $\mleft(\coordinate{T}_\beta\mright)_{ij} = \innerproduct{T(v_j)}{v_i}$ (extremely useful. The order of $i$ and $j$ are swapped)
-    \item For $g: V \rightarrow F$, $g(x) = \innerproduct{x}{\sum_{i=1}^n \conjugate{g(v_i)} v_i}$ (\cindex{Riesz representation theorem}, proved in \theoref{eiesz_representation_theorem})
+    \item $\displaystyle x = \sum_{i=1}^n \innerproduct{x}{v_i} v_i$\footnote{$\innerproduct{x}{v_i}$ are the \cindex{Fourier coefficients}.}
+    \item $\mleft(\coordinate{T}_\beta\mright)_{ij} = \innerproduct{T(v_j)}{v_i}$\footnote{extremely useful. The order of $i$ and $j$ are swapped}
+    \item For linear functional\footnote{Defined in \defiref{linear_functional}.} $g: V \rightarrow F$, $g(x) = \innerproduct{x}{\sum_{i=1}^n \conjugate{g(v_i)} v_i}$\footnote{\cindex{Riesz representation theorem}, proved in \theoref{eiesz_representation_theorem}.}
 \end{itemize}
 
 
@@ -254,9 +271,68 @@ Once we have orthonormal basis $\beta = \set{v_1, v_2, ..., v_n}$,  we could dir
     If the characteristic polynomial of $T$ splits, then there exists an orthonormal basis $\gamma$ such that $\coordinate{T}_\gamma$ is upper triangular.
 \end{theorem}
 \begin{proof}
-    If $T$ splits, there is a basis $\beta$ that $\coordinate{T}_\beta$ is upper triangular. Then use the Gram-Schmidt process (\theoref{gram_schmidt_process}) to normalize $\beta$ and we have $\gamma$.
+    If $T$ splits, \theoref{split_means_upper_trangular} means there is a basis $\beta$ that $\coordinate{T}_\beta$ is upper triangular. Then use the Gram-Schmidt process (\theoref{gram_schmidt_process}) to normalize $\beta$ and we have $\gamma$.
 \end{proof}
 
+
+
+\begin{theorem}
+    Given $v \in V$, $\forall u \in U \subset V$, we have:
+    \begin{equation}
+        \norm{v - \projection{v}{U}} \leq \norm{v - u}
+    \end{equation}
+    
+    The equality holds if and only if $u = \projection{v}{U}$.
+\end{theorem}
+\begin{proof}
+    $\norm{v - u}^2 = \norm{v - \projection{v}{U}}^2 + \norm{\projection{v}{U} - u}^2 \geq \norm{\projection{v}{U} - u}^2$.
+\end{proof}
+
+
+
+
+\begin{example}
+    We want to find which $g \in U$ could minimize the expression
+    \begin{equation}
+        \argmin{g} \frac{1}{2\pi}\int_{0}^{2\pi} \absolutevalue{f(x) - g(x)}^2 \dif x
+    \end{equation}
+    
+     This is an expression of $\norm{f - g}^2$ on inner product space $H$\footnote{Defined in Example \ref{inner_product_space_h}} , so we would like to find a $g$ that $g \perp f$. We could project $f$ on $U$, which is to project $f$ on basis of $U$ and add up the projections.
+     
+     For example, $f(x) = \sin{x}$ and $g \in \mathcal{P}_5$. We could find the minimal $g$ by:
+     \begin{enumerate}
+         \item Convert basis $1, x, x^2, x^3, x^4, x^5$ to orthonormal basis $e_1, e_2, e_3, e_4, e_5$ in $H$
+         \item Project $\sin{x}$ to basis $e_i$ as $\displaystyle g(x) = \sum_{i=1}^5 \innerproduct{\sin{x}}{e_i}e_i$
+     \end{enumerate}
+\end{example}
+
+
+
+\begin{theorem}
+    $T$ is a projection if and only if $T^2 = T$.    
+\end{theorem}
+\begin{proof}
+    Assume $T^2 = T$. Then $T=I$ in subspace $\rangespace{T}$ and $T = 0$ in $\rangespace{T}^\perp$.
+\end{proof}
+
+\begin{theorem}
+    $T$ is an orthogonal projection if and only if $T^2 = T = T^*$.
+\end{theorem}
+\begin{proof}
+    $T$ is a projection, so $T^2 = T$. For $a_i \in \rangespace{T}$ and $b_i \in \nullspace{T}$, we have 
+    \begin{equation*}
+        \innerproduct{a_1 + b_1}{T(a_2 + b_2)} = \innerproduct{a_1}{a_2} = \innerproduct{T(a_1 + b_1)}{a_2 + b_2}
+    \end{equation*}
+    So $T = T^*$.
+    
+    For the reverse. Let $x \in \rangespace{T}$ and $y \in \nullspace{T}$. We have $x = T(x) = T^*(x)$. So
+    \begin{equation*}
+        \innerproduct{x}{y} = \innerproduct{T^*(x)}{y} = \innerproduct{x}{T(y)} = \innerproduct{x}{0} = 0
+    \end{equation*}
+    So $x \in \nullspace{T}^\perp$, and $\rangespace{T} \subseteq \nullspace{T}^\perp$.
+    
+    Now let $y \in \nullspace{T}^\perp$ and check $\norm{y - T(y)}^2 = \innerproduct{y}{y - T(y)} - \innerproduct{T(y)}{y - T(y)}$. Since $T(y - T(y)) = 0$, we have $y - T(y) \in \nullspace{T}$ and $y \in \nullspace{T}^\perp$, so $y \perp y - T(y)$ and $\innerproduct{y}{y - T(y)} = 0$. Also $\innerproduct{T(y)}{y - T(y)} = \innerproduct{y}{T(y) - TT(y)} = 0$. So $\norm{y - T(y)}^2 = 0$ and $T(y) = y$. So $y \in \rangespace{T}$ and $\nullspace{T}^\perp \subseteq \rangespace{T}$, and $\rangespace{T} = \nullspace{T}^\perp$.
+\end{proof}
 
 
 % adjoint
@@ -745,55 +821,6 @@ So the algorithm to simplify a quadratic form is:
 % spectral theorem
 \section{Spectral Theorem}
 
-\begin{definition}[\cindex{projection}]
-    Let $V = W_1 \oplus W_2$. For $x = a + b$ where $a \in W_1$ and $b \in W_2$, if $T(x) = a$, then $T$ is a projection on $W_2$ along $W_1$.
-\end{definition}
-
-
-\begin{theorem}
-    $T$ is a projection if and only if $T^2 = T$.    
-\end{theorem}
-\begin{proof}
-    Assume $T^2 = T$. Then $T=I$ in subspace $\rangespace{T}$ and $T = 0$ in $\rangespace{T}^\perp$.
-\end{proof}
-
-\begin{definition}[\cindex{orthogonal projection}]
-    $T$ is an orthogonal projection if $\rangespace{T}^\perp = \nullspace{T}$ and $\nullspace{T}^\perp = \rangespace{T}$. If $V$ is finite-dimension, either one is ok.
-    
-    If $T$ is an orthogonal projection $U$ ($U = \rangespace{T} \subseteq V$), for any $v \in V$, write $v = u + w$ where $u \in U$ and $w \in U^\perp$, we have $T(v) = u$.
-\end{definition}
-
-Be careful that orthogonal projection operator is not an orthogonal operator.
-
-\begin{theorem}
-    If $T$ is an orthogonal projection on $U \subseteq V$, and $\set{e_1, \cdots, e_m}$ is the orthonormal basis of $U$, then for any $v \in V$, we have
-    \begin{equation}
-        T(v) = \sum_{i=1}^{m} \innerproduct{v}{e_i} e_i
-    \end{equation}
-    
-    So the orthogonal projection will ignore the result of other basis.
-\end{theorem}
-
-
-
-\begin{theorem}
-    $T$ is an orthogonal projection if and only if $T^2 = T = T^*$.
-\end{theorem}
-\begin{proof}
-    $T$ is a projection, so $T^2 = T$. For $a_i \in \rangespace{T}$ and $b_i \in \nullspace{T}$, we have 
-    \begin{equation*}
-        \innerproduct{a_1 + b_1}{T(a_2 + b_2)} = \innerproduct{a_1}{a_2} = \innerproduct{T(a_1 + b_1)}{a_2 + b_2}
-    \end{equation*}
-    So $T = T^*$.
-    
-    For the reverse. Let $x \in \rangespace{T}$ and $y \in \nullspace{T}$. We have $x = T(x) = T^*(x)$. So
-    \begin{equation*}
-        \innerproduct{x}{y} = \innerproduct{T^*(x)}{y} = \innerproduct{x}{T(y)} = \innerproduct{x}{0} = 0
-    \end{equation*}
-    So $x \in \nullspace{T}^\perp$, and $\rangespace{T} \subseteq \nullspace{T}^\perp$.
-    
-    Now let $y \in \nullspace{T}^\perp$ and check $\norm{y - T(y)}^2 = \innerproduct{y}{y - T(y)} - \innerproduct{T(y)}{y - T(y)}$. Since $T(y - T(y)) = 0$, we have $y - T(y) \in \nullspace{T}$ and $y \in \nullspace{T}^\perp$, so $y \perp y - T(y)$ and $\innerproduct{y}{y - T(y)} = 0$. Also $\innerproduct{T(y)}{y - T(y)} = \innerproduct{y}{T(y) - TT(y)} = 0$. So $\norm{y - T(y)}^2 = 0$ and $T(y) = y$. So $y \in \rangespace{T}$ and $\nullspace{T}^\perp \subseteq \rangespace{T}$, and $\rangespace{T} = \nullspace{T}^\perp$.
-\end{proof}
 
 If $T$ is an orthogonal projection on $W$, we may choose orthonormal basis $\set{v_k}$ of $W$ and expand it to $\beta = \set{v_i}$ of $V$. Then we have
 \begin{equation}

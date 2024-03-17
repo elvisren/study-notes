@@ -32,7 +32,7 @@ There are few basic terms for linear transformation:
 
 
 \begin{definition}[\cindex{linear operator}]
-    If $V = W$, $T$ is called linear operator. Linear operator is the focus of inner product.
+    If $V = W$, $T$ is called linear operator\footnote{Linear operator is the focus of inner product.}.
 \end{definition}
 
 
@@ -110,6 +110,7 @@ Many important result in later chapters will be the choice of basis $\beta$ that
 \begin{enumerate}
     \item $\selectmatrixcolumn{(AB)}{j} = A \times \selectmatrixcolumn{B}{j}$
     \item $\selectmatrixcolumn{A}{j} = A \times \selectmatrixcolumn{I}{j} = A \times e_j$
+    \item $\selectmatrixrow{(AB)}{i} = \selectmatrixrow{A}{i} \times B$
 \end{enumerate}
 \end{theorem}
 
@@ -229,7 +230,7 @@ We also have change of coordinate matrix that represent a general linear transfo
 \end{theorem}
 
 
-\begin{example}
+\begin{example}\label{change_coordinate_under_standard_basis}
     For a linear operator $L_A$ on $F^n$, let's see what is the result if we change from stand basis of $F^n$ to non-stand basis $\gamma = \set{v_i}$. The $Q$ now becomes
     \begin{equation*}
         \selectmatrixcolumn{Q}{j} = v_j = [\gamma]
@@ -344,7 +345,7 @@ We also have change of coordinate matrix that represent a general linear transfo
 
 \section{Dual Space}
 
-\begin{definition}[\cindex{linear functional}]
+\begin{definition}[\cindex{linear functional}]\label{linear_functional}
 	A linear functional is a linear transformation that map from $V$ into $F$. So it is an element of $\mathcal{L}(V, F)$.
 \end{definition}
 

@@ -21,6 +21,103 @@ Linearity allows us to analyze multidimensional processes and transformations by
 \end{enumerate}
 
 
+% recite list
+
+
+\section{Recite List}
+
+\begin{example}[Lagrange polynomial]
+    \begin{equation*}
+    \begin{aligned}
+        f_i(x) &= \prod_{k=0,k \neq i}^{n} \frac{x - c_k}{c_i - c_k} \\
+        g &= \sum_{i=0}^{n} b_i \times f_i
+    \end{aligned}
+    \end{equation*}
+\end{example}
+
+\begin{example}[matrix representation]
+    
+\begin{equation*}
+    \begin{aligned}
+        \coordinate{UT}_{\alpha}^{\gamma} &= \coordinate{U}_{\beta}^{\gamma} \times \coordinate{T}_{\alpha}^{\beta} \\
+        \coordinate{T(u)}_\gamma &= \coordinate{T}_{\beta}^{\gamma} \times \coordinate{u}_{\beta} \\
+        A_{m \times n} &= L_{m \times c} \times R_{c \times n} \\
+        \coordinate{v}_\beta &= Q \coordinate{v}_{\beta^\prime} \\
+        \coordinate{T}_{\beta^\prime}^{\gamma^\prime} &= \coordinate{I_W}_\gamma^{\gamma^\prime} \coordinate{T}_\beta^\gamma \coordinate{I_V}_{\beta^\prime}^\beta \\
+        [L_A]_\gamma &= \inverse{[\gamma]} A [\gamma] \\
+        \coordinate{T}_{\beta^\prime} &= \inverse{Q} \coordinate{T}_{\beta} Q = \coordinate{I_V}_\beta^{\beta^\prime} \coordinate{T}_\beta \coordinate{I_V}_{\beta^\prime}^\beta
+    \end{aligned}
+\end{equation*}
+
+\end{example}
+
+\begin{example}[determinate]
+    \begin{equation*}
+    \begin{aligned}
+        \determinate{A} &= \sum_{j=1}^n A_{ij} \times \cofactor{A_{ij}} = \sum_{j=1}^n (-1)^{i+j} A_{ij}  \determinate{\tilde{A}_{ij}} \\
+        \inverse{A} &= \frac{(\cofactor{A})^t}{\determinate{A}} = \frac{\adjugate{A}}{\determinate{A}}
+    \end{aligned}
+    \end{equation*}
+    
+    \begin{itemize}
+        \item If $A$ is invertible, \begin{equation}
+            \begin{vmatrix}
+                A & B \\
+                C & D
+                \end{vmatrix} = \determinate{A} \times \determinate{D - C \inverse{A} B}
+        \end{equation}
+    \item If $D$ is invertible, \begin{equation}
+            \begin{vmatrix}
+                A & B \\
+                C & D
+                \end{vmatrix} = \determinate{D} \times \determinate{A - B \inverse{D} C}
+        \end{equation}
+    \item If both $A$ and $D$ are invertible, \begin{equation}
+        \determinate{D - C \inverse{A} B} = \frac{\determinate{A}}{\determinate{D}} \times \determinate{A - B \inverse{D} C}
+        \end{equation}
+    \item $\determinate{\lambda I_m - BC} =\lambda^{m-n} \determinate{\lambda I_n - CB}$ (for $B_{m \times n}$, $C_{n \times m}$, $m \geq n$)
+    \end{itemize}
+    
+    The Vandermonde matrix is:
+    \begin{equation}
+        \begin{vmatrix}
+        1 & 1  & \cdots  & 1  \\
+        x_1  & x_2 & \cdots & x_n \\
+        x_1^2 & x_2^2 & \cdots & x_n^2 \\
+        \vdots & \vdots & & \vdots \\
+        x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1} \\
+        \end{vmatrix} = \prod_{1 \leq j < i \leq n}(x_i - x_j)
+    \end{equation}
+\end{example}
+
+\begin{example}[inner product space]
+    Direct calculation using inner product:
+    \begin{itemize}
+    \item $\displaystyle x = \sum_{i=1}^n \innerproduct{x}{v_i} v_i$
+    \item $\mleft(\coordinate{T}_\beta\mright)_{ij} = \innerproduct{T(v_j)}{v_i}$
+    \item For linear functional $g: V \rightarrow F$, $g(x) = \innerproduct{x}{\sum_{i=1}^n \conjugate{g(v_i)} v_i}$
+    \end{itemize}
+    
+    Projection on orthonormal basis:
+    \begin{equation}
+        \projection{y}{U} = \sum_{i=1}^{m} \innerproduct{y}{e_i} e_i
+    \end{equation}
+    
+    Gran-Schmidt process:
+    \begin{equation}
+        v_j = w_j - \sum_{i=1}^{j-1} \frac{\innerproduct{w_j}{v_i}}{\innerproduct{v_i}{v_i}} v_i = w_j - \sum_{i=1}^{j-1} \projection{w_j}{v_i}
+    \end{equation}
+\end{example}
+
+
+
+    
+
+
+
+
+
+% tricks
 \section{Tricks in Proving Theorem}
 
 \begin{enumerate}

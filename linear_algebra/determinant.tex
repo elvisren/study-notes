@@ -1,12 +1,18 @@
 \chapter{Determinant}
 
+Note to this chapter:
+\begin{itemize}
+    \item Use cofactor to calculate the determinate and inverse
+    \item The determinate can define the volume and orientation of vectors
+    \item Use determinate to calculate the result of linear equation
+\end{itemize}
 
 \section{Definition}
 
 \begin{definition}[\cindex{determinate}]
     Define the \cindex{cofactor} of the entry of $A$ in row $i$ and column $j$ as
     \begin{equation}
-        \cofactor{A} = (-1)^{i+j}\determinate{\tilde{A}_{ij}}
+        \cofactor{A_{ij}} = (-1)^{i+j}\determinate{\tilde{A}_{ij}}
     \end{equation}
     
     where $\tilde{A}_{ij}$ is a $(n-1)\times (n-1)$ matrix obtained by removing row $i$ and column $j$ of $A$. The \cindex{determinant} of $A$ along row $i$ is recursively defined using \cindex{Laplace expansion}:
@@ -77,8 +83,8 @@
     
     Then we have
     \begin{equation}
-        \inverse{A} = \frac{\adjugate{A}}{\determinate{A}}
-    \end{equation}    
+        \inverse{A} = \frac{(\cofactor{A})^t}{\determinate{A}} = \frac{\adjugate{A}}{\determinate{A}}
+    \end{equation}
 \end{theorem}
 
 
@@ -107,8 +113,8 @@
 
 
 
-\begin{definition}
-    If $\beta$ and $\gamma$ are two ordered basis for $R^n$, they have the same \cindex{orientation} of and only if $\determinate{Q} > 0$, where $Q$ is change-of-coordinate matrix from $\beta$ to $\gamma$. If $\beta$ is the standard basis, then $\gamma$ is a right-handed coordinate system if $\determinate{Q} > 0$.
+\begin{definition}[\cindex{orientation}]
+    If $\beta$ and $\gamma$ are two ordered basis for $R^n$, they have the same orientation of and only if $\determinate{Q} > 0$, where $Q$ is change-of-coordinate matrix from $\beta$ to $\gamma$. If $\beta$ is the standard basis, then $\gamma$ is a right-handed coordinate system if $\determinate{Q} > 0$.
 \end{definition}
 
 
