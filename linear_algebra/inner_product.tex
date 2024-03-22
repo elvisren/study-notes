@@ -91,6 +91,11 @@ Be careful that \emph{inner product could be negative}. So it is different from 
 \end{definition}
 
 
+\begin{definition}[\cindex{unit vector}]
+	A vector is unit vector if $\norm{x} = 1$. A \cindex{normalizing} to non-zero $x$ is $\dfrac{1}{\norm{x}} x$.
+\end{definition}
+
+
 \begin{theorem}
     The property of norm:
     \begin{itemize}
@@ -145,10 +150,6 @@ Be careful that \emph{inner product could be negative}. So it is different from 
 \end{definition}
 
 
-\begin{definition}[\cindex{unit vector}]
-	A vector is unit vector if $\norm{x} = 1$. A \cindex{normalizing} to non-zero $x$ is $\dfrac{1}{\norm{x}} x$.
-\end{definition}
-
 \begin{theorem}
     A orthogonal set is linearly independent.
 \end{theorem}
@@ -182,7 +183,7 @@ Be careful that \emph{inner product could be negative}. So it is different from 
 
 
 \begin{definition}[\cindex{orthogonal complement}]
-    For a subset $S$ of $V$, the orthogonal complement $S^\perp$ is defined as $S^\perp=\set{x \in V: \forall y \in S, \innerproduct{x}{y} = 0}$.
+    For a subset\footnote{$S$ does not have to be a subspace.} $S$ of $V$, the orthogonal complement $S^\perp$ is defined as $S^\perp=\set{x \in V: \forall y \in S, \innerproduct{x}{y} = 0}$.
 \end{definition}
 
 Here \emph{$S$ does not have to be a vector space, but $S^\perp$ is a vector space}. It could be any set and $(S^\perp)^\perp$ is usually not the same as $S$. 

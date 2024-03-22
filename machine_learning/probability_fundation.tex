@@ -61,7 +61,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
 \end{definition}
 
 \begin{theorem}[\cindex{mode}]
-    A function has a mode at $x$ if $x$ maximize the value of function. Optimization of likelihood function after change of parameters needs to be careful. For a usual change of variables $x = g(y)$, we have $\hat{f}(y) = f(g(y))$. Then
+    A function has a \cindex{mode} at $x$ if $x$ maximize the value of function. Optimization of likelihood function after change of parameters needs to be careful. For a usual change of variables $x = g(y)$, we have $\hat{f}(y) = f(g(y))$. Then
     \begin{equation}
          \argmax{x}f(x) = g\mleft(\argmax{y}f\mleft(g(y)\mright)\mright)
     \end{equation}
@@ -83,7 +83,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
 % entropy
 \section{Entropy}
 
-\begin{definition}
+\begin{definition}[\cindex{entropy}]
     The amount of information is viewed as the degree of surprise. If unlikely happens, it carries more information. 
     
     The form of measurement $H$ has a property that if $x$ and $y$ are irrelevant, the information would be the sum of them. So
@@ -91,7 +91,7 @@ In \cindex{heteroscedasitc regression}, the variance will change. Let $\mu = f(x
         H(x,y) = H(x) + H(y)
     \end{equation}
     
-    In probability, if $x$ and $y$ are independent, then $p(xy)= p(x) p(y)$. So it is natural to take a $\log$ on joint probability. Therefore for a discrete probability distribution $p(x)$, the \emph{average amount of information}, which is called \cindex{entropy}, is
+    In probability, if $x$ and $y$ are independent, then $p(xy)= p(x) p(y)$. So it is natural to take a $\log$ on joint probability. Therefore for a discrete probability distribution $p(x)$, the \emph{average amount of information}, which is called entropy, is
     \begin{equation}
         \entropy{x} = - \sum_i p(x_i) \log_2 p(x_i)
     \end{equation}
